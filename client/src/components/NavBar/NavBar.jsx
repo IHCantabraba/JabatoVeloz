@@ -35,7 +35,11 @@ const NavBar = () => {
         <Toolbar disableGutters style={{ width: '95vw' }}>
           <Box sx={{ mr: 1 }}>
             <IconButton size='medium'>
-              <Menu />
+              <Menu
+                style={{
+                  color: `var(--ihc-${light ? 'light' : 'dark'}-mode-text)`
+                }}
+              />
             </IconButton>
           </Box>
           <Typography
@@ -64,7 +68,7 @@ const NavBar = () => {
             <Button
               color='inherit'
               startIcon={<Lock />}
-              onClick={() => dispatch({ type: 'UPDATE_USER', payload: user })}
+              onClick={() => dispatch({ type: 'OPEN_LOGIN' })}
               style={{
                 color: `var(--ihc-${light ? 'light' : 'dark'}-mode-text)`
               }}
