@@ -1,0 +1,14 @@
+:root {
+  --ihc-light-mode-bg: white;
+  --ihc-dark-mode-bg: rgb(80, 80, 80);
+  --ihc-light-mode-text: black;
+  --ihc-dark-mode-text: rgb(116, 143, 147);
+  --ihc-toolbar-light-mode: green;
+  --ihc-toolbar-dark-mode: black;
+  --ihc-drawer-light: rgba(0, 0, 0, 0.3);
+  --ihc-drawer-dark: rgba(0, 0, 0, 1);
+  --ihc-light-mode-Chevron: black;
+  --ihc-dark-mode-Chevron: white;
+  --ihc-pages-margin-top: 64px;
+  --ihc-pages-margin-left: 0.5rem;
+}
