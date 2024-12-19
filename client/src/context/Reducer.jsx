@@ -13,6 +13,9 @@ const Reducer = (state, action) => {
       return { ...state, openLogin: true }
     case 'CLOSE_LOGIN':
       return { ...state, openLogin: false }
+    case 'UPDATE_ALERT':
+      return { ...state, alert: action.payload }
+
     default:
       throw new Error('No matched action!')
   }

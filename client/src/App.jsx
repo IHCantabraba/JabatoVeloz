@@ -1,6 +1,7 @@
 import './App.css'
 import Login from './components/Login/Login'
 import NavBar from './components/NavBar/NavBar'
+import Notis from './components/Notis/Notis'
 import { useValue } from './context/ContextProvider'
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
   return (
     <>
       {/* TODO revisar otra forma de cambiar el color al background */}
+      <Notis />
       <div
         className='app-body'
         style={{

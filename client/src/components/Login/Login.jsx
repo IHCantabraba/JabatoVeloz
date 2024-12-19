@@ -11,7 +11,8 @@ import {
 import { useValue } from '../../context/ContextProvider'
 import { Close, Send } from '@mui/icons-material'
 import PasswordField from '../Password/PasswordField'
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import GoogleLogin from '../GoogleLogin/GoogleLogin'
 
 const Login = () => {
   /* obetner estado inicial de nuestro custom hook y el dispatcher para cambair estados */
@@ -26,6 +27,12 @@ const Login = () => {
   /* login and register se usa el mismo modelo por lo que usaremos estado para cambair entre ellos */
   const [title, setTitle] = useState('Login')
   const [isRegister, setIsRegister] = useState(false)
+
+  /* Crear referencias de los campos del formulario */
+  const nameRef = useRef()
+  const emailRef = useRef()
+  const passwordRef = useRef()
+  const confirmPasswordRef = useRef()
   /* funcion para cerrar */
   const handleClose = () => {
     dispatch({ type: 'CLOSE_LOGIN' })
@@ -33,13 +40,22 @@ const Login = () => {
   /* controlar el formulario */
   const handleSubmit = (e) => {
     e.preventDefault()
+    /* testing NOTIS */
+    const password = passwordRef.current.value
+    const confirmPassword = confirmPasswordRef.current.value
+    if (password !== confirmPassword) {
+      dispatch({
+        type: 'UPDATE_ALERT',
+        payload: { open: true },
+        severity: 'error',
+        message: 'Passwords do not match'
+      })
+    }
   }
 
-  /* Crear referencias de los campos del formulario */
-  const nameRef = useRef()
-  const emailRef = useRef()
-  const passwordRef = useRef()
-  const confirmPasswordRef = useRef()
+  useEffect(() => {
+    isRegister ? setTitle('Register') : setTitle('Login')
+  }, [isRegister])
   return (
     <Dialog open={openLogin} onClose={handleClose}>
       <DialogTitle>
@@ -113,6 +129,19 @@ const Login = () => {
           </Button>
         </DialogActions>
       </form>
+      {/* añadir un */}
+      <DialogActions sx={{ justifyContent: 'left', p: '5px 24px' }}>
+        {isRegister
+          ? 'Do you have an account? Sig in now'
+          : "Don't you have an account yet? Create one now!!"}
+        <Button onClick={() => setIsRegister(!isRegister)}>
+          {isRegister ? 'Login' : 'Register'}
+        </Button>
+      </DialogActions>
+      {/* Log in with google */}
+      <DialogActions sx={{ justifyContent: 'center', py: '24px' }}>
+        <GoogleLogin />
+      </DialogActions>
     </Dialog>
   )
 }

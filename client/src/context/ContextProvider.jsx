@@ -4,7 +4,8 @@ import Reducer from './Reducer'
 const initialState = {
   currentUser: null,
   light: true,
-  openLogin: false
+  openLogin: false,
+  alert: { open: false, severity: 'info', message: '' }
 }
 /* crear un contexto */
 const Context = createContext(initialState)
