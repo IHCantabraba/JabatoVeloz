@@ -13,6 +13,7 @@ import { Close, Send } from '@mui/icons-material'
 import PasswordField from '../Password/PasswordField'
 import { useEffect, useRef, useState } from 'react'
 import GoogleOneTapLogin from '../GoogleLogin/GoogleLogin'
+import handleLogin from '../../actions/user'
 const BaseUrl = import.meta.env.VITE_BaseName
 const Login = () => {
   /* obetner estado inicial de nuestro custom hook y el dispatcher para cambair estados */
@@ -23,6 +24,9 @@ const Login = () => {
   } = useValue()
   const {
     state: { light }
+  } = useValue()
+  const {
+    state: { currentUser }
   } = useValue()
   /* login and register se usa el mismo modelo por lo que usaremos estado para cambair entre ellos */
   const [title, setTitle] = useState('Login')
@@ -38,65 +42,49 @@ const Login = () => {
   }
 
   /* testing login and register requests */
-  const handleLogin = async () => {
-    const userName = nameRef.current.value
-    const pass = passwordRef.current.value
-    console.log(userName, pass)
-    // if (!isRegister) {
-    //   const user = nameRef.current.value
-    //   const password = passwordRef.current.value
-    //   console.log(user, password)
-    // }
-    try {
-      const fetchResults = await fetch(`${BaseUrl}/api/auth/login`, {
-        headers: new Headers({
-          'Content-Type': 'Application/json'
-        }),
-        method: 'POST',
-        body: JSON.stringify({ nombre: userName, password: pass })
-      })
-      if (fetchResults.ok) {
-        dispatch({
-          type: 'UPDATE_ALERT',
-          payload: {
-            open: true,
-            message: 'login succcesfully'
-          }
-        })
-      }
-    } catch (error) {
-      dispatch({
-        type: 'UPDATE_ALERT',
-        payload: {
-          open: true,
-          severity: 'error',
-          message: `Bad request ${error}`
-        }
-      })
-    }
-  }
+  // const handleLogin = async () => {
+  //   const userName = nameRef.current.value
+  //   const pass = passwordRef.current.value
+  //   try {
+  //     const fetchResults = await fetch(`${BaseUrl}/api/auth/login`, {
+  //       headers: new Headers({
+  //         'Content-Type': 'Application/json'
+  //       }),
+  //       method: 'POST',
+  //       body: JSON.stringify({ nombre: userName, password: pass })
+  //     })
+  //     if (fetchResults.ok) {
+  //       const userData = await fetchResults.json()
+  //       /* send notification to user */
+  //       dispatch({
+  //         type: 'UPDATE_ALERT',
+  //         payload: {
+  //           open: true,
+  //           message: 'login succcesfully'
+  //         }
+  //       })
+  //       /* update user info */
+  //       dispatch({ type: 'UPDATE_USER', payload: userData })
+  //       /* redirect to main page */
+  //       dispatch({ type: 'CLOSE_LOGIN' })
+  //     }
+  //   } catch (error) {
+  //     dispatch({
+  //       type: 'UPDATE_ALERT',
+  //       payload: {
+  //         open: true,
+  //         severity: 'error',
+  //         message: `Bad request ${error}`
+  //       }
+  //     })
+  //   }
+  // }
   /* controlar el formulario */
   const handleSubmit = (e) => {
     e.preventDefault()
-    handleLogin()
-    //testing loading
-    // dispatch({ type: 'START_LOADING' })
-    // setTimeout(() => {
-    //   dispatch({ type: 'END_LOADING' })
-    // }, 6000)
-    // /* testing NOTIS */
-    // const password = passwordRef.current.value
-    // const confirmPassword = confirmPasswordRef.current.value
-    // if (password !== confirmPassword) {
-    //   dispatch({
-    //     type: 'UPDATE_ALERT',
-    //     payload: {
-    //       open: true,
-    //       severity: 'error',
-    //       message: 'Passwords do not match'
-    //     }
-    //   })
-    // }
+    const name = nameRef.current.value
+    const password = passwordRef.current.value
+    handleLogin({ nombre: name, password: password }, dispatch)
   }
   /* ustilizar el hook useEfect para cambiar el título del dialogo entre Login/Register */
   useEffect(() => {
@@ -187,7 +175,7 @@ const Login = () => {
       </DialogActions>
       {/* Log in with google */}
       <DialogActions sx={{ justifyContent: 'center', py: '24px' }}>
-        <GoogleOneTapLogin />
+        <GoogleOneTapLogin sx={{ cursor: 'not-allowed' }} />
       </DialogActions>
     </Dialog>
   )

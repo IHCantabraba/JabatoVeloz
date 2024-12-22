@@ -18,7 +18,7 @@ const PasswordField = ({
   }
   return (
     <TextField
-      autoFocus
+      // autoFocus
       margin='normal'
       variant='standard'
       id={id}

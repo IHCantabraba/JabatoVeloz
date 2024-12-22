@@ -12,8 +12,7 @@ import { Menu, Lock } from '@mui/icons-material'
 import ModeNightIcon from '@mui/icons-material/ModeNight'
 import LightModeIcon from '@mui/icons-material/LightMode'
 import UserIcon from '../User/UserIcon'
-const img = 'Prog.png'
-const user = { name: 'text', img }
+
 const NavBar = () => {
   // const { light } = useContext(ThemeContext)
   const {
