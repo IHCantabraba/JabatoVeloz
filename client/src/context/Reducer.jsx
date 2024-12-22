@@ -13,6 +13,12 @@ const Reducer = (state, action) => {
       return { ...state, openLogin: true }
     case 'CLOSE_LOGIN':
       return { ...state, openLogin: false }
+    /* loading */
+    case 'START_LOADING':
+      return { ...state, loading: true }
+    case 'END_LOADING':
+      return { ...state, loading: false }
+    /* Notifications */
     case 'UPDATE_ALERT':
       return { ...state, alert: action.payload }
 

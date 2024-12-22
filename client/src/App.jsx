@@ -1,4 +1,5 @@
 import './App.css'
+import Loading from './components/Loading/Loading'
 import Login from './components/Login/Login'
 import NavBar from './components/NavBar/NavBar'
 import Notis from './components/Notis/Notis'
@@ -11,6 +12,7 @@ function App() {
   return (
     <>
       {/* TODO revisar otra forma de cambiar el color al background */}
+      <Loading />
       <Notis />
       <div
         className='app-body'

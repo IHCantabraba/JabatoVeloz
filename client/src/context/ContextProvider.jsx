@@ -5,6 +5,7 @@ const initialState = {
   currentUser: null,
   light: true,
   openLogin: false,
+  loading: false,
   alert: { open: false, severity: 'info', message: '' }
 }
 /* crear un contexto */

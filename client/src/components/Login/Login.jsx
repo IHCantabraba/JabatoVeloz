@@ -39,8 +39,12 @@ const Login = () => {
   /* controlar el formulario */
   const handleSubmit = (e) => {
     e.preventDefault()
+    //testing loading
+    dispatch({ type: 'START_LOADING' })
+    setTimeout(() => {
+      dispatch({ type: 'END_LOADING' })
+    }, 6000)
     /* testing NOTIS */
-
     const password = passwordRef.current.value
     const confirmPassword = confirmPasswordRef.current.value
     if (password !== confirmPassword) {
@@ -117,7 +121,7 @@ const Login = () => {
           )}
         </DialogContent>
         {/* botton de enviar */}
-        <DialogActions>
+        <DialogActions sx={{ px: '19px' }}>
           <Button
             type='submit'
             variant='contained'

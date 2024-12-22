@@ -8,7 +8,7 @@ const Notis = () => {
   } = useValue()
   /* controlar el cierre si es po clicki en la X o en cualquier lado de la pantalla */
   const handleClose = (event, reason) => {
-    /* si se hace clic fuera no se cierra  */
+    /* si se hace click fuera no se cierra  */
     if (reason === 'clickaway') return
     /* resto de casos cierra cambiando el estado inicial */
     dispatch({ type: 'UPDATE_ALERT', payload: { ...alert, open: false } })
@@ -18,7 +18,7 @@ const Notis = () => {
       open={alert.open}
       autoHideDuration={6000}
       onClose={handleClose}
-      anchorOrigin={{ vertical: 'down', horizontal: 'center' }}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
     >
       <Alert
         onClose={handleClose}
