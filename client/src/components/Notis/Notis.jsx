@@ -18,7 +18,7 @@ const Notis = () => {
       open={alert.open}
       autoHideDuration={6000}
       onClose={handleClose}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      anchorOrigin={{ vertical: 'down', horizontal: 'center' }}
     >
       <Alert
         onClose={handleClose}

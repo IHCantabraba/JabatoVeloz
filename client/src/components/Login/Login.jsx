@@ -12,7 +12,7 @@ import { useValue } from '../../context/ContextProvider'
 import { Close, Send } from '@mui/icons-material'
 import PasswordField from '../Password/PasswordField'
 import { useEffect, useRef, useState } from 'react'
-import GoogleLogin from '../GoogleLogin/GoogleLogin'
+import GoogleOneTapLogin from '../GoogleLogin/GoogleLogin'
 
 const Login = () => {
   /* obetner estado inicial de nuestro custom hook y el dispatcher para cambair estados */
@@ -27,7 +27,6 @@ const Login = () => {
   /* login and register se usa el mismo modelo por lo que usaremos estado para cambair entre ellos */
   const [title, setTitle] = useState('Login')
   const [isRegister, setIsRegister] = useState(false)
-
   /* Crear referencias de los campos del formulario */
   const nameRef = useRef()
   const emailRef = useRef()
@@ -41,18 +40,21 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     /* testing NOTIS */
+
     const password = passwordRef.current.value
     const confirmPassword = confirmPasswordRef.current.value
     if (password !== confirmPassword) {
       dispatch({
         type: 'UPDATE_ALERT',
-        payload: { open: true },
-        severity: 'error',
-        message: 'Passwords do not match'
+        payload: {
+          open: true,
+          severity: 'error',
+          message: 'Passwords do not match'
+        }
       })
     }
   }
-
+  /* ustilizar el hook useEfect para cambiar el título del dialogo entre Login/Register */
   useEffect(() => {
     isRegister ? setTitle('Register') : setTitle('Login')
   }, [isRegister])
@@ -85,6 +87,7 @@ const Login = () => {
               id='name'
               label='Name'
               type='text'
+              ref={nameRef}
               fullWidth
               inputRef={nameRef}
               inputProps={{ minLength: 2 }}
@@ -140,7 +143,7 @@ const Login = () => {
       </DialogActions>
       {/* Log in with google */}
       <DialogActions sx={{ justifyContent: 'center', py: '24px' }}>
-        <GoogleLogin />
+        <GoogleOneTapLogin />
       </DialogActions>
     </Dialog>
   )

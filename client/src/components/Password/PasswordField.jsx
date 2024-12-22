@@ -3,7 +3,7 @@ import { IconButton, InputAdornment, TextField } from '@mui/material'
 import React, { useState } from 'react'
 
 const PasswordField = ({
-  passwordReference,
+  passwordRef,
   id = 'password',
   label = 'Password'
 }) => {
@@ -25,7 +25,7 @@ const PasswordField = ({
       label={label}
       type={showPassword ? 'text' : 'password'}
       fullWidth
-      inputRef={passwordReference}
+      inputRef={passwordRef}
       inputProps={{ minLength: 6 }}
       required
       InputProps={{
