@@ -5,11 +5,10 @@ export const handleRegister = async (user, dispatch) => {
   dispatch({ type: 'START_LOADING' })
 
   const result = await fetchingData(
-    { url: `${baseUrl}/api/auth/login`, body: user },
+    { url: `${baseUrl}/api/auth/register`, body: user },
     dispatch
   )
   if (result) {
-    dispatch({ type: 'UPDATE_USER', payload: result })
     dispatch({ type: 'CLOSE_LOGIN' })
     dispatch({
       type: 'UPDATE_ALERT',

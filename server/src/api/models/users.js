@@ -11,8 +11,8 @@ const userSchema = new mongoose.Schema(
     alias: { type: String, required: false },
     dni: {
       type: String,
-      required: true,
-      validate: [validateDNI, 'Invalid DNI or NIE']
+      required: true
+      // validate: [validateDNI, 'Invalid DNI or NIE']
     },
     email: {
       type: String,

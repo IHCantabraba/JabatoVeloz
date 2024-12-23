@@ -1,5 +1,6 @@
 import {
   Button,
+  Container,
   Dialog,
   DialogActions,
   DialogContent,
@@ -9,11 +10,12 @@ import {
   TextField
 } from '@mui/material'
 import { useValue } from '../../context/ContextProvider'
-import { Close, Send } from '@mui/icons-material'
+import { AlignHorizontalRight, Close, Send } from '@mui/icons-material'
 import PasswordField from '../Password/PasswordField'
 import { useEffect, useRef, useState } from 'react'
 import GoogleOneTapLogin from '../GoogleLogin/GoogleLogin'
-import handleLogin from '../../actions/user'
+import handleLogin, { handleRegister } from '../../actions/user'
+import CustomDate from '../CustomDate/CustomDate'
 const BaseUrl = import.meta.env.VITE_BaseName
 const Login = () => {
   /* obetner estado inicial de nuestro custom hook y el dispatcher para cambair estados */
@@ -36,6 +38,10 @@ const Login = () => {
   const emailRef = useRef()
   const passwordRef = useRef()
   const confirmPasswordRef = useRef()
+  const dniRef = useRef()
+  const apellidosRef = useRef()
+  const aliasRef = useRef()
+  const birthDateRef = useRef()
   /* funcion para cerrar */
   const handleClose = () => {
     dispatch({ type: 'CLOSE_LOGIN' })
@@ -84,7 +90,39 @@ const Login = () => {
     e.preventDefault()
     const name = nameRef.current.value
     const password = passwordRef.current.value
-    handleLogin({ nombre: name, password: password }, dispatch)
+    if (isRegister) {
+      const email = emailRef.current.value
+      const apellidos = apellidosRef.current.value
+      const dni = dniRef.current.value
+      const alias = aliasRef.current.vale
+      const confirmPassword = confirmPasswordRef.current.value
+      const birthdate = birthDateRef.current.value
+      if (password === confirmPassword) {
+        console.log({
+          nombre: name,
+          apellidos: apellidos,
+          alias: alias,
+          dni: dni,
+          email: email,
+          password: password,
+          birthDate: birthdate
+        })
+        handleRegister(
+          {
+            nombre: name,
+            apellidos: apellidos,
+            alias: alias,
+            dni: dni,
+            email: email,
+            password: password,
+            birthDate: birthdate
+          },
+          dispatch
+        )
+      } else {
+        handleLogin({ nombre: name, password: password }, dispatch)
+      }
+    }
   }
   /* ustilizar el hook useEfect para cambiar el título del dialogo entre Login/Register */
   useEffect(() => {
@@ -123,10 +161,47 @@ const Login = () => {
             inputProps={{ minLength: 2 }}
             required
           />
+
+          {isRegister && (
+            <TextField
+              margin='normal'
+              variant='standard'
+              id='apellidos'
+              label='Surname'
+              type='text'
+              fullWidth
+              inputRef={apellidosRef}
+              required
+            />
+          )}
+          {isRegister && (
+            <TextField
+              margin='normal'
+              variant='standard'
+              id='alias'
+              label='Nickname'
+              type='text'
+              fullWidth
+              inputRef={aliasRef}
+              required
+            />
+          )}
+          {isRegister && <CustomDate birthDateRef={birthDateRef} />}
+          {isRegister && (
+            <TextField
+              margin='normal'
+              variant='standard'
+              id='dni'
+              label='DNI/NIE'
+              type='text'
+              fullWidth
+              inputRef={dniRef}
+              required
+            />
+          )}
           {isRegister && (
             <TextField
               /* si no esta registrado el focus lo hacemos al mail */
-              autoFocus={!isRegister}
               margin='normal'
               variant='standard'
               id='email'
@@ -174,9 +249,9 @@ const Login = () => {
         </Button>
       </DialogActions>
       {/* Log in with google */}
-      <DialogActions sx={{ justifyContent: 'center', py: '24px' }}>
+      {/* <DialogActions sx={{ justifyContent: 'center', py: '24px' }}>
         <GoogleOneTapLogin sx={{ cursor: 'not-allowed' }} />
-      </DialogActions>
+      </DialogActions> */}
     </Dialog>
   )
 }
