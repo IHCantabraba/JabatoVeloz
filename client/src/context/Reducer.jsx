@@ -2,6 +2,7 @@ const Reducer = (state, action) => {
   switch (action.type) {
     /* permite añadir info una vez logueado */
     case 'UPDATE_USER':
+      localStorage.setItem('currentUser', JSON.stringify(action.payload))
       return { ...state, currentUser: action.payload }
     /* cambio de temas en la app */
     case 'DARK_THEME':
@@ -21,7 +22,6 @@ const Reducer = (state, action) => {
     /* Notifications */
     case 'UPDATE_ALERT':
       return { ...state, alert: action.payload }
-
     default:
       throw new Error('No matched action!')
   }
