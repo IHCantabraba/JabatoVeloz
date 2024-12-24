@@ -7,21 +7,17 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Fab,
   IconButton,
   TextField
 } from '@mui/material'
 import { useValue } from '../../context/ContextProvider'
-import { AlignHorizontalRight, Close, Send } from '@mui/icons-material'
-import AddIcon from '@mui/icons-material/Add'
+import { Close, Send } from '@mui/icons-material'
 import PasswordField from '../Password/PasswordField'
 import { useEffect, useRef, useState } from 'react'
 import GoogleOneTapLogin from '../GoogleLogin/GoogleLogin'
 import handleLogin, { handleRegister } from '../../actions/user'
 import CustomDate from '../CustomDate/CustomDate'
-import { Input } from '@mui/material'
-import FileUpload from '../FileUpload/FileUpload'
-import CloudUploadIcon from '@mui/icons-material/CloudUpload'
+
 // import FileUpload from '../FileUpload/FileUpload'
 const BaseUrl = import.meta.env.VITE_BaseName
 const Login = () => {

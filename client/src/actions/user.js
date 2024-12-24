@@ -47,7 +47,7 @@ const handleLogin = async (user, dispatch) => {
       payload: {
         open: true,
         severity: 'error',
-        message: result.message
+        message: 'successfully login!'
       }
     })
   }
