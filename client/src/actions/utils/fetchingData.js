@@ -10,13 +10,13 @@ const fetchingData = async (
   try {
     const response = await fetch(url, { method, headers, ...body })
     const data = await response.json()
-    if (response.ok) {
+    if (data.success) {
       dispatch({
         type: 'UPDATE_ALERT',
         payload: {
           open: true,
           severity: 'success',
-          message: 'succesfully login!'
+          message: data.message
         }
       })
     }

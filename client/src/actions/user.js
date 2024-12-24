@@ -8,7 +8,7 @@ export const handleRegister = async (user, dispatch) => {
     { url: `${baseUrl}/api/auth/register`, body: user },
     dispatch
   )
-  if (result.ok) {
+  if (result.success) {
     dispatch({ type: 'CLOSE_LOGIN' })
     dispatch({
       type: 'UPDATE_ALERT',
@@ -24,7 +24,7 @@ export const handleRegister = async (user, dispatch) => {
       payload: {
         open: true,
         severity: 'error',
-        message: result
+        message: result.message
       }
     })
   }
