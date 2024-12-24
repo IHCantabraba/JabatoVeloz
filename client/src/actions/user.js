@@ -15,7 +15,7 @@ export const handleRegister = async (user, dispatch) => {
       payload: {
         open: true,
         severity: 'success',
-        message: 'Registration successfully done!'
+        message: 'Registration successfully created!'
       }
     })
   } else {
@@ -38,11 +38,19 @@ const handleLogin = async (user, dispatch) => {
     dispatch
   )
   console.log(result)
-  if (result) {
+  if (result.success) {
     dispatch({ type: 'UPDATE_USER', payload: result })
     dispatch({ type: 'CLOSE_LOGIN' })
+  } else {
+    dispatch({
+      type: 'UPDATE_ALERT',
+      payload: {
+        open: true,
+        severity: 'error',
+        message: result.message
+      }
+    })
   }
-
   dispatch({ type: 'END_LOADING' })
 }
 export default handleLogin

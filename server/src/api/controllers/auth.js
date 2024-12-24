@@ -7,10 +7,15 @@ export const register = async (req, res, next) => {
       dni: req.body.dni
     })
     if (userDuplicated) {
-      return res.status(400).json('User alrady exists. Please log in!')
+      return res.status(400).json({
+        success: false,
+        message: 'User already exists. Please log in!'
+      })
     }
     if (req.body.password.length < 6)
-      return res.status(400).json('Password must be 6 chras or more')
+      return res
+        .status(400)
+        .json({ success: false, message: 'Password must be 6 chras or more' })
     const newUser = new User(req.body)
     if (req.file) {
       console.log('adding file')
@@ -19,9 +24,11 @@ export const register = async (req, res, next) => {
       console.log('no image passed')
     }
     const user = await newUser.save()
-    return res.status(201).json(user)
+    return res.status(201).json({ success: true, result: user })
   } catch (error) {
-    return res.status(400).json(`Error while registering: ${error}`)
+    return res
+      .status(400)
+      .json({ success: false, message: `Error while registering: ${error}` })
   }
 }
 export const login = async (req, res, next) => {
@@ -29,15 +36,22 @@ export const login = async (req, res, next) => {
     const { nombre, password } = req.body
     const user = await User.findOne({ nombre })
     if (!user) {
-      return res.status(400).json(`user name '${nombre}' does not exists`)
+      return res.status(400).json({
+        success: false,
+        message: `user name '${nombre}' does not exists`
+      })
     }
     if (bcrypt.compareSync(password, user.password)) {
       const token = generateKey(user.id)
-      return res.status(200).json({ token, user })
+      return res.status(200).json({ success: true, result: { token, user } })
     }
-    return res.status(400).json(`user or password incorrect`)
+    return res
+      .status(400)
+      .json({ success: false, message: `user or password incorrect` })
   } catch (error) {
-    return res.status(400).sjon(`Error while login: ${error}`)
+    return res
+      .status(400)
+      .json({ success: false, messaje: `Error while login: ${error}` })
   }
 }
 // export default { register, login }
