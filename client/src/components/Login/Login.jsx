@@ -1,4 +1,5 @@
 import {
+  Avatar,
   Button,
   Container,
   Dialog,
@@ -6,16 +7,22 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  Fab,
   IconButton,
   TextField
 } from '@mui/material'
 import { useValue } from '../../context/ContextProvider'
 import { AlignHorizontalRight, Close, Send } from '@mui/icons-material'
+import AddIcon from '@mui/icons-material/Add'
 import PasswordField from '../Password/PasswordField'
 import { useEffect, useRef, useState } from 'react'
 import GoogleOneTapLogin from '../GoogleLogin/GoogleLogin'
 import handleLogin, { handleRegister } from '../../actions/user'
 import CustomDate from '../CustomDate/CustomDate'
+import { Input } from '@mui/material'
+import FileUpload from '../FileUpload/FileUpload'
+import CloudUploadIcon from '@mui/icons-material/CloudUpload'
+// import FileUpload from '../FileUpload/FileUpload'
 const BaseUrl = import.meta.env.VITE_BaseName
 const Login = () => {
   /* obetner estado inicial de nuestro custom hook y el dispatcher para cambair estados */
@@ -42,49 +49,13 @@ const Login = () => {
   const apellidosRef = useRef()
   const aliasRef = useRef()
   const birthDateRef = useRef()
+
   /* funcion para cerrar */
   const handleClose = () => {
     dispatch({ type: 'CLOSE_LOGIN' })
   }
 
   /* testing login and register requests */
-  // const handleLogin = async () => {
-  //   const userName = nameRef.current.value
-  //   const pass = passwordRef.current.value
-  //   try {
-  //     const fetchResults = await fetch(`${BaseUrl}/api/auth/login`, {
-  //       headers: new Headers({
-  //         'Content-Type': 'Application/json'
-  //       }),
-  //       method: 'POST',
-  //       body: JSON.stringify({ nombre: userName, password: pass })
-  //     })
-  //     if (fetchResults.ok) {
-  //       const userData = await fetchResults.json()
-  //       /* send notification to user */
-  //       dispatch({
-  //         type: 'UPDATE_ALERT',
-  //         payload: {
-  //           open: true,
-  //           message: 'login succcesfully'
-  //         }
-  //       })
-  //       /* update user info */
-  //       dispatch({ type: 'UPDATE_USER', payload: userData })
-  //       /* redirect to main page */
-  //       dispatch({ type: 'CLOSE_LOGIN' })
-  //     }
-  //   } catch (error) {
-  //     dispatch({
-  //       type: 'UPDATE_ALERT',
-  //       payload: {
-  //         open: true,
-  //         severity: 'error',
-  //         message: `Bad request ${error}`
-  //       }
-  //     })
-  //   }
-  // }
   /* controlar el formulario */
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -97,16 +68,8 @@ const Login = () => {
       const alias = aliasRef.current.vale
       const confirmPassword = confirmPasswordRef.current.value
       const birthdate = birthDateRef.current.value
+
       if (password === confirmPassword) {
-        console.log({
-          nombre: name,
-          apellidos: apellidos,
-          alias: alias,
-          dni: dni,
-          email: email,
-          password: password,
-          birthDate: birthdate
-        })
         handleRegister(
           {
             nombre: name,
@@ -120,8 +83,17 @@ const Login = () => {
           dispatch
         )
       } else {
-        handleLogin({ nombre: name, password: password }, dispatch)
+        dispatch({
+          type: 'UPDATE_ALERT',
+          payload: {
+            open: true,
+            severity: 'error',
+            message: 'passwords do not match'
+          }
+        })
       }
+    } else {
+      handleLogin({ nombre: name, password: password }, dispatch)
     }
   }
   /* ustilizar el hook useEfect para cambiar el título del dialogo entre Login/Register */
@@ -179,7 +151,7 @@ const Login = () => {
               margin='normal'
               variant='standard'
               id='alias'
-              label='Nickname'
+              label='Alias'
               type='text'
               fullWidth
               inputRef={aliasRef}
@@ -212,7 +184,6 @@ const Login = () => {
               required
             />
           )}
-
           {/* añadir campo de password y si estamos en el menu register, añadir el campo password de valdiacion Al primero, solo se le pasa la prop del useRef daod que el resto usa los campos por defecto */}
           <PasswordField {...{ passwordRef }} />
           {isRegister && (

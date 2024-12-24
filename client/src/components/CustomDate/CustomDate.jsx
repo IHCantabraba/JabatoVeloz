@@ -6,7 +6,6 @@ import { useState } from 'react'
 export default function CustomDate({ birthDateRef }) {
   const [selectedDate, setSelectedDate] = useState(null)
   const handleDateChange = (date) => {
-    console.log(date)
     setSelectedDate(date)
   }
 

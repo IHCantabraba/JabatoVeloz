@@ -9,6 +9,8 @@ export const register = async (req, res, next) => {
     if (userDuplicated) {
       return res.status(400).json('User alrady exists. Please log in!')
     }
+    if (req.body.password.length < 6)
+      return res.status(400).json('Password must be 6 chras or more')
     const newUser = new User(req.body)
     if (req.file) {
       console.log('adding file')
