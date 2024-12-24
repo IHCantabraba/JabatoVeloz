@@ -41,13 +41,21 @@ const handleLogin = async (user, dispatch) => {
   if (result.success) {
     dispatch({ type: 'UPDATE_USER', payload: result })
     dispatch({ type: 'CLOSE_LOGIN' })
+    dispatch({
+      type: 'UPDATE_ALERT',
+      payload: {
+        open: true,
+        severity: 'success',
+        message: 'succesfully login'
+      }
+    })
   } else {
     dispatch({
       type: 'UPDATE_ALERT',
       payload: {
         open: true,
         severity: 'error',
-        message: 'successfully login!'
+        message: result.message
       }
     })
   }

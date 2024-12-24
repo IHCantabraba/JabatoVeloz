@@ -3,7 +3,6 @@ import User from '../models/users.js'
 import { generateKey } from '../../utils/jwt.js'
 import tryCatch from './utils/tryCatch.js'
 export const register = tryCatch(async (req, res, next) => {
-  // try {
   const userDuplicated = await User.findOne({
     dni: req.body.dni
   })
@@ -26,11 +25,6 @@ export const register = tryCatch(async (req, res, next) => {
   }
   const user = await newUser.save()
   return res.status(201).json({ success: true, result: user })
-  // } catch (error) {
-  //   return res
-  //     .status(400)
-  //     .json({ success: false, message: `Error while registering: ${error}` })
-  // }
 })
 export const login = tryCatch(async (req, res, next) => {
   //try {
@@ -49,10 +43,4 @@ export const login = tryCatch(async (req, res, next) => {
   return res
     .status(400)
     .json({ success: false, message: `user or password incorrect` })
-  // } catch (error) {
-  //   return res
-  //     .status(500)
-  //     .json({ success: false, messaje: `Error while login: ${error}` })
-  // }
 })
-// export default { register, login }
