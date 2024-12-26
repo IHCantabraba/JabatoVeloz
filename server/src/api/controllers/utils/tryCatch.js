@@ -5,7 +5,7 @@ const tryCatch = (controller) => {
     } catch (error) {
       return res
         .status(500)
-        .json({ success: false, messaje: `Error while login: ${error}` })
+        .json({ success: false, messaje: `Error: ${error}` })
     }
   }
 }

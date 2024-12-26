@@ -1,7 +1,7 @@
 import deleteFile from '../../utils/deleteFile.js'
 import Event from '../models/competitions.js'
 import User from '../models/users.js'
-
+import tryCatch from '../controllers/utils/tryCatch.js'
 export const getAllusers = async (req, res, next) => {
   try {
     const users = await User.find()
@@ -24,26 +24,27 @@ export const getUserByID = async (req, res, next) => {
   }
 }
 
-export const updatedUser = async (req, res, next) => {
-  try {
-    const { id } = req.params
-    const newUser = new User(req.body)
-    const oldUser = await User.findById(id)
-    if (req.file) {
-      console.log('changing avatar img')
-      deleteFile(oldUser.img)
-      newUser.img = req.file.path
-    }
-    newUser._id = id
+export const updatedUser = tryCatch(async (req, res, next) => {
+  const { id } = req.params
+  const newUser = new User(req.body)
+  const oldUser = await User.findById(id)
 
-    const userUpdated = await User.findByIdAndUpdate(id, newUser, {
-      new: true
-    })
-    return res.status(200).json(`User succesfully updated, ${userUpdated}`)
-  } catch (error) {
-    return res.status(400).json('Error occurred while updating ')
+  if (req.file) {
+    console.log('changing avatar img')
+    deleteFile(oldUser.img)
+    newUser.img = req.file.path
+  } else {
+    console.log('no file send')
   }
-}
+  newUser._id = id
+  const userUpdated = await User.findByIdAndUpdate(id, newUser, {
+    new: true
+  })
+  return res.status(200).json({
+    success: true,
+    result: userUpdated
+  })
+})
 export const deleteUser = async (req, res, next) => {
   try {
     const { id } = req.params

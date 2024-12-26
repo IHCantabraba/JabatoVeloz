@@ -2,6 +2,7 @@ import cloudinary from 'cloudinary'
 import buildUrl from 'cloudinary-build-url'
 
 const deleteFile = (imgUrl) => {
+  console.log('deleting previous image')
   try {
     const publicId = buildUrl.extractPublicId(imgUrl)
 
@@ -14,4 +15,4 @@ const deleteFile = (imgUrl) => {
   }
 }
 
-export default { deleteFile }
+export default deleteFile

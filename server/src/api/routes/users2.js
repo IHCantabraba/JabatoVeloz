@@ -10,13 +10,13 @@ import {
 import express from 'express'
 const userRouter = express.Router()
 userRouter.get('/', [isAuth, isAdmin], getAllusers)
-userRouter.get('/:id', [isAuth, getUserByID])
+userRouter.get('/:id', [isAuth], getUserByID)
 userRouter.post(
-  'competitons',
+  '/competitons',
   [isAuth, isAdmin],
   upload.single('img'),
   registerEvent
 )
-userRouter.post('/:id', [isAuth], upload.single('img'))
+userRouter.post('/:id', [isAuth], upload.single('img'), updatedUser)
 userRouter.delete('/:id', [isAdmin, isAdmin], deleteUser)
 export default userRouter

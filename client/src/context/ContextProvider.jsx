@@ -6,7 +6,8 @@ const initialState = {
   light: true,
   openLogin: false,
   loading: false,
-  alert: { open: false, severity: 'info', message: '' }
+  alert: { open: false, severity: 'info', message: '' },
+  profile: { open: false, file: null, photoURL: '' }
 }
 /* crear un contexto */
 const Context = createContext(initialState)

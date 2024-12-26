@@ -2,34 +2,55 @@ import { Settings } from '@mui/icons-material'
 import { ListItemIcon, Menu, MenuItem } from '@mui/material'
 import { Logout } from '@mui/icons-material'
 import { useValue } from '../../context/ContextProvider'
+import Profile from '../Profile/Profile'
 
 const UserMEnu = ({ anchorUserMenu, setAnchorUserMenu }) => {
-  const { dispatch } = useValue()
+  const {
+    state: { currentUser },
+    dispatch
+  } = useValue()
   /* no element related to this menu */
   const handleCloseUserMenu = () => {
     setAnchorUserMenu(null)
   }
 
   return (
-    <Menu
-      anchorEl={anchorUserMenu}
-      open={Boolean(anchorUserMenu)}
-      onClose={handleCloseUserMenu}
-      onClick={handleCloseUserMenu}
-    >
-      <MenuItem>
-        <ListItemIcon>
-          <Settings fontSize='small'>Profile</Settings>
-        </ListItemIcon>
-      </MenuItem>
-      <MenuItem
-        onClick={() => dispatch({ type: 'UPDATE_USER', payload: null })}
+    <>
+      <Menu
+        anchorEl={anchorUserMenu}
+        open={Boolean(anchorUserMenu)}
+        onClose={handleCloseUserMenu}
+        onClick={handleCloseUserMenu}
       >
-        <ListItemIcon>
-          <Logout fontSize='small'>Logout</Logout>
-        </ListItemIcon>
-      </MenuItem>
-    </Menu>
+        <MenuItem
+          onClick={() =>
+            dispatch({
+              type: 'UPDATE_PROFILE',
+              payload: {
+                open: true,
+                file: null,
+                photoURL: currentUser?.result.user.img
+              }
+            })
+          }
+        >
+          <ListItemIcon>
+            <Settings fontSize='small'>Profile</Settings>
+          </ListItemIcon>
+          Profile
+        </MenuItem>
+        {/* en logout click, actualizar el current user a null */}
+        <MenuItem
+          onClick={() => dispatch({ type: 'UPDATE_USER', payload: null })}
+        >
+          <ListItemIcon>
+            <Logout fontSize='small'>Logout</Logout>
+          </ListItemIcon>
+          Logout
+        </MenuItem>
+      </Menu>
+      <Profile></Profile>
+    </>
   )
 }
 

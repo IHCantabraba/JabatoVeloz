@@ -1,5 +1,5 @@
 import User from '../api/models/users.js'
-import verifyToken from '../utils/jwt.js'
+import { verifyToken } from '../utils/jwt.js'
 
 export const isAuth = async (req, res, next) => {
   try {

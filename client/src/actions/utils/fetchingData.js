@@ -4,7 +4,7 @@ const fetchingData = async (
   dispatch
 ) => {
   const headers = token
-    ? { 'Content-Type': 'application/json', authentication: `Bearer ${token}` }
+    ? { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` }
     : { 'Content-Type': 'application/json' }
   body = body ? { body: JSON.stringify(body) } : {}
   try {

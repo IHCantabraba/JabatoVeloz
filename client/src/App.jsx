@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import './App.css'
 import Loading from './components/Loading/Loading'
 import Login from './components/Login/Login'
@@ -9,6 +10,7 @@ function App() {
   const {
     state: { light }
   } = useValue()
+
   return (
     <>
       {/* TODO revisar otra forma de cambiar el color al background */}
