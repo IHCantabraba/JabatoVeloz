@@ -9,14 +9,14 @@ import BottomNAv from './components/User/BottomNAv'
 
 function App() {
   const {
-    state: { light }
+    state: { light, currentUser }
   } = useValue()
 
   return (
     <>
-      {/* TODO revisar otra forma de cambiar el color al background */}
       <Loading />
       <Notis />
+      {/* TODO revisar otra forma de cambiar el color al background */}
       <div
         className='app-body'
         style={{
@@ -32,7 +32,7 @@ function App() {
       ></div>
       <Login />
       <NavBar />
-      <BottomNAv />
+      {currentUser && <BottomNAv />}
     </>
   )
 }

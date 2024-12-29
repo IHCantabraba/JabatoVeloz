@@ -24,6 +24,10 @@ const Reducer = (state, action) => {
       return { ...state, alert: action.payload }
     case 'UPDATE_PROFILE':
       return { ...state, profile: action.payload }
+    case 'UPDATE_DETAILS':
+      return { ...state, details: { ...state.details, ...action.payload } }
+    case 'UPDATE_FECHA_PEDIDO':
+      return { ...state, FechaPedido: action.payload }
     default:
       throw new Error('No matched action!')
   }

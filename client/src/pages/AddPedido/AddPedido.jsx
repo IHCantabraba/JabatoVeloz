@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
   Button,
   Container,
@@ -10,19 +10,24 @@ import {
 } from '@mui/material'
 import AddDate from './AddDate/AddDate'
 import AddDetails from './AddDetails/AddDetails'
+import { useValue } from '../../context/ContextProvider'
 
 const AddPedido = () => {
+  const {
+    state: { details, FechaPedido },
+    dispatch
+  } = useValue()
   const [activeStep, setActiveStep] = useState(0)
-  const [step, setSteps] = useState([
+  const [steps, setSteps] = useState([
     { label: 'Date', completed: false },
     { label: 'Details', completed: false }
     // { label: 'Image', completed: true }
   ])
 
-  /*  */
+  /* funcion para controlar el botón next para pasar entre Steps del proceso */
   const handleNext = () => {
     /* si el paso activo no es el último */
-    if (activeStep < step.length - 1) {
+    if (activeStep < steps.length - 1) {
       /* setear el indice al paso anterior mas 1 */
       setActiveStep((activeStep) => activeStep + 1)
     } else {
@@ -36,7 +41,7 @@ const AddPedido = () => {
   const checkDisabled = () => {
     /* comprobar si el paso activo no es el ultimo */
     /* si no es el último, se para la ejecucion */
-    if (activeStep < step.length - 1) return false
+    if (activeStep < steps.length - 1) return false
     /* buscar algun paso sin completar */
     const index = findUnfinished()
     /* si todos los pasos estan completados */
@@ -46,7 +51,33 @@ const AddPedido = () => {
   }
   /* buscar algun paso sin completar */
   const findUnfinished = () => {
-    return step.findIndex((step) => !step.completed)
+    return steps.findIndex((step) => !step.completed)
+  }
+
+  /* useEffect para controlar el estado completado del step */
+  useEffect(() => {
+    if (details.title.length > 4 && details.description.length > 9) {
+      if (!steps[1].completed) setComplete(1, true)
+    } else {
+      if (steps[1].completed) setComplete(1, false)
+    }
+  }, [details])
+
+  /* useEffect para controlar el estado completado del step */
+  useEffect(() => {
+    if (FechaPedido !== '') {
+      if (!steps[0].completed) setComplete(0, true)
+    } else {
+      if (steps[0].completed) setComplete(0, false)
+    }
+  }, [FechaPedido])
+
+  /* funcion para modificar el estado completado de un paso */
+  const setComplete = (index, status) => {
+    setSteps((steps) => {
+      steps[index].completed = status
+      return [...steps]
+    })
   }
   return (
     <Container>
@@ -56,7 +87,7 @@ const AddPedido = () => {
         activeStep={activeStep}
         sx={{ mb: 3 }}
       >
-        {step.map((step, index) => (
+        {steps.map((step, index) => (
           <Step key={step.label} completed={step.completed}>
             <StepButton onClick={() => setActiveStep(index)} />
             {step.label}

@@ -154,7 +154,9 @@ const Login = () => {
               required
             />
           )}
-          {isRegister && <CustomDate birthDateRef={birthDateRef} />}
+          {isRegister && (
+            <CustomDate propRef={birthDateRef} labelProp='Start Date' />
+          )}
           {isRegister && (
             <TextField
               margin='normal'
