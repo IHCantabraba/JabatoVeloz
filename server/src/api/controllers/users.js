@@ -33,10 +33,13 @@ export const updatedUser = tryCatch(async (req, res, next) => {
     console.log('changing avatar img')
     deleteFile(oldUser.img)
     newUser.img = req.file.path
+    console.log(`new user img is:${newUser.img}`)
   } else {
     console.log('no file send')
   }
   newUser._id = id
+  console.log(`new user img is:${newUser.img}`)
+
   const userUpdated = await User.findByIdAndUpdate(id, newUser, {
     new: true
   })

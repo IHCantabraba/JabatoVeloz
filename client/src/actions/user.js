@@ -64,13 +64,11 @@ const handleLogin = async (user, dispatch) => {
 export const UpdateProfile = async (currentUser, updatedFields, dispatch) => {
   dispatch({ type: 'START_LOADING' })
   const { name, file } = updatedFields
-  let body = { nombre: name }
+
   const data = new FormData()
   data.append('nombre', name)
   if (file) {
-    console.log('adding file')
     data.append('img', file)
-    body = { ...body, img: file }
   }
   try {
     const result = await fetch(
@@ -82,22 +80,41 @@ export const UpdateProfile = async (currentUser, updatedFields, dispatch) => {
       }
     )
     const response = await result.json()
-    if (result.ok) {
-      console.log(response.result.img)
-      /* TODO actualziar el avatar */
+    console.log(`response is`, response)
+    currentUser.result.user.img = response.result.img
+    currentUser.result.user.nombre = response.result.nombre
+    if (response.success) {
+      dispatch({
+        type: 'UPDATE_USER',
+        payload: currentUser
+      })
+      dispatch({
+        type: 'UPDATE_ALERT',
+        payload: {
+          open: true,
+          severity: 'success',
+          message: 'Your profile has been updated successfully'
+        }
+      })
+      dispatch({
+        type: 'UPDATE_PROFILE',
+        payload: {
+          open: false,
+          file: null,
+          photoURL: response.result.img
+        }
+      })
     }
   } catch (error) {
-    console.log(error)
+    dispatch({
+      type: 'UPDATE_ALERT',
+      payload: {
+        open: true,
+        severity: 'error',
+        message: error.message
+      }
+    })
   }
-  // const result = await fetchingData(
-  //   {
-  //     url: `${baseUrl}/api/users/${currentUser.result.user._id}`,
-  //     method: 'POST',
-  //     token: currentUser.result.token,
-  //     body: data
-  //   },
-  //   dispatch
-  // )
   dispatch({ type: 'END_LOADING' })
 }
 export default handleLogin

@@ -39,10 +39,11 @@ const Profile = () => {
     e.preventDefault()
     /* send request to change user info */
     const name = nameRef.current.value
-    console.log(profile.file)
+
     UpdateProfile(currentUser, { name, file: profile.file }, dispatch)
+
+    console.log(response)
   }
-  /* crear funcion para obtener el archivo seleccionado para la imagen de perfil y actualizar con el dispatcher */
 
   return (
     <Dialog open={profile.open} onClose={handleClose}>

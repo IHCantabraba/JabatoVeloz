@@ -23,7 +23,7 @@ const ContextProvider = ({ children }) => {
     if (currentUser) {
       dispatch({ type: 'UPDATE_USER', payload: currentUser })
     }
-  })
+  }, [])
   return (
     <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>
   )
