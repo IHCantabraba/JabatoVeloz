@@ -71,6 +71,7 @@ export const UpdateProfile = async (currentUser, updatedFields, dispatch) => {
     data.append('img', file)
   }
   try {
+    /* TODO resuar fetchData function y tryCatch */
     const result = await fetch(
       `${baseUrl}/api/users/${currentUser.result.user._id}`,
       {
@@ -80,7 +81,7 @@ export const UpdateProfile = async (currentUser, updatedFields, dispatch) => {
       }
     )
     const response = await result.json()
-    console.log(`response is`, response)
+    /* TODO revisar */
     currentUser.result.user.img = response.result.img
     currentUser.result.user.nombre = response.result.nombre
     if (response.success) {

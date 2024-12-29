@@ -5,6 +5,7 @@ import Login from './components/Login/Login'
 import NavBar from './components/NavBar/NavBar'
 import Notis from './components/Notis/Notis'
 import { useValue } from './context/ContextProvider'
+import BottomNAv from './components/User/BottomNAv'
 
 function App() {
   const {
@@ -31,6 +32,7 @@ function App() {
       ></div>
       <Login />
       <NavBar />
+      <BottomNAv />
     </>
   )
 }

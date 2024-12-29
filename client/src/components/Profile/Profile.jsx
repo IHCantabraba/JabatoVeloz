@@ -41,8 +41,6 @@ const Profile = () => {
     const name = nameRef.current.value
 
     UpdateProfile(currentUser, { name, file: profile.file }, dispatch)
-
-    console.log(response)
   }
 
   return (
