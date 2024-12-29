@@ -14,12 +14,11 @@ import LightModeIcon from '@mui/icons-material/LightMode'
 import UserIcon from '../User/UserIcon'
 
 const NavBar = () => {
-  // const { light } = useContext(ThemeContext)
+  // const {
+  //   state: { light }
+  // } = useValue()
   const {
-    state: { light }
-  } = useValue()
-  const {
-    state: { currentUser },
+    state: { currentUser, light },
     dispatch
   } = useValue()
 
@@ -28,7 +27,7 @@ const NavBar = () => {
       <AppBar
         style={{
           backgroundColor: `var(--ihc-toolbar-${
-            light ? 'light' : 'dark'
+            !currentUser ? 'none' : light ? 'light' : 'dark'
           }-mode)`,
           justifyContent: 'space-between'
         }}
@@ -72,7 +71,9 @@ const NavBar = () => {
                 startIcon={<Lock />}
                 onClick={() => dispatch({ type: 'OPEN_LOGIN' })}
                 style={{
-                  color: `var(--ihc-${light ? 'light' : 'dark'}-mode-text)`
+                  color: `var(--ihc-${
+                    !currentUser ? 'white' : light ? 'light' : 'dark'
+                  }-mode-text)`
                 }}
               >
                 Login
@@ -85,7 +86,9 @@ const NavBar = () => {
                 style={{
                   fontSize: '40px',
                   paddingLeft: '0.5rem',
-                  color: `var(--ihc-${light ? 'light' : 'dark'}-mode-text)`
+                  color: `var(--ihc-${
+                    !currentUser ? 'white' : light ? 'light' : 'dark'
+                  }-mode-text)`
                 }}
                 onClick={() => dispatch({ type: 'DARK_THEME', payload: false })}
               />
@@ -93,7 +96,9 @@ const NavBar = () => {
               <ModeNightIcon
                 style={{
                   fontSize: '30px',
-                  color: `var(--ihc-${light ? 'light' : 'dark'}-mode-text)`
+                  color: `var(--ihc-${
+                    !currentUser ? 'white' : light ? 'light' : 'dark'
+                  }-mode-text)`
                 }}
                 onClick={() => dispatch({ type: 'LIGHT_THEME', payload: true })}
               />

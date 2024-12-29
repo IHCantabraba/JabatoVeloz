@@ -1,8 +1,11 @@
 :root {
   --ihc-light-mode-bg: white;
+  --ihc-none-mode: rgb(0, 0, 0, 1);
   --ihc-dark-mode-bg: rgb(80, 80, 80);
   --ihc-light-mode-text: black;
   --ihc-dark-mode-text: rgb(116, 143, 147);
+  --ihc-white-mode-text: white;
+  --ihc-white-mode-text: white;
   --ihc-toolbar-light-mode: green;
   --ihc-toolbar-dark-mode: black;
   --ihc-drawer-light: rgba(0, 0, 0, 0.3);

@@ -6,6 +6,7 @@ import NavBar from './components/NavBar/NavBar'
 import Notis from './components/Notis/Notis'
 import { useValue } from './context/ContextProvider'
 import BottomNAv from './components/User/BottomNAv'
+import LandingPage from './components/Landing/LandingPage'
 
 function App() {
   const {
@@ -14,10 +15,11 @@ function App() {
 
   return (
     <>
+      {!currentUser && <LandingPage />}
       <Loading />
       <Notis />
       {/* TODO revisar otra forma de cambiar el color al background */}
-      <div
+      {/* <div
         className='app-body'
         style={{
           backgroundColor: `var(--ihc-${light ? 'light' : 'dark'}-mode-bg)`,
@@ -29,7 +31,7 @@ function App() {
           width: '100%',
           height: '100vh'
         }}
-      ></div>
+      ></div> */}
       <Login />
       <NavBar />
       {currentUser && <BottomNAv />}
