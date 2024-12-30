@@ -8,6 +8,8 @@ import Typography from '@mui/material/Typography'
 import { Collapse } from '@mui/material'
 import { useValue } from '../../context/ContextProvider'
 
+const buttonSX = { color: 'orange', '&:hover': { backgroundColor: '#ddd' } }
+
 export default function LandingCards({ cardInfo, checked }) {
   const { dispatch } = useValue()
   const handleLogin = () => {
@@ -54,7 +56,7 @@ export default function LandingCards({ cardInfo, checked }) {
         <CardActions sx={{ justifyContent: 'center' }}>
           <Button
             size='small'
-            sx={{ color: 'orange' }}
+            sx={buttonSX}
             onClick={
               cardInfo.clickFunction === 'login' ? handleLogin : handleContact
             }
