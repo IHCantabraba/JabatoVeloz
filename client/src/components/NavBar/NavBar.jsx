@@ -14,9 +14,6 @@ import LightModeIcon from '@mui/icons-material/LightMode'
 import UserIcon from '../User/UserIcon'
 
 const NavBar = () => {
-  // const {
-  //   state: { light }
-  // } = useValue()
   const {
     state: { currentUser, light },
     dispatch
@@ -29,16 +26,19 @@ const NavBar = () => {
           backgroundColor: `var(--ihc-toolbar-${
             !currentUser ? 'none' : light ? 'light' : 'dark'
           }-mode)`,
-          justifyContent: 'space-between'
+          // justifyContent: 'space-between'
+          flexGrow: '1'
         }}
       >
         <Container maxWidth='lg' sx={{ mr: 0, ml: 0 }}>
-          <Toolbar disableGutters style={{ width: '95vw' }}>
+          <Toolbar disableGutters style={{ width: '95vw', margin: '0 auto' }}>
             <Box sx={{ mr: 1 }}>
               <IconButton size='medium'>
                 <Menu
                   style={{
-                    color: `var(--ihc-${light ? 'light' : 'dark'}-mode-text)`
+                    color: `var(--ihc-${
+                      !currentUser ? 'white' : light ? 'light' : 'dark'
+                    }-mode-text)`
                   }}
                 />
               </IconButton>
@@ -49,10 +49,13 @@ const NavBar = () => {
               noWrap
               sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}
               style={{
-                color: `var(--ihc-${light ? 'light' : 'dark'}-mode-text)`
+                color: `var(--ihc-${
+                  !currentUser ? 'white' : light ? 'light' : 'dark'
+                }-mode-text)`
               }}
             >
-              Jabato veloz
+              Jabato
+              <span style={{ color: 'orange', fontWeight: 'bold' }}>Veloz</span>
             </Typography>
             <Typography
               variant='h6'
