@@ -28,6 +28,10 @@ const Reducer = (state, action) => {
       return { ...state, details: { ...state.details, ...action.payload } }
     case 'UPDATE_FECHA_PEDIDO':
       return { ...state, FechaPedido: action.payload }
+    case 'IS_ADMIN':
+      return { ...state, isAdmin: true }
+    case 'NOT_ADMIN':
+      return { ...state, isAdmin: false }
     default:
       throw new Error('No matched action!')
   }

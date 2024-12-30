@@ -39,6 +39,12 @@ const handleLogin = async (user, dispatch) => {
   )
   if (result.success) {
     dispatch({ type: 'UPDATE_USER', payload: result })
+    if (result.result.user.rol === 'admin') {
+      dispatch({ type: 'IS_ADMIN' })
+    } else {
+      dispatch({ type: 'NOT_ADMIN' })
+    }
+
     dispatch({ type: 'CLOSE_LOGIN' })
     dispatch({
       type: 'UPDATE_ALERT',

@@ -9,7 +9,8 @@ const initialState = {
   alert: { open: false, severity: 'info', message: '' },
   profile: { open: false, file: null, photoURL: '' },
   details: { title: '', description: '' },
-  FechaPedido: ''
+  FechaPedido: '',
+  isAdmin: false
 }
 /* crear un contexto */
 const Context = createContext(initialState)

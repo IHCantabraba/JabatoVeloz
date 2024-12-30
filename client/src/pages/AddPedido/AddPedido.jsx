@@ -11,6 +11,7 @@ import {
 import AddDate from './AddDate/AddDate'
 import AddDetails from './AddDetails/AddDetails'
 import { useValue } from '../../context/ContextProvider'
+import { Send } from '@mui/icons-material'
 
 const AddPedido = () => {
   const {
@@ -23,7 +24,7 @@ const AddPedido = () => {
     { label: 'Details', completed: false }
     // { label: 'Image', completed: true }
   ])
-
+  const [showSubmit, setShowSubmit] = useState(false)
   /* funcion para controlar el botón next para pasar entre Steps del proceso */
   const handleNext = () => {
     /* si el paso activo no es el último */
@@ -79,8 +80,23 @@ const AddPedido = () => {
       return [...steps]
     })
   }
+  useEffect(() => {
+    if (findUnfinished() === -1) {
+      if (!showSubmit) setShowSubmit(true)
+    } else {
+      if (showSubmit) setShowSubmit(false)
+    }
+  })
+  const handleSubmit = () => {
+    console.log(
+      `${FechaPedido.$D}/${FechaPedido.$M + 1}/${FechaPedido.$y}`,
+      details.title,
+      details.description
+    )
+    /* TODO crear función para enviar datos al server */
+  }
   return (
-    <Container>
+    <Container sx={{ marginTop: '20px', fontFamily: 'Nunito' }}>
       <Stepper
         alternativeLabel
         nonLinear
@@ -94,22 +110,32 @@ const AddPedido = () => {
           </Step>
         ))}
       </Stepper>
-      <Box>{{ 0: <AddDate />, 1: <AddDetails /> }[activeStep]}</Box>
-      <Stack
-        direction='row'
-        sx={{ pt: 2, pb: 7, justifyContent: 'space-around' }}
-      >
-        <Button
-          color='inherit'
-          disabled={!activeStep}
-          onClick={() => setActiveStep((activeStep) => activeStep - 1)}
+      <Box sx={{ pb: 7 }}>
+        {{ 0: <AddDate />, 1: <AddDetails /> }[activeStep]}
+        <Stack
+          direction='row'
+          sx={{ pt: 2, pb: 7, justifyContent: 'space-around' }}
         >
-          Back
-        </Button>
-        <Button disabled={checkDisabled()} onClick={handleNext}>
-          Next
-        </Button>
-      </Stack>
+          <Button
+            color='inherit'
+            disabled={!activeStep}
+            onClick={() => setActiveStep((activeStep) => activeStep - 1)}
+          >
+            Back
+          </Button>
+          <Button disabled={checkDisabled()} onClick={handleNext}>
+            Next
+          </Button>
+        </Stack>
+      </Box>
+
+      {showSubmit && (
+        <Stack sx={{ alignItems: 'center' }}>
+          <Button variant='contained' endIcon={<Send />} onClick={handleSubmit}>
+            Submit
+          </Button>
+        </Stack>
+      )}
     </Container>
   )
 }
