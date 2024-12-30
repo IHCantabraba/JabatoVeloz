@@ -2,6 +2,8 @@ import React from 'react'
 import LandingCards from './LandingCards'
 import cardInfomation from './cardsInfo'
 import useWindowPosition from './hook/useWindowPosition'
+import './Directions.css'
+
 const Directions = () => {
   const checked = useWindowPosition('Landing')
   return (
