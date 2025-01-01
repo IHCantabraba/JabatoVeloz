@@ -1,5 +1,5 @@
+import { extractDaysOf } from '../pages/Pedidos/utlis/extractDaysOff'
 import fetchingData from './utils/fetchingData'
-
 const baseUrl = import.meta.env.VITE_BaseName
 export const createPedido = async (pedido, currentUser, dispatch, setPage) => {
   dispatch({ type: 'START_LOADING' })
@@ -22,18 +22,27 @@ export const createPedido = async (pedido, currentUser, dispatch, setPage) => {
       }
     })
     dispatch({ type: 'RESET_PEDIDO' })
-    setPage(0)
+    setPage(2)
   }
   dispatch({ type: 'END_LOADING' })
 }
 export const getPedidos = async (dispatch) => {
   dispatch({ type: 'START_LOADING' })
+  /* TODO use fetching data funcion */
   const result = await fetchingData(
-    {
-      url: `${baseUrl}/api/pedidos`
-    },
+    { url: `${baseUrl}/api/pedidos`, method: 'GET' },
     dispatch
   )
-  if (result.success) return result
-  dispatch({ type: 'END_LOADING' })
+  const handleExpirationDate = (pedido) => {
+    extractDaysOf(pedido)
+  }
+
+  if (result.success) {
+    result.result.map((pedido) => {
+      handleExpirationDate(pedido)
+    })
+    dispatch({ type: 'UPDATE_PEDIDOS', payload: result.result })
+    dispatch({ type: 'END_LOADING' })
+  }
+  return result
 }

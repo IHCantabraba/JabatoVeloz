@@ -6,7 +6,8 @@ const cardInfomation = [
     url: './assets/JV_bg.jpg',
     background: 'rgba(0,0,0,0.5)',
     btnName: 'Contact',
-    clickFunction: 'contact'
+    clickFunction: 'contact',
+    id: '1'
   },
   {
     title: 'Login or register!',
@@ -15,7 +16,8 @@ const cardInfomation = [
     url: './assets/JV_negro.jpg',
     background: 'rgba(0,0,0,0.5)',
     btnName: 'Login - Register',
-    clickFunction: 'login'
+    clickFunction: 'login',
+    id: '2'
   }
 ]
 export default cardInfomation

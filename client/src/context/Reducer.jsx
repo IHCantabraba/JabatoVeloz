@@ -35,6 +35,8 @@ const Reducer = (state, action) => {
     case 'NOT_ADMIN':
       localStorage.setItem('isAdmin', 'false')
       return { ...state, isAdmin: false }
+    case 'UPDATE_PEDIDOS':
+      return { ...state, pedidos: action.payload }
     /* reset panel pedido desppues de crear uno */
     case 'RESET_PEDIDO':
       return {

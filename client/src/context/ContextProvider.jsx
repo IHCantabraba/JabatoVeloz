@@ -10,7 +10,8 @@ const initialState = {
   profile: { open: false, file: null, photoURL: '' },
   details: { title: '', description: '' },
   FechaPedido: '',
-  isAdmin: false
+  isAdmin: false,
+  pedidos: null
 }
 /* crear un contexto */
 const Context = createContext(initialState)
@@ -29,7 +30,6 @@ const ContextProvider = ({ children }) => {
     }
     /* evita que en page refresh se resetee el valor dela variable global */
     if (AdminState) {
-      console.log(AdminState)
       localStorage.setItem('isAdmin', 'true')
       dispatch({ type: 'IS_ADMIN' })
     } else {

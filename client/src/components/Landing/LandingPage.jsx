@@ -24,7 +24,8 @@ const Landing = styled('div')(({ theme }) => ({
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 }))
 const Title = styled('div')(({ theme }) => ({

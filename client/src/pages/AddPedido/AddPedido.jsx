@@ -89,11 +89,6 @@ const AddPedido = ({ setPage }) => {
     }
   })
   const handleSubmit = () => {
-    console.log(
-      `${FechaPedido.$D}/${FechaPedido.$M + 1}/${FechaPedido.$y}`,
-      details.title,
-      details.description
-    )
     const pedido = {
       ExpireDate: `${FechaPedido.$D}/${FechaPedido.$M + 1}/${FechaPedido.$y}`,
       title: details.title,
@@ -101,8 +96,6 @@ const AddPedido = ({ setPage }) => {
       uid: currentUser.result.user._id
     }
     createPedido(pedido, currentUser, dispatch, setPage)
-
-    /* TODO crear función para enviar datos al server */
   }
   return (
     <Container sx={{ marginTop: '20px', fontFamily: 'Nunito' }}>
@@ -123,12 +116,13 @@ const AddPedido = ({ setPage }) => {
         {{ 0: <AddDate />, 1: <AddDetails /> }[activeStep]}
         <Stack
           direction='row'
-          sx={{ pt: 2, pb: 7, justifyContent: 'space-around' }}
+          sx={{ pt: 2, pb: 1, justifyContent: 'space-around' }}
         >
           <Button
             color='inherit'
             disabled={!activeStep}
             onClick={() => setActiveStep((activeStep) => activeStep - 1)}
+            sx={{ mb: 0 }}
           >
             Back
           </Button>
@@ -140,7 +134,12 @@ const AddPedido = ({ setPage }) => {
 
       {showSubmit && (
         <Stack sx={{ alignItems: 'center' }}>
-          <Button variant='contained' endIcon={<Send />} onClick={handleSubmit}>
+          <Button
+            variant='contained'
+            sx={{ backgroundColor: 'green' }}
+            endIcon={<Send />}
+            onClick={handleSubmit}
+          >
             Submit
           </Button>
         </Stack>

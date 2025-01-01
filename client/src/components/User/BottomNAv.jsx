@@ -14,12 +14,14 @@ import Carreras from '../../pages/Carreras/Carreras'
 import Pedidos from '../../pages/Pedidos/Pedidos'
 import AddPedido from '../../pages/AddPedido/AddPedido'
 import { useValue } from '../../context/ContextProvider'
+import { getPedidos } from '../../actions/pedidos'
 const BottomNAv = () => {
   /* estado que controla el click de cada icono de los existentes en lña barra de navegador. */
   const {
-    state: { isAdmin }
+    state: { isAdmin },
+    dispatch
   } = useValue()
-  const [value, setValue] = useState(0)
+  const [value, setValue] = useState(2)
 
   /* al cambiar entre páginas, hacer scroll al inicio  */
   const ref = useRef()
