@@ -36,7 +36,7 @@ const BottomNAv = () => {
             0: <ClusterMap />,
             1: <Carreras />,
             2: <Pedidos />,
-            3: <AddPedido />
+            3: <AddPedido setPage={setValue} />
           }[value]
         : { 0: <ClusterMap />, 1: <Carreras />, 2: <Pedidos /> }[value]}
       <Paper

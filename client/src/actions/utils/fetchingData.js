@@ -10,6 +10,12 @@ const fetchingData = async (
   try {
     const response = await fetch(url, { method, headers, ...body })
     const data = await response.json()
+
+    if (!data.success) {
+      if (response.status === 401)
+        dispatch({ type: 'UPDATE_USER', payload: null })
+      throw new Error(data.message)
+    }
     if (data.success) {
       dispatch({
         type: 'UPDATE_ALERT',
@@ -27,6 +33,7 @@ const fetchingData = async (
       payload: { open: true, severity: 'error', message: error.message }
     })
     console.log(error.message)
+    dispatch({ type: 'END_LOADING' })
     return null
   }
 }

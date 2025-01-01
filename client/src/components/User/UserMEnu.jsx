@@ -41,7 +41,10 @@ const UserMEnu = ({ anchorUserMenu, setAnchorUserMenu }) => {
         </MenuItem>
         {/* en logout click, actualizar el current user a null */}
         <MenuItem
-          onClick={() => dispatch({ type: 'UPDATE_USER', payload: null })}
+          onClick={() => {
+            dispatch({ type: 'UPDATE_USER', payload: null }),
+              dispatch({ type: 'NOT_ADMIN' })
+          }}
         >
           <ListItemIcon>
             <Logout fontSize='small'>Logout</Logout>

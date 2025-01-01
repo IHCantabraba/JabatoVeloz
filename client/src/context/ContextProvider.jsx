@@ -23,8 +23,17 @@ const ContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(Reducer, initialState)
   useEffect(() => {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'))
+    const AdminState = localStorage.getItem('isAdmin')
     if (currentUser) {
       dispatch({ type: 'UPDATE_USER', payload: currentUser })
+    }
+    /* evita que en page refresh se resetee el valor dela variable global */
+    if (AdminState) {
+      console.log(AdminState)
+      localStorage.setItem('isAdmin', 'true')
+      dispatch({ type: 'IS_ADMIN' })
+    } else {
+      localStorage.setItem('isAdmin', 'false')
     }
   }, [])
   return (

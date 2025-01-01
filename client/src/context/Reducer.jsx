@@ -28,10 +28,20 @@ const Reducer = (state, action) => {
       return { ...state, details: { ...state.details, ...action.payload } }
     case 'UPDATE_FECHA_PEDIDO':
       return { ...state, FechaPedido: action.payload }
+    /* usuario logueado es admin o no */
     case 'IS_ADMIN':
+      localStorage.setItem('isAdmin', 'true')
       return { ...state, isAdmin: true }
     case 'NOT_ADMIN':
+      localStorage.setItem('isAdmin', 'false')
       return { ...state, isAdmin: false }
+    /* reset panel pedido desppues de crear uno */
+    case 'RESET_PEDIDO':
+      return {
+        ...state,
+        FechaPedido: '',
+        details: { title: '', description: '' }
+      }
     default:
       throw new Error('No matched action!')
   }

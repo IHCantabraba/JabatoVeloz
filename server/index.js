@@ -7,6 +7,7 @@ import cors from 'cors'
 import userRouter from './src/api/routes/users2.js'
 import authRouter from './src/api/routes/auth.js'
 import cloudinaryConfig from './src/config/cloudinary.js'
+import pedidosRouter from './src/api/routes/pedidos.js'
 
 const app = express()
 const PORT = 3000
@@ -22,6 +23,8 @@ app.use(cors())
 app.use('/api/auth', authRouter)
 /* users */
 app.use('/api/users', userRouter)
+/* pedidos */
+app.use('/api/pedidos', pedidosRouter)
 /* Not found Root */
 app.use('*', (req, res, next) => {
   return res.status(404).json(`Route not found`)

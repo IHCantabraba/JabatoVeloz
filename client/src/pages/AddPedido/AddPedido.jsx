@@ -11,11 +11,12 @@ import {
 import AddDate from './AddDate/AddDate'
 import AddDetails from './AddDetails/AddDetails'
 import { useValue } from '../../context/ContextProvider'
-import { Send } from '@mui/icons-material'
+import { PermIdentityOutlined, Send } from '@mui/icons-material'
+import { createPedido } from '../../actions/pedidos'
 
-const AddPedido = () => {
+const AddPedido = ({ setPage }) => {
   const {
-    state: { details, FechaPedido },
+    state: { details, FechaPedido, currentUser },
     dispatch
   } = useValue()
   const [activeStep, setActiveStep] = useState(0)
@@ -93,6 +94,14 @@ const AddPedido = () => {
       details.title,
       details.description
     )
+    const pedido = {
+      ExpireDate: `${FechaPedido.$D}/${FechaPedido.$M + 1}/${FechaPedido.$y}`,
+      title: details.title,
+      description: details.description,
+      uid: currentUser.result.user._id
+    }
+    createPedido(pedido, currentUser, dispatch, setPage)
+
     /* TODO crear función para enviar datos al server */
   }
   return (

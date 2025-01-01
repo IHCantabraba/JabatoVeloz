@@ -38,7 +38,13 @@ export const login = tryCatch(async (req, res, next) => {
   }
   if (bcrypt.compareSync(password, user.password)) {
     const token = generateKey(user.id)
-    return res.status(200).json({ success: true, result: { token, user } })
+    return res
+      .status(200)
+      .json({
+        success: true,
+        result: { token, user },
+        message: 'Successfully login!'
+      })
   }
   return res
     .status(400)
