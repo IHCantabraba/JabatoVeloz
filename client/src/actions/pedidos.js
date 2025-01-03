@@ -28,7 +28,7 @@ export const createPedido = async (pedido, currentUser, dispatch, setPage) => {
 }
 export const getPedidos = async (dispatch) => {
   dispatch({ type: 'START_LOADING' })
-  /* TODO use fetching data funcion */
+
   const result = await fetchingData(
     { url: `${baseUrl}/api/pedidos`, method: 'GET' },
     dispatch

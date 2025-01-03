@@ -9,5 +9,5 @@ const connectDB = async () => {
     console.log(`Error occurred while connecting to DB: ${error}`)
   }
 }
-// export default { connectDB }
+
 export default connectDB

@@ -11,7 +11,8 @@ const initialState = {
   details: { title: '', description: '' },
   FechaPedido: '',
   isAdmin: false,
-  pedidos: null
+  pedidos: null,
+  productos: null
 }
 /* crear un contexto */
 const Context = createContext(initialState)
@@ -29,7 +30,7 @@ const ContextProvider = ({ children }) => {
       dispatch({ type: 'UPDATE_USER', payload: currentUser })
     }
     /* evita que en page refresh se resetee el valor dela variable global */
-    if (AdminState) {
+    if (AdminState === 'true') {
       localStorage.setItem('isAdmin', 'true')
       dispatch({ type: 'IS_ADMIN' })
     } else {

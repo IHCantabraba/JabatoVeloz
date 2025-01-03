@@ -37,7 +37,9 @@ const Reducer = (state, action) => {
       return { ...state, isAdmin: false }
     case 'UPDATE_PEDIDOS':
       return { ...state, pedidos: action.payload }
-    /* reset panel pedido desppues de crear uno */
+    case 'UPDATE_PRODUCTOS':
+      return { ...state, productos: action.payload }
+    /* reset panel pedido despues de crear uno */
     case 'RESET_PEDIDO':
       return {
         ...state,

@@ -5,7 +5,7 @@ import { getPedidos } from '../../actions/pedidos'
 
 const Pedidos = () => {
   const {
-    state: { pedidos },
+    state: { pedidos, isAdmin },
     dispatch
   } = useValue()
   useEffect(() => {
@@ -36,7 +36,16 @@ const Pedidos = () => {
                 sx={{ ml: 2, placeSelf: 'self-end' }}
                 onClick={() => console.log('clicked')}
               >
-                Request Clothes
+                Pedir Ropa
+              </Button>
+            )}
+            {isAdmin && (
+              <Button
+                variant='outlined'
+                sx={{ ml: 2, placeSelf: 'self-end' }}
+                onClick={() => console.log('eliminate pedido')}
+              >
+                Eliminar pedido
               </Button>
             )}
           </Alert>

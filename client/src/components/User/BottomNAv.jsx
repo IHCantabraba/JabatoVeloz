@@ -13,8 +13,10 @@ import ClusterMap from '../../pages/ClusterMap/ClusterMap'
 import Carreras from '../../pages/Carreras/Carreras'
 import Pedidos from '../../pages/Pedidos/Pedidos'
 import AddPedido from '../../pages/AddPedido/AddPedido'
+import Products from '../../pages/Products/Products'
 import { useValue } from '../../context/ContextProvider'
-import { getPedidos } from '../../actions/pedidos'
+
+import CheckroomIcon from '@mui/icons-material/Checkroom'
 const BottomNAv = () => {
   /* estado que controla el click de cada icono de los existentes en lña barra de navegador. */
   const {
@@ -38,9 +40,15 @@ const BottomNAv = () => {
             0: <ClusterMap />,
             1: <Carreras />,
             2: <Pedidos />,
-            3: <AddPedido setPage={setValue} />
+            3: <AddPedido setPage={setValue} />,
+            4: <Products />
           }[value]
-        : { 0: <ClusterMap />, 1: <Carreras />, 2: <Pedidos /> }[value]}
+        : {
+            0: <ClusterMap />,
+            1: <Carreras />,
+            2: <Pedidos />,
+            3: <Products />
+          }[value]}
       <Paper
         elevation={3}
         sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 2 }}
@@ -62,6 +70,7 @@ const BottomNAv = () => {
               icon={<AddLocationAltIcon />}
             />
           )}
+          <BottomNavigationAction label='Ropa' icon={<CheckroomIcon />} />
         </BottomNavigation>
       </Paper>
     </Box>
