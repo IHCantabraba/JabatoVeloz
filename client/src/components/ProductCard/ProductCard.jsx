@@ -1,16 +1,19 @@
 import React from 'react'
 import {
+  Avatar,
   Card,
   CardContent,
   CardHeader,
   CardMedia,
   IconButton,
+  Tooltip,
   Typography
 } from '@mui/material'
 import { DeleteOutlined } from '@mui/icons-material'
 import { useValue } from '../../context/ContextProvider'
+import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined'
 
-const ProductCard = ({ producto, handleClick }) => {
+const ProductCard = ({ producto, handleClickDelete, handleClickOpen }) => {
   const {
     state: { isAdmin },
     dispatch
@@ -20,22 +23,35 @@ const ProductCard = ({ producto, handleClick }) => {
   return (
     <div>
       <Card elevation={3} sx={{ maxWidth: '300px' }}>
-        {isAdmin ? (
-          <CardHeader
-            action={
-              <IconButton onClick={() => handleClick(producto._id)}>
-                <DeleteOutlined />
+        <CardHeader
+          action={
+            isAdmin ? (
+              <IconButton
+                aerial-label='delete Product'
+                onClick={() => handleClickDelete(producto._id)}
+              >
+                <Tooltip id='delete-button' title='Borrar Product'>
+                  <DeleteOutlined />
+                </Tooltip>
               </IconButton>
-            }
-            title={producto.Nombre}
-            subheader={producto.Categoria + ' ' + producto.Sexo}
-          />
-        ) : (
-          <CardHeader
-            title={producto.Nombre}
-            subheader={producto.Categoria + ' ' + producto.Sexo}
-          />
-        )}
+            ) : (
+              <IconButton onClick={() => handleClickOpen(producto._id)}>
+                <Tooltip id='Detalles-button' title='Ver Detalles'>
+                  <RemoveRedEyeOutlinedIcon />
+                </Tooltip>
+              </IconButton>
+            )
+          }
+          title={producto.Nombre}
+          subheader={producto.Categoria + ' ' + producto.Sexo}
+          //* TODO neceistamos marca de ropa */
+          avatar={
+            <Avatar sx={{ bgcolor: 'black' }} aria-label='recipe'>
+              R
+            </Avatar>
+          }
+        />
+
         <CardMedia
           component='img'
           height='194'

@@ -12,10 +12,12 @@ const Products = () => {
   useEffect(() => {
     getProducts(dispatch)
   }, [eliminado])
-  const handleClick = (id) => {
-    console.log(`deleting ${id} product`)
+  const handleClickDelete = (id) => {
     deleteProduct(dispatch, id)
     setEliminado(!eliminado)
+  }
+  const handleClickOpen = (id) => {
+    console.log(`Openning ${id} product`)
   }
   return (
     <Container sx={{ paddingBottom: 10 }}>
@@ -23,7 +25,11 @@ const Products = () => {
         {productos &&
           productos.map((producto) => (
             <Grid2 item key={producto.id} md={6} lg={4}>
-              <ProductCard producto={producto} handleClick={handleClick} />
+              <ProductCard
+                producto={producto}
+                handleClickDelete={handleClickDelete}
+                handleClickOpen={handleClickOpen}
+              />
             </Grid2>
           ))}
       </Grid2>
