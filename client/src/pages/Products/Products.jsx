@@ -6,7 +6,7 @@ import ProductCard from '../../components/ProductCard/ProductCard'
 const Products = () => {
   const [eliminado, setEliminado] = useState(false)
   const {
-    state: { productos },
+    state: { productos, light },
     dispatch
   } = useValue()
   useEffect(() => {
@@ -20,7 +20,11 @@ const Products = () => {
     console.log(`Openning ${id} product`)
   }
   return (
-    <Container sx={{ paddingBottom: 10 }}>
+    <Container
+      sx={{
+        padding: 10
+      }}
+    >
       <Grid2 container spacing={3}>
         {productos &&
           productos.map((producto) => (

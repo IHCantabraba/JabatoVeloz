@@ -10,6 +10,9 @@
   --ihc-light-mode-bg: white;
   --ihc-none-mode: rgb(0, 0, 0, 1);
   --ihc-dark-mode-bg: rgb(80, 80, 80);
+  --ihc-dark-mode-bg-app: rgb(160, 159, 159);
+  --ihc-dark-mode-bg-nav: rgb(119, 145, 148);
+  --ihc-light-mode-bg-nav: rgb(225, 230, 231);
   --ihc-light-mode-text: black;
   --ihc-dark-mode-text: rgb(116, 143, 147);
   --ihc-white-mode-text: rgb(181, 179, 179);

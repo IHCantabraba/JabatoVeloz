@@ -20,7 +20,7 @@ import CheckroomIcon from '@mui/icons-material/Checkroom'
 const BottomNAv = () => {
   /* estado que controla el click de cada icono de los existentes en lña barra de navegador. */
   const {
-    state: { isAdmin },
+    state: { isAdmin, light },
     dispatch
   } = useValue()
   const [value, setValue] = useState(2)
@@ -32,7 +32,10 @@ const BottomNAv = () => {
   }, [value])
 
   return (
-    <Box ref={ref}>
+    <Box
+      ref={ref}
+      sx={{ bgcolor: `var(--ihc-${light ? 'light' : 'dark'}-mode-bg-app)` }}
+    >
       {/* crear un switcher entre páginas en JSX */}
       {
         {
@@ -45,12 +48,19 @@ const BottomNAv = () => {
       }
       <Paper
         elevation={3}
-        sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 2 }}
+        sx={{
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 2
+        }}
       >
         <BottomNavigation
           showLabels
           value={value}
           onChange={(e, newValue) => setValue(newValue)}
+          sx={{ bgcolor: `var(--ihc-${light ? 'light' : 'dark'}-mode-bg-nav)` }}
         >
           <BottomNavigationAction label='Map' icon={<LocationOn />} />
           <BottomNavigationAction
