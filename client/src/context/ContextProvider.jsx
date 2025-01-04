@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useReducer } from 'react'
+import { createContext, useContext, useEffect, useReducer, useRef } from 'react'
 import Reducer from './Reducer'
 
 const initialState = {
@@ -12,7 +12,9 @@ const initialState = {
   FechaPedido: '',
   isAdmin: false,
   pedidos: null,
-  productos: null
+  productos: null,
+  priceFilter: 100,
+  filterProducts: []
 }
 /* crear un contexto */
 const Context = createContext(initialState)
@@ -23,6 +25,7 @@ export const useValue = () => {
 /* crear un provider */
 const ContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(Reducer, initialState)
+  const containerRef = useRef()
   useEffect(() => {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'))
     const AdminState = localStorage.getItem('isAdmin')
@@ -38,7 +41,9 @@ const ContextProvider = ({ children }) => {
     }
   }, [])
   return (
-    <Context.Provider value={{ state, dispatch }}>{children}</Context.Provider>
+    <Context.Provider value={{ state, dispatch, containerRef }}>
+      {children}
+    </Context.Provider>
   )
 }
 

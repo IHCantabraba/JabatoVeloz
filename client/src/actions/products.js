@@ -1,3 +1,4 @@
+import { useValue } from '../context/ContextProvider'
 import fetchingData from './utils/fetchingData'
 const baseUrl = import.meta.env.VITE_BaseName
 
@@ -16,6 +17,7 @@ export const getProducts = async (dispatch) => {
 
 export const deleteProduct = async (dispatch, id) => {
   dispatch({ type: 'START_LOADING' })
+
   const deleteProducto = await fetchingData(
     {
       url: `${baseUrl}/api/productos/${id}`,
@@ -25,7 +27,7 @@ export const deleteProduct = async (dispatch, id) => {
   )
   if (deleteProducto.success) {
     /* TODO actualizar productos una vez eliminado uno.*/
-    // dispatch({ type: 'UPDATE_PRODUCTOS', payload: {...productos,  } })
+    // dispatch({ type: 'UPDATE_PRODUCTOS', payload: productosFiltrados })
     dispatch({ type: 'END_LOADING' })
   }
 

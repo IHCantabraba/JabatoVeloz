@@ -11,7 +11,7 @@ import {
 import AddDate from './AddDate/AddDate'
 import AddDetails from './AddDetails/AddDetails'
 import { useValue } from '../../context/ContextProvider'
-import { PermIdentityOutlined, Send } from '@mui/icons-material'
+import { Send } from '@mui/icons-material'
 import { createPedido } from '../../actions/pedidos'
 
 const AddPedido = ({ setPage }) => {

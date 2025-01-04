@@ -3,10 +3,11 @@ import { Container, Grid2 } from '@mui/material'
 import { deleteProduct, getProducts } from '../../actions/products'
 import { useValue } from '../../context/ContextProvider'
 import ProductCard from '../../components/ProductCard/ProductCard'
+import ProductCard1 from '../../components/ProductCard/ProductCard1'
 const Products = () => {
   const [eliminado, setEliminado] = useState(false)
   const {
-    state: { productos, light },
+    state: { filterProducts, light },
     dispatch
   } = useValue()
   useEffect(() => {
@@ -22,18 +23,21 @@ const Products = () => {
   return (
     <Container
       sx={{
-        padding: 10
+        padding: 5
       }}
     >
       <Grid2 container spacing={3}>
-        {productos &&
-          productos.map((producto) => (
+        {filterProducts &&
+          filterProducts.map((producto) => (
             <Grid2 item key={producto.id} md={6} lg={4}>
-              <ProductCard
+              <ProductCard1
+                {...{ producto, handleClickDelete, handleClickOpen }}
+              />
+              {/* <ProductCard
                 producto={producto}
                 handleClickDelete={handleClickDelete}
                 handleClickOpen={handleClickOpen}
-              />
+              /> */}
             </Grid2>
           ))}
       </Grid2>

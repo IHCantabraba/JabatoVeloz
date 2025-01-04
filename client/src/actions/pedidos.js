@@ -22,7 +22,8 @@ export const createPedido = async (pedido, currentUser, dispatch, setPage) => {
       }
     })
     dispatch({ type: 'RESET_PEDIDO' })
-    setPage(2)
+    /* redirigir a la página */
+    setPage(1)
   }
   dispatch({ type: 'END_LOADING' })
 }

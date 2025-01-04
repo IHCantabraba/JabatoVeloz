@@ -12,8 +12,11 @@ import { Menu, Lock } from '@mui/icons-material'
 import ModeNightIcon from '@mui/icons-material/ModeNight'
 import LightModeIcon from '@mui/icons-material/LightMode'
 import UserIcon from '../User/UserIcon'
+import Sidebar from '../Sidebar/Sidebar'
+import { useState } from 'react'
 
 const NavBar = () => {
+  const [isOpen, setIsOpen] = useState(false)
   const {
     state: { currentUser, light },
     dispatch
@@ -33,7 +36,11 @@ const NavBar = () => {
         <Container maxWidth='lg' sx={{ mr: 0, ml: 0 }}>
           <Toolbar disableGutters style={{ width: '95vw', margin: '0 auto' }}>
             <Box sx={{ mr: 1 }}>
-              <IconButton size='medium'>
+              <IconButton
+                size='large'
+                color='inherit'
+                onClick={() => setIsOpen(true)}
+              >
                 <Menu
                   style={{
                     color: `var(--ihc-${
@@ -109,8 +116,8 @@ const NavBar = () => {
           </Toolbar>
         </Container>
       </AppBar>
-      {/* añadir el toolbar para bajar el contenido y que no se esconda debajo del NavBar de la app */}
       <Toolbar />
+      <Sidebar {...{ isOpen, setIsOpen }} />
     </>
   )
 }

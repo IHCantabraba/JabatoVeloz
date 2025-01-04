@@ -38,7 +38,18 @@ const Reducer = (state, action) => {
     case 'UPDATE_PEDIDOS':
       return { ...state, pedidos: action.payload }
     case 'UPDATE_PRODUCTOS':
-      return { ...state, productos: action.payload }
+      return {
+        ...state,
+        productos: action.payload,
+        priceFilter: 100,
+        filterProducts: action.payload
+      }
+    case 'FILTER_PRICE':
+      return {
+        ...state,
+        priceFilter: action.payload,
+        filterProducts: applyFilter(state.productos, action.payload)
+      }
     /* reset panel pedido despues de crear uno */
     case 'RESET_PEDIDO':
       return {
@@ -52,3 +63,14 @@ const Reducer = (state, action) => {
 }
 
 export default Reducer
+
+/* price filtering */
+const applyFilter = (productos, price) => {
+  let filterProducts = productos
+  if (price < 100) {
+    filterProducts = filterProducts.filter(
+      (producto) => producto.Precio <= price
+    )
+  }
+  return filterProducts
+}

@@ -17,13 +17,14 @@ import Products from '../../pages/Products/Products'
 import { useValue } from '../../context/ContextProvider'
 
 import CheckroomIcon from '@mui/icons-material/Checkroom'
+import Products1 from '../../pages/Products/Products1'
 const BottomNAv = () => {
   /* estado que controla el click de cada icono de los existentes en lña barra de navegador. */
   const {
     state: { isAdmin, light },
     dispatch
   } = useValue()
-  const [value, setValue] = useState(2)
+  const [value, setValue] = useState(3)
 
   /* al cambiar entre páginas, hacer scroll al inicio  */
   const ref = useRef()
@@ -39,11 +40,11 @@ const BottomNAv = () => {
       {/* crear un switcher entre páginas en JSX */}
       {
         {
-          0: <ClusterMap />,
-          1: <Carreras />,
-          2: <Pedidos />,
-          3: <AddPedido setPage={setValue} />,
-          4: <Products />
+          // 0: <ClusterMap />,
+          0: <Carreras />,
+          1: <Pedidos />,
+          2: <AddPedido setPage={setValue} />,
+          3: <Products1 />
         }[value]
       }
       <Paper
@@ -62,12 +63,17 @@ const BottomNAv = () => {
           onChange={(e, newValue) => setValue(newValue)}
           sx={{ bgcolor: `var(--ihc-${light ? 'light' : 'dark'}-mode-bg-nav)` }}
         >
-          <BottomNavigationAction label='Map' icon={<LocationOn />} />
+          {/* <BottomNavigationAction label='Map' icon={<LocationOn />} /> */}
           <BottomNavigationAction
             label='Carreras'
             icon={<DirectionsRunIcon />}
           />
-          <BottomNavigationAction label='Pedidos' icon={<ShoppingCartIcon />} />
+          {isAdmin && (
+            <BottomNavigationAction
+              label='Pedidos'
+              icon={<ShoppingCartIcon />}
+            />
+          )}
           {isAdmin && (
             <BottomNavigationAction
               label='Añadir Pedido'
