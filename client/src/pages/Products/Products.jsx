@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Container, Grid2 } from '@mui/material'
+import { Container, Grid2 } from '@mui/material'
 import { deleteProduct, getProducts } from '../../actions/products'
 import { useValue } from '../../context/ContextProvider'
 import ProductCard from '../../components/ProductCard/ProductCard'
@@ -18,11 +18,11 @@ const Products = () => {
     setEliminado(!eliminado)
   }
   return (
-    <Container>
+    <Container sx={{ paddingBottom: 10 }}>
       <Grid2 container spacing={3}>
         {productos &&
           productos.map((producto) => (
-            <Grid2 item key={producto.id} sx={12} md={6} lg={4}>
+            <Grid2 item key={producto.id} md={6} lg={4}>
               <ProductCard producto={producto} handleClick={handleClick} />
             </Grid2>
           ))}

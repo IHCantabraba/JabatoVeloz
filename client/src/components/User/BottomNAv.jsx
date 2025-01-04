@@ -34,21 +34,15 @@ const BottomNAv = () => {
   return (
     <Box ref={ref}>
       {/* crear un switcher entre páginas en JSX */}
-
-      {isAdmin
-        ? {
-            0: <ClusterMap />,
-            1: <Carreras />,
-            2: <Pedidos />,
-            3: <AddPedido setPage={setValue} />,
-            4: <Products />
-          }[value]
-        : {
-            0: <ClusterMap />,
-            1: <Carreras />,
-            2: <Pedidos />,
-            3: <Products />
-          }[value]}
+      {
+        {
+          0: <ClusterMap />,
+          1: <Carreras />,
+          2: <Pedidos />,
+          3: <AddPedido setPage={setValue} />,
+          4: <Products />
+        }[value]
+      }
       <Paper
         elevation={3}
         sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 2 }}

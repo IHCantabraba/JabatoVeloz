@@ -19,17 +19,23 @@ const ProductCard = ({ producto, handleClick }) => {
 
   return (
     <div>
-      <Card elevation={3}>
-        <CardHeader
-          action={
-            <IconButton onClick={() => handleClick(producto._id)}>
-              <DeleteOutlined />
-            </IconButton>
-          }
-          title={producto.Nombre}
-          subheader={producto.Categoria + ' ' + producto.Sexo}
-        />
-
+      <Card elevation={3} sx={{ maxWidth: '300px' }}>
+        {isAdmin ? (
+          <CardHeader
+            action={
+              <IconButton onClick={() => handleClick(producto._id)}>
+                <DeleteOutlined />
+              </IconButton>
+            }
+            title={producto.Nombre}
+            subheader={producto.Categoria + ' ' + producto.Sexo}
+          />
+        ) : (
+          <CardHeader
+            title={producto.Nombre}
+            subheader={producto.Categoria + ' ' + producto.Sexo}
+          />
+        )}
         <CardMedia
           component='img'
           height='194'
@@ -38,7 +44,8 @@ const ProductCard = ({ producto, handleClick }) => {
         />
         <CardContent>
           <Typography variant='body2' color='textSecondary'>
-            {producto.Descripcion}
+            <span style={{ fontWeight: 'bold' }}>Tallas: </span>
+            {producto.Tallas}
           </Typography>
         </CardContent>
       </Card>
