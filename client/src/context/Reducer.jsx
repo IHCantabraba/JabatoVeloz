@@ -57,6 +57,8 @@ const Reducer = (state, action) => {
         FechaPedido: '',
         details: { title: '', description: '' }
       }
+    case 'UPDATE_PRODUCT':
+      return { ...state, product: action.payload }
     default:
       throw new Error('No matched action!')
   }

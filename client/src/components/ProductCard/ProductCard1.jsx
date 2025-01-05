@@ -17,6 +17,7 @@ import { useValue } from '../../context/ContextProvider'
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import ProductCardMenu from './ProductCardMenu'
+import { getPedidos } from '../../actions/pedidos'
 
 const ProductCard1 = ({
   producto,
@@ -92,6 +93,10 @@ const ProductCard1 = ({
           alt={producto.Nombre}
           loading='lazy'
           style={{ cursor: 'pointer' }}
+          onClick={() => {
+            dispatch({ type: 'UPDATE_PRODUCT', payload: producto })
+            getPedidos(dispatch)
+          }}
         />
         {/* Rate area */}
         <ImageListItemBar

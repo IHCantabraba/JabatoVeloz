@@ -7,6 +7,7 @@ import Notis from './components/Notis/Notis'
 import { useValue } from './context/ContextProvider'
 import BottomNAv from './components/User/BottomNAv'
 import LandingPage from './components/Landing/LandingPage'
+import Product from './pages/Products/Product'
 
 function App() {
   const {
@@ -34,6 +35,7 @@ function App() {
       ></div> */}
       <Login />
       <NavBar />
+      <Product />
       {currentUser && <BottomNAv />}
     </>
   )

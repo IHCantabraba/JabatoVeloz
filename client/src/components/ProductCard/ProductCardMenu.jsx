@@ -16,7 +16,6 @@ const ProductCardMenu = ({
   const handleCloseProductMenu = () => {
     setAnchorProductMenu(null)
   }
-  // const [eliminado, setEliminado] = useState(false)
 
   const handleClickDelete = (id) => {
     deleteProduct(dispatch, id)

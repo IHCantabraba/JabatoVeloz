@@ -7,12 +7,12 @@ import ProductCard1 from '../../components/ProductCard/ProductCard1'
 const Products1 = () => {
   const [eliminado, setEliminado] = useState(false)
   const {
-    state: { filterProducts, delProduct, light },
+    state: { filterProducts, light },
     dispatch
   } = useValue()
   useEffect(() => {
     getProducts(dispatch)
-  }, [eliminado]) /*eliminado */
+  }, [eliminado])
 
   const handleClickOpen = (id) => {
     console.log(`Openning ${id} product`)
