@@ -15,7 +15,7 @@ export const getProducts = async (dispatch) => {
   return productos
 }
 
-export const deleteProduct = async (dispatch, id) => {
+export const deleteProduct = async (dispatch, id, productoEliminado) => {
   dispatch({ type: 'START_LOADING' })
 
   const deleteProducto = await fetchingData(
@@ -27,7 +27,13 @@ export const deleteProduct = async (dispatch, id) => {
   )
   if (deleteProducto.success) {
     /* TODO actualizar productos una vez eliminado uno.*/
-    // dispatch({ type: 'UPDATE_PRODUCTOS', payload: productosFiltrados })
+    if (productoEliminado === 'yes') {
+      console.log('productoEliminado es true')
+      dispatch({ type: 'PRODUCTO_ELIMINADO', payload: 'no' })
+    } else {
+      console.log('productoEliminado es false')
+      dispatch({ type: 'PRODUCTO_ELIMINADO', payload: 'yes' })
+    }
     dispatch({ type: 'END_LOADING' })
   }
 

@@ -1,22 +1,16 @@
-import React, { useEffect, useState } from 'react'
-import { Container, Grid2, ImageList } from '@mui/material'
-import { deleteProduct, getProducts } from '../../actions/products'
+import React, { useEffect } from 'react'
+import { Container, ImageList } from '@mui/material'
+import { getProducts } from '../../actions/products'
 import { useValue } from '../../context/ContextProvider'
-import ProductCard from '../../components/ProductCard/ProductCard'
 import ProductCard1 from '../../components/ProductCard/ProductCard1'
 const Products1 = () => {
-  const [eliminado, setEliminado] = useState(false)
   const {
-    state: { filterProducts, light },
+    state: { filterProducts, productoEliminado },
     dispatch
   } = useValue()
   useEffect(() => {
     getProducts(dispatch)
-  }, [eliminado])
-
-  const handleClickOpen = (id) => {
-    console.log(`Openning ${id} product`)
-  }
+  }, [productoEliminado])
   return (
     <Container sx={{ padding: '5px' }}>
       <ImageList
@@ -27,11 +21,7 @@ const Products1 = () => {
         }}
       >
         {filterProducts &&
-          filterProducts.map((producto) => (
-            <ProductCard1
-              {...{ producto, handleClickOpen, setEliminado, eliminado }}
-            />
-          ))}
+          filterProducts.map((producto) => <ProductCard1 {...{ producto }} />)}
       </ImageList>
     </Container>
   )

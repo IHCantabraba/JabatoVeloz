@@ -50,6 +50,10 @@ const Reducer = (state, action) => {
         priceFilter: action.payload,
         filterProducts: applyFilter(state.productos, action.payload)
       }
+    /* actualizar productos cuando se elimina uno */
+    case 'PRODUCTO_ELIMINADO':
+      return { ...state, productoEliminado: action.payload }
+
     /* reset panel pedido despues de crear uno */
     case 'RESET_PEDIDO':
       return {

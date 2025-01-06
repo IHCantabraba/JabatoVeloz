@@ -19,12 +19,7 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import ProductCardMenu from './ProductCardMenu'
 import { getPedidos } from '../../actions/pedidos'
 
-const ProductCard1 = ({
-  producto,
-  handleClickOpen,
-  setEliminado,
-  eliminado
-}) => {
+const ProductCard1 = ({ producto }) => {
   const [anchorProductMenu, setAnchorProductMenu] = useState(false)
   const {
     state: { isAdmin },
@@ -63,16 +58,17 @@ const ProductCard1 = ({
                   {...{
                     anchorProductMenu,
                     setAnchorProductMenu,
-                    id,
-                    dispatch,
-                    handleClickOpen,
-                    setEliminado,
-                    eliminado
+                    producto
                   }}
                 />
               </>
             ) : (
-              <IconButton onClick={() => handleClickOpen(id)}>
+              <IconButton
+                onClick={() => {
+                  dispatch({ type: 'UPDATE_PRODUCT', payload: producto })
+                  getPedidos(dispatch)
+                }}
+              >
                 <Tooltip
                   id='Detalles-button'
                   title='Ver Detalles'

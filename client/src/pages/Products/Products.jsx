@@ -7,15 +7,16 @@ import ProductCard1 from '../../components/ProductCard/ProductCard1'
 const Products = () => {
   const [eliminado, setEliminado] = useState(false)
   const {
-    state: { filterProducts, light },
+    state: { filterProducts, light, productoEliminado },
     dispatch
   } = useValue()
   useEffect(() => {
+    console.log('fetching products')
     getProducts(dispatch)
-  }, [eliminado])
+  }, [productoEliminado])
   const handleClickDelete = (id) => {
-    deleteProduct(dispatch, id)
-    setEliminado(!eliminado)
+    deleteProduct(dispatch, id, productoEliminado)
+    // setEliminado(!eliminado)
   }
   const handleClickOpen = (id, producto) => {
     console.log(`Openning ${id} product`)

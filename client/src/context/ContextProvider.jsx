@@ -15,7 +15,8 @@ const initialState = {
   productos: null,
   priceFilter: 100,
   filterProducts: [],
-  product: null
+  product: null,
+  productoEliminado: false
 }
 /* crear un contexto */
 const Context = createContext(initialState)

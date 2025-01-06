@@ -1,25 +1,26 @@
 import { ListItemIcon, Menu, MenuItem, Tooltip } from '@mui/material'
-import React, { useEffect, useState } from 'react'
-import { deleteProduct, getProducts } from '../../actions/products'
-import { DeleteOutlined, StarBorder } from '@mui/icons-material'
+import { deleteProduct } from '../../actions/products'
+import { DeleteOutlined } from '@mui/icons-material'
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined'
+import { useValue } from '../../context/ContextProvider'
+import { getPedidos } from '../../actions/pedidos'
 
 const ProductCardMenu = ({
   anchorProductMenu,
   setAnchorProductMenu,
-  id,
-  dispatch,
-  handleClickOpen,
-  setEliminado,
-  eliminado
+  producto
 }) => {
+  const {
+    state: { productoEliminado },
+    dispatch
+  } = useValue()
   const handleCloseProductMenu = () => {
     setAnchorProductMenu(null)
   }
 
   const handleClickDelete = (id) => {
-    deleteProduct(dispatch, id)
-    setEliminado(!eliminado)
+    deleteProduct(dispatch, id, productoEliminado)
+    // setEliminado(!eliminado)
   }
   return (
     <>
@@ -34,14 +35,19 @@ const ProductCardMenu = ({
         }}
       >
         {/* crear las opciones del menú */}
-        <MenuItem onClick={() => handleClickDelete(id)}>
+        <MenuItem onClick={() => handleClickDelete(producto._id)}>
           <Tooltip title='Eliminar'>
             <ListItemIcon>
               <DeleteOutlined />
             </ListItemIcon>
           </Tooltip>
         </MenuItem>
-        <MenuItem onClick={() => handleClickOpen(id)}>
+        <MenuItem
+          onClick={() => {
+            dispatch({ type: 'UPDATE_PRODUCT', payload: producto })
+            getPedidos(dispatch)
+          }}
+        >
           <Tooltip title='Detalles'>
             <ListItemIcon>
               <RemoveRedEyeOutlinedIcon />
