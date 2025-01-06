@@ -6,7 +6,7 @@ const pedidosSchema = mongoose.Schema(
     title: { type: String, required: true },
     description: { type: String, required: true },
     orders: [{ type: mongoose.Types.ObjectId, ref: 'orders' }],
-    uid: { type: mongoose.Types.ObjectId, ref: 'users' },
+    users: { type: mongoose.Types.ObjectId, ref: 'users' },
     open: { type: Boolean, default: true }
   },
   { timestamp: true, collection: 'pedidos' }

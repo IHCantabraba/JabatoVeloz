@@ -1,4 +1,11 @@
-import { Alert, AlertTitle, Button, Container } from '@mui/material'
+import {
+  Alert,
+  AlertTitle,
+  Button,
+  Container,
+  TextField,
+  Typography
+} from '@mui/material'
 import React, { useEffect } from 'react'
 import { useValue } from '../../context/ContextProvider'
 import { getPedidos } from '../../actions/pedidos'
@@ -14,7 +21,7 @@ const Pedidos = () => {
 
   return (
     <Container sx={{ py: 5, mb: 4 }}>
-      {pedidos &&
+      {pedidos?.length > 0 ? (
         pedidos.map((pedido) => (
           <Alert
             sx={{
@@ -45,11 +52,24 @@ const Pedidos = () => {
                 sx={{ ml: 2, placeSelf: 'self-end' }}
                 onClick={() => console.log('eliminate pedido')}
               >
-                Eliminar pedido
+                Ver Detalles
               </Button>
             )}
           </Alert>
-        ))}
+        ))
+      ) : (
+        <Typography
+          sx={{
+            mt: 5,
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'center'
+          }}
+          variant='h4'
+        >
+          No hay pedidos habiertos
+        </Typography>
+      )}
     </Container>
   )
 }

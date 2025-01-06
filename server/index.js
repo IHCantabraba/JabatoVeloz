@@ -9,6 +9,7 @@ import authRouter from './src/api/routes/auth.js'
 import cloudinaryConfig from './src/config/cloudinary.js'
 import pedidosRouter from './src/api/routes/pedidos.js'
 import productosRouter from './src/api/routes/productos.js'
+import ordersRouter from './src/api/routes/orders.js'
 
 const app = express()
 const PORT = 3000
@@ -28,6 +29,8 @@ app.use('/api/users', userRouter)
 app.use('/api/pedidos', pedidosRouter)
 /* productos */
 app.use('/api/productos', productosRouter)
+/* orders */
+app.use('/api/orders', ordersRouter)
 /* Not found Root */
 app.use('*', (req, res, next) => {
   return res.status(404).json(`Route not found`)

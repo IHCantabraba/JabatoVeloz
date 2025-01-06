@@ -47,3 +47,15 @@ export const getPedidos = async (dispatch) => {
   }
   return result
 }
+// export const updatedPedido = async (dispatch, updatedFields) => {
+//   dispatch({ type: 'START_LOADING' })
+
+//   const result = await fetchingData(
+//     { url: `${baseUrl}/api/pedidos/${updatedFields.id}`, method: 'POST' },
+//     dispatch
+//   )
+//   if (result.success) {
+//     dispatch({ type: 'END_LOADING' })
+//   }
+//   return result
+// }

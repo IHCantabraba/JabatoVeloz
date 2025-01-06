@@ -17,7 +17,7 @@ const Products = () => {
     deleteProduct(dispatch, id)
     setEliminado(!eliminado)
   }
-  const handleClickOpen = (id) => {
+  const handleClickOpen = (id, producto) => {
     console.log(`Openning ${id} product`)
   }
   return (

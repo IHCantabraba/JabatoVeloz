@@ -50,8 +50,8 @@ const ProductCard1 = ({
           actionIcon={
             isAdmin ? (
               <>
-                <IconButton aerial-label='delete Product'>
-                  <Tooltip title='Delete Product' sx={{ mr: '5px' }}>
+                <IconButton aerial-label='Opciones'>
+                  <Tooltip title='Opciones' sx={{ mr: '5px' }}>
                     <Avatar
                       onClick={(e) => setAnchorProductMenu(e.currentTarget)}
                     >

@@ -8,7 +8,7 @@ export const createPedido = tryCatch(async (req, res) => {
   return res.status(201).json({ success: true, result: newPedido })
 })
 export const getAllPedidos = tryCatch(async (req, res) => {
-  const pedidos = await Pedidos.find()
+  const pedidos = await Pedidos.find().populate('orders').populate('users')
   return res
     .status(201)
     .json({ success: true, result: pedidos, message: 'Pedidos actualizados' })

@@ -12,17 +12,20 @@ import {
   Select,
   Slide,
   Stack,
+  TextField,
   Toolbar,
   Typography
 } from '@mui/material'
-import React, { forwardRef, useState } from 'react'
+import React, { forwardRef, useRef, useState } from 'react'
 import { useValue } from '../../context/ContextProvider'
 import { Close, Send, Star } from '@mui/icons-material'
-import { getPedidos } from '../../actions/pedidos'
+import { createOrder } from '../../actions/orders'
 
 const Product = () => {
   const [selectedTalla, setSelectedTalla] = useState('')
   const [selectedPedido, setSelectedPedido] = useState('')
+  const [cantidad, setCantidad] = useState('1')
+
   /* definir transición para abrir la página */
   const Transition = forwardRef((props, ref) => {
     return <Slide direction='up' {...props} ref={ref} />
@@ -33,14 +36,24 @@ const Product = () => {
     setSelectedTalla('')
     setSelectedPedido('')
   }
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
     e.preventDefault()
-    /*TODO fetch order to pedido */
-    setSelectedPedido('')
-    setSelectedTalla('')
+
+    const body = {
+      user: currentUser.result.user._id,
+      product: product._id,
+      talla: selectedTalla,
+      pedido: selectedPedido,
+      unidades: cantidad,
+      precio: Number(product.Precio) * Number(cantidad)
+    }
+    createOrder(dispatch, body)
+    // setSelectedPedido('')
+    // setSelectedTalla('')
+    dispatch({ type: 'UPDATE_PRODUCT', payload: null })
   }
   const {
-    state: { product, light, pedidos },
+    state: { product, light, pedidos, currentUser },
     dispatch
   } = useValue()
   const filterPedidos = (pedidos) => {
@@ -51,18 +64,22 @@ const Product = () => {
     }
     return pedidos
   }
+  /*TODO fix PedidosFiltrados */
   const PedidosFiltrados = filterPedidos(pedidos)
-  const Foto = [
-    `./clothesPics/${product?.Foto ? product.Foto : 'NoPic.jpg'}
-  `,
-    `./clothesPics/${product?.Foto ? product.Foto : 'NoPic.jpg'}`
-  ]
+  /* url de la foto almacenada en public */
+  const Foto = `./clothesPics/${product?.Foto ? product.Foto : 'NoPic.jpg'}`
+
   const Tallas = product?.Tallas.split(' ')
   const handleChangeTalla = (e) => {
     setSelectedTalla(e.target.value)
+    console.log(selectedTalla)
   }
   const handleChangePedido = (e) => {
     setSelectedPedido(e.target.value)
+    console.log(`pedido selecionado es: ${selectedPedido}`)
+  }
+  const handleAmountChange = (e) => {
+    setCantidad(e.target.value)
   }
   return (
     <Dialog
@@ -87,7 +104,7 @@ const Product = () => {
         </Toolbar>
       </AppBar>
       <img
-        src={Foto[0]}
+        src={Foto}
         style={{
           maxWidth: '350px',
           maxHeight: '300px',
@@ -129,10 +146,10 @@ const Product = () => {
             sx={{ justifyContent: 'space-between', flexWrap: 'wrap' }}
           >
             <Box>
-              <Typography variant='h6' component='spam'>
+              <Typography variant='h6' component='span'>
                 {'Descripcion  '}
               </Typography>
-              <Typography component='spam'>{product?.Descripcion}</Typography>
+              <Typography component='span'>{product?.Descripcion}</Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
               <Typography variant='h6' component='span'>
@@ -156,7 +173,15 @@ const Product = () => {
                   mt: 5
                 }}
               >
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+                <div
+                  style={{
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    gap: '20px',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                  }}
+                >
                   {/* seleccionar talla */}
                   <FormControl>
                     <InputLabel id='tallas-label'>Tallas</InputLabel>
@@ -192,6 +217,17 @@ const Product = () => {
                           ))
                         : 'No hay pedidos actualmente'}
                     </Select>
+                  </FormControl>
+                  {/* seleccionar cantidad */}
+                  <FormControl>
+                    <TextField
+                      sx={{ width: '7ch !important' }}
+                      variant='standard'
+                      inputProps={{ type: 'number', min: 1, max: 60 }}
+                      value={cantidad}
+                      onChange={handleAmountChange}
+                      name='cantidad'
+                    />
                   </FormControl>
                 </div>
                 {/* habilitar botón */}
