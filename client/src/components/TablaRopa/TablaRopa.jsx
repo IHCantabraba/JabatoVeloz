@@ -15,7 +15,7 @@ export const TablaRopa = ({ userOrders }) => {
       <Table sx={{ minWidth: '100%' }} size='small' aria-label='a dense table'>
         <TableHead>
           <TableRow>
-            <TableCell>Fecha</TableCell>
+            <TableCell>Fecha Lanzamiento</TableCell>
             <TableCell align='right'>Artículo</TableCell>
             <TableCell align='right'>Talla</TableCell>
             <TableCell align='right'>Cantidad</TableCell>
@@ -29,9 +29,7 @@ export const TablaRopa = ({ userOrders }) => {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component='th' scope='row'>
-                {order.createdAt.split('T')[0] +
-                  ' ' +
-                  order.createdAt.split('T')[1].slice(0, 8)}
+                {order.pedidos.ExpireDate}
               </TableCell>
               <TableCell align='right'>{order.productos.Nombre}</TableCell>
               <TableCell align='right'>{order.talla}</TableCell>

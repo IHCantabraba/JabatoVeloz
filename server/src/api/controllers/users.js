@@ -18,6 +18,7 @@ export const getUserByID = async (req, res, next) => {
     const user = await User.findById(id)
       .populate('orders')
       .populate({ path: 'orders', populate: { path: 'productos' } })
+      .populate({ path: 'orders', populate: { path: 'pedidos' } })
     return res.status(200).json({
       success: true,
       result: user,

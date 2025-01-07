@@ -23,6 +23,11 @@ const MiRopa = () => {
           No hay ropa solicitada
         </Typography>
       )}
+      <Typography variant='span' component='span'>
+        {
+          '*el pedido de ropa se realiza cuando se alcance una suma de 600€ entre los pedidos de los integrantes del equipo. La fecha prevista de lanzamiento es aproximada. Ten preparados los euros!!'
+        }
+      </Typography>
     </Container>
   )
 }
