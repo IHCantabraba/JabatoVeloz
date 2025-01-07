@@ -11,6 +11,7 @@ import {
 import React from 'react'
 import { useValue } from '../../context/ContextProvider'
 import { Close } from '@mui/icons-material'
+import TablaPedidos from '../../components/TablaPedidos/TablaPedidos'
 
 const Pedido = () => {
   const {
@@ -72,27 +73,51 @@ const Pedido = () => {
           </Box>
         </Stack>
         {/* detalle de cada solicitud */}
-        <Stack
+        {/* <Stack
           direction='column'
           sx={{ justifyContent: 'space-between', flexWrap: 'wrap' }}
         >
+          <Stack
+            direction='row'
+            sx={{ justifyContent: 'space-around', flexWrap: 'wrap' }}
+          >
+            <Box varinat='h4' component='h4'>
+              {'Miembro'}
+            </Box>
+            <Box varinat='h4' component='h4'>
+              {'Artículo'}
+            </Box>
+            <Box varinat='h4' component='h4'>
+              {'Talla'}
+            </Box>
+            <Box varinat='h4' component='h4'>
+              {'Cantidad'}
+            </Box>
+          </Stack>
           {pedido?.orders.map((order) => (
             <Stack
               direction='row'
               sx={{ justifyContent: 'space-around', flexWrap: 'wrap' }}
             >
               <Box varinat='h4' component='span'>
-                {'Artículo: ' + order.talla}
+                {'Miembro: ' + order.users.alias
+                  ? order.users.alias
+                  : order.users.nombre}
+              </Box>
+              <Box varinat='h4' component='span'>
+                {'Artículo: ' + order.productos.Nombre}
               </Box>
               <Box varinat='h4' component='span'>
                 {'Talla: ' + order.talla}
               </Box>
               <Box varinat='h4' component='span'>
-                {'cantidad: ' + order.unidades}
+                {'Cantidad: ' + order.unidades}
               </Box>
             </Stack>
           ))}
-        </Stack>
+            
+        </Stack> */}
+        <TablaPedidos pedido={pedido} />
       </Container>
     </Dialog>
   )

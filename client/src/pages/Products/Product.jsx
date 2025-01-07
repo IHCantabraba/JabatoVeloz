@@ -44,7 +44,7 @@ const Product = () => {
 
     const body = {
       users: currentUser.result.user._id,
-      productos: product.Nombre,
+      productos: product._id,
       talla: selectedTalla,
       pedidos: selectedPedido,
       unidades: cantidad,
