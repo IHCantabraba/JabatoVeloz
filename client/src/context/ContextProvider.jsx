@@ -19,7 +19,8 @@ const initialState = {
   productoEliminado: false,
   productPage: false,
   showThemes: false,
-  pedido: null
+  pedido: null,
+  miRopa: null
 }
 /* crear un contexto */
 const Context = createContext(initialState)

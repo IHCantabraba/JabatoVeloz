@@ -76,6 +76,8 @@ const Reducer = (state, action) => {
     /* para abrir detalles de pedido */
     case 'UPDATE_PEDIDO':
       return { ...state, pedido: action.payload }
+    case 'UPDATE_MIROPA':
+      return { ...state, miRopa: action.payload }
     default:
       throw new Error('No matched action!')
   }

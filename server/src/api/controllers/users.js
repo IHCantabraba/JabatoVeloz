@@ -16,7 +16,13 @@ export const getUserByID = async (req, res, next) => {
   try {
     const { id } = req.params
     const user = await User.findById(id)
-    return res.status(200).json(user)
+      .populate('orders')
+      .populate({ path: 'orders', populate: { path: 'productos' } })
+    return res.status(200).json({
+      success: true,
+      result: user,
+      message: 'Actualizandas las ordenes de ropa'
+    })
   } catch (error) {
     return res
       .status(400)

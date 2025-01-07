@@ -30,7 +30,7 @@ const Pedidos = () => {
             {pedido.description}
 
             {` Este pedido se cerrará el ${pedido.ExpireDate}. Aún quedan ${pedido.daysOff} para solicitar ropa`}
-            {pedido.daysOff > 0 && (
+            {/* {pedido.daysOff > 0 && (
               <Button
                 variant='outlined'
                 sx={{ ml: 2, placeSelf: 'self-end' }}
@@ -38,7 +38,7 @@ const Pedidos = () => {
               >
                 Pedir Ropa
               </Button>
-            )}
+            )} */}
             {isAdmin && (
               <Button
                 variant='outlined'

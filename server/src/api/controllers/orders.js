@@ -1,9 +1,11 @@
 import Pedidos from '../models/pedidos.js'
 import Orders from '../models/orders.js'
 import tryCatch from './utils/tryCatch.js'
+import User from '../models/users.js'
 
 export const createOrder = tryCatch(async (req, res) => {
   const pedido = await Pedidos.findById(req.body.pedidos)
+  const user = await User.findById(req.body.users)
 
   const newOrder = new Orders(req.body)
   const solicitud = await newOrder.save()
@@ -12,6 +14,12 @@ export const createOrder = tryCatch(async (req, res) => {
     if (pedido) {
       pedido.orders.push(solicitud._id)
       const updatedPedido = await Pedidos.findByIdAndUpdate(pedido.id, pedido, {
+        new: true
+      })
+    }
+    if (user) {
+      user.orders.push(solicitud._id)
+      const updatedUser = await User.findByIdAndUpdate(user.id, user, {
         new: true
       })
     }

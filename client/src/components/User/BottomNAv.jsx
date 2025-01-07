@@ -12,14 +12,17 @@ import Carreras from '../../pages/Carreras/Carreras'
 import Pedidos from '../../pages/Pedidos/Pedidos'
 import AddPedido from '../../pages/AddPedido/AddPedido'
 import Products from '../../pages/Products/Products'
+import MiRopa from '../../pages/MiRopa/MiRopa'
 import { useValue } from '../../context/ContextProvider'
+import LocalGroceryStoreOutlinedIcon from '@mui/icons-material/LocalGroceryStoreOutlined'
 
 import CheckroomIcon from '@mui/icons-material/Checkroom'
 import Products1 from '../../pages/Products/Products1'
+import { getUserOrders } from '../../actions/orders'
 const BottomNAv = () => {
   /* estado que controla el click de cada icono de los existentes en lña barra de navegador. */
   const {
-    state: { isAdmin, light, productPage },
+    state: { isAdmin, light, productPage, currentUser },
     dispatch
   } = useValue()
   const [value, setValue] = useState(3)
@@ -42,7 +45,8 @@ const BottomNAv = () => {
           0: <Carreras />,
           1: <Pedidos />,
           2: <AddPedido setPage={setValue} />,
-          3: <Products1 />
+          3: <Products1 />,
+          4: <MiRopa />
         }[value]
       }
       <Paper
@@ -95,8 +99,21 @@ const BottomNAv = () => {
           )}
           <BottomNavigationAction
             label='Ropa'
-            icon={<CheckroomIcon />}
+            icon={<LocalGroceryStoreOutlinedIcon />}
             onClick={() => dispatch({ type: 'SHOW_FILTERS' })}
+          />
+
+          <BottomNavigationAction
+            label='MiRopa'
+            icon={<CheckroomIcon />}
+            onClick={() => {
+              getUserOrders(
+                dispatch,
+                currentUser.result.user._id,
+                currentUser.result.token
+              )
+              dispatch({ type: 'HIDE_FILTERS' })
+            }}
           />
         </BottomNavigation>
       </Paper>

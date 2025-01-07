@@ -7,12 +7,12 @@ import Notis from './components/Notis/Notis'
 import { useValue } from './context/ContextProvider'
 import BottomNAv from './components/User/BottomNAv'
 import LandingPage from './components/Landing/LandingPage'
-import Product from './pages/Products/Product'
-import Pedido from './pages/Pedidos/Pedido'
+import ProductDialog from './components/ProductDialog/ProductDialog'
+import PedidoDialog from './components/PedidoDialog/PedidoDialog'
 
 function App() {
   const {
-    state: { light, currentUser }
+    state: { currentUser }
   } = useValue()
 
   return (
@@ -20,24 +20,11 @@ function App() {
       {!currentUser && <LandingPage />}
       <Loading />
       <Notis />
-      {/* TODO revisar otra forma de cambiar el color al background */}
-      {/* <div
-        className='app-body'
-        style={{
-          backgroundColor: `var(--ihc-${light ? 'light' : 'dark'}-mode-bg)`,
-          color: `var(--ihc-${light ? 'light' : 'dark'}-mode-text)`,
-          transition: 'all 0.5s',
-          position: 'fixed',
-          top: '0',
-          left: '0',
-          width: '100%',
-          height: '100vh'
-        }}
-      ></div> */}
       <Login />
       <NavBar />
-      <Product />
-      <Pedido />
+      <ProductDialog />
+      <PedidoDialog />
+
       {currentUser && <BottomNAv />}
     </>
   )

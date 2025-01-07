@@ -23,3 +23,21 @@ export const createOrder = async (dispatch, body) => {
   }
   dispatch({ type: 'END_LOADING' })
 }
+
+export const getUserOrders = async (dispatch, userId, token) => {
+  dispatch({ type: 'START_LOADING' })
+
+  const result = await fetchingData(
+    {
+      url: `${baseUrl}/api/users/${userId}`,
+      method: 'GET',
+      token: token
+    },
+    dispatch
+  )
+  if (result.success) {
+    dispatch({ type: 'UPDATE_MIROPA', payload: result.result })
+    console.log(result.result)
+  }
+  dispatch({ type: 'END_LOADING' })
+}

@@ -16,12 +16,13 @@ import {
   Toolbar,
   Typography
 } from '@mui/material'
-import React, { forwardRef, useRef, useState } from 'react'
-import { useValue } from '../../context/ContextProvider'
+import React, { useState } from 'react'
+
 import { Close, Send, Star } from '@mui/icons-material'
+import { useValue } from '../../context/ContextProvider'
 import { createOrder } from '../../actions/orders'
 
-const Product = () => {
+const ProductDialog = () => {
   const [selectedTalla, setSelectedTalla] = useState('')
   const [selectedPedido, setSelectedPedido] = useState('')
   const [cantidad, setCantidad] = useState(1)
@@ -124,7 +125,7 @@ const Product = () => {
         }}
       >
         <Stack sx={{ p: 3 }} spacing={2}>
-          {/* añadir una fila */}
+          {/* añadir una fila con precio y valoracion*/}
           <Stack
             direction='row'
             sx={{ justifyContent: 'space-between', flexWrap: 'wrap' }}
@@ -145,6 +146,7 @@ const Product = () => {
               </Typography>
             </Box>
           </Stack>
+          {/* añadir una fila con Descripcion y tallas*/}
           <Stack
             direction='row'
             sx={{ justifyContent: 'space-between', flexWrap: 'wrap' }}
@@ -161,6 +163,7 @@ const Product = () => {
               </Typography>
             </Box>
           </Stack>
+          {/* añadir una fila con Cómo pedir un productos*/}
           <Stack>
             <Box>
               <Typography variant='h6' component='span'>
@@ -169,83 +172,99 @@ const Product = () => {
               <Typography>
                 {'Selecciona una talla y fecha de un pedido disponible: '}
               </Typography>
-              <Stack
-                direction='row'
-                sx={{
-                  justifyContent: 'space-between',
-                  flexWrap: 'wrap',
-                  mt: 5
-                }}
-              >
-                <div
-                  style={{
-                    display: 'flex',
+              {pedidos?.length > 0 ? (
+                <Stack
+                  direction='row'
+                  sx={{
+                    justifyContent: 'space-between',
                     flexWrap: 'wrap',
-                    gap: '20px',
+                    mt: 5
+                  }}
+                >
+                  <div
+                    style={{
+                      display: 'flex',
+                      flexWrap: 'wrap',
+                      gap: '20px',
+                      justifyContent: 'center',
+                      alignItems: 'center'
+                    }}
+                  >
+                    {/* seleccionar talla */}
+                    <FormControl>
+                      <InputLabel id='tallas-label'>Tallas</InputLabel>
+                      <Select
+                        labelId='tallas-label'
+                        value={selectedTalla}
+                        label='Tallas'
+                        onChange={handleChangeTalla}
+                        sx={{ minWidth: '85px' }}
+                      >
+                        {product &&
+                          Tallas.map((talla) => (
+                            <MenuItem value={talla}>{talla}</MenuItem>
+                          ))}
+                      </Select>
+                    </FormControl>
+                    {/* selecionar pedido */}
+                    <FormControl>
+                      <InputLabel id='pedido-label'>Fecha Pedido</InputLabel>
+                      <Select
+                        value={selectedPedido}
+                        labelId='pedido-label'
+                        label='Fecha Pedido'
+                        onChange={handleChangePedido}
+                        autoWidth
+                        sx={{ minWidth: '150px' }}
+                      >
+                        {PedidosFiltrados
+                          ? PedidosFiltrados.map((pedido) => (
+                              <MenuItem value={pedido._id}>
+                                {pedido.ExpireDate}
+                              </MenuItem>
+                            ))
+                          : 'No hay pedidos actualmente'}
+                      </Select>
+                    </FormControl>
+                    {/* seleccionar cantidad */}
+                    <FormControl>
+                      <TextField
+                        sx={{ width: '7ch !important' }}
+                        variant='standard'
+                        inputProps={{ type: 'number', min: 1, max: 60 }}
+                        value={cantidad}
+                        onChange={handleAmountChange}
+                        name='cantidad'
+                      />
+                    </FormControl>
+                  </div>
+                  {/* habilitar botón */}
+                  {selectedTalla !== '' && selectedPedido && (
+                    <Button
+                      variant='contained'
+                      sx={{ backgroundColor: 'green' }}
+                      endIcon={<Send />}
+                      onClick={handleSubmit}
+                    >
+                      Solicitar
+                    </Button>
+                  )}
+                </Stack>
+              ) : (
+                <Typography
+                  variant='h6'
+                  component='span'
+                  sx={{
+                    display: 'flex',
+                    color: 'red',
                     justifyContent: 'center',
                     alignItems: 'center'
                   }}
                 >
-                  {/* seleccionar talla */}
-                  <FormControl>
-                    <InputLabel id='tallas-label'>Tallas</InputLabel>
-                    <Select
-                      labelId='tallas-label'
-                      value={selectedTalla}
-                      label='Tallas'
-                      onChange={handleChangeTalla}
-                      sx={{ minWidth: '85px' }}
-                    >
-                      {product &&
-                        Tallas.map((talla) => (
-                          <MenuItem value={talla}>{talla}</MenuItem>
-                        ))}
-                    </Select>
-                  </FormControl>
-                  {/* selecionar pedido */}
-                  <FormControl>
-                    <InputLabel id='pedido-label'>Fecha Pedido</InputLabel>
-                    <Select
-                      value={selectedPedido}
-                      labelId='pedido-label'
-                      label='Fecha Pedido'
-                      onChange={handleChangePedido}
-                      autoWidth
-                      sx={{ minWidth: '150px' }}
-                    >
-                      {PedidosFiltrados
-                        ? PedidosFiltrados.map((pedido) => (
-                            <MenuItem value={pedido._id}>
-                              {pedido.ExpireDate}
-                            </MenuItem>
-                          ))
-                        : 'No hay pedidos actualmente'}
-                    </Select>
-                  </FormControl>
-                  {/* seleccionar cantidad */}
-                  <FormControl>
-                    <TextField
-                      sx={{ width: '7ch !important' }}
-                      variant='standard'
-                      inputProps={{ type: 'number', min: 1, max: 60 }}
-                      value={cantidad}
-                      onChange={handleAmountChange}
-                      name='cantidad'
-                    />
-                  </FormControl>
-                </div>
-                {/* habilitar botón */}
-                {selectedTalla !== '' && selectedPedido && (
-                  <Button
-                    variant='contained'
-                    sx={{ backgroundColor: 'green' }}
-                    endIcon={<Send />}
-                    onClick={handleSubmit}
-                  >
-                    Solicitar
-                  </Button>
-                )}
-              </Stack>
+                  No hay ningun pedido abierto para solicitar ropa, contacta con
+                  un Admin.
+                </Typography>
+              )}
             </Box>
           </Stack>
         </Stack>
@@ -253,4 +272,4 @@ const Product = () => {
     </Dialog>
   )
 }
-export default Product
+export default ProductDialog

@@ -23,12 +23,9 @@ const ProductCard1 = ({ producto }) => {
     dispatch
   } = useValue()
   /* TODO fix this */
-  const Foto = [
-    `./clothesPics/${producto.Foto ? producto.Foto : 'NoPic.jpg'}
-  `,
-    `./clothesPics/${producto.Foto ? producto.Foto : 'NoPic.jpg'}`
-  ]
-  const id = producto._id
+  const Foto = `./clothesPics/${producto.Foto ? producto.Foto : 'NoPic.jpg'}
+  `
+  // const id = producto._id
 
   return (
     <Card key={producto._id} elevation={3} sx={{ maxWidth: '300px' }}>
@@ -71,10 +68,9 @@ const ProductCard1 = ({ producto }) => {
                   title='Ver Detalles'
                   sx={{ mr: '5px' }}
                 >
-                  <Avatar>
-                    <RemoveRedEyeOutlinedIcon />
+                  <Avatar src={Foto}>
+                    {/* <RemoveRedEyeOutlinedIcon /> */}
                   </Avatar>
-                  {/* <Avatar src={Foto[0]} /> */}
                 </Tooltip>
               </IconButton>
             )
@@ -82,7 +78,7 @@ const ProductCard1 = ({ producto }) => {
           position='top'
         />
         <img
-          src={Foto[0]}
+          src={Foto}
           alt={producto.Nombre}
           loading='lazy'
           style={{ cursor: 'pointer' }}

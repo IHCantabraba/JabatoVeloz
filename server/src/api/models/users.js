@@ -28,7 +28,8 @@ const userSchema = new mongoose.Schema(
       enum: ['admin', 'user', 'candidate']
     },
     img: { type: String, required: false },
-    carreras: [{ type: mongoose.Types.ObjectId, ref: 'competitions' }]
+    carreras: [{ type: mongoose.Types.ObjectId, ref: 'competitions' }],
+    orders: [{ type: mongoose.Types.ObjectId, ref: 'orders' }]
   },
   { timestamp: true, collection: 'users' }
 )

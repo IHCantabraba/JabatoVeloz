@@ -9,11 +9,13 @@ import {
   Typography
 } from '@mui/material'
 import React from 'react'
-import { useValue } from '../../context/ContextProvider'
-import { Close } from '@mui/icons-material'
-import TablaPedidos from '../../components/TablaPedidos/TablaPedidos'
 
-const Pedido = () => {
+import { Close } from '@mui/icons-material'
+
+import { useValue } from '../../context/ContextProvider'
+import TablaPedidos from '../TablaPedidos/TablaPedidos'
+
+const PedidoDialog = () => {
   const {
     state: { pedido, light },
     dispatch
@@ -93,4 +95,4 @@ const Pedido = () => {
   )
 }
 
-export default Pedido
+export default PedidoDialog
