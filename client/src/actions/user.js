@@ -39,6 +39,8 @@ const handleLogin = async (user, dispatch) => {
   )
   if (result.success) {
     dispatch({ type: 'UPDATE_USER', payload: result })
+    dispatch({ type: 'SHOW_FILTERS' })
+    dispatch({ type: 'SHOW_THEME_SWITCHER' })
     if (result.result.user.rol === 'admin') {
       console.log('true')
       dispatch({ type: 'IS_ADMIN' })

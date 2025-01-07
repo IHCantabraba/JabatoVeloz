@@ -5,11 +5,9 @@ import {
   Box,
   Paper
 } from '@mui/material'
-import { LocationOn } from '@mui/icons-material'
 import DirectionsRunIcon from '@mui/icons-material/DirectionsRun'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt'
-import ClusterMap from '../../pages/ClusterMap/ClusterMap'
 import Carreras from '../../pages/Carreras/Carreras'
 import Pedidos from '../../pages/Pedidos/Pedidos'
 import AddPedido from '../../pages/AddPedido/AddPedido'
@@ -21,7 +19,7 @@ import Products1 from '../../pages/Products/Products1'
 const BottomNAv = () => {
   /* estado que controla el click de cada icono de los existentes en lña barra de navegador. */
   const {
-    state: { isAdmin, light },
+    state: { isAdmin, light, productPage },
     dispatch
   } = useValue()
   const [value, setValue] = useState(3)
@@ -67,20 +65,39 @@ const BottomNAv = () => {
           <BottomNavigationAction
             label='Carreras'
             icon={<DirectionsRunIcon />}
+            onClick={() => {
+              if (productPage) {
+                dispatch({ type: 'HIDE_FILTERS' })
+              }
+            }}
           />
           {isAdmin && (
             <BottomNavigationAction
               label='Pedidos'
               icon={<ShoppingCartIcon />}
+              onClick={() => {
+                if (productPage) {
+                  dispatch({ type: 'HIDE_FILTERS' })
+                }
+              }}
             />
           )}
           {isAdmin && (
             <BottomNavigationAction
               label='Añadir Pedido'
               icon={<AddLocationAltIcon />}
+              onClick={() => {
+                if (productPage) {
+                  dispatch({ type: 'HIDE_FILTERS' })
+                }
+              }}
             />
           )}
-          <BottomNavigationAction label='Ropa' icon={<CheckroomIcon />} />
+          <BottomNavigationAction
+            label='Ropa'
+            icon={<CheckroomIcon />}
+            onClick={() => dispatch({ type: 'SHOW_FILTERS' })}
+          />
         </BottomNavigation>
       </Paper>
     </Box>

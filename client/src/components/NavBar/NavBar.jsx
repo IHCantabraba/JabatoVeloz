@@ -14,11 +14,12 @@ import LightModeIcon from '@mui/icons-material/LightMode'
 import UserIcon from '../User/UserIcon'
 import Sidebar from '../Sidebar/Sidebar'
 import { useState } from 'react'
-
+import TuneIcon from '@mui/icons-material/Tune'
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false)
+
   const {
-    state: { currentUser, light },
+    state: { currentUser, light, productPage, showThemes },
     dispatch
   } = useValue()
 
@@ -36,19 +37,21 @@ const NavBar = () => {
         <Container maxWidth='lg' sx={{ mr: 0, ml: 0 }}>
           <Toolbar disableGutters style={{ width: '95vw', margin: '0 auto' }}>
             <Box sx={{ mr: 1 }}>
-              <IconButton
-                size='large'
-                color='inherit'
-                onClick={() => setIsOpen(true)}
-              >
-                <Menu
-                  style={{
-                    color: `var(--ihc-${
-                      !currentUser ? 'white' : light ? 'light' : 'dark'
-                    }-mode-text)`
-                  }}
-                />
-              </IconButton>
+              {productPage && (
+                <IconButton
+                  size='large'
+                  color='inherit'
+                  onClick={() => setIsOpen(true)}
+                >
+                  <TuneIcon
+                    style={{
+                      color: `var(--ihc-${
+                        !currentUser ? 'white' : light ? 'light' : 'dark'
+                      }-mode-text)`
+                    }}
+                  />
+                </IconButton>
+              )}
             </Box>
             <Typography
               variant='h6'
@@ -91,7 +94,9 @@ const NavBar = () => {
             ) : (
               <UserIcon />
             )}
-            {light ? (
+            {!showThemes ? (
+              ''
+            ) : light ? (
               <LightModeIcon
                 style={{
                   fontSize: '40px',

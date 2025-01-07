@@ -2,9 +2,6 @@ import React, { useState } from 'react'
 import {
   Avatar,
   Card,
-  CardContent,
-  CardHeader,
-  CardMedia,
   IconButton,
   ImageListItem,
   ImageListItemBar,
@@ -12,7 +9,7 @@ import {
   Tooltip,
   Typography
 } from '@mui/material'
-import { DeleteOutlined, StarBorder } from '@mui/icons-material'
+import { StarBorder } from '@mui/icons-material'
 import { useValue } from '../../context/ContextProvider'
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined'
 import MoreVertIcon from '@mui/icons-material/MoreVert'

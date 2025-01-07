@@ -24,15 +24,10 @@ const Login = () => {
   /* obetner estado inicial de nuestro custom hook y el dispatcher para cambair estados */
   /* el Login se va a habrir desde varios sitios por lo que se necesita controlar el estadp con una variable"openLogin" y el dispatch para cerrarlo  */
   const {
-    state: { openLogin },
+    state: { openLogin, light },
     dispatch
   } = useValue()
-  const {
-    state: { light }
-  } = useValue()
-  const {
-    state: { currentUser }
-  } = useValue()
+
   /* login and register se usa el mismo modelo por lo que usaremos estado para cambair entre ellos */
   const [title, setTitle] = useState('Login')
   const [isRegister, setIsRegister] = useState(false)

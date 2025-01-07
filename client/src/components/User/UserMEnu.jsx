@@ -6,7 +6,7 @@ import Profile from '../Profile/Profile'
 
 const UserMEnu = ({ anchorUserMenu, setAnchorUserMenu }) => {
   const {
-    state: { currentUser },
+    state: { currentUser, productPage },
     dispatch
   } = useValue()
   /* no element related to this menu */
@@ -42,8 +42,13 @@ const UserMEnu = ({ anchorUserMenu, setAnchorUserMenu }) => {
         {/* en logout click, actualizar el current user a null */}
         <MenuItem
           onClick={() => {
-            dispatch({ type: 'UPDATE_USER', payload: null }),
-              dispatch({ type: 'NOT_ADMIN' })
+            dispatch({
+              type: 'UPDATE_USER',
+              payload: null
+            })
+            dispatch({ type: 'NOT_ADMIN' })
+            if (productPage) dispatch({ type: 'HIDE_FILTERS' })
+            dispatch({ type: 'HIDE_THEME_SWITCHER' })
           }}
         >
           <ListItemIcon>

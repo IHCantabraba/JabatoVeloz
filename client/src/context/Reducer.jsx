@@ -53,7 +53,16 @@ const Reducer = (state, action) => {
     /* actualizar productos cuando se elimina uno */
     case 'PRODUCTO_ELIMINADO':
       return { ...state, productoEliminado: action.payload }
-
+    /* habilitar o no el botón del filtro en el navBar */
+    case 'SHOW_FILTERS':
+      return { ...state, productPage: true }
+    case 'HIDE_FILTERS':
+      return { ...state, productPage: false }
+    /* show hide theme Switcher */
+    case 'SHOW_THEME_SWITCHER':
+      return { ...state, showThemes: true }
+    case 'HIDE_THEME_SWITCHER':
+      return { ...state, showThemes: false }
     /* reset panel pedido despues de crear uno */
     case 'RESET_PEDIDO':
       return {
