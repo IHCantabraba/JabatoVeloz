@@ -5,9 +5,10 @@ import tryCatch from './utils/tryCatch.js'
 export const createOrder = tryCatch(async (req, res) => {
   const { id } = req.params
 
-  const pedido = await Pedidos.findById(req.body.pedido)
+  const pedido = await Pedidos.findById(req.body.pedidos)
 
   const newOrder = new Orders(req.body)
+
   const solicitud = await newOrder.save()
 
   if (solicitud) {

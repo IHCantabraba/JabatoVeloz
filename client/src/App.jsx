@@ -8,6 +8,7 @@ import { useValue } from './context/ContextProvider'
 import BottomNAv from './components/User/BottomNAv'
 import LandingPage from './components/Landing/LandingPage'
 import Product from './pages/Products/Product'
+import Pedido from './pages/Pedidos/Pedido'
 
 function App() {
   const {
@@ -36,6 +37,7 @@ function App() {
       <Login />
       <NavBar />
       <Product />
+      <Pedido />
       {currentUser && <BottomNAv />}
     </>
   )

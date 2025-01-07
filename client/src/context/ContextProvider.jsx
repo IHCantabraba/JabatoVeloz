@@ -18,7 +18,8 @@ const initialState = {
   product: null,
   productoEliminado: false,
   productPage: false,
-  showThemes: false
+  showThemes: false,
+  pedido: null
 }
 /* crear un contexto */
 const Context = createContext(initialState)

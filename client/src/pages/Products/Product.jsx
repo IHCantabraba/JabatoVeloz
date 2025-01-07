@@ -24,32 +24,36 @@ import { createOrder } from '../../actions/orders'
 const Product = () => {
   const [selectedTalla, setSelectedTalla] = useState('')
   const [selectedPedido, setSelectedPedido] = useState('')
-  const [cantidad, setCantidad] = useState('1')
+  const [cantidad, setCantidad] = useState(1)
 
   /* definir transición para abrir la página */
-  const Transition = forwardRef((props, ref) => {
-    return <Slide direction='up' {...props} ref={ref} />
-  })
+  /* TOOD averiguar porqué afecta a los clicks tras cerrar una vez */
+  // const Transition = forwardRef((props, ref) => {
+  //   return <Slide direction='up' {...props} ref={ref} />
+  // })
+
   /* close product page function */
   const handleClose = () => {
     dispatch({ type: 'UPDATE_PRODUCT', payload: null })
     setSelectedTalla('')
     setSelectedPedido('')
+    setCantidad(1)
   }
   const handleSubmit = (e) => {
     e.preventDefault()
 
     const body = {
-      user: currentUser.result.user._id,
-      product: product._id,
+      users: currentUser.result.user._id,
+      productos: product.Nombre,
       talla: selectedTalla,
-      pedido: selectedPedido,
+      pedidos: selectedPedido,
       unidades: cantidad,
       precio: Number(product.Precio) * Number(cantidad)
     }
     createOrder(dispatch, body)
-    // setSelectedPedido('')
-    // setSelectedTalla('')
+    setSelectedPedido('')
+    setSelectedTalla('')
+    setCantidad('1')
     dispatch({ type: 'UPDATE_PRODUCT', payload: null })
   }
   const {

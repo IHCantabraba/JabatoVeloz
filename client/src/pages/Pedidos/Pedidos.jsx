@@ -43,7 +43,10 @@ const Pedidos = () => {
               <Button
                 variant='outlined'
                 sx={{ ml: 2, placeSelf: 'self-end' }}
-                onClick={() => console.log('eliminate pedido')}
+                onClick={() => {
+                  console.log(pedido)
+                  dispatch({ type: 'UPDATE_PEDIDO', payload: pedido })
+                }}
               >
                 Ver Detalles
               </Button>
