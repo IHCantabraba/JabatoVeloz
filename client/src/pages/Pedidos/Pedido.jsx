@@ -38,9 +38,10 @@ const Pedido = () => {
       >
         <Toolbar>
           <Typography variant='h6' component='h3' sx={{ ml: 2, flex: 1 }}>
-            {'Pedido creado por ' +
+            {'Creado por ' +
               pedido?.users.alias +
-              ' ' +
+              '. ' +
+              'Fecha Estimada: ' +
               pedido?.ExpireDate}
           </Typography>
           <IconButton color='inherit' onClick={handleClose}>
@@ -72,52 +73,21 @@ const Pedido = () => {
             </Typography>
           </Box>
         </Stack>
-        {/* detalle de cada solicitud */}
-        {/* <Stack
-          direction='column'
-          sx={{ justifyContent: 'space-between', flexWrap: 'wrap' }}
-        >
-          <Stack
-            direction='row'
-            sx={{ justifyContent: 'space-around', flexWrap: 'wrap' }}
+        {pedido?.orders.length > 0 ? (
+          <TablaPedidos pedido={pedido} />
+        ) : (
+          <Typography
+            sx={{
+              mt: 5,
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center'
+            }}
+            variant='h5'
           >
-            <Box varinat='h4' component='h4'>
-              {'Miembro'}
-            </Box>
-            <Box varinat='h4' component='h4'>
-              {'Artículo'}
-            </Box>
-            <Box varinat='h4' component='h4'>
-              {'Talla'}
-            </Box>
-            <Box varinat='h4' component='h4'>
-              {'Cantidad'}
-            </Box>
-          </Stack>
-          {pedido?.orders.map((order) => (
-            <Stack
-              direction='row'
-              sx={{ justifyContent: 'space-around', flexWrap: 'wrap' }}
-            >
-              <Box varinat='h4' component='span'>
-                {'Miembro: ' + order.users.alias
-                  ? order.users.alias
-                  : order.users.nombre}
-              </Box>
-              <Box varinat='h4' component='span'>
-                {'Artículo: ' + order.productos.Nombre}
-              </Box>
-              <Box varinat='h4' component='span'>
-                {'Talla: ' + order.talla}
-              </Box>
-              <Box varinat='h4' component='span'>
-                {'Cantidad: ' + order.unidades}
-              </Box>
-            </Stack>
-          ))}
-            
-        </Stack> */}
-        <TablaPedidos pedido={pedido} />
+            Aún no hay ninguna orden de compra
+          </Typography>
+        )}
       </Container>
     </Dialog>
   )
