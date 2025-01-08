@@ -7,7 +7,8 @@ const orderSchema = mongoose.Schema(
     talla: { type: String, required: true },
     pedidos: { type: mongoose.Types.ObjectId, ref: 'pedidos' },
     unidades: { type: String, required: true },
-    precio: { type: String, required: true }
+    precio: { type: String, required: true },
+    pagado: { type: Boolean, default: false }
   },
   { timestamps: true, collection: 'orders' }
 )

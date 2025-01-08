@@ -26,5 +26,22 @@ export const createOrder = tryCatch(async (req, res) => {
   }
   return res.status(201).json({ success: true, result: solicitud })
 })
+export const updateOrder = tryCatch(async (req, res) => {
+  const { id } = req.params
+  const order = await Orders.findById(id)
 
-export default createOrder
+  if (order) {
+    console.log(`order ${order._id} actualizada`)
+    order.pagado = true
+  }
+
+  const orderUpdated = await Orders.findByIdAndUpdate(id, order, {
+    new: true
+  })
+  return res.status(200).json({
+    success: true,
+    result: orderUpdated,
+    message: 'Prenda actualizada'
+  })
+})
+export default { createOrder, updateOrder }

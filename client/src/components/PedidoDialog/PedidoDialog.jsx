@@ -1,6 +1,8 @@
 import {
   AppBar,
+  Avatar,
   Box,
+  Button,
   Container,
   Dialog,
   IconButton,
@@ -8,19 +10,39 @@ import {
   Toolbar,
   Typography
 } from '@mui/material'
-import React from 'react'
+import React, { useRef } from 'react'
 
 import { Close } from '@mui/icons-material'
 
 import { useValue } from '../../context/ContextProvider'
 import TablaPedidos from '../TablaPedidos/TablaPedidos'
-
+import DoneAllIcon from '@mui/icons-material/DoneAll'
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf'
+import html2canvas from 'html2canvas'
+import { jsPDF } from 'jspdf'
 const PedidoDialog = () => {
   const {
     state: { pedido, light },
     dispatch
   } = useValue()
+  const printRef = useRef()
+  const handleCerrarPedido = () => {
+    console.log(`Se va acerrar el pedido ${pedido._id}`)
+  }
+  const handleGenerarPDF = async () => {
+    console.log('se generará pdf')
+    const element = printRef.current
+    const canvas = await html2canvas(element)
+    const data = canvas.toDataURL('img/png')
 
+    const pdf = new jsPDF()
+    const imgProperties = pdf.getImageProperties(data)
+    const pdfWidth = pdf.internal.pageSize.getWidth()
+    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width
+
+    pdf.addImage(data, 'PNG', 0, 0, pdfWidth, pdfHeight)
+    pdf.save(`pedido_${pedido?._id}`)
+  }
   const handleClose = () => {
     dispatch({ type: 'UPDATE_PEDIDO', payload: null })
   }
@@ -54,11 +76,34 @@ const PedidoDialog = () => {
       {/* cuerpo con informacion */}
       <Container
         sx={{
-          pt: 5,
+          pt: 3,
           alignContent: 'Center',
           width: '100%'
         }}
+        ref={printRef}
       >
+        <Stack
+          direction='row'
+          sx={{
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            mb: 3,
+            gap: 5
+          }}
+        >
+          <Avatar
+            src='./Jabato_Veloz9_tran.png'
+            sx={{ width: '150px', height: '75px', alignSelf: 'start' }}
+          ></Avatar>
+          <Typography
+            variant='h6'
+            component='span'
+            sx={{ alignSelf: 'center' }}
+          >
+            Jabato Veloz Club Deportivo
+          </Typography>
+        </Stack>
         {/* resumen de solicitudes */}
         <Stack
           direction='row'
@@ -90,6 +135,35 @@ const PedidoDialog = () => {
             Aún no hay ninguna orden de compra
           </Typography>
         )}
+      </Container>
+      <Container
+        sx={{
+          pt: 5,
+          alignContent: 'Center',
+          width: '100%'
+        }}
+      >
+        <Stack
+          direction='row'
+          sx={{ justifyContent: 'space-between', flexWrap: 'wrap' }}
+        >
+          <Button
+            variant='contained'
+            sx={{ backgroundColor: 'green', mt: 5 }}
+            endIcon={<PictureAsPdfIcon />}
+            onClick={handleGenerarPDF}
+          >
+            PDF
+          </Button>
+          <Button
+            variant='contained'
+            sx={{ backgroundColor: 'green', mt: 5 }}
+            endIcon={<DoneAllIcon />}
+            onClick={handleCerrarPedido}
+          >
+            Finalizar
+          </Button>
+        </Stack>
       </Container>
     </Dialog>
   )

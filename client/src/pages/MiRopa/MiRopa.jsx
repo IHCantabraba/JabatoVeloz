@@ -1,12 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useValue } from '../../context/ContextProvider'
 import { Box, Container, Stack, Typography } from '@mui/material'
 import { TablaRopa } from '../../components/TablaRopa/TablaRopa'
 
 const MiRopa = () => {
   const {
-    state: { miRopa }
+    state: { miRopa, miPrenda }
   } = useValue()
+
+  /* TODO update info after setting to "paid" a product */
+  useEffect(() => {
+    console.log('prenda actualizada')
+  }, [miPrenda])
   return (
     <Container sx={{ py: 5, mb: 4 }}>
       <Stack>

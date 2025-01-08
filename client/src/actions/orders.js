@@ -41,3 +41,23 @@ export const getUserOrders = async (dispatch, userId, token) => {
   }
   dispatch({ type: 'END_LOADING' })
 }
+
+/* TOOD update order */
+
+export const updateOrder = async (dispatch, order, token) => {
+  dispatch({ type: 'START_LOADING' })
+  const result = await fetchingData(
+    {
+      url: `${baseUrl}/api/orders/${order._id}`,
+      method: 'POST',
+      token: token
+    },
+    dispatch
+  )
+  if (result.success) {
+    /* TODO create a paidOrder */
+    dispatch({ type: 'UPDATE_PRENDA', payload: result.result })
+    /* una vez que esta variable global cambie se debe renderizar de nuevo las ordenes del usuairo */
+  }
+  dispatch({ type: 'END_LOADING' })
+}

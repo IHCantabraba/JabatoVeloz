@@ -20,7 +20,8 @@ const initialState = {
   productPage: false,
   showThemes: false,
   pedido: null,
-  miRopa: null
+  miRopa: null,
+  miPrenda: null
 }
 /* crear un contexto */
 const Context = createContext(initialState)
