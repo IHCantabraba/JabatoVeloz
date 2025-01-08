@@ -22,10 +22,6 @@ const ProductCard1 = ({ producto }) => {
     state: { isAdmin },
     dispatch
   } = useValue()
-  /* TODO fix this */
-  const Foto = `./clothesPics/${producto.Foto ? producto.Foto : 'NoPic.jpg'}
-  `
-  // const id = producto._id
 
   return (
     <Card key={producto._id} elevation={3} sx={{ maxWidth: '300px' }}>
@@ -78,7 +74,7 @@ const ProductCard1 = ({ producto }) => {
           position='top'
         />
         <img
-          src={Foto}
+          src={producto.Foto}
           alt={producto.Nombre}
           loading='lazy'
           style={{ cursor: 'pointer' }}

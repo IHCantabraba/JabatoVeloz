@@ -6,6 +6,7 @@ const storage = new CloudinaryStorage({
   cloudinary: cloudinary.v2,
   params: {
     folder: (req) => {
+      console.log(`originalUrl is: ${req.originalUrl}`)
       let baseUrl = req.originalUrl.split('/').at(-1)
       console.log(`base url is: ${baseUrl}`)
       if (baseUrl === 'register' || baseUrl === 'user') {

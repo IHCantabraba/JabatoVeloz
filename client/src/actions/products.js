@@ -2,10 +2,10 @@ import { useValue } from '../context/ContextProvider'
 import fetchingData from './utils/fetchingData'
 const baseUrl = import.meta.env.VITE_BaseName
 
-export const getProducts = async (dispatch) => {
+export const getProducts = async (dispatch, token) => {
   dispatch({ type: 'START_LOADING' })
   const productos = await fetchingData(
-    { url: `${baseUrl}/api/productos`, method: 'GET' },
+    { url: `${baseUrl}/api/productos`, method: 'GET', token: token },
     dispatch
   )
   if (productos.success) {

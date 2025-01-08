@@ -3,6 +3,11 @@ import csv from 'csv-parser'
 import Productos from '../../api/models/productos.js'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
+import cloudinaryConfig from '../../config/cloudinary.js'
+import cloudinary from 'cloudinary'
+
+dotenv.config()
+cloudinaryConfig()
 const array = [
   {
     Nombre: 'Camiseta Trail Alpes',
@@ -12,6 +17,15 @@ const array = [
     Tallas: 'xs s m l xl 2xl',
     Descripcion: 'Not available',
     Foto: 'ALpes_Camiseta.png'
+  },
+  {
+    Nombre: 'Paravientos Terry',
+    Categoria: 'Cortavientos',
+    Sexo: 'unisex',
+    Precio: '65',
+    Tallas: 'xs s m l xl 2xl',
+    Descripcion: 'Con Gorro y membrana',
+    Foto: ''
   },
   {
     Nombre: 'Camiseta Sin Mangas Alpes',
@@ -47,16 +61,7 @@ const array = [
     Precio: '65',
     Tallas: 'xs s m l xl 2xl',
     Descripcion: 'Not available',
-    Foto: 'avance_cross.png'
-  },
-  {
-    Nombre: 'Paravientos Terry',
-    Categoria: 'Cortavientos',
-    Sexo: 'unisex',
-    Precio: '65',
-    Tallas: 'xs s m l xl 2xl',
-    Descripcion: 'Con Gorro y membrana',
-    Foto: ''
+    Foto: 'Paravientos.png'
   },
   {
     Nombre: 'Paravientos',
@@ -74,7 +79,7 @@ const array = [
     Precio: '39.5',
     Tallas: 'xs s m l xl 2xl',
     Descripcion: 'Bolsillo en la espalda',
-    Foto: 'avance_cross.png'
+    Foto: 'chaleco.png'
   },
   {
     Nombre: 'Pantalon de Trail corto',
@@ -276,7 +281,7 @@ const array = [
     Foto: ''
   }
 ]
-dotenv.config()
+
 /* de Array a CSV */
 const Array2CSV = (array) => {
   let stringFinal = ``
@@ -290,7 +295,7 @@ const Array2CSV = (array) => {
     stringFinal += `${elemento.Nombre},${elemento.Categoria},${elemento.Sexo},${elemento.Precio},${elemento.Tallas},${elemento.Descripcion},${elemento.Foto}\n`
   }
   fs.writeFile(
-    './src/utils/Products/productos.csv',
+    './src/utils/Products/ImageProducts.csv',
     stringFinal,
     (err, data) => {
       if (err !== null) {
@@ -304,30 +309,61 @@ const Array2CSV = (array) => {
   return stringFinal
 }
 const resultCSV = Array2CSV(array)
-
-const products = []
-fs.createReadStream('./src/utils/Products/productos.csv')
-  .pipe(csv())
-  .on('data', (data) => products.push(data))
-  .on('end', () => {
-    console.log(products)
-    /* TODO definir esquema de producto */
-    mongoose
-      .connect(process.env.DB_URL)
-      .then(async () => {
-        try {
-          await Productos.collection.drop()
-          console.log('Colección limpia')
-        } catch (error) {
-          console.log('No se ha podido limpiar la colección de los productos')
+const seedProducts = async (productos) => {
+  const options = { folder: 'Jveloz/Products' }
+  let Nopic = 'NoPic.jpg'
+  let Foto
+  let cloudPhotURL
+  try {
+    await mongoose.connect(process.env.DB_URL)
+    await Productos.collection.drop()
+    for (const producto of productos) {
+      console.log(producto.Foto)
+      if (producto.Foto !== '') {
+        Foto = producto.Foto
+      } else {
+        Foto = Nopic
+      }
+      if (!Foto.includes('https')) {
+        const result = await cloudinary.v2.uploader.upload(
+          `./clothesPics/${Foto}`,
+          options
+        )
+        if (Foto === 'NoPic.jpg') {
+          if (result) {
+            Nopic = result.secure_url
+            console.log('reasigned Nopic path to cloudinary image path')
+          }
         }
-
-        try {
-          await Productos.insertMany(products)
-          console.log('Todos los productos se han insertado ')
-        } catch (error) {
-          console.log('No se han podido insertar los productos')
+        if (result) {
+          console.log('photo uploaded')
+          console.log(`secure_url is: ${result.secure_url}`)
+          cloudPhotURL = result.secure_url
         }
+      } else {
+        cloudPhotURL = Nopic
+      }
+
+      const newProduct = new Productos({
+        Nombre: producto.Nombre,
+        Categoria: producto.Categoria,
+        Sexo: producto.Sexo,
+        Precio: producto.Precio,
+        Tallas: producto.Tallas,
+        Descripcion: producto.Descripción,
+        Foto: cloudPhotURL
       })
-      .finally(() => mongoose.disconnect())
-  })
+      await newProduct.save()
+    }
+    mongoose.disconnect()
+  } catch (error) {
+    console.log(error)
+    mongoose.disconnect()
+  }
+}
+
+const productos = []
+fs.createReadStream('./src/utils/Products/ImageProducts.csv')
+  .pipe(csv())
+  .on('data', (data) => productos.push(data))
+  .on('end', () => seedProducts(productos))

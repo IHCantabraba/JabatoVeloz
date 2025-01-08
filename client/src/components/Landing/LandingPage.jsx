@@ -13,7 +13,7 @@ const classes = {
 const Landing = styled('div')(({ theme }) => ({
   [`&.${classes.landing}`]: {
     minHeight: '100vh',
-    backgroundImage: `url('./assets/JV_bg.jpg')`,
+    backgroundImage: `url('./assets/JV_night.jpg')`,
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center center',
     backgroundSize: 'cover',
@@ -58,7 +58,11 @@ const LandingPage = () => {
               Running Team
             </span>
           </Title>
-          <Scroll to='contact' smooth={true}>
+          <Scroll
+            to='contact'
+            smooth={true}
+            style={{ display: 'flex', justifyContent: 'center' }}
+          >
             <IconButton
               sx={{
                 width: '50px',

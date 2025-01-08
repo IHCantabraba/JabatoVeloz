@@ -74,7 +74,9 @@ const NavBar = () => {
               noWrap
               sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
               style={{
-                color: `var(--ihc-${light ? 'light' : 'dark'}-mode-text)`
+                color: `var(--ihc-${
+                  !currentUser ? 'white' : light ? 'light' : 'dark'
+                }-mode-text)`
               }}
             >
               JV

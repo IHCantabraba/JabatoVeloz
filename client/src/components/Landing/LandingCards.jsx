@@ -28,11 +28,11 @@ export default function LandingCards({ cardInfo, checked }) {
     })
   }
   return (
-    <Collapse in={checked} {...(checked ? { timeout: 1000 } : {})}>
+    <Collapse in={checked} {...(checked ? { timeout: 100 } : {})}>
       <Card
         sx={{ width: 450, background: cardInfo.background, margin: '20px' }}
       >
-        <CardMedia sx={{ height: 340 }} image={cardInfo.url} title='Team' />
+        <CardMedia sx={{ height: 200 }} image={cardInfo.url} title='Team' />
         <CardContent>
           <Typography
             gutterBottom

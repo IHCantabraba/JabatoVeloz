@@ -8,7 +8,8 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "build": "npm install --prefix ./FrontEnd && npm run build --prefix ./FrontEnd && npm install",
-    "productSeed": "node ./src/utils/Products/productSeeding.js"
+    "productSeed": "node ./src/utils/Products/productSeeding.js",
+    "SeedingProducts": "node ./src/utils/Products/SeedingProducts.js"
   },
   "keywords": [],
   "author": "",

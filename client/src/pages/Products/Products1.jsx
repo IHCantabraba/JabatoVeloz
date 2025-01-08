@@ -5,11 +5,11 @@ import { useValue } from '../../context/ContextProvider'
 import ProductCard1 from '../../components/ProductCard/ProductCard1'
 const Products1 = () => {
   const {
-    state: { filterProducts, productoEliminado },
+    state: { filterProducts, productoEliminado, currentUser },
     dispatch
   } = useValue()
   useEffect(() => {
-    getProducts(dispatch)
+    getProducts(dispatch, currentUser.result.token)
   }, [productoEliminado])
   return (
     <Container sx={{ padding: '5px' }}>
