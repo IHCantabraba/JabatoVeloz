@@ -1,5 +1,6 @@
 import {
   Button,
+  IconButton,
   Paper,
   Table,
   TableBody,
@@ -21,7 +22,12 @@ export const TablaRopa = ({ userOrders }) => {
   } = useValue()
   const handleUpdatePagado = (order) => {
     console.log(`actualizando estado de ${order._id}`)
-    updateOrder(dispatch, order, currentUser?.result.token)
+    updateOrder(
+      dispatch,
+      order,
+      currentUser?.result.user._id,
+      currentUser?.result.token
+    )
   }
   return (
     <TableContainer component={Paper}>
@@ -58,12 +64,12 @@ export const TablaRopa = ({ userOrders }) => {
                   <DoneAllIcon sx={{ color: 'green' }} />
                 ) : (
                   <Tooltip title='Marcar como pagado'>
-                    <Button
+                    <IconButton
                       sx={{ m: 0, width: '20px' }}
                       onClick={() => handleUpdatePagado(order)}
                     >
                       <CheckIcon sx={{ color: 'green' }} />
-                    </Button>
+                    </IconButton>
                   </Tooltip>
                 )}
               </TableCell>

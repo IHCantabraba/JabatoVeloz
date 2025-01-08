@@ -44,7 +44,7 @@ export const getUserOrders = async (dispatch, userId, token) => {
 
 /* TOOD update order */
 
-export const updateOrder = async (dispatch, order, token) => {
+export const updateOrder = async (dispatch, order, userId, token) => {
   dispatch({ type: 'START_LOADING' })
   const result = await fetchingData(
     {
@@ -54,10 +54,23 @@ export const updateOrder = async (dispatch, order, token) => {
     },
     dispatch
   )
+
   if (result.success) {
     /* TODO create a paidOrder */
     dispatch({ type: 'UPDATE_PRENDA', payload: result.result })
     /* una vez que esta variable global cambie se debe renderizar de nuevo las ordenes del usuairo */
+  }
+  const userOrders = await fetchingData(
+    {
+      url: `${baseUrl}/api/users/${userId}`,
+      method: 'GET',
+      token: token
+    },
+    dispatch
+  )
+  if (userOrders.success) {
+    dispatch({ type: 'UPDATE_MIROPA', payload: userOrders.result })
+    console.log(userOrders.result)
   }
   dispatch({ type: 'END_LOADING' })
 }

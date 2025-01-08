@@ -5,19 +5,15 @@ import { TablaRopa } from '../../components/TablaRopa/TablaRopa'
 
 const MiRopa = () => {
   const {
-    state: { miRopa, miPrenda }
+    state: { miRopa, currentUser }
   } = useValue()
 
-  /* TODO update info after setting to "paid" a product */
-  useEffect(() => {
-    console.log('prenda actualizada')
-  }, [miPrenda])
   return (
     <Container sx={{ py: 5, mb: 4 }}>
       <Stack>
         <Box>
           <Typography variant='h4' component='span'>
-            Ropa solicitada
+            {`Ropa solicitada por ${currentUser.result.user.nombre}`}
           </Typography>
         </Box>
       </Stack>
