@@ -44,6 +44,7 @@ const Login = () => {
   /* funcion para cerrar */
   const handleClose = () => {
     dispatch({ type: 'CLOSE_LOGIN' })
+    setIsRegister(false)
   }
 
   /* testing login and register requests */

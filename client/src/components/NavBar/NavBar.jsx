@@ -96,7 +96,6 @@ const NavBar = () => {
             ) : (
               <UserIcon />
             )}
-            {/* TODO fix when refreshing page */}
             {!currentUser ? (
               ''
             ) : light ? (

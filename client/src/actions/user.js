@@ -72,7 +72,7 @@ export const UpdateProfile = async (currentUser, updatedFields, dispatch) => {
       }
     )
     const response = await result.json()
-    /* TODO revisar */
+
     currentUser.result.user.img = response.result.img
     currentUser.result.user.nombre = response.result.nombre
     if (response.success) {

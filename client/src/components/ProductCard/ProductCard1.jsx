@@ -63,7 +63,7 @@ const ProductCard1 = ({ producto }) => {
                   title='Ver Detalles'
                   sx={{ mr: '5px' }}
                 >
-                  <Avatar src={Foto}>
+                  <Avatar src={producto.Foto}>
                     {/* <RemoveRedEyeOutlinedIcon /> */}
                   </Avatar>
                 </Tooltip>

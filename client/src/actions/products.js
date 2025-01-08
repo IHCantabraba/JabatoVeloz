@@ -26,7 +26,6 @@ export const deleteProduct = async (dispatch, id, productoEliminado) => {
     dispatch
   )
   if (deleteProducto.success) {
-    /* TODO actualizar productos una vez eliminado uno.*/
     if (productoEliminado === 'yes') {
       console.log('productoEliminado es true')
       dispatch({ type: 'PRODUCTO_ELIMINADO', payload: 'no' })

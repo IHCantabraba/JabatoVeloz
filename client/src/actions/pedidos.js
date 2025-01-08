@@ -37,25 +37,22 @@ export const getPedidos = async (dispatch) => {
   const handleExpirationDate = (pedido) => {
     extractDaysOf(pedido)
   }
-
+  /* filtrar pedidos que tengan fecha vencida */
+  const filterPedidos = (pedidos) => {
+    if (pedidos) {
+      pedidos = pedidos.filter((pedido) => pedido.daysOff > 0)
+    } else {
+      return pedidos
+    }
+    return pedidos
+  }
   if (result.success) {
     result.result.map((pedido) => {
       handleExpirationDate(pedido)
     })
-    dispatch({ type: 'UPDATE_PEDIDOS', payload: result.result })
+    const PedidosFiltrados = filterPedidos(result.result)
+    dispatch({ type: 'UPDATE_PEDIDOS', payload: PedidosFiltrados })
     dispatch({ type: 'END_LOADING' })
   }
   return result
 }
-// export const updatedPedido = async (dispatch, updatedFields) => {
-//   dispatch({ type: 'START_LOADING' })
-
-//   const result = await fetchingData(
-//     { url: `${baseUrl}/api/pedidos/${updatedFields.id}`, method: 'POST' },
-//     dispatch
-//   )
-//   if (result.success) {
-//     dispatch({ type: 'END_LOADING' })
-//   }
-//   return result
-// }

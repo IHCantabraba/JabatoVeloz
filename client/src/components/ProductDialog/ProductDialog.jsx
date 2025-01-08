@@ -61,18 +61,6 @@ const ProductDialog = () => {
     state: { product, light, pedidos, currentUser },
     dispatch
   } = useValue()
-  const filterPedidos = (pedidos) => {
-    if (pedidos) {
-      pedidos = pedidos.filter((pedido) => pedido.daysOff > 0)
-    } else {
-      return pedidos
-    }
-    return pedidos
-  }
-  /*TODO fix PedidosFiltrados */
-  const PedidosFiltrados = filterPedidos(pedidos)
-  /* url de la foto almacenada en public */
-  const Foto = `./clothesPics/${product?.Foto ? product.Foto : 'NoPic.jpg'}`
 
   const Tallas = product?.Tallas.split(' ')
   const handleChangeTalla = (e) => {
@@ -109,7 +97,7 @@ const ProductDialog = () => {
         </Toolbar>
       </AppBar>
       <img
-        src={Foto}
+        src={product?.Foto}
         style={{
           maxWidth: '350px',
           maxHeight: '300px',
@@ -217,8 +205,8 @@ const ProductDialog = () => {
                         autoWidth
                         sx={{ minWidth: '150px' }}
                       >
-                        {PedidosFiltrados
-                          ? PedidosFiltrados.map((pedido) => (
+                        {pedidos
+                          ? pedidos.map((pedido) => (
                               <MenuItem value={pedido._id}>
                                 {pedido.ExpireDate}
                               </MenuItem>
