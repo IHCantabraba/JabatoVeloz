@@ -55,8 +55,10 @@ const Reducer = (state, action) => {
       return { ...state, productoEliminado: action.payload }
     /* habilitar o no el botón del filtro en el navBar */
     case 'SHOW_FILTERS':
+      localStorage.setItem('showFilter', 'true')
       return { ...state, productPage: true }
     case 'HIDE_FILTERS':
+      localStorage.setItem('showFilter', 'false')
       return { ...state, productPage: false }
     /* show hide theme Switcher */
     case 'SHOW_THEME_SWITCHER':

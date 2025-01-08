@@ -37,8 +37,7 @@ const NavBar = () => {
         <Container maxWidth='lg' sx={{ mr: 0, ml: 0 }}>
           <Toolbar disableGutters style={{ width: '95vw', margin: '0 auto' }}>
             <Box sx={{ mr: 1 }}>
-              {/* TODO fix when refreshing page */}
-              {productPage && (
+              {localStorage.getItem('showFilter') === 'true' && (
                 <IconButton
                   size='large'
                   color='inherit'
@@ -98,7 +97,7 @@ const NavBar = () => {
               <UserIcon />
             )}
             {/* TODO fix when refreshing page */}
-            {!showThemes ? (
+            {!currentUser ? (
               ''
             ) : light ? (
               <LightModeIcon

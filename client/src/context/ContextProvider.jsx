@@ -34,6 +34,7 @@ const ContextProvider = ({ children }) => {
   useEffect(() => {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'))
     const AdminState = localStorage.getItem('isAdmin')
+    const showFilter = localStorage.getItem('showFilter')
     if (currentUser) {
       dispatch({ type: 'UPDATE_USER', payload: currentUser })
     }
@@ -43,6 +44,12 @@ const ContextProvider = ({ children }) => {
       dispatch({ type: 'IS_ADMIN' })
     } else {
       localStorage.setItem('isAdmin', 'false')
+    }
+
+    if (showFilter === 'true') {
+      localStorage.setItem('showFilter', true)
+    } else {
+      localStorage.setItem('showFilter', false)
     }
   }, [])
   return (

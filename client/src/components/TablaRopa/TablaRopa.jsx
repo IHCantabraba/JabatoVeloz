@@ -31,11 +31,11 @@ export const TablaRopa = ({ userOrders }) => {
               <TableCell component='th' scope='row'>
                 {order.pedidos.ExpireDate}
               </TableCell>
-              <TableCell align='right'>{order.productos.Nombre}</TableCell>
+              <TableCell align='right'>{order.productos?.Nombre}</TableCell>
               <TableCell align='right'>{order.talla}</TableCell>
               <TableCell align='right'>{order.unidades + 'x'}</TableCell>
               <TableCell align='right'>
-                {order.productos.Precio + ' €'}
+                {order.productos?.Precio + ' €'}
               </TableCell>
             </TableRow>
           ))}

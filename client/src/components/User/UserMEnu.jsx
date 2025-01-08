@@ -42,6 +42,7 @@ const UserMEnu = ({ anchorUserMenu, setAnchorUserMenu }) => {
         {/* en logout click, actualizar el current user a null */}
         <MenuItem
           onClick={() => {
+            localStorage.setItem('showFilter', 'false')
             dispatch({
               type: 'UPDATE_USER',
               payload: null

@@ -11,7 +11,6 @@ import {
 } from '@mui/material'
 import { StarBorder } from '@mui/icons-material'
 import { useValue } from '../../context/ContextProvider'
-import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import ProductCardMenu from './ProductCardMenu'
 import { getPedidos } from '../../actions/pedidos'
