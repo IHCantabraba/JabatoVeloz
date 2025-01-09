@@ -21,7 +21,8 @@ const initialState = {
   showThemes: false,
   pedido: null,
   miRopa: null,
-  miPrenda: null
+  miPrenda: null,
+  newProductPhoto: './Prof.png'
 }
 /* crear un contexto */
 const Context = createContext(initialState)

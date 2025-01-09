@@ -16,7 +16,7 @@ const array = [
     Precio: '34',
     Tallas: 'xs s m l xl 2xl',
     Descripcion: 'Not available',
-    Foto: 'ALpes_Camiseta.png'
+    img: 'ALpes_Camiseta.png'
   },
   {
     Nombre: 'Paravientos Terry',
@@ -25,7 +25,7 @@ const array = [
     Precio: '65',
     Tallas: 'xs s m l xl 2xl',
     Descripcion: 'Con Gorro y membrana',
-    Foto: ''
+    img: ''
   },
   {
     Nombre: 'Camiseta Sin Mangas Alpes',
@@ -34,7 +34,7 @@ const array = [
     Precio: '31',
     Tallas: 'xs s m l xl 2xl',
     Descripcion: 'Not available',
-    Foto: 'camiseta_SM.png'
+    img: 'camiseta_SM.png'
   },
   {
     Nombre: 'Camiseta Manga Corta Cross',
@@ -43,7 +43,7 @@ const array = [
     Precio: '30',
     Tallas: 'xs s m l xl 2xl',
     Descripcion: 'Not available',
-    Foto: 'avance_cross.png'
+    img: 'avance_cross.png'
   },
   {
     Nombre: 'Camiseta Manga Corta Adv.',
@@ -52,7 +52,7 @@ const array = [
     Precio: '31',
     Tallas: 'xs s m l xl 2xl',
     Descripcion: 'Con Gorro Bolsillo espalda y menbrana',
-    Foto: 'avance_cross.png'
+    img: 'avance_cross.png'
   },
   {
     Nombre: 'Paravientos Sherpa',
@@ -61,7 +61,7 @@ const array = [
     Precio: '65',
     Tallas: 'xs s m l xl 2xl',
     Descripcion: 'Not available',
-    Foto: 'Paravientos.png'
+    img: 'Paravientos.png'
   },
   {
     Nombre: 'Paravientos',
@@ -70,7 +70,7 @@ const array = [
     Precio: '48',
     Tallas: 'xs s m l xl 2xl',
     Descripcion: 'Sin Gorro 2 bosillos con cremallera',
-    Foto: 'Paravientos.png'
+    img: 'Paravientos.png'
   },
   {
     Nombre: 'Chaleco Challange',
@@ -79,7 +79,7 @@ const array = [
     Precio: '39.5',
     Tallas: 'xs s m l xl 2xl',
     Descripcion: 'Bolsillo en la espalda',
-    Foto: 'chaleco.png'
+    img: 'chaleco.png'
   },
   {
     Nombre: 'Pantalon de Trail corto',
@@ -88,7 +88,7 @@ const array = [
     Precio: '31.5',
     Tallas: 'xs s m l xl',
     Descripcion: 'Not available',
-    Foto: 'Pantalon_trail_chica.png'
+    img: 'Pantalon_trail_chica.png'
   },
   {
     Nombre: 'Pantalon de Trail corto',
@@ -97,7 +97,7 @@ const array = [
     Precio: '31.5',
     Tallas: 's m l xl 2xl',
     Descripcion: 'Not available',
-    Foto: 'Pantalon_trail.png'
+    img: 'Pantalon_trail.png'
   },
   {
     Nombre: 'Sudadera Alaska',
@@ -106,7 +106,7 @@ const array = [
     Precio: '48',
     Tallas: 'xs s m l xl 2xl',
     Descripcion: 'Sudadera con capucha',
-    Foto: 'sudadera_alaska.png'
+    img: 'sudadera_alaska.png'
   },
   {
     Nombre: 'Pantaloneta',
@@ -115,7 +115,7 @@ const array = [
     Precio: '29',
     Tallas: 'xs s m l xl 2xl',
     Descripcion: 'Not available',
-    Foto: 'Pantaloneta.png'
+    img: 'Pantaloneta.png'
   },
   {
     Nombre: 'Pantalon largo',
@@ -124,7 +124,7 @@ const array = [
     Precio: '25',
     Tallas: 'xs s m l xl 2xl',
     Descripcion: 'Chandal con logo bordado. Solo disponibl en color negro',
-    Foto: 'Pantalon_largo.png'
+    img: 'Pantalon_largo.png'
   },
   {
     Nombre: 'Pantalon de Trail corto',
@@ -133,7 +133,7 @@ const array = [
     Precio: '30',
     Tallas: 'xs s m l xl 2xl',
     Descripcion: 'Not available',
-    Foto: 'Malla_corta.png'
+    img: 'Malla_corta.png'
   },
   {
     Nombre: 'Falda',
@@ -142,7 +142,7 @@ const array = [
     Precio: '31',
     Tallas: 'xs s m l xl',
     Descripcion: 'Not available',
-    Foto: 'Pantalon_trail_chica.png'
+    img: 'Pantalon_trail_chica.png'
   },
   {
     Nombre: 'Manguitos Verano',
@@ -151,7 +151,7 @@ const array = [
     Precio: '12.10',
     Tallas: 'unica',
     Descripcion: 'Not available',
-    Foto: 'manguitos.png'
+    img: 'manguitos.png'
   },
   {
     Nombre: 'Manguitos Invierno',
@@ -160,7 +160,7 @@ const array = [
     Precio: '13.5',
     Tallas: 'unica',
     Descripcion: 'Not available',
-    Foto: 'manguitos.png'
+    img: 'manguitos.png'
   },
   {
     Nombre: 'Malliot manga corta Summun',
@@ -169,7 +169,7 @@ const array = [
     Precio: '52',
     Tallas: 's m l xl 2xl',
     Descripcion: 'Not available',
-    Foto: ''
+    img: ''
   },
   {
     Nombre: 'Malliot manga corta Summun',
@@ -178,7 +178,7 @@ const array = [
     Precio: '52',
     Tallas: 'xs s m l xl',
     Descripcion: 'Not available',
-    Foto: ''
+    img: ''
   },
   {
     Nombre: 'Culotte corto',
@@ -187,7 +187,7 @@ const array = [
     Precio: '70',
     Tallas: 's m l xl 2xl',
     Descripcion: 'Culotte con tirantes',
-    Foto: ''
+    img: ''
   },
   {
     Nombre: 'Culotte corto',
@@ -196,7 +196,7 @@ const array = [
     Precio: '70',
     Tallas: 'xs s m l xl',
     Descripcion: 'Culotte con tirantes',
-    Foto: ''
+    img: ''
   },
   {
     Nombre: 'Top corto',
@@ -205,7 +205,7 @@ const array = [
     Precio: '26',
     Tallas: 'xs s m l xl',
     Descripcion: 'Not available',
-    Foto: ''
+    img: ''
   },
   {
     Nombre: 'Polo',
@@ -214,7 +214,7 @@ const array = [
     Precio: '33',
     Tallas: 'xs s m l xl 2xl',
     Descripcion: 'Solo disponible en color negro',
-    Foto: 'polo.png'
+    img: 'polo.png'
   },
   {
     Nombre: 'Personalización',
@@ -224,7 +224,7 @@ const array = [
     Tallas: 'unica',
     Descripcion:
       'Personaliza la ropa que quieras adquirir con tu nombre o el de los tuyos.',
-    Foto: ''
+    img: ''
   },
   {
     Nombre: 'Camiseta Manga larga',
@@ -233,7 +233,7 @@ const array = [
     Precio: '25',
     Tallas: 'xs s m l xl',
     Descripcion: 'Not available',
-    Foto: ''
+    img: ''
   },
   {
     Nombre: 'Camiseta Manga larga',
@@ -242,7 +242,7 @@ const array = [
     Precio: '25',
     Tallas: 's m l xl 2xl',
     Descripcion: 'Not available',
-    Foto: ''
+    img: ''
   },
   {
     Nombre: 'Plumifero',
@@ -251,7 +251,7 @@ const array = [
     Precio: '47',
     Tallas: 'xs s m l xl 2xl',
     Descripcion: 'Not available',
-    Foto: 'plumifero.png'
+    img: 'plumifero.png'
   },
   {
     Nombre: 'Gorra',
@@ -260,7 +260,7 @@ const array = [
     Precio: '15',
     Tallas: 's m l',
     Descripcion: 'Solo disponible en color blanco',
-    Foto: 'gorra.png'
+    img: 'gorra.png'
   },
   {
     Nombre: 'Camiseta',
@@ -269,7 +269,7 @@ const array = [
     Precio: '18',
     Tallas: '2 4 6 8 10 12',
     Descripcion: 'Not available',
-    Foto: ''
+    img: ''
   },
   {
     Nombre: 'Sudadera',
@@ -278,7 +278,7 @@ const array = [
     Precio: '45',
     Tallas: '2 4 6 8 10 12',
     Descripcion: 'Not available',
-    Foto: ''
+    img: ''
   }
 ]
 
@@ -292,7 +292,7 @@ const Array2CSV = (array) => {
   stringFinal += '\n'
 
   for (const elemento of array) {
-    stringFinal += `${elemento.Nombre},${elemento.Categoria},${elemento.Sexo},${elemento.Precio},${elemento.Tallas},${elemento.Descripcion},${elemento.Foto}\n`
+    stringFinal += `${elemento.Nombre},${elemento.Categoria},${elemento.Sexo},${elemento.Precio},${elemento.Tallas},${elemento.Descripcion},${elemento.img}\n`
   }
   fs.writeFile(
     './src/utils/Products/ImageProducts.csv',
@@ -318,9 +318,9 @@ const seedProducts = async (productos) => {
     await mongoose.connect(process.env.DB_URL)
     await Productos.collection.drop()
     for (const producto of productos) {
-      console.log(producto.Foto)
-      if (producto.Foto !== '') {
-        Foto = producto.Foto
+      console.log(producto.img)
+      if (producto.img !== '') {
+        Foto = producto.img
       } else {
         Foto = Nopic
       }
@@ -351,7 +351,7 @@ const seedProducts = async (productos) => {
         Precio: producto.Precio,
         Tallas: producto.Tallas,
         Descripcion: producto.Descripción,
-        Foto: cloudPhotURL
+        img: cloudPhotURL
       })
       await newProduct.save()
     }

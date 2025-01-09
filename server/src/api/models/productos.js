@@ -15,7 +15,7 @@ const productosSchema = mongoose.Schema(
       required: true
     },
     Descripcion: { type: String, required: false },
-    Foto: { type: String, required: false }
+    img: { type: String, required: false }
   },
   { timestamp: true, collection: 'productos' }
 )

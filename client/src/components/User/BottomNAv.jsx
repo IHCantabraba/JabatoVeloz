@@ -47,7 +47,7 @@ const BottomNAv = () => {
           1: <Pedidos />,
           2: <AddPedido setPage={setValue} />,
           3: <Products1 />,
-          4: <AdddProduct />,
+          4: <AdddProduct setPage={setValue} />,
           5: <MiRopa />
         }[value]
       }

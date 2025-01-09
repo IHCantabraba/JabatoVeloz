@@ -35,6 +35,38 @@ export const deleteProduct = async (dispatch, id, productoEliminado) => {
     }
     dispatch({ type: 'END_LOADING' })
   }
-
   return deleteProduct
+}
+export const addProduct = async (dispatch, currentUser, data, setPage) => {
+  dispatch({ type: 'START_LOADING' })
+  // const addedProduct = await fetchingData(
+  //   {
+  //     url: `${baseUrl}/api/productos`,
+  //     method: 'POST',
+  //     token: currentUser.result.token,
+  //     body: data
+  //   },
+  //   dispatch
+  // )
+  const { Nombre, Categoria, Descripcion, Tallas, Genero, Precio, Photo } = data
+  const productInfo = new FormData()
+  productInfo.append('Nombre', Nombre)
+  productInfo.append('Categoria', Categoria)
+  productInfo.append('Sexo', Genero.toLowerCase())
+  productInfo.append('Precio', Precio)
+  productInfo.append('Tallas', Tallas.replace(',', ' '))
+  productInfo.append('Descripcion', Descripcion)
+  productInfo.append('img', Photo)
+
+  const addedProduct = await fetch(`${baseUrl}/api/productos/producto`, {
+    headers: { Authorization: `Bearer ${currentUser.result.token}` },
+    method: 'POST',
+    body: productInfo
+  })
+  if (addedProduct.success) {
+    dispatch({ type: 'UPDATE_NEW_PROD_PHOTO', payload: './Prof.png' })
+    dispatch({ type: 'END_LOADING' })
+    setPage(3)
+  }
+  dispatch({ type: 'END_LOADING' })
 }

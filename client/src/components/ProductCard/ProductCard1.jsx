@@ -73,7 +73,7 @@ const ProductCard1 = ({ producto }) => {
           position='top'
         />
         <img
-          src={producto.Foto}
+          src={producto.img}
           alt={producto.Nombre}
           loading='lazy'
           style={{ cursor: 'pointer' }}

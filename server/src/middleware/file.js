@@ -13,6 +13,10 @@ const storage = new CloudinaryStorage({
         baseUrl = 'users'
         console.log(`BaseUrl redirected to: ${baseUrl}`)
         return `Jveloz/${baseUrl}`
+      } else if (baseUrl === 'producto') {
+        baseUrl = 'Products'
+        console.log(`BaseUrl redirected to: ${baseUrl}`)
+        return `Jveloz/${baseUrl}`
       } else {
         baseUrl = req.originalUrl.split('/').at(-2)
         console.log(`BaseUrl redirected to: ${baseUrl}`)

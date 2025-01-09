@@ -24,7 +24,9 @@ export const register = tryCatch(async (req, res, next) => {
     console.log('no image passed')
   }
   const user = await newUser.save()
-  return res.status(201).json({ success: true, result: user })
+  return res
+    .status(201)
+    .json({ success: true, result: user, message: 'Registration successfuly' })
 })
 export const login = tryCatch(async (req, res, next) => {
   //try {
@@ -38,13 +40,11 @@ export const login = tryCatch(async (req, res, next) => {
   }
   if (bcrypt.compareSync(password, user.password)) {
     const token = generateKey(user.id)
-    return res
-      .status(200)
-      .json({
-        success: true,
-        result: { token, user },
-        message: 'Successfully login!'
-      })
+    return res.status(200).json({
+      success: true,
+      result: { token, user },
+      message: 'Successfully login!'
+    })
   }
   return res
     .status(400)

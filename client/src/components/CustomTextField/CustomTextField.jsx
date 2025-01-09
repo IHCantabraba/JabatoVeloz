@@ -1,7 +1,7 @@
 import { TextField } from '@mui/material'
 import React from 'react'
 
-const CustomTextField = ({ nombre, tipo, register, formState }) => {
+const CustomTextField = ({ nombre, inputProps, register, formState }) => {
   return (
     <TextField
       {...register(nombre, {
@@ -20,9 +20,10 @@ const CustomTextField = ({ nombre, tipo, register, formState }) => {
       variant='filled'
       label={nombre}
       id={nombre}
-      type={tipo}
+      inputProps={inputProps}
       fullWidth
       defaultValue
+      size='small'
     />
   )
 }
