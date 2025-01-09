@@ -42,13 +42,12 @@ const UserMEnu = ({ anchorUserMenu, setAnchorUserMenu }) => {
         {/* en logout click, actualizar el current user a null */}
         <MenuItem
           onClick={() => {
-            localStorage.setItem('showFilter', 'false')
             dispatch({
               type: 'UPDATE_USER',
               payload: null
             })
             dispatch({ type: 'NOT_ADMIN' })
-            if (productPage) dispatch({ type: 'HIDE_FILTERS' })
+            dispatch({ type: 'HIDE_FILTERS' })
             dispatch({ type: 'HIDE_THEME_SWITCHER' })
           }}
         >

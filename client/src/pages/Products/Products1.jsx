@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { memo, useEffect } from 'react'
 import { Container, ImageList } from '@mui/material'
 import { getProducts } from '../../actions/products'
 import { useValue } from '../../context/ContextProvider'

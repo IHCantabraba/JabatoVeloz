@@ -15,10 +15,11 @@ import Products from '../../pages/Products/Products'
 import MiRopa from '../../pages/MiRopa/MiRopa'
 import { useValue } from '../../context/ContextProvider'
 import LocalGroceryStoreOutlinedIcon from '@mui/icons-material/LocalGroceryStoreOutlined'
-
+import LibraryAddOutlinedIcon from '@mui/icons-material/LibraryAddOutlined'
 import CheckroomIcon from '@mui/icons-material/Checkroom'
 import Products1 from '../../pages/Products/Products1'
 import { getUserOrders } from '../../actions/orders'
+import AdddProduct from '../../pages/AddProduct/AdddProduct'
 const BottomNAv = () => {
   /* estado que controla el click de cada icono de los existentes en lña barra de navegador. */
   const {
@@ -46,7 +47,8 @@ const BottomNAv = () => {
           1: <Pedidos />,
           2: <AddPedido setPage={setValue} />,
           3: <Products1 />,
-          4: <MiRopa />
+          4: <AdddProduct />,
+          5: <MiRopa />
         }[value]
       }
       <Paper
@@ -102,7 +104,17 @@ const BottomNAv = () => {
             icon={<LocalGroceryStoreOutlinedIcon />}
             onClick={() => dispatch({ type: 'SHOW_FILTERS' })}
           />
-
+          {isAdmin && (
+            <BottomNavigationAction
+              label='Nueva Prenda'
+              icon={<LibraryAddOutlinedIcon />}
+              onClick={() => {
+                if (productPage) {
+                  dispatch({ type: 'HIDE_FILTERS' })
+                }
+              }}
+            />
+          )}
           <BottomNavigationAction
             label='MiRopa'
             icon={<CheckroomIcon />}
