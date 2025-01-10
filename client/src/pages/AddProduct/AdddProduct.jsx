@@ -16,6 +16,7 @@ import { useForm } from 'react-hook-form'
 import CustomTextField from '../../components/CustomTextField/CustomTextField'
 import { useValue } from '../../context/ContextProvider'
 import { addProduct } from '../../actions/products'
+import DropDownMenu from '../../components/DropDownMenu/DropDownMenu'
 
 const ITEM_HEIGHT = 48
 const ITEM_PADDING_TOP = 8
@@ -32,7 +33,7 @@ const AdddProduct = ({ setPage }) => {
   const [selectedCategoria, setCategoriaSelected] = useState('')
 
   const {
-    state: { newProductPhoto, currentUser, light, Categorias },
+    state: { newProductPhoto, currentUser, light, Categorias, Generos },
     dispatch
   } = useValue()
   const handleGeneroChange = (e) => {
@@ -93,40 +94,16 @@ const AdddProduct = ({ setPage }) => {
             formState={formState}
             light={light}
           />
-          {/* TODO drop down with scroll*/}
+
           {/* TODO componetizar fromControl*/}
-
-          <FormControl fullWidth>
-            <InputLabel id='Categoria-label'>Categoria</InputLabel>
-            <Select
-              {...register('Categogria', {
-                required: true,
-                message: 'selecciona una categoria'
-              })}
-              error={!!formState.errors.Genero}
-              labelId='Categoria-label'
-              value={selectedCategoria}
-              label='
-              Categoria'
-              nombre='Categoria'
-              id='Categoria'
-              onChange={handleCategoriaChange}
-              defaultValue
-              MenuProps={MenuProps}
-            >
-              {Categorias &&
-                Categorias.map((categoria) => (
-                  <MenuItem
-                    sx={{ backgroundColor: 'white' }}
-                    key={categoria}
-                    value={categoria}
-                  >
-                    {categoria}
-                  </MenuItem>
-                ))}
-            </Select>
-          </FormControl>
-
+          <DropDownMenu
+            name='Categorias'
+            register={register}
+            value={selectedCategoria}
+            handler={selectedCategoria}
+            formState={formState}
+            selections={Categorias}
+          />
           <CustomTextField
             nombre='Descripcion'
             inputProps={{ type: 'text' }}
@@ -182,31 +159,15 @@ const AdddProduct = ({ setPage }) => {
               />
             </label>
           </Stack>
-
           {/* Select sexo */}
-          <FormControl fullWidth>
-            <InputLabel id='Genero-label'>Genero</InputLabel>
-            <Select
-              {...register('Genero', {
-                required: true,
-                message: 'selecciona un genero'
-              })}
-              error={!!formState.errors.Genero}
-              labelId='Genero-label'
-              value={selectedGenero}
-              label='Genero'
-              nombre='Genero'
-              id='Genero'
-              onChange={handleGeneroChange}
-              defaultValue
-              MenuProps={MenuProps}
-            >
-              <MenuItem value='Hombre'>Hombre</MenuItem>
-              <MenuItem value='Mujer'>Mujer</MenuItem>
-              <MenuItem value='unisex'>Unisex</MenuItem>
-              <MenuItem value='niñ@s'>Niñ@s</MenuItem>
-            </Select>
-          </FormControl>
+          <DropDownMenu
+            name='Genero'
+            register={register}
+            value={selectedGenero}
+            handler={setSelectedGenero}
+            formState={formState}
+            selections={Generos}
+          />
           <DialogActions sx={{ justifyContent: 'center', pb: 2 }}>
             <Button
               type='submit'

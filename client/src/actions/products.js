@@ -72,8 +72,9 @@ export const addProduct = async (dispatch, currentUser, data, setPage) => {
   dispatch({ type: 'END_LOADING' })
 }
 
-export const getCategorias = (filterProducts, dispatch) => {
+export const getCategoriasAndGeneros = (filterProducts, dispatch) => {
   const Categorias = []
+  const Generos = []
   filterProducts.map((product) => {
     if (!Categorias.includes(product.Categoria)) {
       Categorias.push(product.Categoria)
@@ -82,5 +83,14 @@ export const getCategorias = (filterProducts, dispatch) => {
   if (Categorias.length > 0) {
     dispatch({ type: 'UPDATE_CATEGORIAS', payload: Categorias })
   }
+  filterProducts.map((product) => {
+    if (!Generos.includes(product.Sexo)) {
+      Generos.push(product.Sexo)
+    }
+  })
+  if (Generos.length > 0) {
+    dispatch({ type: 'UPDATE_GENEROS', payload: Generos })
+  }
+
   return Categorias
 }

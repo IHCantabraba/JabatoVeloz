@@ -86,6 +86,8 @@ const Reducer = (state, action) => {
       return { ...state, newProductPhoto: action.payload }
     case 'UPDATE_CATEGORIAS':
       return { ...state, Categorias: action.payload }
+    case 'UPDATE_GENEROS':
+      return { ...state, Generos: action.payload }
     default:
       throw new Error('No matched action!')
   }

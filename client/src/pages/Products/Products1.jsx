@@ -1,6 +1,6 @@
-import React, { memo, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Container, ImageList } from '@mui/material'
-import { getCategorias, getProducts } from '../../actions/products'
+import { getCategoriasAndGeneros, getProducts } from '../../actions/products'
 import { useValue } from '../../context/ContextProvider'
 import ProductCard1 from '../../components/ProductCard/ProductCard1'
 const Products1 = () => {
@@ -12,7 +12,7 @@ const Products1 = () => {
     getProducts(dispatch, currentUser.result.token)
   }, [productoEliminado])
   useEffect(() => {
-    getCategorias(filterProducts, dispatch)
+    getCategoriasAndGeneros(filterProducts, dispatch)
   }, [filterProducts])
   return (
     <Container sx={{ padding: '5px' }}>

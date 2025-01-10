@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import './App.css'
 import Loading from './components/Loading/Loading'
 import Login from './components/ui/Login/Login'
