@@ -11,6 +11,14 @@ import pedidosRouter from './src/api/routes/pedidos.js'
 import productosRouter from './src/api/routes/productos.js'
 import ordersRouter from './src/api/routes/orders.js'
 
+/* para despliegue */
+/* Necesito importar estas librerias para poder generar rutas relativas */
+import path from 'path'
+import { fileURLToPath } from 'url'
+/* Necesito crear varias variables para poder implementar la funcionalida dde __dirname que en ES no funciona */
+const __file = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__file)
+/*  */
 const app = express()
 const PORT = 3000
 
@@ -31,6 +39,15 @@ app.use('/api/pedidos', pedidosRouter)
 app.use('/api/productos', productosRouter)
 /* orders */
 app.use('/api/orders', ordersRouter)
+
+/* para despliegue */
+//Use the client app (FrontEnd)
+// app.use(express.static(path.join(__dirname, '/client/dist')))
+// render client for any path
+// app.get('*', (req, res) =>
+//   res.sendFile(path.join(__dirname, '/FrontEnd/dist/index.html'))
+//)
+/*  */
 /* Not found Root */
 app.use('*', (req, res, next) => {
   return res.status(404).json(`Route not found`)

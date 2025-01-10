@@ -1,8 +1,8 @@
 import { Settings } from '@mui/icons-material'
 import { ListItemIcon, Menu, MenuItem } from '@mui/material'
 import { Logout } from '@mui/icons-material'
-import { useValue } from '../../context/ContextProvider'
 import Profile from '../Profile/Profile'
+import { useValue } from '../../../../context/ContextProvider'
 
 const UserMEnu = ({ anchorUserMenu, setAnchorUserMenu }) => {
   const {

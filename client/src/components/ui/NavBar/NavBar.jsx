@@ -7,11 +7,11 @@ import {
   Toolbar,
   Typography
 } from '@mui/material'
-import { useValue } from '../../context/ContextProvider'
-import { Menu, Lock } from '@mui/icons-material'
+import { useValue } from '../../../context/ContextProvider'
+import { Lock } from '@mui/icons-material'
 import ModeNightIcon from '@mui/icons-material/ModeNight'
 import LightModeIcon from '@mui/icons-material/LightMode'
-import UserIcon from '../User/UserIcon'
+import UserIcon from './User/UserIcon'
 import Sidebar from '../Sidebar/Sidebar'
 import { useState } from 'react'
 import TuneIcon from '@mui/icons-material/Tune'

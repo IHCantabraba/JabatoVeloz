@@ -8,18 +8,18 @@ import {
 import DirectionsRunIcon from '@mui/icons-material/DirectionsRun'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt'
-import Carreras from '../../pages/Carreras/Carreras'
-import Pedidos from '../../pages/Pedidos/Pedidos'
-import AddPedido from '../../pages/AddPedido/AddPedido'
-import Products from '../../pages/Products/Products'
-import MiRopa from '../../pages/MiRopa/MiRopa'
-import { useValue } from '../../context/ContextProvider'
+import Carreras from '../../../pages/Carreras/Carreras'
+import Pedidos from '../../../pages/Pedidos/Pedidos'
+import AddPedido from '../../../pages/AddPedido/AddPedido'
+import MiRopa from '../../../pages/MiRopa/MiRopa'
 import LocalGroceryStoreOutlinedIcon from '@mui/icons-material/LocalGroceryStoreOutlined'
 import LibraryAddOutlinedIcon from '@mui/icons-material/LibraryAddOutlined'
 import CheckroomIcon from '@mui/icons-material/Checkroom'
-import Products1 from '../../pages/Products/Products1'
-import { getUserOrders } from '../../actions/orders'
-import AdddProduct from '../../pages/AddProduct/AdddProduct'
+import Products1 from '../../../pages/Products/Products1'
+import { getUserOrders } from '../../../actions/orders'
+import AdddProduct from '../../../pages/AddProduct/AdddProduct'
+import { useValue } from '../../../context/ContextProvider'
+
 const BottomNAv = () => {
   /* estado que controla el click de cada icono de los existentes en lña barra de navegador. */
   const {
