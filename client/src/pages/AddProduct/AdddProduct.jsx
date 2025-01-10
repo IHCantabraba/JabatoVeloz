@@ -46,13 +46,13 @@ const AdddProduct = ({ setPage }) => {
   const handleChangePic = (e) => {
     const file = e.target.files[0]
     console.log(file)
-    if (file) {
-      const PhotoURL = URL.createObjectURL(file)
-      dispatch({
-        type: 'UPDATE_NEW_PROD_PHOTO',
-        payload: { file: file, PhotoURL: PhotoURL }
-      })
-    }
+    // if (file) {
+    //   const PhotoURL = URL.createObjectURL(file)
+    //   dispatch({
+    //     type: 'UPDATE_NEW_PROD_PHOTO',
+    //     payload: { file: file, PhotoURL: PhotoURL }
+    //   })
+    // }
   }
 
   const { register, handleSubmit, formState } = useForm({
