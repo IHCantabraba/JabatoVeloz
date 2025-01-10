@@ -70,7 +70,7 @@ const AdddProduct = ({ setPage }) => {
   const onSubmit = (values) => {
     values.Photo = newProductPhoto?.file
     console.log(values)
-    addProduct(dispatch, currentUser, values, setPage)
+    // addProduct(dispatch, currentUser, values, setPage)
   }
   return (
     <Container sx={{ py: 2, pb: 100 }}>
@@ -89,7 +89,7 @@ const AdddProduct = ({ setPage }) => {
           sx={{ py: 6 }}
         >
           <CustomTextField
-            nombre='Nombre *'
+            nombre='Nombre'
             tipo='text'
             register={register}
             formState={formState}
@@ -98,7 +98,7 @@ const AdddProduct = ({ setPage }) => {
 
           {/* TODO componetizar fromControl*/}
           <DropDownMenu
-            name='Categorias *'
+            name='Categoria'
             register={register}
             value={[selectedCategoria]}
             handler={handleCategoriaChange}
@@ -121,7 +121,7 @@ const AdddProduct = ({ setPage }) => {
             light={light}
           /> */}
           <DropDownMultiple
-            name='Tallas *'
+            name='Tallas'
             register={register}
             value={selectedTallas}
             handler={handleTallasChange}
@@ -162,7 +162,7 @@ const AdddProduct = ({ setPage }) => {
           {/* precio */}
           <FormControl sx={{ width: '100%' }}>
             <CustomTextField
-              nombre='Precio *'
+              nombre='Precio'
               inputProps={{ type: 'number', min: 1, max: 300 }}
               register={register}
               formState={formState}
@@ -201,7 +201,7 @@ const AdddProduct = ({ setPage }) => {
           </Stack>
           {/* Select sexo */}
           <DropDownMenu
-            name='Genero *'
+            name='Genero'
             register={register}
             value={selectedGenero}
             handler={handleGeneroChange}

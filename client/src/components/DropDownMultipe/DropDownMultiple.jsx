@@ -26,6 +26,8 @@ const DropDownMultiple = ({
   formState,
   selections
 }) => {
+  console.log(value)
+  console.log(value.includes('xs'))
   return (
     <FormControl fullWidth>
       <InputLabel id={name}>{name}</InputLabel>
@@ -42,19 +44,18 @@ const DropDownMultiple = ({
         id={name}
         onChange={handler}
         renderValue={(selected) => selected.join(', ')}
-        input={<OutlinedInput label='Tag' />}
         MenuProps={MenuProps}
         multiple
       >
         {selections &&
-          selections.map((categoria) => (
+          selections.map((selection) => (
             <MenuItem
               sx={{ backgroundColor: 'white' }}
-              key={categoria}
-              value={categoria}
+              key={selection}
+              value={selection}
             >
-              <CheckBox checked={categoria} />
-              <ListItemText primary={categoria} />
+              <CheckBox checked={value.includes(selection)} />
+              <ListItemText primary={selection} />
             </MenuItem>
           ))}
       </Select>
