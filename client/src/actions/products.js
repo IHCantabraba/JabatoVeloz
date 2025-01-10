@@ -1,4 +1,3 @@
-import { useValue } from '../context/ContextProvider'
 import fetchingData from './utils/fetchingData'
 const baseUrl = import.meta.env.VITE_BaseName
 
@@ -71,4 +70,17 @@ export const addProduct = async (dispatch, currentUser, data, setPage) => {
     setPage(3)
   }
   dispatch({ type: 'END_LOADING' })
+}
+
+export const getCategorias = (filterProducts, dispatch) => {
+  const Categorias = []
+  filterProducts.map((product) => {
+    if (!Categorias.includes(product.Categoria)) {
+      Categorias.push(product.Categoria)
+    }
+  })
+  if (Categorias.length > 0) {
+    dispatch({ type: 'UPDATE_CATEGORIAS', payload: Categorias })
+  }
+  return Categorias
 }

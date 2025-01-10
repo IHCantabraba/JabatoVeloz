@@ -13,7 +13,7 @@ const Pedidos = () => {
   }, [])
 
   return (
-    <Container sx={{ py: 5, mb: 4 }}>
+    <Container sx={{ py: 5, mb: 4, pb: 40 }}>
       {pedidos?.length > 0 ? (
         pedidos.map((pedido) => (
           <Alert
@@ -21,8 +21,11 @@ const Pedidos = () => {
               mt: 2,
               display: 'flex',
               flexDirection: 'column',
-              justifyContent: 'flex-start'
+              justifyContent: 'flex-start',
+              bgcolor: 'var(--ihc-JV-bgColor-yellow)',
+              border: '1px solid green'
             }}
+            elevation={4}
             severity={pedido.severity}
             variant='outlined'
           >
@@ -30,19 +33,15 @@ const Pedidos = () => {
             {pedido.description}
 
             {` Este pedido se cerrará el ${pedido.ExpireDate}. Aún quedan ${pedido.daysOff} para solicitar ropa`}
-            {/* {pedido.daysOff > 0 && (
-              <Button
-                variant='outlined'
-                sx={{ ml: 2, placeSelf: 'self-end' }}
-                onClick={() => console.log('clicked')}
-              >
-                Pedir Ropa
-              </Button>
-            )} */}
+
             {isAdmin && (
               <Button
                 variant='outlined'
-                sx={{ ml: 2, placeSelf: 'self-end' }}
+                sx={{
+                  ml: 2,
+                  placeSelf: 'self-end',
+                  color: 'green'
+                }}
                 onClick={() => {
                   console.log(pedido)
                   dispatch({ type: 'UPDATE_PEDIDO', payload: pedido })
@@ -63,7 +62,7 @@ const Pedidos = () => {
           }}
           variant='h4'
         >
-          No hay pedidos habiertos
+          No hay pedidos abiertos
         </Typography>
       )}
     </Container>

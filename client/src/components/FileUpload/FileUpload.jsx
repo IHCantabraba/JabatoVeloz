@@ -21,32 +21,3 @@ const FileUpload = ({ fileInput }) => {
 }
 
 export default FileUpload
-
-// import React, { useState } from 'react'
-// import { MuiFileInput } from 'mui-file-input'
-// import CloseIcon from '@mui/icons-material/Close'
-// import AttachFileIcon from '@mui/icons-material/AttachFile'
-// const FileUpload = ({ fileRef }) => {
-//   const [value, setValue] = useState(null)
-
-//   const handleChange = (newValue) => {
-//     setValue(newValue)
-//   }
-
-//   return (
-//     <MuiFileInput
-//       inputProps={{ accept: 'image/png, image/gif, image/jpeg' }}
-//       clearIconButtonProps={{
-//         title: 'select',
-//         children: <AttachFileIcon fontSize='small' />
-//       }}
-//       placeholder='select file'
-//       inputRef={fileRef}
-//       value={value}
-//       onChange={handleChange}
-//       size='small'
-//       fullWidth
-//     />
-//   )
-// }
-// export default FileUpload

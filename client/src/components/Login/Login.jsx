@@ -14,11 +14,9 @@ import { useValue } from '../../context/ContextProvider'
 import { Close, Send } from '@mui/icons-material'
 import PasswordField from '../Password/PasswordField'
 import { useEffect, useRef, useState } from 'react'
-import GoogleOneTapLogin from '../GoogleLogin/GoogleLogin'
 import handleLogin, { handleRegister } from '../../actions/user'
 import CustomDate from '../CustomDate/CustomDate'
 
-// import FileUpload from '../FileUpload/FileUpload'
 const BaseUrl = import.meta.env.VITE_BaseName
 const Login = () => {
   /* obetner estado inicial de nuestro custom hook y el dispatcher para cambair estados */

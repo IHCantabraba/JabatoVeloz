@@ -98,12 +98,15 @@ const AddPedido = ({ setPage }) => {
     createPedido(pedido, currentUser, dispatch, setPage)
   }
   return (
-    <Container sx={{ marginTop: '20px', fontFamily: 'Nunito' }}>
+    <Container sx={{ fontFamily: 'Nunito', py: 5, pb: 40 }}>
       <Stepper
         alternativeLabel
         nonLinear
         activeStep={activeStep}
-        sx={{ mb: 3 }}
+        sx={{
+          mb: 3,
+          textAlign: 'center'
+        }}
       >
         {steps.map((step, index) => (
           <Step key={step.label} completed={step.completed}>
