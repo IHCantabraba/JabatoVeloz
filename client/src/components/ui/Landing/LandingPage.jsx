@@ -52,7 +52,7 @@ const LandingPage = () => {
           {...(checked ? { timeout: 1000 } : {})}
           collapsedHeight={50}
         >
-          <Title className={classes.title}>
+          <Title sx={{ textAlign: 'center' }} className={classes.title}>
             Jabato Veloz <br />
             <span style={{ color: 'orange', fontWeight: 'bold' }}>
               Running Team
