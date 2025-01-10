@@ -93,7 +93,7 @@ const PedidoDialog = () => {
           }}
         >
           <Avatar
-            src='./Jabato_Veloz9_tran.png'
+            src='./assets/Jabato_Veloz9_tran.png'
             sx={{ width: '150px', height: '75px', alignSelf: 'start' }}
           ></Avatar>
           <Typography

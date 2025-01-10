@@ -15,6 +15,7 @@ import DoneAllIcon from '@mui/icons-material/DoneAll'
 import CheckIcon from '@mui/icons-material/Check'
 import { updateOrder } from '../../actions/orders'
 import { useValue } from '../../context/ContextProvider'
+import PaymentIcon from '@mui/icons-material/Payment'
 export const TablaRopa = ({ userOrders }) => {
   const {
     state: { currentUser },
@@ -65,10 +66,10 @@ export const TablaRopa = ({ userOrders }) => {
                 ) : (
                   <Tooltip title='Marcar como pagado'>
                     <IconButton
-                      sx={{ m: 0, width: '20px' }}
+                      sx={{ m: 0, width: '20px', color: 'inherit' }}
                       onClick={() => handleUpdatePagado(order)}
                     >
-                      <CheckIcon sx={{ color: 'green' }} />
+                      <PaymentIcon />
                     </IconButton>
                   </Tooltip>
                 )}

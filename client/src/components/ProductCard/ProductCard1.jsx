@@ -63,7 +63,7 @@ const ProductCard1 = ({ producto }) => {
                   title='Ver Detalles'
                   sx={{ mr: '5px' }}
                 >
-                  <Avatar src={producto.Foto}>
+                  <Avatar src={producto.img}>
                     {/* <RemoveRedEyeOutlinedIcon /> */}
                   </Avatar>
                 </Tooltip>
@@ -73,7 +73,9 @@ const ProductCard1 = ({ producto }) => {
           position='top'
         />
         <img
-          src={producto.img}
+          src={
+            producto.img !== 'undefined' ? producto.img : './assets/NoPic.jpg'
+          }
           alt={producto.Nombre}
           loading='lazy'
           style={{ cursor: 'pointer' }}

@@ -37,7 +37,7 @@ const NavBar = () => {
         <Container maxWidth='lg' sx={{ mr: 0, ml: 0 }}>
           <Toolbar disableGutters style={{ width: '95vw', margin: '0 auto' }}>
             <Box sx={{ mr: 1 }}>
-              {localStorage.getItem('showFilter') === 'true' && (
+              {productPage && currentUser && (
                 <IconButton
                   size='large'
                   color='inherit'

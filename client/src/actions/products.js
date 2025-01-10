@@ -39,15 +39,7 @@ export const deleteProduct = async (dispatch, id, productoEliminado) => {
 }
 export const addProduct = async (dispatch, currentUser, data, setPage) => {
   dispatch({ type: 'START_LOADING' })
-  // const addedProduct = await fetchingData(
-  //   {
-  //     url: `${baseUrl}/api/productos`,
-  //     method: 'POST',
-  //     token: currentUser.result.token,
-  //     body: data
-  //   },
-  //   dispatch
-  // )
+
   const { Nombre, Categoria, Descripcion, Tallas, Genero, Precio, Photo } = data
   const productInfo = new FormData()
   productInfo.append('Nombre', Nombre)
@@ -63,9 +55,19 @@ export const addProduct = async (dispatch, currentUser, data, setPage) => {
     method: 'POST',
     body: productInfo
   })
-  if (addedProduct.success) {
+  const result = await addedProduct.json()
+  if (result.success) {
+    console.log('success')
+    /* TODO fix reset form */
+    dispatch({
+      type: 'UPDATE_ALERT',
+      payload: {
+        open: true,
+        severity: 'success',
+        message: 'Producto añadido correctamente'
+      }
+    })
     dispatch({ type: 'UPDATE_NEW_PROD_PHOTO', payload: './Prof.png' })
-    dispatch({ type: 'END_LOADING' })
     setPage(3)
   }
   dispatch({ type: 'END_LOADING' })

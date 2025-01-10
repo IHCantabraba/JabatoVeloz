@@ -17,7 +17,7 @@ const MiRopa = () => {
           </Typography>
         </Box>
       </Stack>
-      <Stack sx={{ mt: 5 }}>
+      <Stack sx={{ mt: 5, justifyContent: 'center', alignItems: 'center' }}>
         {miRopa?.orders.length > 0 ? (
           <TablaRopa userOrders={miRopa} />
         ) : (
@@ -26,13 +26,15 @@ const MiRopa = () => {
           </Typography>
         )}
       </Stack>
-      <Stack sx={{ mt: 5 }}>
-        <Typography variant='span' component='span'>
-          {
-            '*el pedido de ropa se realiza cuando se alcance una suma de 600€ entre los pedidos de los integrantes del equipo. La fecha prevista de lanzamiento es aproximada. Ten preparados los euros!!'
-          }
-        </Typography>
-      </Stack>
+      {miRopa?.orders.length > 0 && (
+        <Stack sx={{ mt: 5 }}>
+          <Typography variant='span' component='span'>
+            {
+              '*el pedido de ropa se realiza cuando se alcance una suma de 600€ entre los pedidos de los integrantes del equipo. La fecha prevista de lanzamiento es aproximada. Ten preparados los euros!!'
+            }
+          </Typography>
+        </Stack>
+      )}
     </Container>
   )
 }
