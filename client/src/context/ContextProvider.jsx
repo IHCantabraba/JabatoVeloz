@@ -24,7 +24,8 @@ const initialState = {
   miPrenda: null,
   newProductPhoto: './assets/Prof.png',
   Categorias: null,
-  Generos: null
+  Generos: null,
+  Tallas: null
 }
 /* crear un contexto */
 const Context = createContext(initialState)

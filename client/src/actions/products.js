@@ -75,21 +75,28 @@ export const addProduct = async (dispatch, currentUser, data, setPage) => {
 export const getCategoriasAndGeneros = (filterProducts, dispatch) => {
   const Categorias = []
   const Generos = []
+  const Tallas = []
   filterProducts.map((product) => {
+    const productTallas = product.Tallas.split(' ')
     if (!Categorias.includes(product.Categoria)) {
       Categorias.push(product.Categoria)
+    }
+    for (const talla of productTallas) {
+      if (!Tallas.includes(talla)) Tallas.push(talla)
+    }
+    if (!Generos.includes(product.Sexo)) {
+      Generos.push(product.Sexo)
     }
   })
   if (Categorias.length > 0) {
     dispatch({ type: 'UPDATE_CATEGORIAS', payload: Categorias })
   }
-  filterProducts.map((product) => {
-    if (!Generos.includes(product.Sexo)) {
-      Generos.push(product.Sexo)
-    }
-  })
+
   if (Generos.length > 0) {
     dispatch({ type: 'UPDATE_GENEROS', payload: Generos })
+  }
+  if (Tallas.length > 0) {
+    dispatch({ type: 'UPDATE_TALLAS', payload: Tallas })
   }
 
   return Categorias

@@ -12,7 +12,7 @@ import {
   TextField,
   Typography
 } from '@mui/material'
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import CustomTextField from '../../components/CustomTextField/CustomTextField'
 import { useValue } from '../../context/ContextProvider'
@@ -21,22 +21,13 @@ import DropDownMenu from '../../components/DropDownMenu/DropDownMenu'
 import DropDownMultiple from '../../components/DropDownMultipe/DropDownMultiple'
 import { CheckBox } from '@mui/icons-material'
 
-// const ITEM_HEIGHT = 48
-// const ITEM_PADDING_TOP = 8
-// const MenuProps = {
-//   PaperProps: {
-//     style: {
-//       maxHeight: ITEM_HEIGHT * 2.5 + ITEM_PADDING_TOP,
-//       width: 250
-//     }
-//   }
-// }
 const AdddProduct = ({ setPage }) => {
   const [selectedGenero, setSelectedGenero] = useState('')
   const [selectedCategoria, setCategoriaSelected] = useState('')
+  const [selectedTallas, setTallasSelected] = useState([])
 
   const {
-    state: { newProductPhoto, currentUser, light, Categorias, Generos },
+    state: { newProductPhoto, currentUser, light, Categorias, Generos, Tallas },
     dispatch
   } = useValue()
   const handleGeneroChange = (e) => {
@@ -44,6 +35,13 @@ const AdddProduct = ({ setPage }) => {
   }
   const handleCategoriaChange = (e) => {
     setCategoriaSelected(e.target.value)
+  }
+
+  const handleTallasChange = (e) => {
+    const {
+      target: { value }
+    } = e
+    setTallasSelected(typeof value === 'string' ? value.split(',') : value)
   }
   const handleChangePic = (e) => {
     const file = e.target.files[0]
@@ -91,7 +89,7 @@ const AdddProduct = ({ setPage }) => {
           sx={{ py: 6 }}
         >
           <CustomTextField
-            nombre='Nombre'
+            nombre='Nombre *'
             tipo='text'
             register={register}
             formState={formState}
@@ -100,9 +98,9 @@ const AdddProduct = ({ setPage }) => {
 
           {/* TODO componetizar fromControl*/}
           <DropDownMenu
-            name='Categorias'
+            name='Categorias *'
             register={register}
-            value={selectedCategoria}
+            value={[selectedCategoria]}
             handler={handleCategoriaChange}
             formState={formState}
             selections={Categorias}
@@ -115,21 +113,21 @@ const AdddProduct = ({ setPage }) => {
             light={light}
           />
           {/* TODO convertir en drop down multiselection */}
-          <CustomTextField
+          {/* <CustomTextField
             nombre='Tallas'
             inputProps={{ type: 'text' }}
             register={register}
             formState={formState}
             light={light}
-          />
-          {/* <DropDownMultiple
-            name='Categorias'
-            register={register}
-            value={selectedCategoria}
-            handler={selectedCategoria}
-            formState={formState}
-            selections={Categorias}
           /> */}
+          <DropDownMultiple
+            name='Tallas *'
+            register={register}
+            value={selectedTallas}
+            handler={handleTallasChange}
+            formState={formState}
+            selections={Tallas}
+          />
           {/* <FormControl fullWidth>
             <InputLabel id='Tallas'>Tallas</InputLabel>
             <Select
@@ -164,7 +162,7 @@ const AdddProduct = ({ setPage }) => {
           {/* precio */}
           <FormControl sx={{ width: '100%' }}>
             <CustomTextField
-              nombre='Precio'
+              nombre='Precio *'
               inputProps={{ type: 'number', min: 1, max: 300 }}
               register={register}
               formState={formState}
@@ -203,7 +201,7 @@ const AdddProduct = ({ setPage }) => {
           </Stack>
           {/* Select sexo */}
           <DropDownMenu
-            name='Genero'
+            name='Genero *'
             register={register}
             value={selectedGenero}
             handler={handleGeneroChange}

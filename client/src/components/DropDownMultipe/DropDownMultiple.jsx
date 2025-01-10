@@ -4,6 +4,7 @@ import {
   InputLabel,
   ListItemText,
   MenuItem,
+  OutlinedInput,
   Select
 } from '@mui/material'
 import React from 'react'
@@ -17,14 +18,14 @@ const MenuProps = {
     }
   }
 }
-const DropDownMultiple = (
+const DropDownMultiple = ({
   name,
   register,
   value,
   handler,
   formState,
   selections
-) => {
+}) => {
   return (
     <FormControl fullWidth>
       <InputLabel id={name}>{name}</InputLabel>
@@ -40,7 +41,8 @@ const DropDownMultiple = (
         nombre={name}
         id={name}
         onChange={handler}
-        defaultValue
+        renderValue={(selected) => selected.join(', ')}
+        input={<OutlinedInput label='Tag' />}
         MenuProps={MenuProps}
         multiple
       >

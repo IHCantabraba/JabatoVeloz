@@ -35,7 +35,6 @@ const DropDownMenu = ({
         nombre={name}
         id={name}
         onChange={handler}
-        defaultValue
         MenuProps={MenuProps}
       >
         {selections &&
