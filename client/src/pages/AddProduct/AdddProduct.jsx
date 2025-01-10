@@ -99,7 +99,7 @@ const AdddProduct = ({ setPage }) => {
           <FormControl fullWidth>
             <InputLabel id='Categoria-label'>Categoria</InputLabel>
             <Select
-              {...register('Categogria', {
+              {...register('Categoria', {
                 required: true,
                 message: 'selecciona una categoria'
               })}
