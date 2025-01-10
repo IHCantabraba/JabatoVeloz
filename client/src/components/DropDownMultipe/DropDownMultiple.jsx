@@ -1,6 +1,12 @@
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
+import { CheckBox } from '@mui/icons-material'
+import {
+  FormControl,
+  InputLabel,
+  ListItemText,
+  MenuItem,
+  Select
+} from '@mui/material'
 import React from 'react'
-
 const ITEM_HEIGHT = 48
 const ITEM_PADDING_TOP = 8
 const MenuProps = {
@@ -11,15 +17,14 @@ const MenuProps = {
     }
   }
 }
-
-const DropDownMenu = ({
+const DropDownMultiple = (
   name,
   register,
   value,
   handler,
   formState,
   selections
-}) => {
+) => {
   return (
     <FormControl fullWidth>
       <InputLabel id={name}>{name}</InputLabel>
@@ -37,6 +42,7 @@ const DropDownMenu = ({
         onChange={handler}
         defaultValue
         MenuProps={MenuProps}
+        multiple
       >
         {selections &&
           selections.map((categoria) => (
@@ -45,7 +51,8 @@ const DropDownMenu = ({
               key={categoria}
               value={categoria}
             >
-              {categoria}
+              <CheckBox checked={categoria} />
+              <ListItemText primary={categoria} />
             </MenuItem>
           ))}
       </Select>
@@ -53,4 +60,4 @@ const DropDownMenu = ({
   )
 }
 
-export default DropDownMenu
+export default DropDownMultiple

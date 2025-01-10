@@ -5,6 +5,7 @@ import {
   DialogActions,
   FormControl,
   InputLabel,
+  ListItemText,
   MenuItem,
   Select,
   Stack,
@@ -17,17 +18,19 @@ import CustomTextField from '../../components/CustomTextField/CustomTextField'
 import { useValue } from '../../context/ContextProvider'
 import { addProduct } from '../../actions/products'
 import DropDownMenu from '../../components/DropDownMenu/DropDownMenu'
+import DropDownMultiple from '../../components/DropDownMultipe/DropDownMultiple'
+import { CheckBox } from '@mui/icons-material'
 
-const ITEM_HEIGHT = 48
-const ITEM_PADDING_TOP = 8
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 2.5 + ITEM_PADDING_TOP,
-      width: 250
-    }
-  }
-}
+// const ITEM_HEIGHT = 48
+// const ITEM_PADDING_TOP = 8
+// const MenuProps = {
+//   PaperProps: {
+//     style: {
+//       maxHeight: ITEM_HEIGHT * 2.5 + ITEM_PADDING_TOP,
+//       width: 250
+//     }
+//   }
+// }
 const AdddProduct = ({ setPage }) => {
   const [selectedGenero, setSelectedGenero] = useState('')
   const [selectedCategoria, setCategoriaSelected] = useState('')
@@ -100,7 +103,7 @@ const AdddProduct = ({ setPage }) => {
             name='Categorias'
             register={register}
             value={selectedCategoria}
-            handler={selectedCategoria}
+            handler={handleCategoriaChange}
             formState={formState}
             selections={Categorias}
           />
@@ -119,6 +122,45 @@ const AdddProduct = ({ setPage }) => {
             formState={formState}
             light={light}
           />
+          {/* <DropDownMultiple
+            name='Categorias'
+            register={register}
+            value={selectedCategoria}
+            handler={selectedCategoria}
+            formState={formState}
+            selections={Categorias}
+          /> */}
+          {/* <FormControl fullWidth>
+            <InputLabel id='Tallas'>Tallas</InputLabel>
+            <Select
+              {...register('Tallas', {
+                required: true,
+                message: `Selecciona una Talla`
+              })}
+              error={!!formState.errors[name]}
+              labelId='Tallas-label'
+              value={value}
+              label='Tallas'
+              nombre='Tallas'
+              id='Tallas'
+              onChange={handler}
+              defaultValue
+              MenuProps={MenuProps}
+              multiple
+            >
+              {selections &&
+                selections.map((categoria) => (
+                  <MenuItem
+                    sx={{ backgroundColor: 'white' }}
+                    key={categoria}
+                    value={categoria}
+                  >
+                    <CheckBox checked={categoria} />
+                    <ListItemText primary={categoria} />
+                  </MenuItem>
+                ))}
+            </Select>
+          </FormControl> */}
           {/* precio */}
           <FormControl sx={{ width: '100%' }}>
             <CustomTextField
@@ -164,7 +206,7 @@ const AdddProduct = ({ setPage }) => {
             name='Genero'
             register={register}
             value={selectedGenero}
-            handler={setSelectedGenero}
+            handler={handleGeneroChange}
             formState={formState}
             selections={Generos}
           />
