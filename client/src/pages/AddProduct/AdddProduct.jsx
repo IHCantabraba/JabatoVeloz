@@ -112,7 +112,6 @@ const AdddProduct = ({ setPage }) => {
               id='Categoria'
               onChange={handleCategoriaChange}
               defaultValue
-              size='small'
               MenuProps={MenuProps}
             >
               {Categorias &&
@@ -200,7 +199,6 @@ const AdddProduct = ({ setPage }) => {
               id='Genero'
               onChange={handleGeneroChange}
               defaultValue
-              size='samll'
               MenuProps={MenuProps}
             >
               <MenuItem value='Hombre'>Hombre</MenuItem>
