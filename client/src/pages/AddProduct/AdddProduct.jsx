@@ -63,7 +63,6 @@ const AdddProduct = ({ setPage }) => {
       Tallas: 'xs s m l xl 2xl',
       Genero: '',
       Precio: 50
-      // Image: ''
     }
   })
 
