@@ -139,7 +139,7 @@ const AddPedido = ({ setPage }) => {
         <Stack sx={{ alignItems: 'center' }}>
           <Button
             variant='contained'
-            sx={{ backgroundColor: 'green' }}
+            sx={{ backgroundColor: 'var(--ihc-jV-green)' }}
             endIcon={<Send />}
             onClick={handleSubmit}
           >

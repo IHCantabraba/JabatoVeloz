@@ -54,7 +54,7 @@ const LandingPage = () => {
         >
           <Title sx={{ textAlign: 'center' }} className={classes.title}>
             Jabato Veloz <br />
-            <span style={{ color: 'orange', fontWeight: 'bold' }}>
+            <span style={{ color: 'var(--ihc-JV-orange)', fontWeight: 'bold' }}>
               Running Team
             </span>
           </Title>
@@ -67,7 +67,7 @@ const LandingPage = () => {
               sx={{
                 width: '50px',
                 alignSelf: 'center',
-                color: 'orange'
+                color: 'var(--ihc-JV-orange)'
               }}
             >
               <ExpandMore sx={{ fontSize: '5rem' }} />

@@ -210,7 +210,7 @@ const AdddProduct = ({ setPage }) => {
             <Button
               type='submit'
               disabled={!formState.isDirty}
-              sx={{ color: 'green' }}
+              sx={{ color: 'var(--ihc-jV-green)' }}
             >
               Register Product
             </Button>

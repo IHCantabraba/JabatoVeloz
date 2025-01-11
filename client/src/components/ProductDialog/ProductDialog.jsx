@@ -307,7 +307,7 @@ const ProductDialog = () => {
                   {selectedTalla !== '' && selectedPedido && (
                     <Button
                       variant='contained'
-                      sx={{ backgroundColor: 'green' }}
+                      sx={{ backgroundColor: 'var(--ihc-jV-green)' }}
                       endIcon={<Send />}
                       onClick={handleSubmit}
                     >

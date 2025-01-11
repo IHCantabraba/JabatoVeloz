@@ -69,7 +69,7 @@ const TablaPedidos = ({ pedido }) => {
               <TableCell align='right'>
                 {order.pagado ? (
                   <Icon>
-                    <DoneAllIcon sx={{ color: 'green' }} />
+                    <DoneAllIcon sx={{ color: 'var(--ihc-jV-green)' }} />
                   </Icon>
                 ) : (
                   <Icon>

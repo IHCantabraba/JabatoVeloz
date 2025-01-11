@@ -55,7 +55,7 @@ const DropDownMultiple = ({
               value={selection}
             >
               <Checkbox
-                sx={{ '&.Mui-checked': { color: 'green' } }}
+                sx={{ '&.Mui-checked': { color: 'var(--ihc-jV-green)' } }}
                 checked={value.includes(selection)}
                 size='small'
               />

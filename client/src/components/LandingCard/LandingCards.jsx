@@ -8,7 +8,10 @@ import Typography from '@mui/material/Typography'
 import { Collapse } from '@mui/material'
 import { useValue } from '../../context/ContextProvider'
 
-const buttonSX = { color: 'orange', '&:hover': { backgroundColor: '#ddd' } }
+const buttonSX = {
+  color: 'var(--ihc-JV-orange)',
+  '&:hover': { backgroundColor: '#ddd' }
+}
 
 export default function LandingCards({ cardInfo, checked }) {
   const { dispatch } = useValue()

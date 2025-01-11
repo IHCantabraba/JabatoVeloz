@@ -11,6 +11,8 @@ import { useValue } from '../../../context/ContextProvider'
 import { Lock } from '@mui/icons-material'
 import ModeNightIcon from '@mui/icons-material/ModeNight'
 import LightModeIcon from '@mui/icons-material/LightMode'
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined'
+import ModeNightOutlinedIcon from '@mui/icons-material/ModeNightOutlined'
 import UserIcon from './User/UserIcon'
 import Sidebar from '../Sidebar/Sidebar'
 import { useState } from 'react'
@@ -65,7 +67,11 @@ const NavBar = () => {
               }}
             >
               Jabato
-              <span style={{ color: 'orange', fontWeight: 'bold' }}>Veloz</span>
+              <span
+                style={{ color: 'var(--ihc-JV-orange)', fontWeight: 'bold' }}
+              >
+                Veloz
+              </span>
             </Typography>
             <Typography
               variant='h6'
@@ -99,23 +105,23 @@ const NavBar = () => {
             {!currentUser ? (
               ''
             ) : light ? (
-              <LightModeIcon
+              <LightModeOutlinedIcon
                 style={{
                   fontSize: '40px',
                   paddingLeft: '0.5rem',
-                  color: `var(--ihc-${
-                    !currentUser ? 'white' : light ? 'light' : 'dark'
-                  }-mode-text)`
+                  color: 'var(--ihc-JV-orange)',
+                  cursor: 'pointer'
                 }}
                 onClick={() => dispatch({ type: 'DARK_THEME', payload: false })}
               />
             ) : (
-              <ModeNightIcon
+              <ModeNightOutlinedIcon
                 style={{
                   fontSize: '30px',
                   color: `var(--ihc-${
                     !currentUser ? 'white' : light ? 'light' : 'dark'
-                  }-mode-text)`
+                  }-mode-text)`,
+                  cursor: 'pointer'
                 }}
                 onClick={() => dispatch({ type: 'LIGHT_THEME', payload: true })}
               />

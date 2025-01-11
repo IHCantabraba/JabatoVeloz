@@ -62,7 +62,7 @@ export const TablaRopa = ({ userOrders }) => {
               <TableCell align='right'>{order.pagado ? 'Si' : 'No'}</TableCell>
               <TableCell align='right'>
                 {order.pagado ? (
-                  <DoneAllIcon sx={{ color: 'green' }} />
+                  <DoneAllIcon sx={{ color: 'var(--ihc-jV-green)' }} />
                 ) : (
                   <Tooltip title='Marcar como pagado'>
                     <IconButton
