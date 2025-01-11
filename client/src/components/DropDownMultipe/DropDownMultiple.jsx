@@ -1,5 +1,6 @@
 import { CheckBox } from '@mui/icons-material'
 import {
+  Checkbox,
   FormControl,
   InputLabel,
   ListItemText,
@@ -26,8 +27,6 @@ const DropDownMultiple = ({
   formState,
   selections
 }) => {
-  console.log(value)
-  console.log(value.includes('xs'))
   return (
     <FormControl fullWidth>
       <InputLabel id={name}>{name}</InputLabel>
@@ -46,6 +45,7 @@ const DropDownMultiple = ({
         renderValue={(selected) => selected.join(', ')}
         MenuProps={MenuProps}
         multiple
+        defaultValue
       >
         {selections &&
           selections.map((selection) => (
@@ -54,7 +54,11 @@ const DropDownMultiple = ({
               key={selection}
               value={selection}
             >
-              <CheckBox checked={value.includes(selection)} />
+              <Checkbox
+                sx={{ '&.Mui-checked': { color: 'green' } }}
+                checked={value.includes(selection)}
+                size='small'
+              />
               <ListItemText primary={selection} />
             </MenuItem>
           ))}

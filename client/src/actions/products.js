@@ -54,7 +54,7 @@ export const addProduct = async (dispatch, currentUser, data, setPage) => {
   productInfo.append('Categoria', Categoria)
   productInfo.append('Sexo', Genero.toLowerCase())
   productInfo.append('Precio', Precio)
-  productInfo.append('Tallas', Tallas.replace(',', ' '))
+  productInfo.append('Tallas', Tallas.toString().replace(',', ' '))
   productInfo.append('Descripcion', Descripcion)
   productInfo.append('img', Photo)
 

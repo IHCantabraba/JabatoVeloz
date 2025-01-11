@@ -46,13 +46,13 @@ const AdddProduct = ({ setPage }) => {
   const handleChangePic = (e) => {
     const file = e.target.files[0]
     console.log(file)
-    // if (file) {
-    //   const PhotoURL = URL.createObjectURL(file)
-    //   dispatch({
-    //     type: 'UPDATE_NEW_PROD_PHOTO',
-    //     payload: { file: file, PhotoURL: PhotoURL }
-    //   })
-    // }
+    if (file) {
+      const PhotoURL = URL.createObjectURL(file)
+      dispatch({
+        type: 'UPDATE_NEW_PROD_PHOTO',
+        payload: { file: file, PhotoURL: PhotoURL }
+      })
+    }
   }
 
   const { register, handleSubmit, formState } = useForm({
@@ -60,7 +60,7 @@ const AdddProduct = ({ setPage }) => {
       Nombre: '',
       Categoria: '',
       Descripcion: '',
-      Tallas: 'xs s m l xl 2xl',
+      Tallas: [],
       Genero: '',
       Precio: 50
     }
@@ -69,7 +69,7 @@ const AdddProduct = ({ setPage }) => {
   const onSubmit = (values) => {
     values.Photo = newProductPhoto?.file
     console.log(values)
-    // addProduct(dispatch, currentUser, values, setPage)
+    addProduct(dispatch, currentUser, values, setPage)
   }
   return (
     <Container sx={{ py: 2, pb: 100 }}>
@@ -99,7 +99,7 @@ const AdddProduct = ({ setPage }) => {
           <DropDownMenu
             name='Categoria'
             register={register}
-            value={[selectedCategoria]}
+            value={selectedCategoria}
             handler={handleCategoriaChange}
             formState={formState}
             selections={Categorias}
@@ -180,7 +180,6 @@ const AdddProduct = ({ setPage }) => {
             <Typography sx={{ color: 'grey' }}> Añadir Imagen </Typography>
             <label htmlFor='productPhoto'>
               <input
-                // {...register('Image', { required: false })}
                 accept='image/*'
                 id='productPhoto'
                 type='file'

@@ -36,6 +36,7 @@ const DropDownMenu = ({
         id={name}
         onChange={handler}
         MenuProps={MenuProps}
+        defaultValue
       >
         {selections &&
           selections.map((categoria) => (
