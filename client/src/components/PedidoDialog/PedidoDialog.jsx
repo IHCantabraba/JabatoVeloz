@@ -53,6 +53,7 @@ const PedidoDialog = () => {
   }
   return (
     <Dialog fullScreen open={Boolean(pedido)}>
+      {/* TODO fix bgColor Dialog */}
       {/* cabecera del pedido */}
       <AppBar
         position='relative'

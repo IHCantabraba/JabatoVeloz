@@ -13,7 +13,7 @@ const Pedidos = () => {
   }, [])
 
   return (
-    <Container sx={{ py: 5, mb: 4, pb: 40 }}>
+    <Container sx={{ minHeight: '93vh', py: 5, mb: 4, pb: 40 }}>
       {pedidos?.length > 0 ? (
         pedidos.map((pedido) => (
           <Alert

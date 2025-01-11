@@ -98,7 +98,7 @@ const AddPedido = ({ setPage }) => {
     createPedido(pedido, currentUser, dispatch, setPage)
   }
   return (
-    <Container sx={{ fontFamily: 'Nunito', py: 5, pb: 40 }}>
+    <Container sx={{ minHeight: '93vh', fontFamily: 'Nunito', py: 5, pb: 40 }}>
       <Stepper
         alternativeLabel
         nonLinear

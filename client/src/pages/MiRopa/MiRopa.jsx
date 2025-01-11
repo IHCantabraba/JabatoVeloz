@@ -9,7 +9,7 @@ const MiRopa = () => {
   } = useValue()
 
   return (
-    <Container sx={{ py: 5, mb: 4 }}>
+    <Container sx={{ minHeight: '93vh', py: 6, mb: 4 }}>
       <Stack>
         <Box>
           <Typography variant='h4' component='span'>
