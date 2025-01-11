@@ -1,4 +1,5 @@
 import {
+  Icon,
   Paper,
   Table,
   TableBody,
@@ -9,7 +10,8 @@ import {
 } from '@mui/material'
 import React from 'react'
 import { useValue } from '../../context/ContextProvider'
-
+import DoneAllIcon from '@mui/icons-material/DoneAll'
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
 const TablaPedidos = ({ pedido }) => {
   const {
     state: { AvaliableSeriegrafia }
@@ -32,6 +34,7 @@ const TablaPedidos = ({ pedido }) => {
             <TableCell align='right'>Talla</TableCell>
             <TableCell align='right'>Cantidad</TableCell>
             <TableCell align='right'>Precio (€)</TableCell>
+            <TableCell align='right'>Pagado</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -62,6 +65,19 @@ const TablaPedidos = ({ pedido }) => {
                     ) +
                     '€'
                   : ''}
+              </TableCell>
+              <TableCell align='right'>
+                {order.pagado ? (
+                  <Icon>
+                    <DoneAllIcon sx={{ color: 'green' }} />
+                  </Icon>
+                ) : (
+                  <Icon>
+                    <CloseOutlinedIcon
+                      sx={{ color: 'red' }}
+                    ></CloseOutlinedIcon>
+                  </Icon>
+                )}
               </TableCell>
             </TableRow>
           ))}

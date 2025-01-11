@@ -42,8 +42,6 @@ export const getUserOrders = async (dispatch, userId, token) => {
   dispatch({ type: 'END_LOADING' })
 }
 
-/* TOOD update order */
-
 export const updateOrder = async (dispatch, order, userId, token) => {
   dispatch({ type: 'START_LOADING' })
   const result = await fetchingData(
@@ -74,3 +72,5 @@ export const updateOrder = async (dispatch, order, userId, token) => {
   }
   dispatch({ type: 'END_LOADING' })
 }
+
+/* TODO delete order */

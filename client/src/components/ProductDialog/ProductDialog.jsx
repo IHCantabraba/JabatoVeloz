@@ -24,18 +24,8 @@ import React, { useState } from 'react'
 import { Close, Send, Star } from '@mui/icons-material'
 import { useValue } from '../../context/ContextProvider'
 import { createOrder } from '../../actions/orders'
-
-const calculatePrecio = (product, seriegrafia, AvaliableSeriegrafia) => {
-  const filterSeriegrafia = AvaliableSeriegrafia.filter(
-    (serie) => serie.categoria === product.Categoria
-  )
-  console.log(filterSeriegrafia[0])
-  if (seriegrafia) {
-    return Number(product.Precio) + Number(filterSeriegrafia[0].precio)
-  } else {
-    return product.Precio
-  }
-}
+import { calculatePrecio } from './utils/calcularPrecio'
+import { obtenerCategoria } from './utils/obtenerCategoria'
 
 const ProductDialog = () => {
   const {
@@ -272,39 +262,45 @@ const ProductDialog = () => {
                       />
                     </FormControl>
                     {/* Seriegrafia */}
-                    <FormControl>
-                      <RadioGroup
-                        sx={{ justifyContent: 'center', alignItems: 'center' }}
-                        name='Seriegrafia'
-                        value={SelectedSeriegrafia}
-                        row
-                        onChange={handleSeriegrafia}
-                      >
-                        <FormControlLabel
-                          value={0}
-                          control={<Radio />}
-                          label='Sin Seriegrafía'
-                        />
-                        <FormControlLabel
-                          value={1}
-                          control={<Radio />}
-                          label='Con Seriegrafía'
-                        />
-                        {seriegrafia && (
-                          <TextField
+                    {product &&
+                      obtenerCategoria(product, AvaliableSeriegrafia) && (
+                        <FormControl>
+                          <RadioGroup
                             sx={{
-                              width: '20ch !important',
-                              pb: 2
+                              justifyContent: 'center',
+                              alignItems: 'center'
                             }}
-                            variant='standard'
-                            name='Seriegrafía'
-                            label='Seriegrafía'
-                            value={seriegrafia}
-                            onChange={handleInputSeriegrafia}
-                          />
-                        )}
-                      </RadioGroup>
-                    </FormControl>
+                            name='Seriegrafia'
+                            value={SelectedSeriegrafia}
+                            row
+                            onChange={handleSeriegrafia}
+                          >
+                            <FormControlLabel
+                              value={0}
+                              control={<Radio />}
+                              label='Sin Seriegrafía'
+                            />
+                            <FormControlLabel
+                              value={1}
+                              control={<Radio />}
+                              label='Con Seriegrafía'
+                            />
+                            {seriegrafia && (
+                              <TextField
+                                sx={{
+                                  width: '20ch !important',
+                                  pb: 2
+                                }}
+                                variant='standard'
+                                name='Seriegrafía'
+                                label='Seriegrafía'
+                                value={seriegrafia}
+                                onChange={handleInputSeriegrafia}
+                              />
+                            )}
+                          </RadioGroup>
+                        </FormControl>
+                      )}
                   </Box>
 
                   {/* habilitar botón */}
