@@ -25,7 +25,9 @@ const initialState = {
   newProductPhoto: './assets/Prof.png',
   Categorias: null,
   Generos: null,
-  Tallas: null
+  Tallas: null,
+  seriegrafia: null,
+  AvaliableSeriegrafia: null
 }
 /* crear un contexto */
 const Context = createContext(initialState)

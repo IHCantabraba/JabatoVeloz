@@ -5,9 +5,12 @@ import {
   Container,
   Dialog,
   FormControl,
+  FormControlLabel,
   IconButton,
   InputLabel,
   MenuItem,
+  Radio,
+  RadioGroup,
   Rating,
   Select,
   Slide,
@@ -22,10 +25,36 @@ import { Close, Send, Star } from '@mui/icons-material'
 import { useValue } from '../../context/ContextProvider'
 import { createOrder } from '../../actions/orders'
 
+const calculatePrecio = (product, seriegrafia, AvaliableSeriegrafia) => {
+  const filterSeriegrafia = AvaliableSeriegrafia.filter(
+    (serie) => serie.categoria === product.Categoria
+  )
+  console.log(filterSeriegrafia[0])
+  if (seriegrafia) {
+    return Number(product.Precio) + Number(filterSeriegrafia[0].precio)
+  } else {
+    return product.Precio
+  }
+}
+
 const ProductDialog = () => {
+  const {
+    state: {
+      product,
+      light,
+      pedidos,
+      currentUser,
+      seriegrafia,
+      AvaliableSeriegrafia
+    },
+    dispatch
+  } = useValue()
   const [selectedTalla, setSelectedTalla] = useState('')
   const [selectedPedido, setSelectedPedido] = useState('')
   const [cantidad, setCantidad] = useState(1)
+  const [SelectedSeriegrafia, setSelectedSeriegrafia] = useState(
+    seriegrafia ? 1 : 0
+  )
 
   /* definir transición para abrir la página */
   /* TOOD averiguar porqué afecta a los clicks tras cerrar una vez */
@@ -38,6 +67,9 @@ const ProductDialog = () => {
     dispatch({ type: 'UPDATE_PRODUCT', payload: null })
     setSelectedTalla('')
     setSelectedPedido('')
+    setSelectedSeriegrafia(0)
+    dispatch({ type: 'UPDATE_SERIEGRAFIA', payload: null })
+
     setCantidad(1)
   }
   const handleSubmit = (e) => {
@@ -49,7 +81,10 @@ const ProductDialog = () => {
       talla: selectedTalla,
       pedidos: selectedPedido,
       unidades: cantidad,
-      precio: Number(product.Precio) * Number(cantidad)
+      precio:
+        calculatePrecio(product, seriegrafia, AvaliableSeriegrafia) *
+        Number(cantidad),
+      seriegrafia: seriegrafia
     }
     createOrder(dispatch, body)
     setSelectedPedido('')
@@ -57,10 +92,6 @@ const ProductDialog = () => {
     setCantidad('1')
     dispatch({ type: 'UPDATE_PRODUCT', payload: null })
   }
-  const {
-    state: { product, light, pedidos, currentUser },
-    dispatch
-  } = useValue()
 
   const Tallas = product?.Tallas.split(' ')
   const handleChangeTalla = (e) => {
@@ -73,6 +104,20 @@ const ProductDialog = () => {
   }
   const handleAmountChange = (e) => {
     setCantidad(e.target.value)
+  }
+  const handleSeriegrafia = (e) => {
+    setSelectedSeriegrafia(e.target.value)
+    if (Number(e.target.value)) {
+      dispatch({
+        type: 'UPDATE_SERIEGRAFIA',
+        payload: currentUser.result.user.alias
+      })
+    } else {
+      dispatch({ type: 'UPDATE_SERIEGRAFIA', payload: false })
+    }
+  }
+  const handleInputSeriegrafia = (e) => {
+    dispatch({ type: 'UPDATE_SERIEGRAFIA', payload: e.target.value })
   }
   return (
     <Dialog
@@ -97,7 +142,7 @@ const ProductDialog = () => {
         </Toolbar>
       </AppBar>
       <img
-        src={product?.Foto}
+        src={product?.img}
         style={{
           maxWidth: '350px',
           maxHeight: '300px',
@@ -166,10 +211,11 @@ const ProductDialog = () => {
                   sx={{
                     justifyContent: 'space-between',
                     flexWrap: 'wrap',
-                    mt: 5
+                    mt: 5,
+                    alignItems: 'center'
                   }}
                 >
-                  <div
+                  <Box
                     style={{
                       display: 'flex',
                       flexWrap: 'wrap',
@@ -225,7 +271,42 @@ const ProductDialog = () => {
                         name='cantidad'
                       />
                     </FormControl>
-                  </div>
+                    {/* Seriegrafia */}
+                    <FormControl>
+                      <RadioGroup
+                        sx={{ justifyContent: 'center', alignItems: 'center' }}
+                        name='Seriegrafia'
+                        value={SelectedSeriegrafia}
+                        row
+                        onChange={handleSeriegrafia}
+                      >
+                        <FormControlLabel
+                          value={0}
+                          control={<Radio />}
+                          label='Sin Seriegrafía'
+                        />
+                        <FormControlLabel
+                          value={1}
+                          control={<Radio />}
+                          label='Con Seriegrafía'
+                        />
+                        {seriegrafia && (
+                          <TextField
+                            sx={{
+                              width: '20ch !important',
+                              pb: 2
+                            }}
+                            variant='standard'
+                            name='Seriegrafía'
+                            label='Seriegrafía'
+                            value={seriegrafia}
+                            onChange={handleInputSeriegrafia}
+                          />
+                        )}
+                      </RadioGroup>
+                    </FormControl>
+                  </Box>
+
                   {/* habilitar botón */}
                   {selectedTalla !== '' && selectedPedido && (
                     <Button

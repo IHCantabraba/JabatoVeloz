@@ -1,5 +1,4 @@
 import {
-  Container,
   Paper,
   Table,
   TableBody,
@@ -9,8 +8,19 @@ import {
   TableRow
 } from '@mui/material'
 import React from 'react'
+import { useValue } from '../../context/ContextProvider'
 
 const TablaPedidos = ({ pedido }) => {
+  const {
+    state: { AvaliableSeriegrafia }
+  } = useValue()
+
+  const getSeriegrafiaPrice = (categoria, seriegrafiasDisponibles) => {
+    const filterSeriegrafia = seriegrafiasDisponibles.filter(
+      (serie) => serie.categoria === categoria
+    )
+    return filterSeriegrafia[0].precio
+  }
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: '100%' }} size='small' aria-label='a dense table'>
@@ -18,6 +28,7 @@ const TablaPedidos = ({ pedido }) => {
           <TableRow>
             <TableCell>Miembro</TableCell>
             <TableCell align='right'>Artículo</TableCell>
+            <TableCell align='right'>Seriegrafía</TableCell>
             <TableCell align='right'>Talla</TableCell>
             <TableCell align='right'>Cantidad</TableCell>
             <TableCell align='right'>Precio (€)</TableCell>
@@ -32,11 +43,25 @@ const TablaPedidos = ({ pedido }) => {
               <TableCell component='th' scope='row'>
                 {order.users.alias ? order.users.alias : order.users.nombre}
               </TableCell>
-              <TableCell align='right'>{order.productos.Nombre}</TableCell>
+              <TableCell align='right'>
+                {order.productos.Nombre}
+                {order.seriegrafia ? ' +Seriegraf.' : ''}
+              </TableCell>
+              <TableCell align='right'>
+                {order.seriegrafia !== '' ? order.seriegrafia : 'No'}
+              </TableCell>
               <TableCell align='right'>{order.talla}</TableCell>
               <TableCell align='right'>{order.unidades + 'x'}</TableCell>
               <TableCell align='right'>
-                {order.productos.Precio + ' €'}
+                {order.productos.Precio + '€'}
+                {order.seriegrafia
+                  ? '+' +
+                    getSeriegrafiaPrice(
+                      order.productos.Categoria,
+                      AvaliableSeriegrafia
+                    ) +
+                    '€'
+                  : ''}
               </TableCell>
             </TableRow>
           ))}

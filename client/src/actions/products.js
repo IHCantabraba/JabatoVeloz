@@ -9,8 +9,17 @@ export const getProducts = async (dispatch, token) => {
   )
   if (productos.success) {
     dispatch({ type: 'UPDATE_PRODUCTOS', payload: productos.result })
-    dispatch({ type: 'END_LOADING' })
   }
+
+  const seriegrafias = await fetchingData(
+    { url: `${baseUrl}/api/seriegrafias`, method: 'GET', token: token },
+    dispatch
+  )
+  if (seriegrafias.success) {
+    dispatch({ type: 'UPDATE_SERIEGRAFIAS', payload: seriegrafias.result })
+  }
+  dispatch({ type: 'END_LOADING' })
+
   return productos
 }
 
