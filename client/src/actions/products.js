@@ -78,8 +78,6 @@ export const addProduct = async (dispatch, currentUser, data, setPage) => {
   })
   const result = await addedProduct.json()
   if (result.success) {
-    console.log('success')
-    /* TODO fix reset form */
     dispatch({
       type: 'UPDATE_ALERT',
       payload: {
