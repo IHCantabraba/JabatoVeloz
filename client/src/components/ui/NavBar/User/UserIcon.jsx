@@ -11,17 +11,18 @@ const UserIcon = () => {
   const [anchorUserMenu, setAnchorUserMenu] = useState(false)
   return (
     <Box>
-      <IconButton size='large' color='inherit'>
+      {/* iconos de emails, notifcaciones y avatar cuando se ha logueado */}
+      {/* <IconButton size='large' color='inherit'>
         <Badge color='error' badgeContent={5}>
           <Mail></Mail>
         </Badge>
       </IconButton>
-      {/* iconos de emails, notifcaciones y avatar cuando se ha logueado */}
+      
       <IconButton size='large' color='inherit'>
         <Badge color='error' badgeContent={10}>
           <Notifications />
         </Badge>
-      </IconButton>
+      </IconButton> */}
       <Tooltip title='Open User Settings'>
         <IconButton>
           <Avatar
