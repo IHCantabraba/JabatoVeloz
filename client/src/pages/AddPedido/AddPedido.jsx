@@ -48,7 +48,7 @@ const AddPedido = ({ setPage }) => {
     const index = findUnfinished()
     /* si todos los pasos estan completados */
     if (index !== -1) return false
-    /* todo terminado */
+    /* terminado */
     return true
   }
   /* buscar algun paso sin completar */

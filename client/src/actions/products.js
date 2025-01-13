@@ -88,7 +88,7 @@ export const addProduct = async (dispatch, currentUser, data, setPage) => {
         message: 'Producto añadido correctamente'
       }
     })
-    dispatch({ type: 'UPDATE_NEW_PROD_PHOTO', payload: './Prof.png' })
+    dispatch({ type: 'UPDATE_NEW_PROD_PHOTO', payload: './assets/Prof.png' })
     setPage(3)
   }
   dispatch({ type: 'END_LOADING' })

@@ -1,5 +1,4 @@
 import {
-  Button,
   IconButton,
   Paper,
   Table,
@@ -12,13 +11,12 @@ import {
 } from '@mui/material'
 import React from 'react'
 import DoneAllIcon from '@mui/icons-material/DoneAll'
-import CheckIcon from '@mui/icons-material/Check'
 import { updateOrder } from '../../actions/orders'
 import { useValue } from '../../context/ContextProvider'
 import PaymentIcon from '@mui/icons-material/Payment'
 export const TablaRopa = ({ userOrders }) => {
   const {
-    state: { currentUser },
+    state: { currentUser, light },
     dispatch
   } = useValue()
   const handleUpdatePagado = (order) => {
@@ -31,7 +29,10 @@ export const TablaRopa = ({ userOrders }) => {
     )
   }
   return (
-    <TableContainer component={Paper}>
+    <TableContainer
+      component={Paper}
+      sx={{ bgcolor: `var(--ihc-${light ? 'light' : 'dark'}-mode-table)` }}
+    >
       <Table sx={{ minWidth: '100%' }} size='small' aria-label='a dense table'>
         <TableHead>
           <TableRow>

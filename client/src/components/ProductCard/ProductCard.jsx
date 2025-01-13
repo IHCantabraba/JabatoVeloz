@@ -85,12 +85,12 @@ const ProductCard = ({ producto }) => {
         />
         {/* Rate area */}
         <ImageListItemBar
-          title={producto.Precio + '€'}
+          title={producto.Precio + '€' + ' ' + producto.Sexo}
           actionIcon={
             <Rating
               sx={{ color: 'rgba(255,255,255,0.8)', mr: '5px' }}
               name='product-rating'
-              defaultValue={3.6}
+              defaultValue={3.5}
               precision={0.5}
               emptyIcon={
                 <StarBorder

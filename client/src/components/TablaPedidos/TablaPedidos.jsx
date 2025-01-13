@@ -14,7 +14,7 @@ import DoneAllIcon from '@mui/icons-material/DoneAll'
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
 const TablaPedidos = ({ pedido }) => {
   const {
-    state: { AvaliableSeriegrafia }
+    state: { AvaliableSeriegrafia, light }
   } = useValue()
 
   const getSeriegrafiaPrice = (categoria, seriegrafiasDisponibles) => {
@@ -24,7 +24,10 @@ const TablaPedidos = ({ pedido }) => {
     return filterSeriegrafia[0].precio
   }
   return (
-    <TableContainer component={Paper}>
+    <TableContainer
+      component={Paper}
+      sx={{ bgcolor: `var(--ihc-${light ? 'light' : 'dark'}-mode-table)` }}
+    >
       <Table sx={{ minWidth: '100%' }} size='small' aria-label='a dense table'>
         <TableHead>
           <TableRow>

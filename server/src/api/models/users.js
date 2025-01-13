@@ -2,7 +2,7 @@ import mongoose from 'mongoose'
 import bcrypt from 'bcrypt'
 import validateDNI from '../../utils/ValidateDNIorNIE.js'
 import ValidateEmail from '../../utils/validateEmail.js'
-/* TODO funcion para validar DNI o NIE */
+
 /* esquema de usuario */
 const userSchema = new mongoose.Schema(
   {

@@ -62,7 +62,6 @@ export const UpdateProfile = async (currentUser, updatedFields, dispatch) => {
     data.append('img', file)
   }
   try {
-    /* TODO resuar fetchData function y tryCatch */
     const result = await fetch(
       `${baseUrl}/api/users/${currentUser.result.user._id}`,
       {

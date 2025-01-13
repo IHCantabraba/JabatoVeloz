@@ -52,8 +52,15 @@ const PedidoDialog = () => {
     return total
   }
   return (
-    <Dialog fullScreen open={Boolean(pedido)}>
-      {/* TODO fix bgColor Dialog */}
+    <Dialog
+      fullScreen
+      open={Boolean(pedido)}
+      PaperProps={{
+        style: {
+          backgroundColor: `var(--ihc-${light ? 'light' : 'dark'}-mode-bg-app)`
+        }
+      }}
+    >
       {/* cabecera del pedido */}
       <AppBar
         position='relative'
@@ -62,7 +69,15 @@ const PedidoDialog = () => {
         }}
       >
         <Toolbar>
-          <Typography variant='h6' component='h3' sx={{ ml: 2, flex: 1 }}>
+          <Typography
+            variant='h6'
+            component='h3'
+            sx={{
+              ml: 2,
+              flex: 1,
+              color: `var(--ihc-${light ? 'light' : 'dark'}-mode-text)`
+            }}
+          >
             {'Creado por ' +
               pedido?.users.alias +
               '. ' +
@@ -70,7 +85,9 @@ const PedidoDialog = () => {
               pedido?.ExpireDate}
           </Typography>
           <IconButton color='inherit' onClick={handleClose}>
-            <Close />
+            <Close
+              sx={{ color: `var(--ihc-${light ? 'light' : 'dark'}-mode-text)` }}
+            />
           </IconButton>
         </Toolbar>
       </AppBar>
