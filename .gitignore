@@ -3,3 +3,8 @@ package-lock.json
 .env
 clothesPics
 server/src/utils/Products/datosApp.xlsx
+server/src/utils/Products/orders.csv
+server/src/utils/Products/pedidos.csv
+server/src/utils/Products/users.csv
+server/src/utils/Products/productos.csv
+server/src/utils/Products/seriegrafias.csv
