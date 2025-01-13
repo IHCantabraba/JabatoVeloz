@@ -24,7 +24,7 @@ const ProductCardMenu = ({
   }
   return (
     <>
-      {/* vincular el menu al botón del Productcard1 */}
+      {/* vincular el menu al botón del Productcard */}
       <Menu
         anchorEl={anchorProductMenu}
         open={Boolean(anchorProductMenu)}

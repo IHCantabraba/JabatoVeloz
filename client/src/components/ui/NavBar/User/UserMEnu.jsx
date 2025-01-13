@@ -49,6 +49,7 @@ const UserMEnu = ({ anchorUserMenu, setAnchorUserMenu }) => {
             dispatch({ type: 'NOT_ADMIN' })
             dispatch({ type: 'HIDE_FILTERS' })
             dispatch({ type: 'HIDE_THEME_SWITCHER' })
+            dispatch({ type: 'UPDATE_SERIEGRAFIAS', payload: null })
           }}
         >
           <ListItemIcon>

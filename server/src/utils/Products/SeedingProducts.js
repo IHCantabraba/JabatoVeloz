@@ -217,16 +217,6 @@ const array = [
     img: 'polo.png'
   },
   {
-    Nombre: 'Personalización',
-    Categoria: 'otros',
-    Sexo: 'unisex',
-    Precio: '2',
-    Tallas: 'unica',
-    Descripcion:
-      'Personaliza la ropa que quieras adquirir con tu nombre o el de los tuyos.',
-    img: ''
-  },
-  {
     Nombre: 'Camiseta Manga larga',
     Categoria: 'Camisetas',
     Sexo: 'mujer',

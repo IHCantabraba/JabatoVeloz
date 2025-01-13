@@ -15,7 +15,7 @@ import MiRopa from '../../../pages/MiRopa/MiRopa'
 import LocalGroceryStoreOutlinedIcon from '@mui/icons-material/LocalGroceryStoreOutlined'
 import LibraryAddOutlinedIcon from '@mui/icons-material/LibraryAddOutlined'
 import CheckroomIcon from '@mui/icons-material/Checkroom'
-import Products1 from '../../../pages/Products/Products1'
+import Products from '../../../pages/Products/Products'
 import { getUserOrders } from '../../../actions/orders'
 import AdddProduct from '../../../pages/AddProduct/AdddProduct'
 import { useValue } from '../../../context/ContextProvider'
@@ -46,7 +46,7 @@ const BottomNAv = () => {
           0: <Carreras />,
           1: <Pedidos />,
           2: <AddPedido setPage={setValue} />,
-          3: <Products1 />,
+          3: <Products />,
           4: <AdddProduct setPage={setValue} />,
           5: <MiRopa />
         }[value]
