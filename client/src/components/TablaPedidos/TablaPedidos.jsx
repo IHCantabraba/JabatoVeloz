@@ -1,5 +1,5 @@
 import {
-  Container,
+  Icon,
   Paper,
   Table,
   TableBody,
@@ -9,8 +9,20 @@ import {
   TableRow
 } from '@mui/material'
 import React from 'react'
-
+import { useValue } from '../../context/ContextProvider'
+import DoneAllIcon from '@mui/icons-material/DoneAll'
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
 const TablaPedidos = ({ pedido }) => {
+  const {
+    state: { AvaliableSeriegrafia }
+  } = useValue()
+
+  const getSeriegrafiaPrice = (categoria, seriegrafiasDisponibles) => {
+    const filterSeriegrafia = seriegrafiasDisponibles.filter(
+      (serie) => serie.categoria === categoria
+    )
+    return filterSeriegrafia[0].precio
+  }
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: '100%' }} size='small' aria-label='a dense table'>
@@ -18,9 +30,11 @@ const TablaPedidos = ({ pedido }) => {
           <TableRow>
             <TableCell>Miembro</TableCell>
             <TableCell align='right'>Artículo</TableCell>
+            <TableCell align='right'>Seriegrafía</TableCell>
             <TableCell align='right'>Talla</TableCell>
             <TableCell align='right'>Cantidad</TableCell>
             <TableCell align='right'>Precio (€)</TableCell>
+            <TableCell align='right'>Pagado</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -32,11 +46,38 @@ const TablaPedidos = ({ pedido }) => {
               <TableCell component='th' scope='row'>
                 {order.users.alias ? order.users.alias : order.users.nombre}
               </TableCell>
-              <TableCell align='right'>{order.productos.Nombre}</TableCell>
+              <TableCell align='right'>
+                {order.productos.Nombre}
+                {order.seriegrafia ? ' +Seriegraf.' : ''}
+              </TableCell>
+              <TableCell align='right'>
+                {order.seriegrafia !== '' ? order.seriegrafia : 'No'}
+              </TableCell>
               <TableCell align='right'>{order.talla}</TableCell>
               <TableCell align='right'>{order.unidades + 'x'}</TableCell>
               <TableCell align='right'>
-                {order.productos.Precio + ' €'}
+                {order.productos.Precio + '€'}
+                {order.seriegrafia
+                  ? '+' +
+                    getSeriegrafiaPrice(
+                      order.productos.Categoria,
+                      AvaliableSeriegrafia
+                    ) +
+                    '€'
+                  : ''}
+              </TableCell>
+              <TableCell align='right'>
+                {order.pagado ? (
+                  <Icon>
+                    <DoneAllIcon sx={{ color: 'var(--ihc-jV-green)' }} />
+                  </Icon>
+                ) : (
+                  <Icon>
+                    <CloseOutlinedIcon
+                      sx={{ color: 'red' }}
+                    ></CloseOutlinedIcon>
+                  </Icon>
+                )}
               </TableCell>
             </TableRow>
           ))}

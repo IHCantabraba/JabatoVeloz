@@ -23,7 +23,11 @@ const initialState = {
   miRopa: null,
   miPrenda: null,
   newProductPhoto: './assets/Prof.png',
-  Categorias: null
+  Categorias: null,
+  Generos: null,
+  Tallas: null,
+  seriegrafia: null,
+  AvaliableSeriegrafia: null
 }
 /* crear un contexto */
 const Context = createContext(initialState)

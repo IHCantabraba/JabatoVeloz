@@ -10,12 +10,12 @@ import {
   IconButton,
   TextField
 } from '@mui/material'
-import { useValue } from '../../context/ContextProvider'
+import { useValue } from '../../../context/ContextProvider'
 import { Close, Send } from '@mui/icons-material'
-import PasswordField from '../Password/PasswordField'
+import PasswordField from '../../Password/PasswordField'
 import { useEffect, useRef, useState } from 'react'
-import handleLogin, { handleRegister } from '../../actions/user'
-import CustomDate from '../CustomDate/CustomDate'
+import handleLogin, { handleRegister } from '../../../actions/user'
+import CustomDate from '../../CustomDate/CustomDate'
 
 const BaseUrl = import.meta.env.VITE_BaseName
 const Login = () => {

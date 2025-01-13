@@ -5,34 +5,29 @@ import {
   DialogActions,
   FormControl,
   InputLabel,
+  ListItemText,
   MenuItem,
   Select,
   Stack,
   TextField,
   Typography
 } from '@mui/material'
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import CustomTextField from '../../components/CustomTextField/CustomTextField'
 import { useValue } from '../../context/ContextProvider'
 import { addProduct } from '../../actions/products'
+import DropDownMenu from '../../components/DropDownMenu/DropDownMenu'
+import DropDownMultiple from '../../components/DropDownMultipe/DropDownMultiple'
+import { CheckBox } from '@mui/icons-material'
 
-const ITEM_HEIGHT = 48
-const ITEM_PADDING_TOP = 8
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 2.5 + ITEM_PADDING_TOP,
-      width: 250
-    }
-  }
-}
 const AdddProduct = ({ setPage }) => {
   const [selectedGenero, setSelectedGenero] = useState('')
   const [selectedCategoria, setCategoriaSelected] = useState('')
+  const [selectedTallas, setTallasSelected] = useState([])
 
   const {
-    state: { newProductPhoto, currentUser, light, Categorias },
+    state: { newProductPhoto, currentUser, light, Categorias, Generos, Tallas },
     dispatch
   } = useValue()
   const handleGeneroChange = (e) => {
@@ -40,6 +35,13 @@ const AdddProduct = ({ setPage }) => {
   }
   const handleCategoriaChange = (e) => {
     setCategoriaSelected(e.target.value)
+  }
+
+  const handleTallasChange = (e) => {
+    const {
+      target: { value }
+    } = e
+    setTallasSelected(typeof value === 'string' ? value.split(',') : value)
   }
   const handleChangePic = (e) => {
     const file = e.target.files[0]
@@ -58,10 +60,9 @@ const AdddProduct = ({ setPage }) => {
       Nombre: '',
       Categoria: '',
       Descripcion: '',
-      Tallas: 'xs s m l xl 2xl',
+      Tallas: [],
       Genero: '',
       Precio: 50
-      // Image: ''
     }
   })
 
@@ -93,40 +94,16 @@ const AdddProduct = ({ setPage }) => {
             formState={formState}
             light={light}
           />
-          {/* TODO drop down with scroll*/}
+
           {/* TODO componetizar fromControl*/}
-
-          <FormControl fullWidth>
-            <InputLabel id='Categoria-label'>Categoria</InputLabel>
-            <Select
-              {...register('Categoria', {
-                required: true,
-                message: 'selecciona una categoria'
-              })}
-              error={!!formState.errors.Genero}
-              labelId='Categoria-label'
-              value={selectedCategoria}
-              label='
-              Categoria'
-              nombre='Categoria'
-              id='Categoria'
-              onChange={handleCategoriaChange}
-              defaultValue
-              MenuProps={MenuProps}
-            >
-              {Categorias &&
-                Categorias.map((categoria) => (
-                  <MenuItem
-                    sx={{ backgroundColor: 'white' }}
-                    key={categoria}
-                    value={categoria}
-                  >
-                    {categoria}
-                  </MenuItem>
-                ))}
-            </Select>
-          </FormControl>
-
+          <DropDownMenu
+            name='Categoria'
+            register={register}
+            value={selectedCategoria}
+            handler={handleCategoriaChange}
+            formState={formState}
+            selections={Categorias}
+          />
           <CustomTextField
             nombre='Descripcion'
             inputProps={{ type: 'text' }}
@@ -135,13 +112,52 @@ const AdddProduct = ({ setPage }) => {
             light={light}
           />
           {/* TODO convertir en drop down multiselection */}
-          <CustomTextField
+          {/* <CustomTextField
             nombre='Tallas'
             inputProps={{ type: 'text' }}
             register={register}
             formState={formState}
             light={light}
+          /> */}
+          <DropDownMultiple
+            name='Tallas'
+            register={register}
+            value={selectedTallas}
+            handler={handleTallasChange}
+            formState={formState}
+            selections={Tallas}
           />
+          {/* <FormControl fullWidth>
+            <InputLabel id='Tallas'>Tallas</InputLabel>
+            <Select
+              {...register('Tallas', {
+                required: true,
+                message: `Selecciona una Talla`
+              })}
+              error={!!formState.errors[name]}
+              labelId='Tallas-label'
+              value={value}
+              label='Tallas'
+              nombre='Tallas'
+              id='Tallas'
+              onChange={handler}
+              defaultValue
+              MenuProps={MenuProps}
+              multiple
+            >
+              {selections &&
+                selections.map((categoria) => (
+                  <MenuItem
+                    sx={{ backgroundColor: 'white' }}
+                    key={categoria}
+                    value={categoria}
+                  >
+                    <CheckBox checked={categoria} />
+                    <ListItemText primary={categoria} />
+                  </MenuItem>
+                ))}
+            </Select>
+          </FormControl> */}
           {/* precio */}
           <FormControl sx={{ width: '100%' }}>
             <CustomTextField
@@ -164,7 +180,6 @@ const AdddProduct = ({ setPage }) => {
             <Typography sx={{ color: 'grey' }}> Añadir Imagen </Typography>
             <label htmlFor='productPhoto'>
               <input
-                // {...register('Image', { required: false })}
                 accept='image/*'
                 id='productPhoto'
                 type='file'
@@ -182,36 +197,20 @@ const AdddProduct = ({ setPage }) => {
               />
             </label>
           </Stack>
-
           {/* Select sexo */}
-          <FormControl fullWidth>
-            <InputLabel id='Genero-label'>Genero</InputLabel>
-            <Select
-              {...register('Genero', {
-                required: true,
-                message: 'selecciona un genero'
-              })}
-              error={!!formState.errors.Genero}
-              labelId='Genero-label'
-              value={selectedGenero}
-              label='Genero'
-              nombre='Genero'
-              id='Genero'
-              onChange={handleGeneroChange}
-              defaultValue
-              MenuProps={MenuProps}
-            >
-              <MenuItem value='Hombre'>Hombre</MenuItem>
-              <MenuItem value='Mujer'>Mujer</MenuItem>
-              <MenuItem value='unisex'>Unisex</MenuItem>
-              <MenuItem value='niñ@s'>Niñ@s</MenuItem>
-            </Select>
-          </FormControl>
+          <DropDownMenu
+            name='Genero'
+            register={register}
+            value={selectedGenero}
+            handler={handleGeneroChange}
+            formState={formState}
+            selections={Generos}
+          />
           <DialogActions sx={{ justifyContent: 'center', pb: 2 }}>
             <Button
               type='submit'
               disabled={!formState.isDirty}
-              sx={{ color: 'green' }}
+              sx={{ color: 'var(--ihc-jV-green)' }}
             >
               Register Product
             </Button>

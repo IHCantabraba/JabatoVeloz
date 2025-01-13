@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { styled } from '@mui/material/styles'
 import { Collapse, CssBaseline, IconButton } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
-import Directions from './Directions'
+import Directions from './Directions/Directions'
 import { Link as Scroll } from 'react-scroll'
 const PREFIX = 'MyLanding'
 const classes = {
@@ -52,9 +52,9 @@ const LandingPage = () => {
           {...(checked ? { timeout: 1000 } : {})}
           collapsedHeight={50}
         >
-          <Title className={classes.title}>
+          <Title sx={{ textAlign: 'center' }} className={classes.title}>
             Jabato Veloz <br />
-            <span style={{ color: 'orange', fontWeight: 'bold' }}>
+            <span style={{ color: 'var(--ihc-JV-orange)', fontWeight: 'bold' }}>
               Running Team
             </span>
           </Title>
@@ -67,7 +67,7 @@ const LandingPage = () => {
               sx={{
                 width: '50px',
                 alignSelf: 'center',
-                color: 'orange'
+                color: 'var(--ihc-JV-orange)'
               }}
             >
               <ExpandMore sx={{ fontSize: '5rem' }} />

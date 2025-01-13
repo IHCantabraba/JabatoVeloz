@@ -8,7 +8,8 @@ const orderSchema = mongoose.Schema(
     pedidos: { type: mongoose.Types.ObjectId, ref: 'pedidos' },
     unidades: { type: String, required: true },
     precio: { type: String, required: true },
-    pagado: { type: Boolean, default: false }
+    pagado: { type: Boolean, default: false },
+    seriegrafia: { type: String, required: false }
   },
   { timestamps: true, collection: 'orders' }
 )

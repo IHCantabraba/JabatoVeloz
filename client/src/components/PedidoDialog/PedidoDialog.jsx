@@ -53,6 +53,7 @@ const PedidoDialog = () => {
   }
   return (
     <Dialog fullScreen open={Boolean(pedido)}>
+      {/* TODO fix bgColor Dialog */}
       {/* cabecera del pedido */}
       <AppBar
         position='relative'
@@ -149,7 +150,7 @@ const PedidoDialog = () => {
         >
           <Button
             variant='contained'
-            sx={{ backgroundColor: 'green', mt: 5 }}
+            sx={{ backgroundColor: 'var(--ihc-jV-green)', mt: 5 }}
             endIcon={<PictureAsPdfIcon />}
             onClick={handleGenerarPDF}
           >
@@ -157,7 +158,7 @@ const PedidoDialog = () => {
           </Button>
           <Button
             variant='contained'
-            sx={{ backgroundColor: 'green', mt: 5 }}
+            sx={{ backgroundColor: 'var(--ihc-jV-green)', mt: 5 }}
             endIcon={<DoneAllIcon />}
             onClick={handleCerrarPedido}
           >

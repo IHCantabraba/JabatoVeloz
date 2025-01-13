@@ -31,7 +31,7 @@ const userSchema = new mongoose.Schema(
     carreras: [{ type: mongoose.Types.ObjectId, ref: 'competitions' }],
     orders: [{ type: mongoose.Types.ObjectId, ref: 'orders' }]
   },
-  { timestamp: true, collection: 'users' }
+  { timestamps: true, collection: 'users' }
 )
 /* encriptar contraseña antes de almacenarla */
 userSchema.pre('save', function () {

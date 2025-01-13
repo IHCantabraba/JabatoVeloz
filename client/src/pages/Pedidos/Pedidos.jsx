@@ -13,7 +13,7 @@ const Pedidos = () => {
   }, [])
 
   return (
-    <Container sx={{ py: 5, mb: 4, pb: 40 }}>
+    <Container sx={{ minHeight: '93vh', py: 5, mb: 4, pb: 40 }}>
       {pedidos?.length > 0 ? (
         pedidos.map((pedido) => (
           <Alert
@@ -23,7 +23,7 @@ const Pedidos = () => {
               flexDirection: 'column',
               justifyContent: 'flex-start',
               bgcolor: 'var(--ihc-JV-bgColor-yellow)',
-              border: '1px solid green'
+              border: '1px solid var(--ihc-jV-green)'
             }}
             elevation={4}
             severity={pedido.severity}
@@ -40,7 +40,7 @@ const Pedidos = () => {
                 sx={{
                   ml: 2,
                   placeSelf: 'self-end',
-                  color: 'green'
+                  color: 'var(--ihc-jV-green)'
                 }}
                 onClick={() => {
                   console.log(pedido)

@@ -1,47 +1,36 @@
-import React, { useEffect, useState } from 'react'
-import { Container, Grid2 } from '@mui/material'
-import { deleteProduct, getProducts } from '../../actions/products'
+import React, { useEffect } from 'react'
+import { Container, ImageList } from '@mui/material'
+import { getCategoriasAndGeneros, getProducts } from '../../actions/products'
 import { useValue } from '../../context/ContextProvider'
 import ProductCard from '../../components/ProductCard/ProductCard'
-import ProductCard1 from '../../components/ProductCard/ProductCard1'
 const Products = () => {
-  const [eliminado, setEliminado] = useState(false)
   const {
-    state: { filterProducts, light, productoEliminado },
+    state: {
+      filterProducts,
+      productoEliminado,
+      currentUser,
+      AvaliableSeriegrafia
+    },
     dispatch
   } = useValue()
   useEffect(() => {
-    console.log('fetching products')
-    getProducts(dispatch)
+    getProducts(dispatch, currentUser.result.token, AvaliableSeriegrafia)
   }, [productoEliminado])
-  const handleClickDelete = (id) => {
-    deleteProduct(dispatch, id, productoEliminado)
-    // setEliminado(!eliminado)
-  }
-  const handleClickOpen = (id, producto) => {
-    console.log(`Openning ${id} product`)
-  }
+  useEffect(() => {
+    getCategoriasAndGeneros(filterProducts, dispatch)
+  }, [filterProducts])
   return (
-    <Container
-      sx={{
-        padding: 5
-      }}
-    >
-      <Grid2 container spacing={3}>
+    <Container sx={{ padding: '5px' }}>
+      <ImageList
+        gap={12}
+        sx={{
+          mb: 8,
+          gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))!important'
+        }}
+      >
         {filterProducts &&
-          filterProducts.map((producto) => (
-            <Grid2 item key={producto.id} md={6} lg={4}>
-              <ProductCard1
-                {...{ producto, handleClickDelete, handleClickOpen }}
-              />
-              {/* <ProductCard
-                producto={producto}
-                handleClickDelete={handleClickDelete}
-                handleClickOpen={handleClickOpen}
-              /> */}
-            </Grid2>
-          ))}
-      </Grid2>
+          filterProducts.map((producto) => <ProductCard {...{ producto }} />)}
+      </ImageList>
     </Container>
   )
 }

@@ -1,9 +1,8 @@
 import { Avatar, Badge, Box, IconButton, Tooltip } from '@mui/material'
 import { Mail, Notifications } from '@mui/icons-material'
-
-import { useValue } from '../../context/ContextProvider'
 import UserMEnu from './UserMEnu'
 import { useState } from 'react'
+import { useValue } from '../../../../context/ContextProvider'
 const UserIcon = () => {
   const {
     state: { currentUser }

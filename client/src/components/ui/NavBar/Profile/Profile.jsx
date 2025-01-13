@@ -11,8 +11,8 @@ import {
   TextField
 } from '@mui/material'
 import React, { useRef } from 'react'
-import { useValue } from '../../context/ContextProvider'
-import { UpdateProfile } from '../../actions/user'
+import { useValue } from '../../../../context/ContextProvider'
+import { UpdateProfile } from '../../../../actions/user'
 
 const Profile = () => {
   const {
