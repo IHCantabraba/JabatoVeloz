@@ -9,7 +9,7 @@ const pedidosSchema = mongoose.Schema(
     users: { type: mongoose.Types.ObjectId, ref: 'users' },
     open: { type: Boolean, default: true }
   },
-  { timestamp: true, collection: 'pedidos' }
+  { timestamps: true, collection: 'pedidos' }
 )
 const Pedidos = mongoose.model('pedidos', pedidosSchema, 'pedidos')
 

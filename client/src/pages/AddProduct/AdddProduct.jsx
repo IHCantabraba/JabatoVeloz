@@ -19,7 +19,7 @@ import { useValue } from '../../context/ContextProvider'
 import { addProduct } from '../../actions/products'
 import DropDownMenu from '../../components/DropDownMenu/DropDownMenu'
 import DropDownMultiple from '../../components/DropDownMultipe/DropDownMultiple'
-import { CheckBox } from '@mui/icons-material'
+import { CheckBox, ProductionQuantityLimits } from '@mui/icons-material'
 
 const AdddProduct = ({ setPage }) => {
   const [selectedGenero, setSelectedGenero] = useState('')
@@ -68,6 +68,11 @@ const AdddProduct = ({ setPage }) => {
 
   const onSubmit = (values) => {
     values.Photo = newProductPhoto?.file
+    if (newProductPhoto.file) {
+      values.originalIMG = true
+    } else {
+      values.originalIMG = false
+    }
     console.log(values)
     addProduct(dispatch, currentUser, values, setPage)
   }
@@ -111,14 +116,7 @@ const AdddProduct = ({ setPage }) => {
             formState={formState}
             light={light}
           />
-          {/* TODO convertir en drop down multiselection */}
-          {/* <CustomTextField
-            nombre='Tallas'
-            inputProps={{ type: 'text' }}
-            register={register}
-            formState={formState}
-            light={light}
-          /> */}
+
           <DropDownMultiple
             name='Tallas'
             register={register}
@@ -127,37 +125,7 @@ const AdddProduct = ({ setPage }) => {
             formState={formState}
             selections={Tallas}
           />
-          {/* <FormControl fullWidth>
-            <InputLabel id='Tallas'>Tallas</InputLabel>
-            <Select
-              {...register('Tallas', {
-                required: true,
-                message: `Selecciona una Talla`
-              })}
-              error={!!formState.errors[name]}
-              labelId='Tallas-label'
-              value={value}
-              label='Tallas'
-              nombre='Tallas'
-              id='Tallas'
-              onChange={handler}
-              defaultValue
-              MenuProps={MenuProps}
-              multiple
-            >
-              {selections &&
-                selections.map((categoria) => (
-                  <MenuItem
-                    sx={{ backgroundColor: 'white' }}
-                    key={categoria}
-                    value={categoria}
-                  >
-                    <CheckBox checked={categoria} />
-                    <ListItemText primary={categoria} />
-                  </MenuItem>
-                ))}
-            </Select>
-          </FormControl> */}
+
           {/* precio */}
           <FormControl sx={{ width: '100%' }}>
             <CustomTextField

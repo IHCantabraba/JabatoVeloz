@@ -29,12 +29,111 @@ const dataUsers = [
     birthDate: '1988/04/18',
     rol: 'admin',
     img: null
+  },
+  {
+    nombre: 'Cristian',
+    apellidos: 'Ochoa Menéndez',
+    alias: 'CristianPresi',
+    dni: '09418309Q',
+    email: 'cristianflash2000@yahoo.es',
+    password: 'Cristian2024',
+    birthDate: '1982/01/26',
+    rol: 'admin',
+    img: null
+  },
+  {
+    nombre: 'Cova',
+    apellidos: 'Diego Alonso',
+    alias: 'Cova',
+    dni: '11111111Q',
+    email: 'cova@cova.es',
+    password: 'Cova2024',
+    birthDate: '1992/08/16',
+    rol: 'admin',
+    img: null
+  },
+  {
+    nombre: 'Agustin',
+    apellidos: 'Fernandez Fernandez',
+    alias: 'AgusP',
+    dni: '22222222J',
+    email: 'Agus@Agus.es',
+    password: 'Agus2024',
+    birthDate: '1983/05/22',
+    rol: 'user',
+    img: null
+  },
+  {
+    nombre: 'Angel',
+    apellidos: 'Diaz Suearez',
+    alias: 'Amgel',
+    dni: '33333333N',
+    email: 'Angel@Angel.com',
+    password: 'Angel2024',
+    birthDate: '1986/02/10',
+    rol: 'user',
+    img: null
+  },
+  {
+    nombre: 'Nuria',
+    apellidos: 'Bravo Torres',
+    alias: 'Nuri',
+    dni: '44444444P',
+    email: 'Nuri@Nuri.com',
+    password: 'Nuri2024',
+    birthDate: '1987/11/28',
+    rol: 'user',
+    img: null
+  },
+  {
+    nombre: 'Eva',
+    apellidos: 'Moreno Garcia',
+    alias: 'Evi',
+    dni: '55555555D',
+    email: 'evi@evi.com',
+    password: 'Evi2024',
+    birthDate: '1984/06/21',
+    rol: 'user',
+    img: null
+  },
+  {
+    nombre: 'Fernando',
+    apellidos: 'Antunez Perez',
+    alias: 'Nando',
+    dni: '66666666D',
+    email: 'nando@nando.com',
+    password: 'Nando2024',
+    birthDate: '1987/12/10',
+    rol: 'user',
+    img: null
+  },
+  {
+    nombre: 'Juan',
+    apellidos: 'Suarez Lena',
+    alias: 'Xuan',
+    dni: '77777777J',
+    email: 'xuan@xuan.com',
+    password: 'Xuan2024',
+    birthDate: '1978/03/05',
+    rol: 'user',
+    img: null
+  },
+  {
+    nombre: 'Adela',
+    apellidos: 'San Simon',
+    alias: 'Adela',
+    dni: '88888888J',
+    email: 'adela@adela.com',
+    password: 'auan2024',
+    birthDate: '1989/07/018',
+    rol: 'user',
+    img: null
   }
 ]
 
 const dataProductos = [
   {
-    Nombre: 'PruebaConFoto',
+    Nombre: 'Camiseta Trail Alpes',
     Categoria: 'Camisetas',
     Sexo: 'unisex',
     Precio: '34',
@@ -44,11 +143,271 @@ const dataProductos = [
     originalIMG: true
   },
   {
-    Nombre: 'pruebaSinFoto',
+    Nombre: 'Paravientos Terry',
+    Categoria: 'Cortavientos',
+    Sexo: 'unisex',
+    Precio: '65',
+    Tallas: 'xs s m l xl 2xl',
+    Descripcion: 'Con Gorro y membrana',
+    img: '',
+    originalIMG: false
+  },
+  {
+    Nombre: 'Camiseta Sin Mangas Alpes',
     Categoria: 'Camisetas',
     Sexo: 'unisex',
-    Precio: '34',
+    Precio: '31',
     Tallas: 'xs s m l xl 2xl',
+    Descripcion: 'Not available',
+    img: 'camiseta_SM.png',
+    originalIMG: true
+  },
+  {
+    Nombre: 'Camiseta Manga Corta Cross',
+    Categoria: 'Camisetas',
+    Sexo: 'unisex',
+    Precio: '30',
+    Tallas: 'xs s m l xl 2xl',
+    Descripcion: 'Not available',
+    img: 'avance_cross.png',
+    originalIMG: true
+  },
+  {
+    Nombre: 'Camiseta Manga Corta Adv.',
+    Categoria: 'Camisetas',
+    Sexo: 'unisex',
+    Precio: '31',
+    Tallas: 'xs s m l xl 2xl',
+    Descripcion: 'Con Gorro Bolsillo espalda y menbrana',
+    img: 'avance_cross.png',
+    originalIMG: true
+  },
+  {
+    Nombre: 'Paravientos Sherpa',
+    Categoria: 'Cortavientos',
+    Sexo: 'unisex',
+    Precio: '65',
+    Tallas: 'xs s m l xl 2xl',
+    Descripcion: 'Not available',
+    img: 'Paravientos.png',
+    originalIMG: true
+  },
+  {
+    Nombre: 'Paravientos',
+    Categoria: 'Cortavientos',
+    Sexo: 'unisex',
+    Precio: '48',
+    Tallas: 'xs s m l xl 2xl',
+    Descripcion: 'Sin Gorro 2 bosillos con cremallera',
+    img: 'Paravientos.png',
+    originalIMG: true
+  },
+  {
+    Nombre: 'Chaleco Challange',
+    Categoria: 'Chaleco',
+    Sexo: 'unisex',
+    Precio: '39.5',
+    Tallas: 'xs s m l xl 2xl',
+    Descripcion: 'Bolsillo en la espalda',
+    img: 'chaleco.png',
+    originalIMG: true
+  },
+  {
+    Nombre: 'Pantalon de Trail corto',
+    Categoria: 'Pantalones',
+    Sexo: 'mujer',
+    Precio: '31.5',
+    Tallas: 'xs s m l xl',
+    Descripcion: 'Not available',
+    img: 'Pantalon_trail_chica.png',
+    originalIMG: true
+  },
+  {
+    Nombre: 'Pantalon de Trail corto',
+    Categoria: 'Pantalones',
+    Sexo: 'hombre',
+    Precio: '31.5',
+    Tallas: 's m l xl 2xl',
+    Descripcion: 'Not available',
+    img: 'Pantalon_trail.png',
+    originalIMG: true
+  },
+  {
+    Nombre: 'Sudadera Alaska',
+    Categoria: 'Sudaderas',
+    Sexo: 'unisex',
+    Precio: '48',
+    Tallas: 'xs s m l xl 2xl',
+    Descripcion: 'Sudadera con capucha',
+    img: 'sudadera_alaska.png',
+    originalIMG: true
+  },
+  {
+    Nombre: 'Pantaloneta',
+    Categoria: 'Pantalones',
+    Sexo: 'unisex',
+    Precio: '29',
+    Tallas: 'xs s m l xl 2xl',
+    Descripcion: 'Not available',
+    img: 'Pantaloneta.png',
+    originalIMG: true
+  },
+  {
+    Nombre: 'Pantalon de Trail corto',
+    Categoria: 'Pantalones',
+    Sexo: 'unisex',
+    Precio: '30',
+    Tallas: 'xs s m l xl 2xl',
+    Descripcion: 'Not available',
+    img: 'Malla_corta.png',
+    originalIMG: true
+  },
+  {
+    Nombre: 'Falda',
+    Categoria: 'Pantalones',
+    Sexo: 'mujer',
+    Precio: '31',
+    Tallas: 'xs s m l xl',
+    Descripcion: 'Not available',
+    img: 'Pantalon_trail_chica.png',
+    originalIMG: true
+  },
+  {
+    Nombre: 'Manguitos Verano',
+    Categoria: 'Complementos',
+    Sexo: 'unisex',
+    Precio: '12.10',
+    Tallas: 'unica',
+    Descripcion: 'Not available',
+    img: 'manguitos.png',
+    originalIMG: true
+  },
+  {
+    Nombre: 'Manguitos Invierno',
+    Categoria: 'Complementos',
+    Sexo: 'unisex',
+    Precio: '13.5',
+    Tallas: 'unica',
+    Descripcion: 'Not available',
+    img: 'manguitos.png',
+    originalIMG: true
+  },
+  {
+    Nombre: 'Malliot manga corta Summun',
+    Categoria: 'Malliots',
+    Sexo: 'hombre',
+    Precio: '52',
+    Tallas: 's m l xl 2xl',
+    Descripcion: 'Not available',
+    img: '',
+    originalIMG: false
+  },
+  {
+    Nombre: 'Malliot manga corta Summun',
+    Categoria: 'Malliots',
+    Sexo: 'mujer',
+    Precio: '52',
+    Tallas: 'xs s m l xl',
+    Descripcion: 'Not available',
+    img: '',
+    originalIMG: false
+  },
+  {
+    Nombre: 'Culotte corto',
+    Categoria: 'Culottes',
+    Sexo: 'hombre',
+    Precio: '70',
+    Tallas: 's m l xl 2xl',
+    Descripcion: 'Culotte con tirantes',
+    img: '',
+    originalIMG: false
+  },
+  {
+    Nombre: 'Culotte corto',
+    Categoria: 'Culottes',
+    Sexo: 'mujer',
+    Precio: '70',
+    Tallas: 'xs s m l xl',
+    Descripcion: 'Culotte con tirantes',
+    img: '',
+    originalIMG: false
+  },
+  {
+    Nombre: 'Top corto',
+    Categoria: 'Camisetas',
+    Sexo: 'mujer',
+    Precio: '26',
+    Tallas: 'xs s m l xl',
+    Descripcion: 'Not available',
+    img: '',
+    originalIMG: false
+  },
+  {
+    Nombre: 'Polo',
+    Categoria: 'Camisetas',
+    Sexo: 'unisex',
+    Precio: '33',
+    Tallas: 'xs s m l xl 2xl',
+    Descripcion: 'Solo disponible en color negro',
+    img: 'polo.png',
+    originalIMG: true
+  },
+  {
+    Nombre: 'Camiseta Manga larga',
+    Categoria: 'Camisetas',
+    Sexo: 'mujer',
+    Precio: '25',
+    Tallas: 'xs s m l xl',
+    Descripcion: 'Not available',
+    img: '',
+    originalIMG: false
+  },
+  {
+    Nombre: 'Camiseta Manga larga',
+    Categoria: 'Camisetas',
+    Sexo: 'hombre',
+    Precio: '25',
+    Tallas: 's m l xl 2xl',
+    Descripcion: 'Not available',
+    img: '',
+    originalIMG: false
+  },
+  {
+    Nombre: 'Plumifero',
+    Categoria: 'Plumas',
+    Sexo: 'unisex',
+    Precio: '47',
+    Tallas: 'xs s m l xl 2xl',
+    Descripcion: 'Not available',
+    img: 'plumifero.png',
+    originalIMG: true
+  },
+  {
+    Nombre: 'Gorra',
+    Categoria: 'Complementos',
+    Sexo: 'unisex',
+    Precio: '15',
+    Tallas: 's m l',
+    Descripcion: 'Solo disponible en color blanco',
+    img: 'gorra.png',
+    originalIMG: true
+  },
+  {
+    Nombre: 'Camiseta',
+    Categoria: 'Camisetas',
+    Sexo: 'niñ@s',
+    Precio: '18',
+    Tallas: '2 4 6 8 10 12',
+    Descripcion: 'Not available',
+    img: '',
+    originalIMG: false
+  },
+  {
+    Nombre: 'Sudadera',
+    Categoria: 'Sudadera',
+    Sexo: 'niñ@s',
+    Precio: '45',
+    Tallas: '2 4 6 8 10 12',
     Descripcion: 'Not available',
     img: '',
     originalIMG: false

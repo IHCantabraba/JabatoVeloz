@@ -25,13 +25,14 @@ export const getProducts = async (dispatch, token, seriegrafias) => {
   return productos
 }
 
-export const deleteProduct = async (dispatch, id, productoEliminado) => {
+export const deleteProduct = async (dispatch, id, productoEliminado, token) => {
   dispatch({ type: 'START_LOADING' })
 
   const deleteProducto = await fetchingData(
     {
       url: `${baseUrl}/api/productos/${id}`,
-      method: 'DELETE'
+      method: 'DELETE',
+      token: token
     },
     dispatch
   )
@@ -50,7 +51,16 @@ export const deleteProduct = async (dispatch, id, productoEliminado) => {
 export const addProduct = async (dispatch, currentUser, data, setPage) => {
   dispatch({ type: 'START_LOADING' })
 
-  const { Nombre, Categoria, Descripcion, Tallas, Genero, Precio, Photo } = data
+  const {
+    Nombre,
+    Categoria,
+    Descripcion,
+    Tallas,
+    Genero,
+    Precio,
+    Photo,
+    originalIMG
+  } = data
   const productInfo = new FormData()
   productInfo.append('Nombre', Nombre)
   productInfo.append('Categoria', Categoria)
@@ -59,6 +69,7 @@ export const addProduct = async (dispatch, currentUser, data, setPage) => {
   productInfo.append('Tallas', Tallas.toString().replace(',', ' '))
   productInfo.append('Descripcion', Descripcion)
   productInfo.append('img', Photo)
+  productInfo.append('originalIMG', originalIMG)
 
   const addedProduct = await fetch(`${baseUrl}/api/productos/producto`, {
     headers: { Authorization: `Bearer ${currentUser.result.token}` },

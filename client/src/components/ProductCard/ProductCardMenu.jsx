@@ -11,7 +11,7 @@ const ProductCardMenu = ({
   producto
 }) => {
   const {
-    state: { productoEliminado },
+    state: { productoEliminado, currentUser },
     dispatch
   } = useValue()
   const handleCloseProductMenu = () => {
@@ -19,7 +19,7 @@ const ProductCardMenu = ({
   }
 
   const handleClickDelete = (id) => {
-    deleteProduct(dispatch, id, productoEliminado)
+    deleteProduct(dispatch, id, productoEliminado, currentUser?.result.token)
     // setEliminado(!eliminado)
   }
   return (

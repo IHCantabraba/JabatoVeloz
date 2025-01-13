@@ -18,7 +18,7 @@ const productosSchema = mongoose.Schema(
     img: { type: String, required: false },
     originalIMG: { type: Boolean, required: true }
   },
-  { timestamp: true, collection: 'productos' }
+  { timestamps: true, collection: 'productos' }
 )
 const Productos = mongoose.model('productos', productosSchema, 'productos')
 export default Productos
