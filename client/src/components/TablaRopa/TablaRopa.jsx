@@ -14,6 +14,7 @@ import DoneAllIcon from '@mui/icons-material/DoneAll'
 import { updateOrder } from '../../actions/orders'
 import { useValue } from '../../context/ContextProvider'
 import PaymentIcon from '@mui/icons-material/Payment'
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
 export const TablaRopa = ({ userOrders }) => {
   const {
     state: { currentUser, light },
@@ -43,6 +44,7 @@ export const TablaRopa = ({ userOrders }) => {
             <TableCell align='right'>Precio (€)</TableCell>
             <TableCell align='right'>Pagado</TableCell>
             <TableCell align='right'>Pagar</TableCell>
+            <TableCell align='right'>Eliminar</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -73,6 +75,17 @@ export const TablaRopa = ({ userOrders }) => {
                       <PaymentIcon />
                     </IconButton>
                   </Tooltip>
+                )}
+              </TableCell>
+              <TableCell align='center'>
+                {!order.pagado && (
+                  <IconButton
+                    sx={{ ml: 3, width: '20px', color: 'inherit' }}
+                    /* TODO implement deleteOrder */
+                    onClick={() => console.log('click')}
+                  >
+                    <DeleteForeverOutlinedIcon sx={{ color: 'red' }} />
+                  </IconButton>
                 )}
               </TableCell>
             </TableRow>
