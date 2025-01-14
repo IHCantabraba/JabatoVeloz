@@ -44,4 +44,21 @@ export const updateOrder = tryCatch(async (req, res) => {
     message: 'Prenda actualizada'
   })
 })
-export default { createOrder, updateOrder }
+
+export const deleteOrder = tryCatch(async (req, res) => {
+  const { id } = req.params
+  const order = await Orders.findByIdAndDelete(id)
+  if (order) {
+    const pedido = await Pedidos.findById(order.pedidos)
+    const updatedOrders = pedido.orders.filter(
+      (PedidoOrder) => PedidoOrder._id !== pedido._id
+    )
+    pedido.orders = updatedOrders
+    const updatedPedido = await Pedidos.findByIdAndUpdate(pedido._id, pedido, {
+      new: true
+    })
+  }
+
+  return res.status(200).json({ success: true, message: 'Orden eliminada' })
+})
+export default { createOrder, updateOrder, deleteOrder }

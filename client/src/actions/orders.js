@@ -54,23 +54,49 @@ export const updateOrder = async (dispatch, order, userId, token) => {
   )
 
   if (result.success) {
-    /* TODO create a paidOrder */
-    dispatch({ type: 'UPDATE_PRENDA', payload: result.result })
-    /* una vez que esta variable global cambie se debe renderizar de nuevo las ordenes del usuairo */
+    const userOrders = await fetchingData(
+      {
+        url: `${baseUrl}/api/users/${userId}`,
+        method: 'GET',
+        token: token
+      },
+      dispatch
+    )
+    if (userOrders.success) {
+      dispatch({ type: 'UPDATE_MIROPA', payload: userOrders.result })
+      console.log(userOrders.result)
+    }
   }
-  const userOrders = await fetchingData(
-    {
-      url: `${baseUrl}/api/users/${userId}`,
-      method: 'GET',
-      token: token
-    },
-    dispatch
-  )
-  if (userOrders.success) {
-    dispatch({ type: 'UPDATE_MIROPA', payload: userOrders.result })
-    console.log(userOrders.result)
-  }
+
   dispatch({ type: 'END_LOADING' })
 }
 
 /* TODO delete order */
+export const deleteOrder = async (dispatch, order, userId, token) => {
+  dispatch({ type: 'START_LOADING' })
+
+  const result = await fetchingData(
+    {
+      url: `${baseUrl}/api/orders/order/${order._id}`,
+      method: 'DELETE',
+      token: token
+    },
+    dispatch
+  )
+
+  if (result.success) {
+    const userOrders = await fetchingData(
+      {
+        url: `${baseUrl}/api/users/${userId}`,
+        method: 'GET',
+        token: token
+      },
+      dispatch
+    )
+    if (userOrders.success) {
+      dispatch({ type: 'UPDATE_MIROPA', payload: userOrders.result })
+      console.log(userOrders.result)
+    }
+  }
+  dispatch({ type: 'END_LOADING' })
+}

@@ -80,8 +80,6 @@ const Reducer = (state, action) => {
       return { ...state, pedido: action.payload }
     case 'UPDATE_MIROPA':
       return { ...state, miRopa: action.payload }
-    case 'UPDATE_PRENDA':
-      return { ...state, miPrenda: action.payload }
     case 'UPDATE_NEW_PROD_PHOTO':
       return { ...state, newProductPhoto: action.payload }
     case 'UPDATE_CATEGORIAS':

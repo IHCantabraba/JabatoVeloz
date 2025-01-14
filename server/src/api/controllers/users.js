@@ -45,6 +45,8 @@ export const updatedUser = tryCatch(async (req, res, next) => {
   }
   newUser._id = id
   newUser.rol = oldUser.rol
+  newUser.orders = oldUser.orders
+  newUser.carreras = oldUser.carreras
 
   const userUpdated = await User.findByIdAndUpdate(id, newUser, {
     new: true

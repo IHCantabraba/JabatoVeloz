@@ -21,7 +21,6 @@ const initialState = {
   showThemes: false,
   pedido: null,
   miRopa: null,
-  miPrenda: null,
   newProductPhoto: './assets/Prof.png',
   Categorias: null,
   Generos: null,

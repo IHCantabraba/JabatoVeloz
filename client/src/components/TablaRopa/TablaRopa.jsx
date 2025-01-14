@@ -11,7 +11,7 @@ import {
 } from '@mui/material'
 import React from 'react'
 import DoneAllIcon from '@mui/icons-material/DoneAll'
-import { updateOrder } from '../../actions/orders'
+import { updateOrder, deleteOrder } from '../../actions/orders'
 import { useValue } from '../../context/ContextProvider'
 import PaymentIcon from '@mui/icons-material/Payment'
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
@@ -23,6 +23,15 @@ export const TablaRopa = ({ userOrders }) => {
   const handleUpdatePagado = (order) => {
     console.log(`actualizando estado de ${order._id}`)
     updateOrder(
+      dispatch,
+      order,
+      currentUser?.result.user._id,
+      currentUser?.result.token
+    )
+  }
+  const handleDeleteOrder = (order) => {
+    console.log(`deleting order ${order._id}`)
+    deleteOrder(
       dispatch,
       order,
       currentUser?.result.user._id,
@@ -82,7 +91,7 @@ export const TablaRopa = ({ userOrders }) => {
                   <IconButton
                     sx={{ ml: 3, width: '20px', color: 'inherit' }}
                     /* TODO implement deleteOrder */
-                    onClick={() => console.log('click')}
+                    onClick={() => handleDeleteOrder(order)}
                   >
                     <DeleteForeverOutlinedIcon sx={{ color: 'red' }} />
                   </IconButton>
