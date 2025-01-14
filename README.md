@@ -77,3 +77,7 @@ Esta semilla creará:
 - 28 productos
 - 2 pedidos
 - 20 ordenes de ropa asignadas la mitad a cada uno de los pedidos.
+
+## Deployment link
+
+https://jabatoveloz.onrender.com
