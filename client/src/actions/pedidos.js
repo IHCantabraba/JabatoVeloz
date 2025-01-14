@@ -38,7 +38,7 @@ export const getPedidos = async (dispatch) => {
     extractDaysOf(pedido)
   }
   /* filtrar pedidos que tengan fecha vencida */
-  /* TODO revisar pedido.open */
+
   const filterPedidos = (pedidos) => {
     if (pedidos) {
       pedidos = pedidos.filter((pedido) => pedido.daysOff > 0 && pedido.open)
@@ -68,8 +68,6 @@ export const closePedido = async (pedido, currentUser, dispatch) => {
     dispatch
   )
   if (result.success) {
-    /* TODO pensar si se necesita una VG para eliminar el botón de finalizar. */
-
     dispatch({
       type: 'UPDATE_ALERT',
       payload: {

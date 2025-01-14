@@ -71,7 +71,6 @@ export const updateOrder = async (dispatch, order, userId, token) => {
   dispatch({ type: 'END_LOADING' })
 }
 
-/* TODO delete order */
 export const deleteOrder = async (dispatch, order, userId, token) => {
   dispatch({ type: 'START_LOADING' })
 

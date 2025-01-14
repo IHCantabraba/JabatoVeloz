@@ -17,7 +17,7 @@ export const getAllPedidos = tryCatch(async (req, res) => {
     .json({ success: true, result: pedidos, message: 'Pedidos actualizados' })
 })
 
-/*TODO updatePEdido to set "open: false when finnishing" */
+/* TODO reopen pedido */
 
 export const closePedido = tryCatch(async (req, res) => {
   const { id } = req.params
