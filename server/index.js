@@ -44,11 +44,11 @@ app.use('/api/orders', ordersRouter)
 app.use('/api/seriegrafias', SeriegrafiaRouter)
 /* para despliegue */
 //Use the client app (FrontEnd)
-// app.use(express.static(path.join(__dirname, '/client/dist')))
+app.use(express.static(path.join(__dirname, '/client/dist')))
 // render client for any path
-// app.get('*', (req, res) =>
-//   res.sendFile(path.join(__dirname, '/FrontEnd/dist/index.html'))
-//)
+app.get('*', (req, res) =>
+  res.sendFile(path.join(__dirname, '/client/dist/index.html'))
+)
 /*  */
 /* Not found Root */
 app.use('*', (req, res, next) => {

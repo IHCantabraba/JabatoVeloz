@@ -1,7 +1,7 @@
 import { FormControl, Stack } from '@mui/material'
 import React from 'react'
 import { useValue } from '../../../context/ContextProvider'
-import InfoField from '../AddDetails/InfoFIeld'
+import InfoField from './InfoFIeld'
 const AddDetails = () => {
   const {
     state: {
