@@ -29,12 +29,7 @@ cloudinaryConfig()
 app.use(express.json())
 /* configure to access from different ip (front and back end) */
 app.use(cors())
-app.use(
-  cors({
-    origin: `https://jabato-veloz.vercel.app
-`
-  })
-)
+
 /* router a los distintos modelos */
 /* auth (register login) */
 app.use('/api/auth', authRouter)
