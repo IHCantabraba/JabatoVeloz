@@ -1,6 +1,8 @@
 import cloudinary from 'cloudinary'
 import multer from 'multer'
 import { CloudinaryStorage } from 'multer-storage-cloudinary'
+import dotenv from 'dotenv'
+dotenv.config()
 /* Jveloz/ */
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary.v2,
@@ -12,15 +14,15 @@ const storage = new CloudinaryStorage({
       if (baseUrl === 'register' || baseUrl === 'user') {
         baseUrl = 'users'
         console.log(`BaseUrl redirected to: ${baseUrl}`)
-        return `Pr13_RTH/${baseUrl}`
+        return `${process.env.PRJ_NAME}/${baseUrl}`
       } else if (baseUrl === 'producto') {
         baseUrl = 'Products'
         console.log(`BaseUrl redirected to: ${baseUrl}`)
-        return `Pr13_RTH/${baseUrl}`
+        return `${process.env.PRJ_NAME}/${baseUrl}`
       } else {
         baseUrl = req.originalUrl.split('/').at(-2)
         console.log(`BaseUrl redirected to: ${baseUrl}`)
-        return `Pr13_RTH/${baseUrl}`
+        return `${process.env.PRJ_NAME}/${baseUrl}`
       }
     },
     allowedFormats: ['jpg', 'png', 'jpeg', 'gif']

@@ -17,11 +17,10 @@ cloudinaryConfig()
 /* create path to end file */
 const __file = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__file)
-
+let NOPIC = 'NoPic.jpg'
 /* insertar datos en DB */
 /* subir imagen de producto a cloudinary */
 const uploadPic = async (img, NoPic) => {
-  const options = { folder: 'Pr13_RTH/Products' }
   let Foto
   let cloudPhotURL
   let NoPicture = NoPic
@@ -36,7 +35,7 @@ const uploadPic = async (img, NoPic) => {
   if (!Foto.includes('https')) {
     const result = await cloudinary.v2.uploader.upload(
       `./clothesPics/${Foto}`,
-      options
+      { folder: `${process.env.PRJ_NAME}/Products` }
     )
     /* si la foto es NOpic, se sube por primera vez esa foto a  */
     if (Foto === 'NoPic.jpg') {
@@ -51,6 +50,7 @@ const uploadPic = async (img, NoPic) => {
       cloudPhotURL = result.secure_url
     }
   } else {
+    console.log('keeping the Nopic url from cloudinary')
     cloudPhotURL = NoPicture
   }
   return { cloud: cloudPhotURL, nopic: NoPicture }
@@ -84,8 +84,9 @@ const populateProductos = async (sheetData, sheetName) => {
     console.log(`Inserting data from sheet: ${sheetName}`)
     await Productos.collection.drop()
     for (const product of sheetData) {
-      const result = await uploadPic(product.img, NoPic)
-      NoPic = result.nopic
+      const result = await uploadPic(product.img, NOPIC)
+      NOPIC = result.nopic
+      console.log(`NoPIC has been reseted to: ${NOPIC}`)
       /* asiganr url de cloudinary a la imagen del producto */
       product.img = result.cloud
       const newProduct = new Productos(product)
@@ -162,21 +163,21 @@ const populateData = async (file) => {
       const sheet = workbook.Sheets[sheetName]
       const sheetData = XLSX.utils.sheet_to_json(sheet)
       sheetData.pop()
-      if (sheetName === 'user') {
-        await populateUsers(sheetData, sheetName)
-      }
-      if (sheetName === 'seriegrafias') {
-        await populateSeriegrafias(sheetData, sheetName)
-      }
+      // if (sheetName === 'user') {
+      //   await populateUsers(sheetData, sheetName)
+      // }
+      // if (sheetName === 'seriegrafias') {
+      //   await populateSeriegrafias(sheetData, sheetName)
+      // }
       if (sheetName === 'productos') {
         await populateProductos(sheetData, sheetName)
       }
-      if (sheetName === 'pedidos') {
-        await populatePedidos(sheetData, sheetName)
-      }
-      if (sheetName === 'orders') {
-        await populateOrders(sheetData, sheetName)
-      }
+      // if (sheetName === 'pedidos') {
+      //   await populatePedidos(sheetData, sheetName)
+      // }
+      // if (sheetName === 'orders') {
+      //   await populateOrders(sheetData, sheetName)
+      // }
     }
   } catch (error) {
     console.error('Error while populating MongoDB:', error)
