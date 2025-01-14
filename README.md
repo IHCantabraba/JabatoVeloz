@@ -47,6 +47,7 @@ Se debe tener una cuenta en claudinary y crear en el .env las variables:
 - APY_KEY
 - CLOUD_NAME
 - API_SECRET
+- PRJ_NAME --> Nombre de la carpeta que se va a generar en cloudinary para almacenar las imágenes en subdirectorios en función de la procedencia de la pretición (productos o users)
 
 ## Insertar datos en la DB
 
