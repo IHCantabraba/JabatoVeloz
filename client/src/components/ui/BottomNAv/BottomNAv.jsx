@@ -43,12 +43,12 @@ const BottomNAv = () => {
       {
         {
           // 0: <ClusterMap />,
-          0: <Carreras />,
-          1: <Pedidos />,
-          2: <AddPedido setPage={setValue} />,
-          3: <Products />,
-          4: <AdddProduct setPage={setValue} />,
-          5: <MiRopa />
+          // 0: <Carreras />,
+          0: <Pedidos />,
+          1: <AddPedido setPage={setValue} />,
+          2: <Products />,
+          3: <AdddProduct setPage={setValue} />,
+          4: <MiRopa />
         }[value]
       }
       <Paper
@@ -68,7 +68,7 @@ const BottomNAv = () => {
           sx={{ bgcolor: `var(--ihc-${light ? 'light' : 'dark'}-mode-bg-nav)` }}
         >
           {/* <BottomNavigationAction label='Map' icon={<LocationOn />} /> */}
-          <BottomNavigationAction
+          {/* <BottomNavigationAction
             label='Carreras'
             icon={<DirectionsRunIcon />}
             onClick={() => {
@@ -76,7 +76,7 @@ const BottomNAv = () => {
                 dispatch({ type: 'HIDE_FILTERS' })
               }
             }}
-          />
+          /> */}
           {isAdmin && (
             <BottomNavigationAction
               label='Pedidos'
