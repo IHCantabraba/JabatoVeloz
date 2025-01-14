@@ -27,20 +27,22 @@ Es una aplicación para gestionar los pedidos de ropa de los integrantes del equ
 
 ## Configuracion
 
-### 1. Conexion a MongoDB
+### Backend
+
+#### 1. Conexion a MongoDB
 
 Se debe crear una base de datos de mongo y generar un fichero .env con las siguentes variables:
 
 - DB_URL
 
-### 2. Autenticación con JWT
+#### 2. Autenticación con JWT
 
 Se debe crear en el .env las siguentes variables:
 
 - SECRET_KEY
 - JWT_SECRET
 
-## 3. Repositorio de imagenes Cloudinary
+#### 3. Repositorio de imagenes Cloudinary
 
 Se debe tener una cuenta en claudinary y crear en el .env las variables:
 
@@ -48,6 +50,12 @@ Se debe tener una cuenta en claudinary y crear en el .env las variables:
 - CLOUD_NAME
 - API_SECRET
 - PRJ_NAME --> Nombre de la carpeta que se va a generar en cloudinary para almacenar las imágenes en subdirectorios en función de la procedencia de la pretición (productos o users)
+
+### Frontend
+
+#### 1. Base url
+
+VITE_BaseName = 'http://localhost:3000'
 
 ## Insertar datos en la DB
 
