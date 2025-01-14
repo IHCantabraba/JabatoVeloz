@@ -26,7 +26,7 @@ const BottomNAv = () => {
     state: { isAdmin, light, productPage, currentUser },
     dispatch
   } = useValue()
-  const [value, setValue] = useState(3)
+  const [value, setValue] = useState(2)
 
   /* al cambiar entre páginas, hacer scroll al inicio  */
   const ref = useRef()
