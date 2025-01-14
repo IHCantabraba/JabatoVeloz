@@ -163,21 +163,21 @@ const populateData = async (file) => {
       const sheet = workbook.Sheets[sheetName]
       const sheetData = XLSX.utils.sheet_to_json(sheet)
       sheetData.pop()
-      // if (sheetName === 'user') {
-      //   await populateUsers(sheetData, sheetName)
-      // }
-      // if (sheetName === 'seriegrafias') {
-      //   await populateSeriegrafias(sheetData, sheetName)
-      // }
+      if (sheetName === 'user') {
+        await populateUsers(sheetData, sheetName)
+      }
+      if (sheetName === 'seriegrafias') {
+        await populateSeriegrafias(sheetData, sheetName)
+      }
       if (sheetName === 'productos') {
         await populateProductos(sheetData, sheetName)
       }
-      // if (sheetName === 'pedidos') {
-      //   await populatePedidos(sheetData, sheetName)
-      // }
-      // if (sheetName === 'orders') {
-      //   await populateOrders(sheetData, sheetName)
-      // }
+      if (sheetName === 'pedidos') {
+        await populatePedidos(sheetData, sheetName)
+      }
+      if (sheetName === 'orders') {
+        await populateOrders(sheetData, sheetName)
+      }
     }
   } catch (error) {
     console.error('Error while populating MongoDB:', error)
