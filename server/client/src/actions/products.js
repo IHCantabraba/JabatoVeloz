@@ -4,7 +4,7 @@ const baseUrl = import.meta.env.VITE_BaseName
 export const getProducts = async (dispatch, token, seriegrafias) => {
   dispatch({ type: 'START_LOADING' })
   const productos = await fetchingData(
-    { url: `${baseUrl}/api/productos`, method: 'GET', token: token },
+    { url: `/api/productos`, method: 'GET', token: token },
     dispatch
   )
   if (productos.success) {
@@ -13,7 +13,7 @@ export const getProducts = async (dispatch, token, seriegrafias) => {
   /* obtener las seriegrafias exitentes para los productos si no se han cargado aún */
   if (!seriegrafias) {
     const seriegrafias = await fetchingData(
-      { url: `${baseUrl}/api/seriegrafias`, method: 'GET', token: token },
+      { url: `/api/seriegrafias`, method: 'GET', token: token },
       dispatch
     )
     if (seriegrafias.success) {
@@ -30,7 +30,7 @@ export const deleteProduct = async (dispatch, id, productoEliminado, token) => {
 
   const deleteProducto = await fetchingData(
     {
-      url: `${baseUrl}/api/productos/${id}`,
+      url: `/api/productos/${id}`,
       method: 'DELETE',
       token: token
     },
@@ -71,7 +71,7 @@ export const addProduct = async (dispatch, currentUser, data, setPage) => {
   productInfo.append('img', Photo)
   productInfo.append('originalIMG', originalIMG)
 
-  const addedProduct = await fetch(`${baseUrl}/api/productos/producto`, {
+  const addedProduct = await fetch(`/api/productos/producto`, {
     headers: { Authorization: `Bearer ${currentUser.result.token}` },
     method: 'POST',
     body: productInfo
@@ -87,7 +87,7 @@ export const addProduct = async (dispatch, currentUser, data, setPage) => {
       }
     })
     dispatch({ type: 'UPDATE_NEW_PROD_PHOTO', payload: './assets/Prof.png' })
-    setPage(3)
+    setPage(2)
   }
   dispatch({ type: 'END_LOADING' })
 }

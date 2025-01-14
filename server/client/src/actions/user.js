@@ -5,7 +5,7 @@ export const handleRegister = async (user, dispatch) => {
   dispatch({ type: 'START_LOADING' })
 
   const result = await fetchingData(
-    { url: `${baseUrl}/api/auth/register`, body: user },
+    { url: `/api/auth/register`, body: user },
     dispatch
   )
   if (result.success) {
@@ -34,7 +34,7 @@ const handleLogin = async (user, dispatch) => {
   dispatch({ type: 'START_LOADING' })
 
   const result = await fetchingData(
-    { url: `${baseUrl}/api/auth/login`, body: user },
+    { url: `/api/auth/login`, body: user },
     dispatch
   )
   if (result.success) {
@@ -62,14 +62,11 @@ export const UpdateProfile = async (currentUser, updatedFields, dispatch) => {
     data.append('img', file)
   }
   try {
-    const result = await fetch(
-      `${baseUrl}/api/users/${currentUser.result.user._id}`,
-      {
-        headers: { Authorization: `Bearer ${currentUser.result.token}` },
-        method: 'POST',
-        body: data
-      }
-    )
+    const result = await fetch(`/api/users/${currentUser.result.user._id}`, {
+      headers: { Authorization: `Bearer ${currentUser.result.token}` },
+      method: 'POST',
+      body: data
+    })
     const response = await result.json()
 
     currentUser.result.user.img = response.result.img

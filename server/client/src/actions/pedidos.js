@@ -5,7 +5,7 @@ export const createPedido = async (pedido, currentUser, dispatch, setPage) => {
   dispatch({ type: 'START_LOADING' })
   const result = await fetchingData(
     {
-      url: `${baseUrl}/api/pedidos/pedido`,
+      url: `/api/pedidos/pedido`,
       body: pedido,
       token: currentUser.result.token
     },
@@ -31,7 +31,7 @@ export const getPedidos = async (dispatch) => {
   dispatch({ type: 'START_LOADING' })
 
   const result = await fetchingData(
-    { url: `${baseUrl}/api/pedidos`, method: 'GET' },
+    { url: `/api/pedidos`, method: 'GET' },
     dispatch
   )
   const handleExpirationDate = (pedido) => {
@@ -61,7 +61,7 @@ export const closePedido = async (pedido, currentUser, dispatch) => {
   dispatch({ type: 'START_LOADING' })
   const result = await fetchingData(
     {
-      url: `${baseUrl}/api/pedidos/pedido/${pedido._id}`,
+      url: `/api/pedidos/pedido/${pedido._id}`,
       method: 'POST',
       token: currentUser?.result.token
     },

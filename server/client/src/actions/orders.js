@@ -5,7 +5,7 @@ export const createOrder = async (dispatch, body) => {
 
   const result = await fetchingData(
     {
-      url: `${baseUrl}/api/orders/order`,
+      url: `$/api/orders/order`,
       body: body
     },
     dispatch
@@ -29,7 +29,7 @@ export const getUserOrders = async (dispatch, userId, token) => {
 
   const result = await fetchingData(
     {
-      url: `${baseUrl}/api/users/${userId}`,
+      url: `/api/users/${userId}`,
       method: 'GET',
       token: token
     },
@@ -46,7 +46,7 @@ export const updateOrder = async (dispatch, order, userId, token) => {
   dispatch({ type: 'START_LOADING' })
   const result = await fetchingData(
     {
-      url: `${baseUrl}/api/orders/${order._id}`,
+      url: `/api/orders/${order._id}`,
       method: 'POST',
       token: token
     },
@@ -56,7 +56,7 @@ export const updateOrder = async (dispatch, order, userId, token) => {
   if (result.success) {
     const userOrders = await fetchingData(
       {
-        url: `${baseUrl}/api/users/${userId}`,
+        url: `/api/users/${userId}`,
         method: 'GET',
         token: token
       },
@@ -76,7 +76,7 @@ export const deleteOrder = async (dispatch, order, userId, token) => {
 
   const result = await fetchingData(
     {
-      url: `${baseUrl}/api/orders/order/${order._id}`,
+      url: `/api/orders/order/${order._id}`,
       method: 'DELETE',
       token: token
     },
@@ -86,7 +86,7 @@ export const deleteOrder = async (dispatch, order, userId, token) => {
   if (result.success) {
     const userOrders = await fetchingData(
       {
-        url: `${baseUrl}/api/users/${userId}`,
+        url: `/api/users/${userId}`,
         method: 'GET',
         token: token
       },
