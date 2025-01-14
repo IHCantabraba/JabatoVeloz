@@ -321,7 +321,7 @@ const ProductDialog = () => {
                   component='span'
                   sx={{
                     display: 'flex',
-                    color: 'red',
+                    color: 'var(--ihc-red-icons)',
                     justifyContent: 'center',
                     alignItems: 'center'
                   }}

@@ -77,7 +77,7 @@ const TablaPedidos = ({ pedido }) => {
                 ) : (
                   <Icon>
                     <CloseOutlinedIcon
-                      sx={{ color: 'red' }}
+                      sx={{ color: 'var(--ihc-red-icons)' }}
                     ></CloseOutlinedIcon>
                   </Icon>
                 )}

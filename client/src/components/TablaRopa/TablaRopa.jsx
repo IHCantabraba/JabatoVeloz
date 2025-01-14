@@ -63,7 +63,7 @@ export const TablaRopa = ({ userOrders }) => {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component='th' scope='row'>
-                {order.pedidos.ExpireDate}
+                {order.pedidos.ExpireDate} {order.pedidos.open ? '' : 'Cerrado'}
               </TableCell>
               <TableCell align='right'>{order.productos?.Nombre}</TableCell>
               <TableCell align='right'>{order.talla}</TableCell>
@@ -80,6 +80,7 @@ export const TablaRopa = ({ userOrders }) => {
                     <IconButton
                       sx={{ m: 0, width: '20px', color: 'inherit' }}
                       onClick={() => handleUpdatePagado(order)}
+                      disabled={!order.pedidos.open}
                     >
                       <PaymentIcon />
                     </IconButton>
@@ -89,11 +90,16 @@ export const TablaRopa = ({ userOrders }) => {
               <TableCell align='center'>
                 {!order.pagado && (
                   <IconButton
-                    sx={{ ml: 3, width: '20px', color: 'inherit' }}
-                    /* TODO implement deleteOrder */
+                    sx={{
+                      ml: 3,
+                      width: '20px',
+                      color: 'var(--ihc-red-icons)',
+                      '&:disabled': { color: 'var(--ihc-disabled-icon)' }
+                    }}
                     onClick={() => handleDeleteOrder(order)}
+                    disabled={!order.pedidos.open}
                   >
-                    <DeleteForeverOutlinedIcon sx={{ color: 'red' }} />
+                    <DeleteForeverOutlinedIcon />
                   </IconButton>
                 )}
               </TableCell>
