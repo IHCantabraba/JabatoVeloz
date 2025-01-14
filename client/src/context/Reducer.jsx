@@ -92,6 +92,8 @@ const Reducer = (state, action) => {
       return { ...state, seriegrafia: action.payload }
     case 'UPDATE_SERIEGRAFIAS':
       return { ...state, AvaliableSeriegrafia: action.payload }
+    case 'UPDATE_OPEN_PEDIDO_STATE':
+      return { ...state, OpenPedido: action.payload }
     default:
       throw new Error('No matched action!')
   }

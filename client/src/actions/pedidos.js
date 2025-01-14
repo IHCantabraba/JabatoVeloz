@@ -38,9 +38,10 @@ export const getPedidos = async (dispatch) => {
     extractDaysOf(pedido)
   }
   /* filtrar pedidos que tengan fecha vencida */
+  /* TODO revisar pedido.open */
   const filterPedidos = (pedidos) => {
     if (pedidos) {
-      pedidos = pedidos.filter((pedido) => pedido.daysOff > 0)
+      pedidos = pedidos.filter((pedido) => pedido.daysOff > 0 && pedido.open)
     } else {
       return pedidos
     }
@@ -55,4 +56,34 @@ export const getPedidos = async (dispatch) => {
     dispatch({ type: 'END_LOADING' })
   }
   return result
+}
+export const closePedido = async (pedido, currentUser, dispatch) => {
+  dispatch({ type: 'START_LOADING' })
+  const result = await fetchingData(
+    {
+      url: `${baseUrl}/api/pedidos/pedido/${pedido._id}`,
+      method: 'POST',
+      token: currentUser?.result.token
+    },
+    dispatch
+  )
+  if (result.success) {
+    /* TODO pensar si se necesita una VG para eliminar el botón de finalizar. */
+
+    dispatch({
+      type: 'UPDATE_ALERT',
+      payload: {
+        open: true,
+        severity: 'success',
+        message: 'Pedido cerrado correctamente'
+      }
+    })
+    dispatch({
+      type: 'UPDATE_OPEN_PEDIDO_STATE',
+      payload: false
+    })
+
+    dispatch({ type: 'END_LOADING' })
+  }
+  dispatch({ type: 'END_LOADING' })
 }

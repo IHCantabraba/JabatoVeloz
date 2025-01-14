@@ -45,6 +45,10 @@ const Pedidos = () => {
                 onClick={() => {
                   console.log(pedido)
                   dispatch({ type: 'UPDATE_PEDIDO', payload: pedido })
+                  dispatch({
+                    type: 'UPDATE_OPEN_PEDIDO_STATE',
+                    payload: pedido.open
+                  })
                 }}
               >
                 Ver Detalles

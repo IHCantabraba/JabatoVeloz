@@ -20,14 +20,17 @@ import DoneAllIcon from '@mui/icons-material/DoneAll'
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf'
 import html2canvas from 'html2canvas'
 import { jsPDF } from 'jspdf'
+import { closePedido } from '../../actions/pedidos'
 const PedidoDialog = () => {
   const {
-    state: { pedido, light },
+    state: { pedido, light, currentUser, OpenPedido },
     dispatch
   } = useValue()
   const printRef = useRef()
   const handleCerrarPedido = () => {
+    /* TODO implement update Pedido */
     console.log(`Se va acerrar el pedido ${pedido._id}`)
+    closePedido(pedido, currentUser, dispatch)
   }
   const handleGenerarPDF = async () => {
     console.log('se generará pdf')
@@ -45,6 +48,10 @@ const PedidoDialog = () => {
   }
   const handleClose = () => {
     dispatch({ type: 'UPDATE_PEDIDO', payload: null })
+    dispatch({
+      type: 'UPDATE_OPEN_PEDIDO_STATE',
+      payload: null
+    })
   }
   const cantidadTotal = () => {
     let total = 0
@@ -165,22 +172,41 @@ const PedidoDialog = () => {
           direction='row'
           sx={{ justifyContent: 'space-between', flexWrap: 'wrap' }}
         >
-          <Button
-            variant='contained'
-            sx={{ backgroundColor: 'var(--ihc-jV-green)', mt: 5 }}
-            endIcon={<PictureAsPdfIcon />}
-            onClick={handleGenerarPDF}
-          >
-            PDF
-          </Button>
-          <Button
-            variant='contained'
-            sx={{ backgroundColor: 'var(--ihc-jV-green)', mt: 5 }}
-            endIcon={<DoneAllIcon />}
-            onClick={handleCerrarPedido}
-          >
-            Finalizar
-          </Button>
+          {OpenPedido ? (
+            <Button
+              variant='contained'
+              sx={{ backgroundColor: 'var(--ihc-jV-green)', mt: 5 }}
+              endIcon={<PictureAsPdfIcon />}
+              onClick={handleGenerarPDF}
+            >
+              PDF
+            </Button>
+          ) : (
+            <Button
+              variant='contained'
+              sx={{ backgroundColor: 'var(--ihc-jV-green)', mt: 5 }}
+              endIcon={<PictureAsPdfIcon />}
+              onClick={handleGenerarPDF}
+              disabled
+            >
+              PDF
+            </Button>
+          )}
+          {OpenPedido ? (
+            <Button
+              variant='contained'
+              sx={{ backgroundColor: 'var(--ihc-jV-green)', mt: 5 }}
+              endIcon={<DoneAllIcon />}
+              onClick={handleCerrarPedido}
+            >
+              Finalizar
+            </Button>
+          ) : (
+            <Typography variant='h4' component='span' sx={{ pt: 4 }}>
+              Finalizado!
+            </Typography>
+            /* TODO pensar si hacemos un reabrir y un actualizar fecha */
+          )}
         </Stack>
       </Container>
     </Dialog>

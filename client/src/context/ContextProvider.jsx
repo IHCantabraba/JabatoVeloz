@@ -26,7 +26,8 @@ const initialState = {
   Generos: null,
   Tallas: null,
   seriegrafia: null,
-  AvaliableSeriegrafia: null
+  AvaliableSeriegrafia: null,
+  OpenPedido: null
 }
 /* crear un contexto */
 const Context = createContext(initialState)
