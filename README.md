@@ -80,4 +80,16 @@ Esta semilla creará:
 
 ## Deployment link
 
+### 1. Client inside Server deploy
+
 https://jabatoveloz.onrender.com
+
+## Vercel links
+
+### 1. server side deploy
+
+https://jabato-veloz-backend.vercel.app
+
+### 2. client side deploy
+
+https://jabato-veloz.vercel.app/
