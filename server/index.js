@@ -52,12 +52,10 @@ app.use('/api/seriegrafias', SeriegrafiaRouter)
 //)
 /*  */
 /* Not found Root */
-// app.use('*', (req, res, next) => {
-//   return res.status(404).json(`Route not found`)
-// })
+app.use('*', (req, res, next) => {
+  return res.status(404).json(`Route not found`)
+})
 /* listen port for backend */
 app.listen(PORT, () => {
   console.log(`Server running at: http://localhost:${PORT}`)
 })
-
-export default app
