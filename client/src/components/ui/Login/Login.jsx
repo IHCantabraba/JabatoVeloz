@@ -198,7 +198,7 @@ const Login = () => {
                 : `var(--ihc-dark-mode-text)`
             }}
           >
-            Submit
+            Enviar
           </Button>
         </DialogActions>
       </form>
