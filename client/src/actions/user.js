@@ -34,7 +34,7 @@ const handleLogin = async (user, dispatch) => {
   dispatch({ type: 'START_LOADING' })
 
   const result = await fetchingData(
-    { url: `${baseUrl}/api/auth/login`, body: user },
+    { url: `/api/auth/login`, body: user },
     dispatch
   )
   if (result.success) {
