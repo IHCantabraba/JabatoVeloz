@@ -5,7 +5,10 @@ export const handleRegister = async (user, dispatch) => {
   dispatch({ type: 'START_LOADING' })
 
   const result = await fetchingData(
-    { url: `${baseUrl}/api/auth/register`, body: user },
+    {
+      url: `https://jabato-veloz-backend.vercel.app/api/auth/register`,
+      body: user
+    },
     dispatch
   )
   if (result.success) {
