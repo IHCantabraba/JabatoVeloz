@@ -8,7 +8,7 @@
     }
   ],
   "functions": {
-    "index.js": {
+    "src/actions/*.js": {
       "maxDuration": 60
     }
   }
