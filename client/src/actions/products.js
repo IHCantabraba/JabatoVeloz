@@ -17,7 +17,11 @@ export const getProducts = async (dispatch, token, seriegrafias) => {
   /* obtener las seriegrafias exitentes para los productos si no se han cargado aún */
   if (!seriegrafias) {
     const seriegrafias = await fetchingData(
-      { url: `${baseUrl}/api/seriegrafias`, method: 'GET', token: token },
+      {
+        url: `https://jabato-veloz-backend.vercel.app/api/seriegrafias`,
+        method: 'GET',
+        token: token
+      },
       dispatch
     )
     if (seriegrafias.success) {

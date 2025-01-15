@@ -69,7 +69,7 @@ export const UpdateProfile = async (currentUser, updatedFields, dispatch) => {
   }
   try {
     const result = await fetch(
-      `${baseUrl}/api/users/${currentUser.result.user._id}`,
+      `https://jabato-veloz-backend.vercel.app/api/users/${currentUser.result.user._id}`,
       {
         headers: { Authorization: `Bearer ${currentUser.result.token}` },
         method: 'POST',
