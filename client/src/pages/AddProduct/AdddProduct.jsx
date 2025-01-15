@@ -79,13 +79,16 @@ const AdddProduct = ({ setPage }) => {
   return (
     <Container sx={{ py: 2, pb: 100 }}>
       <Container
+        maxWidth='md'
         sx={{
           boxShadow:
             '0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12)',
-          width: '40%',
           borderRadius: '10px',
           mt: 4,
-          bgcolor: `var(--ihc-${light ? 'light' : 'dark'}-mode-bg-form)`
+          bgcolor: `var(--ihc-${light ? 'light' : 'dark'}-mode-bg-form)`,
+          '&.MuiContainer-maxWidthMd': {
+            maxWidth: '600px'
+          }
         }}
       >
         <form
