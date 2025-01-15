@@ -34,7 +34,10 @@ const handleLogin = async (user, dispatch) => {
   dispatch({ type: 'START_LOADING' })
 
   const result = await fetchingData(
-    { url: `/api/auth/login`, body: user },
+    {
+      url: `https://jabato-veloz-backend.vercel.app/api/auth/login`,
+      body: user
+    },
     dispatch
   )
   if (result.success) {
