@@ -8,6 +8,8 @@ import {
   updatedUser
 } from '../controllers/users.js'
 import express from 'express'
+export const maxDuration = 60
+export const dynamic = 'force-dynamic'
 const userRouter = express.Router()
 userRouter.get('/', [isAuth, isAdmin], getAllusers)
 userRouter.get('/:id', [isAuth], getUserByID)

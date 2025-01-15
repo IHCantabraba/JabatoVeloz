@@ -77,3 +77,21 @@ Esta semilla creará:
 - 28 productos
 - 2 pedidos
 - 20 ordenes de ropa asignadas la mitad a cada uno de los pedidos.
+
+## Deployment link
+
+### 1. Render
+
+#### Client inside Server deploy
+
+https://jabatoveloz.onrender.com
+
+### 2. Vercel links
+
+#### 1. server side deploy
+
+https://jabato-veloz-backend.vercel.app
+
+#### 2. client side deploy
+
+https://jabato-veloz.vercel.app/

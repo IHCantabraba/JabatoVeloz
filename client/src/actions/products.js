@@ -4,7 +4,11 @@ const baseUrl = import.meta.env.VITE_BaseName
 export const getProducts = async (dispatch, token, seriegrafias) => {
   dispatch({ type: 'START_LOADING' })
   const productos = await fetchingData(
-    { url: `${baseUrl}/api/productos`, method: 'GET', token: token },
+    {
+      url: `https://jabato-veloz-backend.vercel.app/api/productos`,
+      method: 'GET',
+      token: token
+    },
     dispatch
   )
   if (productos.success) {
@@ -13,7 +17,11 @@ export const getProducts = async (dispatch, token, seriegrafias) => {
   /* obtener las seriegrafias exitentes para los productos si no se han cargado aún */
   if (!seriegrafias) {
     const seriegrafias = await fetchingData(
-      { url: `${baseUrl}/api/seriegrafias`, method: 'GET', token: token },
+      {
+        url: `https://jabato-veloz-backend.vercel.app/api/seriegrafias`,
+        method: 'GET',
+        token: token
+      },
       dispatch
     )
     if (seriegrafias.success) {
@@ -30,7 +38,7 @@ export const deleteProduct = async (dispatch, id, productoEliminado, token) => {
 
   const deleteProducto = await fetchingData(
     {
-      url: `${baseUrl}/api/productos/${id}`,
+      url: `https://jabato-veloz-backend.vercel.app/api/productos/${id}`,
       method: 'DELETE',
       token: token
     },
@@ -71,11 +79,14 @@ export const addProduct = async (dispatch, currentUser, data, setPage) => {
   productInfo.append('img', Photo)
   productInfo.append('originalIMG', originalIMG)
 
-  const addedProduct = await fetch(`${baseUrl}/api/productos/producto`, {
-    headers: { Authorization: `Bearer ${currentUser.result.token}` },
-    method: 'POST',
-    body: productInfo
-  })
+  const addedProduct = await fetch(
+    `https://jabato-veloz-backend.vercel.app/api/productos/producto`,
+    {
+      headers: { Authorization: `Bearer ${currentUser.result.token}` },
+      method: 'POST',
+      body: productInfo
+    }
+  )
   const result = await addedProduct.json()
   if (result.success) {
     dispatch({

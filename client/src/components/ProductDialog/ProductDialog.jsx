@@ -26,6 +26,7 @@ import { useValue } from '../../context/ContextProvider'
 import { createOrder } from '../../actions/orders'
 import { calculatePrecio } from './utils/calcularPrecio'
 import { obtenerCategoria } from './utils/obtenerCategoria'
+import { CustomProps } from '../utils/CustomProps'
 
 const ProductDialog = () => {
   const {
@@ -80,7 +81,9 @@ const ProductDialog = () => {
     setSelectedPedido('')
     setSelectedTalla('')
     setCantidad('1')
+    setSelectedSeriegrafia(0)
     dispatch({ type: 'UPDATE_PRODUCT', payload: null })
+    dispatch({ type: 'UPDATE_SERIEGRAFIA', payload: null })
   }
 
   const Tallas = product?.Tallas.split(' ')
@@ -90,21 +93,12 @@ const ProductDialog = () => {
   }
   const handleChangePedido = (e) => {
     setSelectedPedido(e.target.value)
-    console.log(`pedido selecionado es: ${selectedPedido}`)
   }
   const handleAmountChange = (e) => {
     setCantidad(e.target.value)
   }
   const handleSeriegrafia = (e) => {
     setSelectedSeriegrafia(e.target.value)
-    if (Number(e.target.value)) {
-      dispatch({
-        type: 'UPDATE_SERIEGRAFIA',
-        payload: currentUser.result.user.alias
-      })
-    } else {
-      dispatch({ type: 'UPDATE_SERIEGRAFIA', payload: false })
-    }
   }
   const handleInputSeriegrafia = (e) => {
     dispatch({ type: 'UPDATE_SERIEGRAFIA', payload: e.target.value })
@@ -196,125 +190,138 @@ const ProductDialog = () => {
                 {'Selecciona una talla y fecha de un pedido disponible: '}
               </Typography>
               {pedidos?.length > 0 ? (
-                <Stack
-                  direction='row'
-                  sx={{
-                    justifyContent: 'space-between',
-                    flexWrap: 'wrap',
-                    mt: 5,
-                    alignItems: 'center'
-                  }}
-                >
-                  <Box
-                    style={{
-                      display: 'flex',
+                <>
+                  <Stack
+                    direction='row'
+                    sx={{
+                      justifyContent: 'space-between',
                       flexWrap: 'wrap',
-                      gap: '20px',
-                      justifyContent: 'center',
+                      mt: 5,
                       alignItems: 'center'
                     }}
                   >
-                    {/* seleccionar talla */}
-                    <FormControl>
-                      <InputLabel id='tallas-label'>Tallas</InputLabel>
-                      <Select
-                        labelId='tallas-label'
-                        value={selectedTalla}
-                        label='Tallas'
-                        onChange={handleChangeTalla}
-                        sx={{ minWidth: '85px' }}
-                      >
-                        {product &&
-                          Tallas.map((talla) => (
-                            <MenuItem value={talla}>{talla}</MenuItem>
-                          ))}
-                      </Select>
-                    </FormControl>
-                    {/* selecionar pedido */}
-                    <FormControl>
-                      <InputLabel id='pedido-label'>Fecha Pedido</InputLabel>
-                      <Select
-                        value={selectedPedido}
-                        labelId='pedido-label'
-                        label='Fecha Pedido'
-                        onChange={handleChangePedido}
-                        autoWidth
-                        sx={{ minWidth: '150px' }}
-                      >
-                        {pedidos
-                          ? pedidos.map((pedido) => (
-                              <MenuItem value={pedido._id}>
-                                {pedido.ExpireDate}
-                              </MenuItem>
-                            ))
-                          : 'No hay pedidos actualmente'}
-                      </Select>
-                    </FormControl>
-                    {/* seleccionar cantidad */}
-                    <FormControl>
-                      <TextField
-                        sx={{ width: '7ch !important' }}
-                        variant='standard'
-                        inputProps={{ type: 'number', min: 1, max: 60 }}
-                        value={cantidad}
-                        onChange={handleAmountChange}
-                        name='cantidad'
-                      />
-                    </FormControl>
-                    {/* Seriegrafia */}
-                    {product &&
-                      obtenerCategoria(product, AvaliableSeriegrafia) && (
-                        <FormControl>
-                          <RadioGroup
-                            sx={{
-                              justifyContent: 'center',
-                              alignItems: 'center'
-                            }}
-                            name='Seriegrafia'
-                            value={SelectedSeriegrafia}
-                            row
-                            onChange={handleSeriegrafia}
-                          >
-                            <FormControlLabel
-                              value={0}
-                              control={<Radio />}
-                              label='Sin Seriegrafía'
-                            />
-                            <FormControlLabel
-                              value={1}
-                              control={<Radio />}
-                              label='Con Seriegrafía'
-                            />
-                            {seriegrafia && (
-                              <TextField
-                                sx={{
-                                  width: '20ch !important',
-                                  pb: 2
-                                }}
-                                variant='standard'
-                                name='Seriegrafía'
-                                label='Seriegrafía'
-                                value={seriegrafia}
-                                onChange={handleInputSeriegrafia}
+                    <Box
+                      style={{
+                        display: 'flex',
+                        flexWrap: 'wrap',
+                        gap: '20px',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                      }}
+                    >
+                      {/* seleccionar talla */}
+                      <FormControl>
+                        <InputLabel id='tallas-label'>Tallas</InputLabel>
+                        <Select
+                          labelId='tallas-label'
+                          value={selectedTalla}
+                          label='Tallas'
+                          onChange={handleChangeTalla}
+                          sx={{ minWidth: '85px' }}
+                          MenuProps={CustomProps}
+                        >
+                          {product &&
+                            Tallas.map((talla) => (
+                              <MenuItem value={talla}>{talla}</MenuItem>
+                            ))}
+                        </Select>
+                      </FormControl>
+                      {/* selecionar pedido */}
+                      <FormControl>
+                        <InputLabel id='pedido-label'>Fecha Pedido</InputLabel>
+                        <Select
+                          value={selectedPedido}
+                          labelId='pedido-label'
+                          label='Fecha Pedido'
+                          onChange={handleChangePedido}
+                          autoWidth
+                          sx={{ minWidth: '150px' }}
+                        >
+                          {pedidos
+                            ? pedidos.map((pedido) => (
+                                <MenuItem value={pedido._id}>
+                                  {pedido.ExpireDate}
+                                </MenuItem>
+                              ))
+                            : 'No hay pedidos actualmente'}
+                        </Select>
+                      </FormControl>
+                      {/* seleccionar cantidad */}
+                      <FormControl>
+                        <TextField
+                          sx={{ width: '7ch !important' }}
+                          variant='standard'
+                          inputProps={{ type: 'number', min: 1, max: 60 }}
+                          value={cantidad}
+                          onChange={handleAmountChange}
+                          name='cantidad'
+                        />
+                      </FormControl>
+                      {/* Seriegrafia */}
+                      {product &&
+                        obtenerCategoria(product, AvaliableSeriegrafia) && (
+                          <FormControl>
+                            <RadioGroup
+                              sx={{
+                                justifyContent: 'center',
+                                alignItems: 'center'
+                              }}
+                              name='Seriegrafia'
+                              value={SelectedSeriegrafia}
+                              row
+                              onChange={handleSeriegrafia}
+                            >
+                              <FormControlLabel
+                                value={0}
+                                control={<Radio />}
+                                label='Sin Seriegrafía'
                               />
-                            )}
-                          </RadioGroup>
-                        </FormControl>
-                      )}
-                  </Box>
-
+                              <FormControlLabel
+                                value={1}
+                                control={<Radio />}
+                                label='Con Seriegrafía'
+                              />
+                              {Number(SelectedSeriegrafia) === 1 && (
+                                <TextField
+                                  sx={{
+                                    width: '20ch !important',
+                                    pb: 2
+                                  }}
+                                  variant='standard'
+                                  name='Seriegrafía'
+                                  label='Seriegrafía'
+                                  value={seriegrafia ? seriegrafia : ''}
+                                  onChange={handleInputSeriegrafia}
+                                />
+                              )}
+                            </RadioGroup>
+                          </FormControl>
+                        )}
+                    </Box>
+                  </Stack>
                   {/* habilitar botón */}
                   {selectedTalla !== '' && selectedPedido && (
-                    <Button
-                      variant='contained'
-                      sx={{ backgroundColor: 'var(--ihc-jV-green)' }}
-                      endIcon={<Send />}
-                      onClick={handleSubmit}
+                    <Stack
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                      }}
                     >
-                      Solicitar
-                    </Button>
+                      <Button
+                        variant='contained'
+                        sx={{
+                          backgroundColor: 'var(--ihc-jV-green)',
+                          mt: 2
+                        }}
+                        endIcon={<Send />}
+                        onClick={handleSubmit}
+                      >
+                        Solicitar
+                      </Button>
+                    </Stack>
                   )}
-                </Stack>
+                </>
               ) : (
                 <Typography
                   variant='h6'

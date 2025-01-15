@@ -9,16 +9,8 @@ import {
   Select
 } from '@mui/material'
 import React from 'react'
-const ITEM_HEIGHT = 48
-const ITEM_PADDING_TOP = 8
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 2.5 + ITEM_PADDING_TOP,
-      width: 250
-    }
-  }
-}
+import { CustomProps } from '../utils/CustomProps'
+
 const DropDownMultiple = ({
   name,
   register,
@@ -43,7 +35,7 @@ const DropDownMultiple = ({
         id={name}
         onChange={handler}
         renderValue={(selected) => selected.join(', ')}
-        MenuProps={MenuProps}
+        MenuProps={CustomProps}
         multiple
         defaultValue
       >

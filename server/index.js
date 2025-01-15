@@ -29,6 +29,7 @@ cloudinaryConfig()
 app.use(express.json())
 /* configure to access from different ip (front and back end) */
 app.use(cors())
+
 /* router a los distintos modelos */
 /* auth (register login) */
 app.use('/api/auth', authRouter)

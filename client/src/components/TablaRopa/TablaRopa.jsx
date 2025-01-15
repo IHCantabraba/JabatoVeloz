@@ -15,9 +15,10 @@ import { updateOrder, deleteOrder } from '../../actions/orders'
 import { useValue } from '../../context/ContextProvider'
 import PaymentIcon from '@mui/icons-material/Payment'
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined'
+import { getSeriegrafiaPrice } from '../../actions/utils/PrecioSeriegrafia'
 export const TablaRopa = ({ userOrders }) => {
   const {
-    state: { currentUser, light },
+    state: { currentUser, light, AvaliableSeriegrafia },
     dispatch
   } = useValue()
   const handleUpdatePagado = (order) => {
@@ -48,6 +49,7 @@ export const TablaRopa = ({ userOrders }) => {
           <TableRow>
             <TableCell>Fecha Lanzamiento</TableCell>
             <TableCell align='right'>Artículo</TableCell>
+            <TableCell align='right'>Seriegrafia</TableCell>
             <TableCell align='right'>Talla</TableCell>
             <TableCell align='right'>Cantidad</TableCell>
             <TableCell align='right'>Precio (€)</TableCell>
@@ -66,10 +68,21 @@ export const TablaRopa = ({ userOrders }) => {
                 {order.pedidos.ExpireDate} {order.pedidos.open ? '' : 'Cerrado'}
               </TableCell>
               <TableCell align='right'>{order.productos?.Nombre}</TableCell>
+              <TableCell align='right'>
+                {order.seriegrafia !== '' ? order.seriegrafia : 'No'}
+              </TableCell>
               <TableCell align='right'>{order.talla}</TableCell>
               <TableCell align='right'>{order.unidades + 'x'}</TableCell>
               <TableCell align='right'>
                 {order.productos?.Precio + ' €'}
+                {order.seriegrafia
+                  ? '+' +
+                    getSeriegrafiaPrice(
+                      order.productos.Categoria,
+                      AvaliableSeriegrafia
+                    ) +
+                    '€'
+                  : ''}
               </TableCell>
               <TableCell align='right'>{order.pagado ? 'Si' : 'No'}</TableCell>
               <TableCell align='right'>

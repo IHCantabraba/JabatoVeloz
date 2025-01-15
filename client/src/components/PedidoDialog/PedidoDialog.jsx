@@ -170,7 +170,7 @@ const PedidoDialog = () => {
       >
         <Stack
           direction='row'
-          sx={{ justifyContent: 'space-between', flexWrap: 'wrap' }}
+          sx={{ justifyContent: 'space-between', flexWrap: 'wrap', mb: 2 }}
         >
           {OpenPedido ? (
             <Button

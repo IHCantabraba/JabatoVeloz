@@ -12,17 +12,12 @@ import React from 'react'
 import { useValue } from '../../context/ContextProvider'
 import DoneAllIcon from '@mui/icons-material/DoneAll'
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
+import { getSeriegrafiaPrice } from '../../actions/utils/PrecioSeriegrafia'
 const TablaPedidos = ({ pedido }) => {
   const {
     state: { AvaliableSeriegrafia, light }
   } = useValue()
 
-  const getSeriegrafiaPrice = (categoria, seriegrafiasDisponibles) => {
-    const filterSeriegrafia = seriegrafiasDisponibles.filter(
-      (serie) => serie.categoria === categoria
-    )
-    return filterSeriegrafia[0].precio
-  }
   return (
     <TableContainer
       component={Paper}

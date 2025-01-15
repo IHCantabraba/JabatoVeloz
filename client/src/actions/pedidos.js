@@ -5,7 +5,7 @@ export const createPedido = async (pedido, currentUser, dispatch, setPage) => {
   dispatch({ type: 'START_LOADING' })
   const result = await fetchingData(
     {
-      url: `${baseUrl}/api/pedidos/pedido`,
+      url: `https://jabato-veloz-backend.vercel.app/api/pedidos/pedido`,
       body: pedido,
       token: currentUser.result.token
     },
@@ -31,7 +31,10 @@ export const getPedidos = async (dispatch) => {
   dispatch({ type: 'START_LOADING' })
 
   const result = await fetchingData(
-    { url: `${baseUrl}/api/pedidos`, method: 'GET' },
+    {
+      url: `https://jabato-veloz-backend.vercel.app/api/pedidos`,
+      method: 'GET'
+    },
     dispatch
   )
   const handleExpirationDate = (pedido) => {
@@ -61,7 +64,7 @@ export const closePedido = async (pedido, currentUser, dispatch) => {
   dispatch({ type: 'START_LOADING' })
   const result = await fetchingData(
     {
-      url: `${baseUrl}/api/pedidos/pedido/${pedido._id}`,
+      url: `https://jabato-veloz-backend.vercel.app/api/pedidos/pedido/${pedido._id}`,
       method: 'POST',
       token: currentUser?.result.token
     },

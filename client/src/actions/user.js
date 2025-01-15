@@ -5,7 +5,10 @@ export const handleRegister = async (user, dispatch) => {
   dispatch({ type: 'START_LOADING' })
 
   const result = await fetchingData(
-    { url: `${baseUrl}/api/auth/register`, body: user },
+    {
+      url: `https://jabato-veloz-backend.vercel.app/api/auth/register`,
+      body: user
+    },
     dispatch
   )
   if (result.success) {
@@ -34,7 +37,10 @@ const handleLogin = async (user, dispatch) => {
   dispatch({ type: 'START_LOADING' })
 
   const result = await fetchingData(
-    { url: `${baseUrl}/api/auth/login`, body: user },
+    {
+      url: `https://jabato-veloz-backend.vercel.app/api/auth/login`,
+      body: user
+    },
     dispatch
   )
   if (result.success) {
@@ -63,7 +69,7 @@ export const UpdateProfile = async (currentUser, updatedFields, dispatch) => {
   }
   try {
     const result = await fetch(
-      `${baseUrl}/api/users/${currentUser.result.user._id}`,
+      `https://jabato-veloz-backend.vercel.app/api/users/${currentUser.result.user._id}`,
       {
         headers: { Authorization: `Bearer ${currentUser.result.token}` },
         method: 'POST',
