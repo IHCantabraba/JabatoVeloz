@@ -8,7 +8,7 @@
     }
   ],
   "functions": {
-    "src/actions/*.js": {
+    "api/routes/*.js": {
       "maxDuration": 60
     }
   }
