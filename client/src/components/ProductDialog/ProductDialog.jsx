@@ -90,14 +90,13 @@ const ProductDialog = () => {
   }
   const handleChangePedido = (e) => {
     setSelectedPedido(e.target.value)
-    console.log(`pedido selecionado es: ${selectedPedido}`)
   }
   const handleAmountChange = (e) => {
     setCantidad(e.target.value)
   }
   const handleSeriegrafia = (e) => {
     setSelectedSeriegrafia(e.target.value)
-    if (Number(e.target.value)) {
+    if (Number(e.target.value) === 1) {
       dispatch({
         type: 'UPDATE_SERIEGRAFIA',
         payload: currentUser.result.user.alias
