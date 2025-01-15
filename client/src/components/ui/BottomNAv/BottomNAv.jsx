@@ -26,7 +26,7 @@ const BottomNAv = () => {
     state: { isAdmin, light, productPage, currentUser },
     dispatch
   } = useValue()
-  const [value, setValue] = useState(3)
+  const [value, setValue] = useState(2)
 
   /* al cambiar entre páginas, hacer scroll al inicio  */
   const ref = useRef()
@@ -65,7 +65,9 @@ const BottomNAv = () => {
           showLabels
           value={value}
           onChange={(e, newValue) => setValue(newValue)}
-          sx={{ bgcolor: `var(--ihc-${light ? 'light' : 'dark'}-mode-bg-nav)` }}
+          sx={{
+            bgcolor: `var(--ihc-${light ? 'light' : 'dark'}-mode-bg-nav)`
+          }}
         >
           {/* <BottomNavigationAction label='Map' icon={<LocationOn />} /> */}
           {/* <BottomNavigationAction

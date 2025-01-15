@@ -22,7 +22,11 @@ const ProductCard = ({ producto }) => {
   } = useValue()
 
   return (
-    <Card key={producto._id} elevation={3} sx={{ maxWidth: '300px' }}>
+    <Card
+      key={producto._id}
+      elevation={3}
+      sx={{ maxWidth: '300px', justifySelf: 'center' }}
+    >
       <ImageListItem sx={{ height: '100% !important' }}>
         <ImageListItemBar
           sx={{
