@@ -26,6 +26,7 @@ import { useValue } from '../../context/ContextProvider'
 import { createOrder } from '../../actions/orders'
 import { calculatePrecio } from './utils/calcularPrecio'
 import { obtenerCategoria } from './utils/obtenerCategoria'
+import { CustomProps } from '../utils/CustomProps'
 
 const ProductDialog = () => {
   const {
@@ -98,14 +99,6 @@ const ProductDialog = () => {
   }
   const handleSeriegrafia = (e) => {
     setSelectedSeriegrafia(e.target.value)
-    // if (Number(e.target.value) === 1) {
-    //   dispatch({
-    //     type: 'UPDATE_SERIEGRAFIA',
-    //     payload: currentUser.result.user.alias
-    //   })
-    // } else {
-    //   dispatch({ type: 'UPDATE_SERIEGRAFIA', payload: false })
-    // }
   }
   const handleInputSeriegrafia = (e) => {
     dispatch({ type: 'UPDATE_SERIEGRAFIA', payload: e.target.value })
@@ -225,6 +218,7 @@ const ProductDialog = () => {
                           label='Tallas'
                           onChange={handleChangeTalla}
                           sx={{ minWidth: '85px' }}
+                          MenuProps={CustomProps}
                         >
                           {product &&
                             Tallas.map((talla) => (

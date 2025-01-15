@@ -1,16 +1,6 @@
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material'
 import React from 'react'
-
-const ITEM_HEIGHT = 48
-const ITEM_PADDING_TOP = 8
-const MenuProps = {
-  PaperProps: {
-    style: {
-      maxHeight: ITEM_HEIGHT * 2.5 + ITEM_PADDING_TOP,
-      width: 250
-    }
-  }
-}
+import { CustomProps } from '../utils/CustomProps'
 
 const DropDownMenu = ({
   name,
@@ -35,7 +25,7 @@ const DropDownMenu = ({
         nombre={name}
         id={name}
         onChange={handler}
-        MenuProps={MenuProps}
+        MenuProps={CustomProps}
         defaultValue
       >
         {selections &&
