@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { styled } from '@mui/material/styles'
-import { Collapse, CssBaseline, IconButton } from '@mui/material'
+import { Collapse, IconButton } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 import Directions from './Directions/Directions'
 import { Link as Scroll } from 'react-scroll'
+
 const PREFIX = 'MyLanding'
 const classes = {
   landing: `${PREFIX}-root`,
@@ -39,6 +40,9 @@ const Title = styled('div')(({ theme }) => ({
 }))
 const LandingPage = () => {
   const [checked, setChecked] = useState(false)
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
   useEffect(() => {
     setChecked(true)
   }, [])
