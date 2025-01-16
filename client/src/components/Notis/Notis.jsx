@@ -16,9 +16,9 @@ const Notis = () => {
   return (
     <Snackbar
       open={alert.open}
-      autoHideDuration={3000}
+      autoHideDuration={2000}
       onClose={handleClose}
-      anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+      anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
     >
       <Alert
         onClose={handleClose}
