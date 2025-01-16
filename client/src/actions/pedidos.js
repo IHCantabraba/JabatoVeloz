@@ -1,5 +1,6 @@
 import { extractDaysOf } from '../pages/Pedidos/utlis/extractDaysOff'
 import fetchingData from './utils/fetchingData'
+import { filterPedidos } from './utils/filterPedidos'
 const baseUrl = import.meta.env.VITE_BaseName
 export const createPedido = async (pedido, currentUser, dispatch, setPage) => {
   dispatch({ type: 'START_LOADING' })
@@ -29,7 +30,6 @@ export const createPedido = async (pedido, currentUser, dispatch, setPage) => {
 }
 export const getPedidos = async (dispatch) => {
   dispatch({ type: 'START_LOADING' })
-
   const result = await fetchingData(
     {
       url: `https://jabato-veloz-backend.vercel.app/api/pedidos`,
@@ -38,15 +38,6 @@ export const getPedidos = async (dispatch) => {
     dispatch
   )
   /* filtrar pedidos que tengan fecha vencida */
-
-  const filterPedidos = (pedidos) => {
-    if (pedidos) {
-      pedidos = pedidos.filter((pedido) => pedido.daysOff > 0 && pedido.open)
-    } else {
-      return pedidos
-    }
-    return pedidos
-  }
   if (result.success) {
     result.result.map((pedido) => {
       extractDaysOf(pedido)

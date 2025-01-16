@@ -9,9 +9,8 @@ const Pedidos = React.memo(() => {
     dispatch
   } = useValue()
   useEffect(() => {
-    console.log('getting pedidos')
     getPedidos(dispatch)
-  }, [getPedidos])
+  }, [])
 
   return (
     <Container sx={{ minHeight: '93vh', py: 5, mb: 4, pb: 40 }}>
