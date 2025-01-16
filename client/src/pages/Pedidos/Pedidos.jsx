@@ -3,14 +3,15 @@ import React, { useEffect } from 'react'
 import { useValue } from '../../context/ContextProvider'
 import { getPedidos } from '../../actions/pedidos'
 
-const Pedidos = () => {
+const Pedidos = React.memo(() => {
   const {
     state: { pedidos, isAdmin },
     dispatch
   } = useValue()
   useEffect(() => {
+    console.log('getting pedidos')
     getPedidos(dispatch)
-  }, [])
+  }, [getPedidos])
 
   return (
     <Container sx={{ minHeight: '93vh', py: 5, mb: 4, pb: 40 }}>
@@ -71,6 +72,6 @@ const Pedidos = () => {
       )}
     </Container>
   )
-}
+})
 
 export default Pedidos

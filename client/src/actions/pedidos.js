@@ -37,9 +37,6 @@ export const getPedidos = async (dispatch) => {
     },
     dispatch
   )
-  const handleExpirationDate = (pedido) => {
-    extractDaysOf(pedido)
-  }
   /* filtrar pedidos que tengan fecha vencida */
 
   const filterPedidos = (pedidos) => {
@@ -52,7 +49,7 @@ export const getPedidos = async (dispatch) => {
   }
   if (result.success) {
     result.result.map((pedido) => {
-      handleExpirationDate(pedido)
+      extractDaysOf(pedido)
     })
     const PedidosFiltrados = filterPedidos(result.result)
     dispatch({ type: 'UPDATE_PEDIDOS', payload: PedidosFiltrados })
