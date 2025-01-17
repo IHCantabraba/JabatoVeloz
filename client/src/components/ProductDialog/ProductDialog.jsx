@@ -239,7 +239,7 @@ const ProductDialog = () => {
                         >
                           {pedidos
                             ? pedidos.map((pedido) => (
-                                <MenuItem value={pedido._id}>
+                                <MenuItem value={pedido._id} key={pedido._id}>
                                   {pedido.ExpireDate}
                                 </MenuItem>
                               ))

@@ -28,6 +28,7 @@ const Pedidos = React.memo(() => {
             elevation={4}
             severity={pedido.severity}
             variant='outlined'
+            key={pedido._id}
           >
             <AlertTitle>{pedido.title}</AlertTitle>
             {pedido.description}

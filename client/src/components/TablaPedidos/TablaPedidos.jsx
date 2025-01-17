@@ -13,7 +13,7 @@ import { useValue } from '../../context/ContextProvider'
 import DoneAllIcon from '@mui/icons-material/DoneAll'
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
 import { getSeriegrafiaPrice } from '../../actions/utils/PrecioSeriegrafia'
-const TablaPedidos = ({ pedido }) => {
+const TablaPedidos = ({ pedido, printref }) => {
   const {
     state: { AvaliableSeriegrafia, light }
   } = useValue()
@@ -22,6 +22,7 @@ const TablaPedidos = ({ pedido }) => {
     <TableContainer
       component={Paper}
       sx={{ bgcolor: `var(--ihc-${light ? 'light' : 'dark'}-mode-table)` }}
+      ref={printref}
     >
       <Table sx={{ minWidth: '100%' }} size='small' aria-label='a dense table'>
         <TableHead>
