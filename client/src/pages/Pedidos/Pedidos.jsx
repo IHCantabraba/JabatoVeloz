@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import { useValue } from '../../context/ContextProvider'
 import { getPedidos } from '../../actions/pedidos'
 
-const Pedidos = () => {
+const Pedidos = React.memo(() => {
   const {
     state: { pedidos, isAdmin },
     dispatch
@@ -28,6 +28,7 @@ const Pedidos = () => {
             elevation={4}
             severity={pedido.severity}
             variant='outlined'
+            key={pedido._id}
           >
             <AlertTitle>{pedido.title}</AlertTitle>
             {pedido.description}
@@ -71,6 +72,6 @@ const Pedidos = () => {
       )}
     </Container>
   )
-}
+})
 
 export default Pedidos

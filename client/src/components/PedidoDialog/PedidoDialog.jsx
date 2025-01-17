@@ -18,34 +18,35 @@ import { useValue } from '../../context/ContextProvider'
 import TablaPedidos from '../TablaPedidos/TablaPedidos'
 import DoneAllIcon from '@mui/icons-material/DoneAll'
 import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf'
-import html2canvas from 'html2canvas'
-import { jsPDF } from 'jspdf'
 import { closePedido } from '../../actions/pedidos'
+import { DownloadTableExcel } from 'react-export-table-to-excel'
+
 const PedidoDialog = () => {
   const {
     state: { pedido, light, currentUser, OpenPedido },
     dispatch
   } = useValue()
   const printRef = useRef()
+
   const handleCerrarPedido = () => {
     /* TODO implement update Pedido */
     console.log(`Se va acerrar el pedido ${pedido._id}`)
     closePedido(pedido, currentUser, dispatch)
   }
-  const handleGenerarPDF = async () => {
-    console.log('se generará pdf')
-    const element = printRef.current
-    const canvas = await html2canvas(element)
-    const data = canvas.toDataURL('img/png')
+  // const handleGenerarPDF = async () => {
+  //   console.log('se generará pdf')
+  //   const element = printRef.current
+  //   const canvas = await html2canvas(element)
+  //   const data = canvas.toDataURL('img/png')
 
-    const pdf = new jsPDF()
-    const imgProperties = pdf.getImageProperties(data)
-    const pdfWidth = pdf.internal.pageSize.getWidth()
-    const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width
+  //   const pdf = new jsPDF()
+  //   const imgProperties = pdf.getImageProperties(data)
+  //   const pdfWidth = pdf.internal.pageSize.getWidth()
+  //   const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width
 
-    pdf.addImage(data, 'PNG', 0, 0, pdfWidth, pdfHeight)
-    pdf.save(`pedido_${pedido?._id}`)
-  }
+  //   pdf.addImage(data, 'PNG', 0, 0, pdfWidth, pdfHeight)
+  //   pdf.save(`pedido_${pedido?._id}`)
+  // }
   const handleClose = () => {
     dispatch({ type: 'UPDATE_PEDIDO', payload: null })
     dispatch({
@@ -105,7 +106,6 @@ const PedidoDialog = () => {
           alignContent: 'Center',
           width: '100%'
         }}
-        ref={printRef}
       >
         <Stack
           direction='row'
@@ -145,68 +145,68 @@ const PedidoDialog = () => {
             </Typography>
           </Box>
         </Stack>
-        {pedido?.orders.length > 0 ? (
-          <TablaPedidos pedido={pedido} />
-        ) : (
-          <Typography
-            sx={{
-              mt: 5,
-              width: '100%',
-              display: 'flex',
-              justifyContent: 'center'
-            }}
-            variant='h5'
-          >
-            Aún no hay ninguna orden de compra
-          </Typography>
-        )}
-      </Container>
-      <Container
-        sx={{
-          pt: 5,
-          alignContent: 'Center',
-          width: '100%'
-        }}
-      >
-        <Stack
-          direction='row'
-          sx={{ justifyContent: 'space-between', flexWrap: 'wrap', mb: 2 }}
-        >
-          {OpenPedido ? (
-            <Button
-              variant='contained'
-              sx={{ backgroundColor: 'var(--ihc-jV-green)', mt: 5 }}
-              endIcon={<PictureAsPdfIcon />}
-              onClick={handleGenerarPDF}
-            >
-              PDF
-            </Button>
+        <Stack>
+          {pedido?.orders.length > 0 ? (
+            <TablaPedidos pedido={pedido} printref={printRef} />
           ) : (
-            <Button
-              variant='contained'
-              sx={{ backgroundColor: 'var(--ihc-jV-green)', mt: 5 }}
-              endIcon={<PictureAsPdfIcon />}
-              onClick={handleGenerarPDF}
-              disabled
+            <Typography
+              sx={{
+                mt: 5,
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'center'
+              }}
+              variant='h5'
             >
-              PDF
-            </Button>
-          )}
-          {OpenPedido ? (
-            <Button
-              variant='contained'
-              sx={{ backgroundColor: 'var(--ihc-jV-green)', mt: 5 }}
-              endIcon={<DoneAllIcon />}
-              onClick={handleCerrarPedido}
-            >
-              Finalizar
-            </Button>
-          ) : (
-            <Typography variant='h4' component='span' sx={{ pt: 4 }}>
-              Finalizado!
+              Aún no hay ninguna orden de compra
             </Typography>
-            /* TODO pensar si hacemos un reabrir y un actualizar fecha */
           )}
+          <Stack
+            direction='row'
+            sx={{ justifyContent: 'space-between', flexWrap: 'wrap', mb: 2 }}
+          >
+            <DownloadTableExcel
+              filename={'pedido_' + pedido?._id}
+              sheet='ropa'
+              currentTableRef={printRef.current}
+            >
+              {OpenPedido ? (
+                <Button
+                  variant='contained'
+                  sx={{ backgroundColor: 'var(--ihc-jV-green)', mt: 5 }}
+                  endIcon={<PictureAsPdfIcon />}
+                  // onClick={handleGenerarPDF}
+                >
+                  Excel
+                </Button>
+              ) : (
+                <Button
+                  variant='contained'
+                  sx={{ backgroundColor: 'var(--ihc-jV-green)', mt: 5 }}
+                  endIcon={<PictureAsPdfIcon />}
+                  // onClick={handleGenerarPDF}
+                  disabled
+                >
+                  PDF
+                </Button>
+              )}
+            </DownloadTableExcel>
+            {OpenPedido ? (
+              <Button
+                variant='contained'
+                sx={{ backgroundColor: 'var(--ihc-jV-green)', mt: 5 }}
+                endIcon={<DoneAllIcon />}
+                onClick={handleCerrarPedido}
+              >
+                Finalizar
+              </Button>
+            ) : (
+              <Typography variant='h4' component='span' sx={{ pt: 4 }}>
+                Finalizado!
+              </Typography>
+              /* TODO pensar si hacemos un reabrir y un actualizar fecha */
+            )}
+          </Stack>
         </Stack>
       </Container>
     </Dialog>

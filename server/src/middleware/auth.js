@@ -15,7 +15,11 @@ export const isAuth = async (req, res, next) => {
     }
   } catch (error) {
     console.log(error)
-    return res.status(401).json(error)
+    if (error === 'jwt expired') {
+      return res.status(401).json('Sesión caducada')
+    } else {
+      return res.status(401).json(error)
+    }
   }
 }
 export const isAdmin = async (req, res, next) => {

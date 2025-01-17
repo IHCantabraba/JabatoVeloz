@@ -65,7 +65,9 @@ const BottomNAv = () => {
           showLabels
           value={value}
           onChange={(e, newValue) => setValue(newValue)}
-          sx={{ bgcolor: `var(--ihc-${light ? 'light' : 'dark'}-mode-bg-nav)` }}
+          sx={{
+            bgcolor: `var(--ihc-${light ? 'light' : 'dark'}-mode-bg-nav)`
+          }}
         >
           {/* <BottomNavigationAction label='Map' icon={<LocationOn />} /> */}
           {/* <BottomNavigationAction
