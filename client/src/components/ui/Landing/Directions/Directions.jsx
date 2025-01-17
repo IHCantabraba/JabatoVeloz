@@ -17,7 +17,7 @@ const Directions = () => {
       id='contact'
     >
       {cardInfomation.map((card) => (
-        <LandingCards cardInfo={card} checked={checked} />
+        <LandingCards key={card.id} cardInfo={card} checked={checked} />
       ))}
     </div>
   )

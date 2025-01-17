@@ -29,7 +29,9 @@ const Products = () => {
         }}
       >
         {filterProducts &&
-          filterProducts.map((producto) => <ProductCard {...{ producto }} />)}
+          filterProducts.map((producto) => (
+            <ProductCard key={producto._id} {...{ producto }} />
+          ))}
       </ImageList>
     </Container>
   )

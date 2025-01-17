@@ -54,7 +54,7 @@ const LandingPage = () => {
         <Collapse
           in={checked}
           {...(checked ? { timeout: 1000 } : {})}
-          collapsedHeight={50}
+          collapsedheight={50}
         >
           <Title sx={{ textAlign: 'center' }} className={classes.title}>
             Jabato Veloz <br />

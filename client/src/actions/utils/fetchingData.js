@@ -28,9 +28,15 @@ const fetchingData = async (
     }
     return data
   } catch (error) {
+    let msg = ''
+    if (error.message === 'jwt expired') {
+      msg = 'Sesion caducada'
+    } else {
+      msg = error.message
+    }
     dispatch({
       type: 'UPDATE_ALERT',
-      payload: { open: true, severity: 'error', message: error.message }
+      payload: { open: true, severity: 'error', message: msg }
     })
     console.log(error.message)
     dispatch({ type: 'END_LOADING' })
