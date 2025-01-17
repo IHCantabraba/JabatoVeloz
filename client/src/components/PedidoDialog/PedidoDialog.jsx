@@ -17,7 +17,8 @@ import { Close } from '@mui/icons-material'
 import { useValue } from '../../context/ContextProvider'
 import TablaPedidos from '../TablaPedidos/TablaPedidos'
 import DoneAllIcon from '@mui/icons-material/DoneAll'
-import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf'
+
+import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined'
 import { closePedido } from '../../actions/pedidos'
 import { DownloadTableExcel } from 'react-export-table-to-excel'
 
@@ -174,8 +175,7 @@ const PedidoDialog = () => {
                 <Button
                   variant='contained'
                   sx={{ backgroundColor: 'var(--ihc-jV-green)', mt: 5 }}
-                  endIcon={<PictureAsPdfIcon />}
-                  // onClick={handleGenerarPDF}
+                  endIcon={<ListAltOutlinedIcon />}
                 >
                   Excel
                 </Button>
@@ -183,8 +183,7 @@ const PedidoDialog = () => {
                 <Button
                   variant='contained'
                   sx={{ backgroundColor: 'var(--ihc-jV-green)', mt: 5 }}
-                  endIcon={<PictureAsPdfIcon />}
-                  // onClick={handleGenerarPDF}
+                  endIcon={<ListAltOutlinedIcon />}
                   disabled
                 >
                   PDF
