@@ -11,13 +11,12 @@ import {
   Typography
 } from '@mui/material'
 import React, { useRef } from 'react'
-
+// import * as XLSX from 'xlsx'
+import ExcelJS from 'exceljs'
 import { Close } from '@mui/icons-material'
-
 import { useValue } from '../../context/ContextProvider'
 import TablaPedidos from '../TablaPedidos/TablaPedidos'
 import DoneAllIcon from '@mui/icons-material/DoneAll'
-
 import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined'
 import { closePedido } from '../../actions/pedidos'
 import { DownloadTableExcel } from 'react-export-table-to-excel'
@@ -34,20 +33,60 @@ const PedidoDialog = () => {
     console.log(`Se va acerrar el pedido ${pedido._id}`)
     closePedido(pedido, currentUser, dispatch)
   }
-  // const handleGenerarPDF = async () => {
-  //   console.log('se generará pdf')
-  //   const element = printRef.current
-  //   const canvas = await html2canvas(element)
-  //   const data = canvas.toDataURL('img/png')
+  const generateExcel = async (pedido) => {
+    const rows = pedido.orders
+    const wb = new ExcelJS.Workbook()
+    const ws = wb.addWorksheet('PEDIDO')
+    const headers = Object.keys(rows[0])
+    ws.addRow(headers)
+    rows.forEach((row) => {
+      ws.addRow(Object.values(row))
+    })
+    const headerRow = ws.getRow(1)
+    headerRow.height = 20
+    headerRow.eachCell((cell) => {
+      cell.font = { bold: true }
+      cell.alignment = { horizontal: 'center', vertical: 'middle' }
+    })
+    const buffer = await wb.xlsx.writeBuffer()
+    const blob = new Blob([buffer], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    })
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    /* name when download */
+    link.download = `${pedido._id}_JABATO_VELOZ`
+    /* click de link */
+    link.click()
+    URL.revokeObjectURL(link.href)
+  }
+  const createExcelAndDownload = (pedido) => {
+    const data = pedido?.orders
+    /* TODO transformar las ordenes al formato de fila del excel que se deb generar */
 
-  //   const pdf = new jsPDF()
-  //   const imgProperties = pdf.getImageProperties(data)
-  //   const pdfWidth = pdf.internal.pageSize.getWidth()
-  //   const pdfHeight = (imgProperties.height * pdfWidth) / imgProperties.width
-
-  //   pdf.addImage(data, 'PNG', 0, 0, pdfWidth, pdfHeight)
-  //   pdf.save(`pedido_${pedido?._id}`)
-  // }
+    /* woorksheet */
+    const ws = XLSX.utils.json_to_sheet(data)
+    /* workbook */
+    const wb = XLSX.utils.book_new()
+    /* create sheet */
+    XLSX.utils.book_append_sheet(wb, ws, 'PEDIDO')
+    /* buffer */
+    const eBuffer = XLSX.write(wb, {
+      bookType: 'xlsx',
+      type: 'array'
+    })
+    // convert to blob in order to download
+    const blob = new Blob([eBuffer], {
+      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    })
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    /* name when download */
+    link.download = `${pedido._id}_JABATO_VELOZ`
+    /* click de link */
+    link.click()
+    URL.revokeObjectURL(link.href)
+  }
   const handleClose = () => {
     dispatch({ type: 'UPDATE_PEDIDO', payload: null })
     dispatch({
@@ -166,6 +205,8 @@ const PedidoDialog = () => {
             direction='row'
             sx={{ justifyContent: 'space-between', flexWrap: 'wrap', mb: 2 }}
           >
+            {/* New button */}
+            <Button onClick={() => generateExcel(pedido)}>New Excel</Button>
             <DownloadTableExcel
               filename={'pedido_' + pedido?._id}
               sheet='ropa'
