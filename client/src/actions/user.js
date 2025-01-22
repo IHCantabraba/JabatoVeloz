@@ -13,6 +13,12 @@ export const handleRegister = async (user, dispatch) => {
   )
   if (result.success) {
     dispatch({ type: 'CLOSE_LOGIN' })
+    console.log(result.result)
+    // login after register
+    handleLogin(
+      { nombre: result.result.nombre, password: user.password },
+      dispatch
+    )
     dispatch({
       type: 'UPDATE_ALERT',
       payload: {
@@ -35,7 +41,7 @@ export const handleRegister = async (user, dispatch) => {
 }
 const handleLogin = async (user, dispatch) => {
   dispatch({ type: 'START_LOADING' })
-
+  console.log(user)
   const result = await fetchingData(
     {
       url: `https://jabato-veloz-backend.vercel.app/api/auth/login`,
