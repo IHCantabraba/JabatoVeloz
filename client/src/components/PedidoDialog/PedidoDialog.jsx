@@ -25,7 +25,6 @@ import {
   bodyStyle,
   columnsWidth,
   createLink,
-  customHeaders,
   fillSheet,
   FormatedData,
   hedaerStyle,
@@ -34,6 +33,7 @@ import {
   lastRowStyle,
   productNameColor,
   SummaryRow,
+  TotalPrendas,
   TotalPrice
 } from './utils/customSheet'
 const PedidoDialog = () => {
@@ -76,6 +76,8 @@ const PedidoDialog = () => {
     TotalPrice(ws)
     // insertar observaciones
     insertObservation(ws, rows)
+    // Total prendas
+    TotalPrendas(ws, rows)
     // create a buffer
     const buffer = await wb.xlsx.writeBuffer()
     const blob = new Blob([buffer], {

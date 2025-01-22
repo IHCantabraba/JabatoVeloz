@@ -1,5 +1,24 @@
-import ExcelJS from 'exceljs'
+const customStyle = (
+  color = 'FF000000',
+  size = 14,
+  horizontal = 'center',
+  border = true
+) => {
+  const style = {
+    font: { bold: true, name: 'Arial', size: size, color: { argb: color } },
+    alignment: { horizontal: horizontal, vertical: 'middle' }
+  }
+  if (border) {
+    style.border = {
+      top: { style: 'thick' },
+      left: { style: 'thick' },
+      right: { style: 'thick' },
+      bottom: { style: 'thick' }
+    }
+  }
 
+  return style
+}
 export const customHeaders = [
   'Código',
   'PRENDA',
@@ -195,17 +214,7 @@ export const SummaryRow = (ws, date) => {
     }
   })
   Cell4.value = totalPrice
-  Cell4.font = {
-    bold: true,
-    size: 12,
-    name: 'Arial'
-  }
-  Cell4.alignment = { horizontal: 'center', vertical: 'middle' }
-  Cell4.border = {
-    bottom: { style: 'thick' },
-    left: { style: 'thick' },
-    right: { style: 'thick' }
-  }
+  Cell4.style = customStyle('FF000000', 12, 'center', true)
 }
 
 export const IvaRow = (ws, pedido) => {
@@ -215,25 +224,13 @@ export const IvaRow = (ws, pedido) => {
   ws.mergeCells(range1)
   const IvaCell = ws.getCell(`Q${ivaRowNumber}`)
   IvaCell.value = '21%IVA'
-  IvaCell.font = { bold: true, size: 12, name: 'Arial' }
-  IvaCell.alignment = { horizontal: 'right', vertical: 'middle' }
-  IvaCell.border = {
-    bottom: { style: 'thick' },
-    left: { style: 'thick' },
-    right: { style: 'thick' }
-  }
+  IvaCell.style = customStyle('FF000000', 12, 'right', true)
 
   let Iva = 0
   pedido?.orders.map((order) => (Iva += Number(order.precio) * 0.21))
   const totalIva = ws.getCell(`S${ivaRowNumber}`)
   totalIva.value = Iva
-  totalIva.font = { bold: true, size: 12, name: 'Arial' }
-  totalIva.alignment = { horizontal: 'center', vertical: 'middle' }
-  totalIva.border = {
-    bottom: { style: 'thick' },
-    left: { style: 'thick' },
-    right: { style: 'thick' }
-  }
+  totalIva.style = customStyle('FF000000', 12, 'center', true)
 
   const portes = ws.getCell(`G${ivaRowNumber}`)
   portes.value = 'PORTES NO INCLUIDOS'
@@ -252,39 +249,17 @@ export const TotalPrice = (ws) => {
   const range1 = `Q${totalRowNumber}:R${totalRowNumber}`
   ws.mergeCells(range1)
   const TotalCell = ws.getCell(`Q${totalRowNumber}`)
+  const TotalCellR = ws.getCell(`R${totalRowNumber}`)
   TotalCell.value = 'TOTAL'
-  TotalCell.font = {
-    bold: true,
-    size: 12,
-    name: 'Arial',
-    color: { argb: 'FFFF0000' }
-  }
-  TotalCell.alignment = { horizontal: 'right', vertical: 'middle' }
-  TotalCell.border = {
-    bottom: { style: 'thick' },
-    left: { style: 'thick' },
-    right: { style: 'thick' }
-  }
-
+  TotalCell.style = customStyle('FFFF0000', 12, 'right', true)
+  TotalCellR.style = customStyle('FFFF0000', 12, 'right', true)
   // obtener base e iva
   const base = ws.getCell(`S${totalRowNumber - 2}`)
   const iva = ws.getCell(`S${totalRowNumber - 1}`)
   const total = Number(base) + Number(iva)
   const totalCellPrice = ws.getCell(`S${totalRowNumber}`)
   totalCellPrice.value = total.toFixed(2) + ' €'
-  totalCellPrice.font = {
-    bold: true,
-    size: 12,
-    name: 'Arial',
-    color: { argb: 'FFFF0000' }
-  }
-  totalCellPrice.alignment = { horizontal: 'center', vertical: 'middle' }
-
-  totalCellPrice.border = {
-    bottom: { style: 'thick' },
-    left: { style: 'thick' },
-    right: { style: 'thick' }
-  }
+  totalCellPrice.style = customStyle('FFFF0000', 12, 'center', true)
 
   const portes = ws.getCell(`G${totalRowNumber}`)
   portes.value = '*Portes pagados a partir de 600 € Base Imponible.'
@@ -296,14 +271,7 @@ export const TotalPrice = (ws) => {
   // Observaciones
   const observacionesCell = ws.getCell(`B${totalRowNumber}`)
   observacionesCell.value = 'OBSERVACIONES'
-  observacionesCell.border = {
-    top: { style: 'thick' },
-    left: { style: 'thick' },
-    right: { style: 'thick' },
-    bottom: { style: 'thick' }
-  }
-  observacionesCell.alignment = { horizontal: 'center', vertical: 'middle' }
-  observacionesCell.font = { bold: true, name: 'arial', size: 14 }
+  observacionesCell.style = customStyle()
 }
 export const insertObservation = (ws, orders) => {
   const filterOrder = orders.filter((order) => order.seriegrafia)
@@ -314,11 +282,51 @@ export const insertObservation = (ws, orders) => {
     newRowCell.value = `${
       order.productos.Nombre
     }: ${order.talla.toUpperCase()}-> ${order.seriegrafia}`
-    newRowCell.font = {
-      bold: true,
-      name: 'Arial',
-      size: 14,
-      color: { argb: 'FFFF0000' }
-    }
+    newRowCell.style = customStyle('FFFF0000', 12, 'left', false)
   })
+}
+
+export const TotalPrendas = (ws, orders) => {
+  const totalPrendas = ws.addRow([])
+  const totalPrendasNumber = totalPrendas.number
+  const totalCell = ws.getCell(`B${totalPrendasNumber}`)
+  totalCell.value = 'TOTAL PRENDAS'
+  totalCell.style = customStyle()
+
+  const range1 = `G${totalPrendasNumber}:J${totalPrendasNumber}`
+  ws.mergeCells(range1)
+  const range2 = `L${totalPrendasNumber}:N${totalPrendasNumber}`
+  ws.mergeCells(range2)
+  const range3 = `O${totalPrendasNumber}:S${totalPrendasNumber}`
+  ws.mergeCells(range3)
+
+  // cantidad de prendas
+  const cantidad = ws.getCell(`G${totalPrendasNumber}`)
+  const cantidadH = ws.getCell(`H${totalPrendasNumber}`)
+  const cantidadI = ws.getCell(`I${totalPrendasNumber}`)
+  const cantidadJ = ws.getCell(`J${totalPrendasNumber}`)
+  cantidad.value = orders.length
+  cantidad.style = customStyle()
+  cantidadH.style = customStyle()
+  cantidadI.style = customStyle()
+  cantidadJ.style = customStyle()
+  // Fecha
+  const fecha = ws.getCell(`L${totalPrendasNumber}`)
+  const fechaM = ws.getCell(`M${totalPrendasNumber}`)
+  const fechaN = ws.getCell(`N${totalPrendasNumber}`)
+  fecha.value = 'FECHA'
+  fecha.style = customStyle()
+  fechaM.style = customStyle()
+  fechaN.style = customStyle()
+
+  const fechaValue = ws.getCell(`O${totalPrendasNumber}`)
+  const fechaValueP = ws.getCell(`P${totalPrendasNumber}`)
+  const fechaValueQ = ws.getCell(`Q${totalPrendasNumber}`)
+  const fechaValueR = ws.getCell(`R${totalPrendasNumber}`)
+  const fechaValueS = ws.getCell(`S${totalPrendasNumber}`)
+  fechaValue.style = customStyle()
+  fechaValueP.style = customStyle()
+  fechaValueQ.style = customStyle()
+  fechaValueR.style = customStyle()
+  fechaValueS.style = customStyle()
 }
