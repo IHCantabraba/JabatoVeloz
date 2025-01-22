@@ -22,6 +22,7 @@ import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined'
 import { closePedido } from '../../actions/pedidos'
 import { DownloadTableExcel } from 'react-export-table-to-excel'
 import {
+  AddEmptyRow,
   bodyStyle,
   columnsWidth,
   createLink,
@@ -30,6 +31,7 @@ import {
   hedaerStyle,
   insertObservation,
   IvaRow,
+  JabatoRow,
   lastRowStyle,
   productNameColor,
   SummaryRow,
@@ -76,15 +78,22 @@ const PedidoDialog = () => {
     TotalPrice(ws)
     // insertar observaciones
     insertObservation(ws, rows)
+    //empy
+    AddEmptyRow(ws)
     // Total prendas
     TotalPrendas(ws, rows)
+    //empy
+    AddEmptyRow(ws)
+    AddEmptyRow(ws)
+    // JV row
+    JabatoRow(ws)
     // create a buffer
     const buffer = await wb.xlsx.writeBuffer()
     const blob = new Blob([buffer], {
       type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     })
     //create a link
-    const link = createLink(blob, pedido._id)
+    const link = createLink(blob)
     URL.revokeObjectURL(link.href)
   }
   const createExcelAndDownload = (pedido) => {
