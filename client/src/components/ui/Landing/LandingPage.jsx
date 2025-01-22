@@ -59,9 +59,21 @@ const LandingPage = () => {
           {...(checked ? { timeout: 1000 } : {})}
           collapsedheight={50}
         >
-          <Title sx={{ textAlign: 'center' }} className={classes.title}>
+          <Title
+            sx={{
+              textAlign: 'center',
+              textShadow: 'var(--ihc-text-shadow-white)'
+            }}
+            className={classes.title}
+          >
             Jabato Veloz <br />
-            <span style={{ color: 'var(--ihc-JV-orange)', fontWeight: 'bold' }}>
+            <span
+              style={{
+                color: 'var(--ihc-JV-orange)',
+                fontWeight: 'bold',
+                textShadow: `var(--ihc-text-shadow-dark)`
+              }}
+            >
               Running Team
             </span>
           </Title>
