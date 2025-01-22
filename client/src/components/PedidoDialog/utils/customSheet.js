@@ -292,4 +292,33 @@ export const TotalPrice = (ws) => {
     color: { argb: 'FFFF0000' },
     name: 'Arial'
   }
+
+  // Observaciones
+  const observacionesCell = ws.getCell(`B${totalRowNumber}`)
+  observacionesCell.value = 'OBSERVACIONES'
+  observacionesCell.border = {
+    top: { style: 'thick' },
+    left: { style: 'thick' },
+    right: { style: 'thick' },
+    bottom: { style: 'thick' }
+  }
+  observacionesCell.alignment = { horizontal: 'center', vertical: 'middle' }
+  observacionesCell.font = { bold: true, name: 'arial', size: 14 }
+}
+export const insertObservation = (ws, orders) => {
+  const filterOrder = orders.filter((order) => order.seriegrafia)
+  filterOrder.map((order) => {
+    const newRow = ws.addRow([])
+    const newRowNumber = newRow.number
+    const newRowCell = ws.getCell(`B${newRowNumber}`)
+    newRowCell.value = `${
+      order.productos.Nombre
+    }: ${order.talla.toUpperCase()}-> ${order.seriegrafia}`
+    newRowCell.font = {
+      bold: true,
+      name: 'Arial',
+      size: 14,
+      color: { argb: 'FFFF0000' }
+    }
+  })
 }

@@ -29,6 +29,7 @@ import {
   fillSheet,
   FormatedData,
   hedaerStyle,
+  insertObservation,
   IvaRow,
   lastRowStyle,
   productNameColor,
@@ -73,6 +74,8 @@ const PedidoDialog = () => {
     IvaRow(ws, pedido)
     // TOTAL rpice
     TotalPrice(ws)
+    // insertar observaciones
+    insertObservation(ws, rows)
     // create a buffer
     const buffer = await wb.xlsx.writeBuffer()
     const blob = new Blob([buffer], {
