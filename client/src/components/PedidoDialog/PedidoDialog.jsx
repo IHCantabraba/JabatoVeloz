@@ -21,7 +21,20 @@ import DoneAllIcon from '@mui/icons-material/DoneAll'
 import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined'
 import { closePedido } from '../../actions/pedidos'
 import { DownloadTableExcel } from 'react-export-table-to-excel'
-
+import {
+  bodyStyle,
+  columnsWidth,
+  createLink,
+  customHeaders,
+  fillSheet,
+  FormatedData,
+  hedaerStyle,
+  IvaRow,
+  lastRowStyle,
+  productNameColor,
+  SummaryRow,
+  TotalPrice
+} from './utils/customSheet'
 const PedidoDialog = () => {
   const {
     state: { pedido, light, currentUser, OpenPedido },
@@ -36,126 +49,37 @@ const PedidoDialog = () => {
   }
   const generateExcel = async (pedido) => {
     const rows = pedido.orders
-    const formatedData = rows.map((data) => ({
-      codigo: data._id,
-      prenda: ` ${
-        data.seriegrafia
-          ? data.productos.Nombre + '- CON NOMBRE - DISEÑO PATROCINADOR'
-          : data.productos.Nombre + '- DISEÑO PATROCINADOR'
-      }`,
-      color: data.productos.Nombre === 'Pantalon largo' ? 'NEGRO' : '',
-      unica: data.talla === 'unica' ? Number(data.unidades) : '',
-      cuatro: data.talla === '4' ? Number(data.unidades) : '',
-      seis: data.talla === '6' ? Number(data.unidades) : '',
-      ocho: data.talla === '8' ? Number(data.unidades) : '',
-      diez: data.talla === '10' ? Number(data.unidades) : '',
-      doce: data.talla === '12' ? Number(data.unidades) : '',
-      catorce: data.talla === '14' ? Number(data.unidades) : '',
-      xs: data.talla === 'xs' ? Number(data.unidades) : '',
-      s: data.talla === 's' ? Number(data.unidades) : '',
-      m: data.talla === 'm' ? Number(data.unidades) : '',
-      l: data.talla === 'l' ? Number(data.unidades) : '',
-      xl: data.talla === 'xl' ? Number(data.unidades) : '',
-      dosxl: data.talla === '2xl' ? Number(data.unidades) : '',
-      tresxs: data.talla === '3xl' ? Number(data.unidades) : '',
-      cuatroxs: data.talla === '4xl' ? Number(data.unidades) : '',
-      TOTAL: Number(data.precio) - Number(data.precio) * 0.21
-    }))
-    //custom headers
-    const customHeaders = [
-      'Código',
-      'PRENDA',
-      'Color',
-      'Única',
-      '4',
-      '6',
-      '8',
-      '10',
-      '12',
-      '14',
-      'XS',
-      'S',
-      'M',
-      'L',
-      'XL',
-      '2XL',
-      '3XL',
-      '4XL',
-      'TOTAL'
-    ]
+    const formatedData = FormatedData(rows)
     // crear workbook y worksheet
     const wb = new ExcelJS.Workbook()
     const ws = wb.addWorksheet('PEDIDO')
 
     //introducir informacion
-    ws.addRow(customHeaders)
-    formatedData.forEach((row) => {
-      ws.addRow(Object.values(row))
-    })
-    const headerRow = ws.getRow(1)
+    // insertar datos
+    fillSheet(ws, formatedData)
     // style for header
-    headerRow.height = 20
-    headerRow.eachCell((cell) => {
-      cell.font = { bold: true, size: 14, name: 'Arial' }
-      cell.alignment = { horizontal: 'center', vertical: 'middle' }
-      cell.border = {
-        top: { style: 'thick', color: { argb: 'FF000000' } },
-        left: { style: 'thick', color: { argb: 'FF000000' } },
-        right: { style: 'thick', color: { argb: 'FF000000' } },
-        bottom: { style: 'thick', color: { argb: 'FF000000' } }
-      }
-    })
+    hedaerStyle(ws.getRow(1))
     /* asignar color a la celda de la prenda */
-    ws.eachRow((fila, numeroFila) => {
-      if (numeroFila > 1) {
-        const nombrePrenda = fila.getCell(2).value.split('-')
-
-        let richText = []
-        for (let part = 0; part < nombrePrenda.length; part++) {
-          let colorSelected =
-            part === 0
-              ? 'FF000000'
-              : nombrePrenda[part].includes('NOMBRE')
-              ? 'FFFF0000'
-              : 'FF0000FF'
-          const nuevaParte = {
-            text: `${nombrePrenda[part]} - `,
-            font: {
-              color: { argb: `${colorSelected}` },
-              bold: true
-            }
-          }
-
-          richText.push(nuevaParte)
-        }
-
-        fila.getCell(2).value = { richText }
-        richText = []
-      }
-    })
+    productNameColor(ws)
     /* asignar color a todos */
-    ws.eachRow((fila, numeroFila) => {
-      if (numeroFila > 1) {
-        fila.eachCell((cell) => {
-          cell.alignment = { horizontal: 'center', vertical: 'middle' }
-          cell.font = { bold: true, size: 11, name: 'Arial' }
-        })
-      }
-    })
-    ws.getColumn(1).width = 20
-    ws.getColumn(2).width = 80
+    bodyStyle(ws)
+    // ancho de las columnas Código y Prenda
+    columnsWidth(ws)
+    //line style las row
+    lastRowStyle(ws)
+    // summary Row
+    SummaryRow(ws, pedido.ExpireDate)
+    // Iva row
+    IvaRow(ws, pedido)
+    // TOTAL rpice
+    TotalPrice(ws)
     // create a buffer
     const buffer = await wb.xlsx.writeBuffer()
     const blob = new Blob([buffer], {
       type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     })
     //create a link
-    const link = document.createElement('a')
-    link.href = URL.createObjectURL(blob)
-    /* name when download */
-    link.download = `${pedido._id}_JABATO_VELOZ`
-    /* click de link */
-    link.click()
+    const link = createLink(blob, pedido._id)
     URL.revokeObjectURL(link.href)
   }
   const createExcelAndDownload = (pedido) => {
