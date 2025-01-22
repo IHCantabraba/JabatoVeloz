@@ -319,3 +319,36 @@ export const JabatoRow = (ws) => {
 export const AddEmptyRow = (ws) => {
   ws.addRow([])
 }
+
+export const customExcel = (ws, pedido) => {
+  const formatedData = FormatedData(pedido.orders)
+  // insertar datos
+  fillSheet(ws, formatedData)
+  // style for header
+  hedaerStyle(ws.getRow(1))
+  /* asignar color a la celda de la prenda */
+  productNameColor(ws)
+  /* asignar color a todos */
+  bodyStyle(ws)
+  // ancho de las columnas Código y Prenda
+  columnsWidth(ws)
+  //line style las row
+  lastRowStyle(ws)
+  // summary Row
+  SummaryRow(ws, pedido.ExpireDate)
+  // Iva row
+  IvaRow(ws, pedido)
+  // TOTAL rpice
+  TotalPrice(ws)
+  // insertar observaciones
+  insertObservation(ws, pedido.orders)
+  //empy
+  AddEmptyRow(ws)
+  // Total prendas
+  TotalPrendas(ws, pedido.orders)
+  //empy
+  AddEmptyRow(ws)
+  AddEmptyRow(ws)
+  // JV row
+  JabatoRow(ws)
+}

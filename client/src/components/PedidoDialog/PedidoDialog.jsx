@@ -21,23 +21,7 @@ import DoneAllIcon from '@mui/icons-material/DoneAll'
 import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined'
 import { closePedido } from '../../actions/pedidos'
 import { DownloadTableExcel } from 'react-export-table-to-excel'
-import {
-  AddEmptyRow,
-  bodyStyle,
-  columnsWidth,
-  createLink,
-  fillSheet,
-  FormatedData,
-  hedaerStyle,
-  insertObservation,
-  IvaRow,
-  JabatoRow,
-  lastRowStyle,
-  productNameColor,
-  SummaryRow,
-  TotalPrendas,
-  TotalPrice
-} from './utils/customSheet'
+import { createLink, customExcel } from './utils/customSheet'
 const PedidoDialog = () => {
   const {
     state: { pedido, light, currentUser, OpenPedido },
@@ -51,42 +35,12 @@ const PedidoDialog = () => {
     closePedido(pedido, currentUser, dispatch)
   }
   const generateExcel = async (pedido) => {
-    const rows = pedido.orders
-    const formatedData = FormatedData(rows)
-    // crear workbook y worksheet
     const wb = new ExcelJS.Workbook()
     const ws = wb.addWorksheet('PEDIDO')
-
+    // crear excel
+    customExcel(ws, pedido)
     //introducir informacion
-    // insertar datos
-    fillSheet(ws, formatedData)
-    // style for header
-    hedaerStyle(ws.getRow(1))
-    /* asignar color a la celda de la prenda */
-    productNameColor(ws)
-    /* asignar color a todos */
-    bodyStyle(ws)
-    // ancho de las columnas Código y Prenda
-    columnsWidth(ws)
-    //line style las row
-    lastRowStyle(ws)
-    // summary Row
-    SummaryRow(ws, pedido.ExpireDate)
-    // Iva row
-    IvaRow(ws, pedido)
-    // TOTAL rpice
-    TotalPrice(ws)
-    // insertar observaciones
-    insertObservation(ws, rows)
-    //empy
-    AddEmptyRow(ws)
-    // Total prendas
-    TotalPrendas(ws, rows)
-    //empy
-    AddEmptyRow(ws)
-    AddEmptyRow(ws)
-    // JV row
-    JabatoRow(ws)
+
     // create a buffer
     const buffer = await wb.xlsx.writeBuffer()
     const blob = new Blob([buffer], {
@@ -96,33 +50,7 @@ const PedidoDialog = () => {
     const link = createLink(blob)
     URL.revokeObjectURL(link.href)
   }
-  const createExcelAndDownload = (pedido) => {
-    const data = pedido?.orders
-    /* TODO transformar las ordenes al formato de fila del excel que se deb generar */
 
-    /* woorksheet */
-    const ws = XLSX.utils.json_to_sheet(data)
-    /* workbook */
-    const wb = XLSX.utils.book_new()
-    /* create sheet */
-    XLSX.utils.book_append_sheet(wb, ws, 'PEDIDO')
-    /* buffer */
-    const eBuffer = XLSX.write(wb, {
-      bookType: 'xlsx',
-      type: 'array'
-    })
-    // convert to blob in order to download
-    const blob = new Blob([eBuffer], {
-      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-    })
-    const link = document.createElement('a')
-    link.href = URL.createObjectURL(blob)
-    /* name when download */
-    link.download = `${pedido._id}_JABATO_VELOZ`
-    /* click de link */
-    link.click()
-    URL.revokeObjectURL(link.href)
-  }
   const handleClose = () => {
     dispatch({ type: 'UPDATE_PEDIDO', payload: null })
     dispatch({
