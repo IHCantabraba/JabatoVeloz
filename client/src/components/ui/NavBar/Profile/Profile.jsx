@@ -87,7 +87,13 @@ const Profile = () => {
             />
             <Avatar
               src={profile.photoURL}
-              sx={{ width: 75, height: 75, cursor: 'pointer' }}
+              sx={{
+                width: 75,
+                height: 75,
+                cursor: 'pointer'
+                // '& .MuiAvatar-img': { objectFit: 'contain' }
+              }}
+              style={{ objectFit: 'contain' }}
             />
           </label>
         </DialogContent>
