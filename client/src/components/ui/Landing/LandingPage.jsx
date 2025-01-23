@@ -56,6 +56,13 @@ const shakeAnimation = keyframes`10%, 90% {
   transform: translate3d(4px, 0, 0);
 }
 `
+const appDown = keyframes`10%, 90% { 
+  transform: translate3d(0, 4px, 0);
+}
+
+40%, 60% {
+  transform: translate3d(0, -2px, 0);
+}`
 const LandingPage = () => {
   const [checked, setChecked] = useState(false)
   useEffect(() => {
