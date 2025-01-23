@@ -22,7 +22,7 @@ const Products = () => {
   return (
     <Container sx={{ padding: '5px' }}>
       <ImageList
-        gap={12}
+        gap={50}
         sx={{
           mb: 8,
           gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))!important'

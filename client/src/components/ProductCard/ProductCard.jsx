@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import {
   Avatar,
   Card,
@@ -13,19 +13,23 @@ import { useValue } from '../../context/ContextProvider'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import ProductCardMenu from './ProductCardMenu'
 import { getPedidos } from '../../actions/pedidos'
-
+import { AddRate } from '../../actions/products'
 const ProductCard = ({ producto }) => {
   const [anchorProductMenu, setAnchorProductMenu] = useState(false)
   const {
     state: { isAdmin },
     dispatch
   } = useValue()
-
+  const [RateValue, setRateValue] = useState(0)
+  const addRate = (id, mark) => {
+    setRateValue(mark)
+    AddRate(dispatch, id, mark)
+  }
   return (
     <Card
       key={producto._id}
       elevation={3}
-      sx={{ maxWidth: '300px', justifySelf: 'center' }}
+      sx={{ height: '200px', width: '250px', justifySelf: 'center' }}
     >
       <ImageListItem sx={{ height: '100% !important' }}>
         <ImageListItemBar
@@ -66,9 +70,7 @@ const ProductCard = ({ producto }) => {
                   title='Ver Detalles'
                   sx={{ mr: '5px' }}
                 >
-                  <Avatar src={producto.img}>
-                    {/* <RemoveRedEyeOutlinedIcon /> */}
-                  </Avatar>
+                  <Avatar src={producto.img}></Avatar>
                 </Tooltip>
               </IconButton>
             )
@@ -94,8 +96,13 @@ const ProductCard = ({ producto }) => {
             <Rating
               sx={{ color: 'rgba(255,255,255,0.8)', mr: '5px' }}
               name='product-rating'
-              defaultValue={3.5}
+              defaultValue={0}
+              value={RateValue}
               precision={0.5}
+              onChange={(event, newEvent) => {
+                setRateValue(newEvent)
+                addRate(producto._id, RateValue)
+              }}
               emptyIcon={
                 <StarBorder
                   sx={{ color: 'rgba(255,255,255,0.8)' }}

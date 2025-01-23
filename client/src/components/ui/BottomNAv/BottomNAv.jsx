@@ -81,6 +81,7 @@ const BottomNAv = () => {
           /> */}
           {isAdmin && (
             <BottomNavigationAction
+              sx={{ display: { xs: 'none', md: 'flex' } }}
               label='Pedidos'
               icon={<ShoppingCartIcon />}
               onClick={() => {

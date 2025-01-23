@@ -9,8 +9,6 @@ import {
 } from '@mui/material'
 import { useValue } from '../../../context/ContextProvider'
 import { Lock } from '@mui/icons-material'
-import ModeNightIcon from '@mui/icons-material/ModeNight'
-import LightModeIcon from '@mui/icons-material/LightMode'
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined'
 import ModeNightOutlinedIcon from '@mui/icons-material/ModeNightOutlined'
 import UserIcon from './User/UserIcon'

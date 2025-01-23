@@ -14,6 +14,7 @@ const productosSchema = mongoose.Schema(
       type: String,
       required: true
     },
+    Puntuacion: [{ type: Number, required: false }],
     Descripcion: { type: String, required: false },
     img: { type: String, required: false },
     originalIMG: { type: Boolean, required: true }

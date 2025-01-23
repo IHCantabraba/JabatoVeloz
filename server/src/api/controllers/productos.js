@@ -42,3 +42,13 @@ export const createProduct = tryCatch(async (req, res) => {
       .status(201)
       .json({ success: true, result: product, message: 'Product added' })
 })
+
+export const addRate = tryCatch(async (req, res) => {
+  const { id } = req.params
+  const product = Productos.findById(id)
+  if (product) {
+    product.Puntuacion.push(req.body)
+  }
+  const updatedProduct = Productos.findByIdAndUpdate(id, product, { new: true })
+  return res.status(200).json({ success: true, message: 'Puntuado!' })
+})

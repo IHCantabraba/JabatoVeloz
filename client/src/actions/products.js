@@ -32,6 +32,15 @@ export const getProducts = async (dispatch, token, seriegrafias) => {
 
   return productos
 }
+export const AddRate = async (dispatch, id, mark) => {
+  dispatch({ type: 'START_LOADING' })
+  const updateProduct = await fetchingData({
+    url: `https://jabato-veloz-backend.vercel.app/api/productos/producto/${id}`,
+    method: 'POST',
+    body: mark
+  })
+  if (updateProduct.success) dispatch({ type: 'END_LOADING' })
+}
 
 export const deleteProduct = async (dispatch, id, productoEliminado, token) => {
   dispatch({ type: 'START_LOADING' })
