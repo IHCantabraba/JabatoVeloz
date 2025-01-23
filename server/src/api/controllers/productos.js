@@ -2,7 +2,10 @@ import Productos from '../models/productos.js'
 import tryCatch from './utils/tryCatch.js'
 import deleteFile from '../../utils/deleteFile.js'
 export const getAllProductos = tryCatch(async (req, res) => {
-  const productos = await Productos.find()
+  const productos = await Productos.find().populate({
+    path: 'Puntuacion',
+    populate: { path: 'users' }
+  })
   return res.status(201).json({
     success: true,
     result: productos,
@@ -45,10 +48,15 @@ export const createProduct = tryCatch(async (req, res) => {
 
 export const addRate = tryCatch(async (req, res) => {
   const { id } = req.params
-  const product = Productos.findById(id)
-  if (product) {
-    product.Puntuacion.push(req.body)
+  const productRated = await Productos.findById(id)
+
+  if (productRated) {
+    productRated.Puntuacion = [req.body.puntuacion, ...productRated.Puntuacion]
   }
-  const updatedProduct = Productos.findByIdAndUpdate(id, product, { new: true })
-  return res.status(200).json({ success: true, message: 'Puntuado!' })
+  const updatedProduct = await Productos.findByIdAndUpdate(id, productRated, {
+    new: true
+  })
+  return res
+    .status(200)
+    .json({ success: true, result: updatedProduct, message: 'Puntuado!' })
 })

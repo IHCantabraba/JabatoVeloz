@@ -17,13 +17,22 @@ import { AddRate } from '../../actions/products'
 const ProductCard = ({ producto }) => {
   const [anchorProductMenu, setAnchorProductMenu] = useState(false)
   const {
-    state: { isAdmin },
+    state: { isAdmin, currentUser, filterProducts },
     dispatch
   } = useValue()
   const [RateValue, setRateValue] = useState(0)
   const addRate = (id, mark) => {
     setRateValue(mark)
-    AddRate(dispatch, id, mark)
+    AddRate(dispatch, id, mark, currentUser.result.user._id)
+    setRateValue(0)
+  }
+  // asegurarse que se recoge el producto más actualizado
+  const getUpdatedProduct = () => {
+    const product = filterProducts.filter(
+      (product) => product._id === producto._id
+    )
+    console.log(product)
+    return product
   }
   return (
     <Card
@@ -61,7 +70,10 @@ const ProductCard = ({ producto }) => {
             ) : (
               <IconButton
                 onClick={() => {
-                  dispatch({ type: 'UPDATE_PRODUCT', payload: producto })
+                  dispatch({
+                    type: 'UPDATE_PRODUCT',
+                    payload: getUpdatedProduct
+                  })
                   getPedidos(dispatch)
                 }}
               >
@@ -96,12 +108,11 @@ const ProductCard = ({ producto }) => {
             <Rating
               sx={{ color: 'rgba(255,255,255,0.8)', mr: '5px' }}
               name='product-rating'
-              defaultValue={0}
               value={RateValue}
               precision={0.5}
               onChange={(event, newEvent) => {
                 setRateValue(newEvent)
-                addRate(producto._id, RateValue)
+                addRate(producto._id, newEvent)
               }}
               emptyIcon={
                 <StarBorder

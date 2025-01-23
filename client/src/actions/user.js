@@ -41,7 +41,6 @@ export const handleRegister = async (user, dispatch) => {
 }
 const handleLogin = async (user, dispatch) => {
   dispatch({ type: 'START_LOADING' })
-  console.log(user)
   const result = await fetchingData(
     {
       url: `https://jabato-veloz-backend.vercel.app/api/auth/login`,
@@ -54,7 +53,6 @@ const handleLogin = async (user, dispatch) => {
     dispatch({ type: 'SHOW_FILTERS' })
     dispatch({ type: 'SHOW_THEME_SWITCHER' })
     if (result.result.user.rol === 'admin') {
-      console.log('true')
       dispatch({ type: 'IS_ADMIN' })
     } else {
       dispatch({ type: 'NOT_ADMIN' })

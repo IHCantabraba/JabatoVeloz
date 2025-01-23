@@ -37,6 +37,21 @@ const Reducer = (state, action) => {
       return { ...state, isAdmin: false }
     case 'UPDATE_PEDIDOS':
       return { ...state, pedidos: action.payload }
+    case 'UPDATE_PRODUCT_IN_LIST':
+      const { _id, Puntuacion } = action.payload
+
+      const productos = state.productos.map((producto) => {
+        if (producto._id !== _id) {
+          return producto
+        }
+
+        return { ...producto, Puntuacion: Puntuacion }
+      })
+      return {
+        ...state,
+        productos: productos,
+        filterProducts: productos
+      }
     case 'UPDATE_PRODUCTOS':
       return {
         ...state,
