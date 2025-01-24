@@ -19,7 +19,6 @@ export default function LandingCards({ cardInfo, checked }) {
     dispatch({ type: 'OPEN_LOGIN' })
   }
   const handleContact = () => {
-    /* TODO create Contact Card */
     console.log('contact')
     dispatch({
       type: 'UPDATE_ALERT',
@@ -34,8 +33,7 @@ export default function LandingCards({ cardInfo, checked }) {
     <Collapse in={checked} {...(checked ? { timeout: 4000 } : {})}>
       <Card
         sx={{
-          height: 400,
-          width: 300,
+          width: { sx: 300, md: 450, lg: 450 },
           background: cardInfo.background,
           margin: '20px'
         }}
