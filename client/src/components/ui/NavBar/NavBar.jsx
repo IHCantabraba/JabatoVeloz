@@ -84,7 +84,7 @@ const NavBar = () => {
               sx={{
                 flexGrow: 1,
                 display: { xs: 'flex', md: 'none' },
-                textShadow: 'var(--ihc-text-thin-shadow-white)',
+                textShadow: 'var(--ihc-text-shadow-dark)',
                 color: `var(--ihc-${
                   !currentUser ? 'white' : light ? 'light' : 'dark'
                 }-mode-text)`
@@ -100,7 +100,8 @@ const NavBar = () => {
                 style={{
                   color: `var(--ihc-${
                     !currentUser ? 'white' : light ? 'light' : 'dark'
-                  }-mode-text)`
+                  }-mode-text)`,
+                  textShadow: 'var(--ihc-text-shadow-dark)'
                 }}
               >
                 Login

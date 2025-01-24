@@ -10,7 +10,9 @@ import { useValue } from '../../context/ContextProvider'
 
 const buttonSX = {
   color: 'var(--ihc-JV-orange)',
-  '&:hover': { backgroundColor: '#ddd' }
+  '&:hover': { backgroundColor: '#ddd' },
+  fontWeight: 'bold',
+  textShadow: 'var(--ihc-text-thin-shadow-dark)'
 }
 
 export default function LandingCards({ cardInfo, checked }) {
