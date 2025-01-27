@@ -73,7 +73,9 @@ const NavBar = () => {
                 style={{
                   color: 'var(--ihc-JV-orange)',
                   fontWeight: 'bold',
-                  textShadow: 'var(--ihc-text-thin-shadow-dark)'
+                  textShadow: `var(--ihc-text-thin-shadow-${
+                    !currentUser ? 'dark' : 'white'
+                  })`
                 }}
               >
                 Veloz
@@ -86,7 +88,9 @@ const NavBar = () => {
               sx={{
                 flexGrow: 1,
                 display: { xs: 'flex', md: 'none' },
-                textShadow: 'var(--ihc-text-shadow-dark)',
+                textShadow: `var(--ihc-text-shadow-${
+                  !currentUser ? 'dark' : 'white'
+                })`,
                 color: `var(--ihc-${
                   !currentUser ? 'white' : light ? 'light' : 'dark'
                 }-mode-text)`
