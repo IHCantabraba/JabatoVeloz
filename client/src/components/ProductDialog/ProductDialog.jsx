@@ -19,7 +19,7 @@ import {
   Toolbar,
   Typography
 } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Close, Send, Star } from '@mui/icons-material'
 import { useValue } from '../../context/ContextProvider'
@@ -27,7 +27,10 @@ import { createOrder } from '../../actions/orders'
 import { calculatePrecio } from './utils/calcularPrecio'
 import { obtenerCategoria } from './utils/obtenerCategoria'
 import { CustomProps } from '../utils/CustomProps'
-
+import { getAverage } from './utils/getRateAverage'
+import { AddRate } from '../../actions/products'
+// let RATES = 0
+// let SCORE = 0
 const ProductDialog = () => {
   const {
     state: {
@@ -46,6 +49,13 @@ const ProductDialog = () => {
   const [SelectedSeriegrafia, setSelectedSeriegrafia] = useState(
     seriegrafia ? 1 : 0
   )
+  const [RateValue, setRateValue] = useState(0)
+
+  const addRate = (id, mark) => {
+    setRateValue(mark)
+    AddRate(dispatch, id, mark, currentUser.result.user._id)
+    setRateValue(0)
+  }
 
   /* definir transición para abrir la página */
   /* TOOD averiguar porqué afecta a los clicks tras cerrar una vez */
@@ -153,12 +163,20 @@ const ProductDialog = () => {
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              <Typography variant='h6' component='span'>
-                {'Valoracion: '}
+              <Typography
+                variant='h6'
+                component='span'
+                sx={{ display: 'flex', alignItems: 'center' }}
+              >
+                {` Valorar: `}
                 <Rating
-                  defaultValue={3.5}
+                  value={RateValue}
                   precision={0.5}
                   emptyIcon={<Star />}
+                  onChange={(event, newEvent) => {
+                    setRateValue(newEvent)
+                    addRate(product._id, newEvent)
+                  }}
                 />
               </Typography>
             </Box>
@@ -221,8 +239,10 @@ const ProductDialog = () => {
                           MenuProps={CustomProps}
                         >
                           {product &&
-                            Tallas.map((talla) => (
-                              <MenuItem value={talla}>{talla}</MenuItem>
+                            Tallas.map((talla, index) => (
+                              <MenuItem key={index} value={talla}>
+                                {talla}
+                              </MenuItem>
                             ))}
                         </Select>
                       </FormControl>

@@ -1,4 +1,8 @@
 import mongoose from 'mongoose'
+const subSchema = mongoose.Schema({
+  users: { type: mongoose.Types.ObjectId, ref: 'users', required: true },
+  score: { type: Number, required: true }
+})
 
 const productosSchema = mongoose.Schema(
   {
@@ -14,6 +18,7 @@ const productosSchema = mongoose.Schema(
       type: String,
       required: true
     },
+    Puntuacion: [subSchema],
     Descripcion: { type: String, required: false },
     img: { type: String, required: false },
     originalIMG: { type: Boolean, required: true }

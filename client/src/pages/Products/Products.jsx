@@ -14,6 +14,7 @@ const Products = () => {
     dispatch
   } = useValue()
   useEffect(() => {
+    console.log('fetchingProducts')
     getProducts(dispatch, currentUser.result.token, AvaliableSeriegrafia)
   }, [productoEliminado])
   useEffect(() => {
@@ -22,7 +23,7 @@ const Products = () => {
   return (
     <Container sx={{ padding: '5px' }}>
       <ImageList
-        gap={12}
+        gap={50}
         sx={{
           mb: 8,
           gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))!important'

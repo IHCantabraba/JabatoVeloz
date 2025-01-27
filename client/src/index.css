@@ -23,4 +23,8 @@
   --ihc-jV-green: green;
   --ihc-red-icons: red;
   --ihc-disabled-icon: grey;
+  --ihc-text-shadow-white: 2px 2px 2px #fef6e4;
+  --ihc-text-shadow-dark: 2px 2px 2px #0f0e17;
+  --ihc-text-thin-shadow-white: 1px 1px 1px #afaead;
+  --ihc-text-thin-shadow-dark: 2px 2px 2px #6c6a6a;
 }

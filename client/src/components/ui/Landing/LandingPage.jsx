@@ -4,13 +4,13 @@ import { Collapse, IconButton } from '@mui/material'
 import { ExpandMore } from '@mui/icons-material'
 import Directions from './Directions/Directions'
 import { Link as Scroll } from 'react-scroll'
-
+import { keyframes } from '@mui/material'
 const PREFIX = 'MyLanding'
 const classes = {
   landing: `${PREFIX}-root`,
   title: `${PREFIX}-root`
 }
-
+// styled landing
 const Landing = styled('div')(({ theme }) => ({
   [`&.${classes.landing}`]: {
     minHeight: '100vh',
@@ -29,6 +29,7 @@ const Landing = styled('div')(({ theme }) => ({
     alignItems: 'center'
   }
 }))
+//styled Title
 const Title = styled('div')(({ theme }) => ({
   [`&.${classes.title}`]: {
     fontWeight: 'bold',
@@ -38,6 +39,30 @@ const Title = styled('div')(({ theme }) => ({
     fontFamily: 'Nunito'
   }
 }))
+// animation
+const shakeAnimation = keyframes`10%, 90% {
+  transform: translate3d(-1px, 0, 0);
+}
+
+20%, 80% {
+  transform: translate3d(2px, 0, 0);
+}
+
+30%, 50%, 70% {
+  transform: translate3d(-4px, 0, 0);
+}
+
+40%, 60% {
+  transform: translate3d(4px, 0, 0);
+}
+`
+const appDown = keyframes`10%, 90% { 
+  transform: translate3d(0, 4px, 0);
+}
+
+40%, 60% {
+  transform: translate3d(0, -2px, 0);
+}`
 const LandingPage = () => {
   const [checked, setChecked] = useState(false)
   useEffect(() => {
@@ -59,9 +84,21 @@ const LandingPage = () => {
           {...(checked ? { timeout: 1000 } : {})}
           collapsedheight={50}
         >
-          <Title sx={{ textAlign: 'center' }} className={classes.title}>
+          <Title
+            sx={{
+              textAlign: 'center',
+              textShadow: 'var(--ihc-text-shadow-white)'
+            }}
+            className={classes.title}
+          >
             Jabato Veloz <br />
-            <span style={{ color: 'var(--ihc-JV-orange)', fontWeight: 'bold' }}>
+            <span
+              style={{
+                color: 'var(--ihc-JV-orange)',
+                fontWeight: 'bold',
+                textShadow: `var(--ihc-text-shadow-dark)`
+              }}
+            >
               Running Team
             </span>
           </Title>
@@ -73,8 +110,13 @@ const LandingPage = () => {
             <IconButton
               sx={{
                 width: '50px',
+                height: '50px',
                 alignSelf: 'center',
-                color: 'var(--ihc-JV-orange)'
+                color: 'var(--ihc-JV-orange)',
+                '&:hover': {
+                  scale: 1.1,
+                  animation: `${shakeAnimation} 0.5s linear`
+                }
               }}
             >
               <ExpandMore sx={{ fontSize: '5rem' }} />

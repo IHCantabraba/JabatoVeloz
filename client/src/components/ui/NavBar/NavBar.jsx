@@ -9,8 +9,6 @@ import {
 } from '@mui/material'
 import { useValue } from '../../../context/ContextProvider'
 import { Lock } from '@mui/icons-material'
-import ModeNightIcon from '@mui/icons-material/ModeNight'
-import LightModeIcon from '@mui/icons-material/LightMode'
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined'
 import ModeNightOutlinedIcon from '@mui/icons-material/ModeNightOutlined'
 import UserIcon from './User/UserIcon'
@@ -59,8 +57,10 @@ const NavBar = () => {
               variant='h6'
               component='h1'
               noWrap
-              sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}
-              style={{
+              sx={{
+                flexGrow: 1,
+                display: { xs: 'none', md: 'flex' },
+                textShadow: 'var(--ihc-text-shadow-dark)',
                 color: `var(--ihc-${
                   !currentUser ? 'white' : light ? 'light' : 'dark'
                 }-mode-text)`
@@ -68,7 +68,11 @@ const NavBar = () => {
             >
               Jabato
               <span
-                style={{ color: 'var(--ihc-JV-orange)', fontWeight: 'bold' }}
+                style={{
+                  color: 'var(--ihc-JV-orange)',
+                  fontWeight: 'bold',
+                  textShadow: 'var(--ihc-text-thin-shadow-dark)'
+                }}
               >
                 Veloz
               </span>
@@ -77,8 +81,10 @@ const NavBar = () => {
               variant='h6'
               component='h1'
               noWrap
-              sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
-              style={{
+              sx={{
+                flexGrow: 1,
+                display: { xs: 'flex', md: 'none' },
+                textShadow: 'var(--ihc-text-shadow-dark)',
                 color: `var(--ihc-${
                   !currentUser ? 'white' : light ? 'light' : 'dark'
                 }-mode-text)`
@@ -94,7 +100,8 @@ const NavBar = () => {
                 style={{
                   color: `var(--ihc-${
                     !currentUser ? 'white' : light ? 'light' : 'dark'
-                  }-mode-text)`
+                  }-mode-text)`,
+                  textShadow: 'var(--ihc-text-shadow-dark)'
                 }}
               >
                 Login

@@ -10,7 +10,9 @@ import { useValue } from '../../context/ContextProvider'
 
 const buttonSX = {
   color: 'var(--ihc-JV-orange)',
-  '&:hover': { backgroundColor: '#ddd' }
+  '&:hover': { backgroundColor: '#ddd' },
+  fontWeight: 'bold',
+  textShadow: 'var(--ihc-text-thin-shadow-dark)'
 }
 
 export default function LandingCards({ cardInfo, checked }) {
@@ -19,7 +21,6 @@ export default function LandingCards({ cardInfo, checked }) {
     dispatch({ type: 'OPEN_LOGIN' })
   }
   const handleContact = () => {
-    /* TODO create Contact Card */
     console.log('contact')
     dispatch({
       type: 'UPDATE_ALERT',
@@ -31,9 +32,13 @@ export default function LandingCards({ cardInfo, checked }) {
     })
   }
   return (
-    <Collapse in={checked} {...(checked ? { timeout: 100 } : {})}>
+    <Collapse in={checked} {...(checked ? { timeout: 4000 } : {})}>
       <Card
-        sx={{ width: 450, background: cardInfo.background, margin: '20px' }}
+        sx={{
+          width: { sx: 300, md: 450, lg: 450 },
+          background: cardInfo.background,
+          margin: '20px'
+        }}
       >
         <CardMedia sx={{ height: 200 }} image={cardInfo.url} title='Team' />
         <CardContent>
