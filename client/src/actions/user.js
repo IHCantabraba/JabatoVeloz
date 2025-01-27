@@ -49,7 +49,7 @@ const handleLogin = async (user, dispatch) => {
     dispatch
   )
   if (result.success) {
-    dispatch({ type: 'UPDATE_USER', payload: result })
+    dispatch({ type: 'UPDATE_USER', payload: result.result })
     dispatch({ type: 'SHOW_FILTERS' })
     dispatch({ type: 'SHOW_THEME_SWITCHER' })
     if (result.result.user.rol === 'admin') {
