@@ -19,7 +19,7 @@ const ProductCardMenu = ({
   }
 
   const handleClickDelete = (id) => {
-    deleteProduct(dispatch, id, productoEliminado, currentUser.token)
+    deleteProduct(dispatch, id, productoEliminado, currentUser?.token)
     // setEliminado(!eliminado)
   }
   return (

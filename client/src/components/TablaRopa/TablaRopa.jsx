@@ -23,11 +23,11 @@ export const TablaRopa = ({ userOrders }) => {
   } = useValue()
   const handleUpdatePagado = (order) => {
     console.log(`actualizando estado de ${order._id}`)
-    updateOrder(dispatch, order, currentUser.user._id, currentUser.token)
+    updateOrder(dispatch, order, currentUser?.user._id, currentUser?.token)
   }
   const handleDeleteOrder = (order) => {
     console.log(`deleting order ${order._id}`)
-    deleteOrder(dispatch, order, currentUser.user._id, currentUser.token)
+    deleteOrder(dispatch, order, currentUser?.user._id, currentUser?.token)
   }
   return (
     <TableContainer

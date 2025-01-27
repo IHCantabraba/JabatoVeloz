@@ -54,7 +54,7 @@ export const closePedido = async (pedido, currentUser, dispatch) => {
     {
       url: `https://jabato-veloz-backend.vercel.app/api/pedidos/pedido/${pedido._id}`,
       method: 'POST',
-      token: currentUser.token
+      token: currentUser?.token
     },
     dispatch
   )
