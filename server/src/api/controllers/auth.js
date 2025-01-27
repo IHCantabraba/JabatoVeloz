@@ -32,6 +32,7 @@ export const login = tryCatch(async (req, res, next) => {
   //try {
   const { nombre, password } = req.body
   const user = await User.findOne({ nombre })
+
   if (!user) {
     return res.status(400).json({
       success: false,
@@ -40,9 +41,16 @@ export const login = tryCatch(async (req, res, next) => {
   }
   if (bcrypt.compareSync(password, user.password)) {
     const token = generateKey(user.id)
+    const simplifiedUser = {
+      _id: user._id,
+      alias: user.alias,
+      nombre: user.nombre,
+      rol: user.rol
+    }
+    console.log(simplifiedUser)
     return res.status(200).json({
       success: true,
-      result: { token, user },
+      result: { token, user: simplifiedUser },
       message: 'Successfully login!'
     })
   }

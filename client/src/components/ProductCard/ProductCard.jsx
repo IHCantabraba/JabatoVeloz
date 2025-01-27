@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useState } from 'react'
 import {
   Avatar,
   Card,
@@ -13,7 +13,6 @@ import { useValue } from '../../context/ContextProvider'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import ProductCardMenu from './ProductCardMenu'
 import { getPedidos } from '../../actions/pedidos'
-import { AddRate } from '../../actions/products'
 import { getAverage } from '../ProductDialog/utils/getRateAverage'
 
 let SCORE = 0
@@ -23,18 +22,7 @@ const ProductCard = ({ producto }) => {
     state: { isAdmin, currentUser, filterProducts },
     dispatch
   } = useValue()
-  // useEffect(() => {
-  //   if (producto?.Puntuacion?.length > 0) {
-  //     const ratingData = getAverage(producto.Puntuacion)
-  //     SCORE = ratingData.average
-  //   }
-  // }, [])
-  // const [RateValue, setRateValue] = useState(0)
-  // const addRate = (id, mark) => {
-  //   setRateValue(mark)
-  //   AddRate(dispatch, id, mark, currentUser.result.user._id)
-  //   setRateValue(0)
-  // }
+
   // asegurarse que se recoge el producto más actualizado
   const getUpdatedProduct = () => {
     const product = filterProducts.filter(
