@@ -28,8 +28,9 @@ import { calculatePrecio } from './utils/calcularPrecio'
 import { obtenerCategoria } from './utils/obtenerCategoria'
 import { CustomProps } from '../utils/CustomProps'
 import { getAverage } from './utils/getRateAverage'
-let RATES = 0
-let SCORE = 0
+import { AddRate } from '../../actions/products'
+// let RATES = 0
+// let SCORE = 0
 const ProductDialog = () => {
   const {
     state: {
@@ -48,13 +49,13 @@ const ProductDialog = () => {
   const [SelectedSeriegrafia, setSelectedSeriegrafia] = useState(
     seriegrafia ? 1 : 0
   )
-  useEffect(() => {
-    if (product?.Puntuacion?.length > 0) {
-      const ratingData = getAverage(product.Puntuacion)
-      RATES = ratingData.total
-      SCORE = ratingData.average
-    }
-  }, [product])
+  const [RateValue, setRateValue] = useState(0)
+
+  const addRate = (id, mark) => {
+    setRateValue(mark)
+    AddRate(dispatch, id, mark, currentUser.result.user._id)
+    setRateValue(0)
+  }
 
   /* definir transición para abrir la página */
   /* TOOD averiguar porqué afecta a los clicks tras cerrar una vez */
@@ -167,12 +168,15 @@ const ProductDialog = () => {
                 component='span'
                 sx={{ display: 'flex', alignItems: 'center' }}
               >
-                {`(${RATES}) Valoraciones: `}
+                {` Valorar: `}
                 <Rating
-                  value={SCORE}
+                  value={RateValue}
                   precision={0.5}
                   emptyIcon={<Star />}
-                  readOnly
+                  onChange={(event, newEvent) => {
+                    setRateValue(newEvent)
+                    addRate(product._id, newEvent)
+                  }}
                 />
               </Typography>
             </Box>

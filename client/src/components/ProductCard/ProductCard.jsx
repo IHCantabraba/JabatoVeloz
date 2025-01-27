@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {
   Avatar,
   Card,
@@ -14,18 +14,27 @@ import MoreVertIcon from '@mui/icons-material/MoreVert'
 import ProductCardMenu from './ProductCardMenu'
 import { getPedidos } from '../../actions/pedidos'
 import { AddRate } from '../../actions/products'
+import { getAverage } from '../ProductDialog/utils/getRateAverage'
+
+let SCORE = 0
 const ProductCard = ({ producto }) => {
   const [anchorProductMenu, setAnchorProductMenu] = useState(false)
   const {
     state: { isAdmin, currentUser, filterProducts },
     dispatch
   } = useValue()
-  const [RateValue, setRateValue] = useState(0)
-  const addRate = (id, mark) => {
-    setRateValue(mark)
-    AddRate(dispatch, id, mark, currentUser.result.user._id)
-    setRateValue(0)
-  }
+  // useEffect(() => {
+  //   if (producto?.Puntuacion?.length > 0) {
+  //     const ratingData = getAverage(producto.Puntuacion)
+  //     SCORE = ratingData.average
+  //   }
+  // }, [])
+  // const [RateValue, setRateValue] = useState(0)
+  // const addRate = (id, mark) => {
+  //   setRateValue(mark)
+  //   AddRate(dispatch, id, mark, currentUser.result.user._id)
+  //   setRateValue(0)
+  // }
   // asegurarse que se recoge el producto más actualizado
   const getUpdatedProduct = () => {
     const product = filterProducts.filter(
@@ -106,17 +115,15 @@ const ProductCard = ({ producto }) => {
           title={producto.Precio + '€' + ' ' + producto.Sexo}
           actionIcon={
             <Rating
-              sx={{ color: 'rgba(255,255,255,0.8)', mr: '5px' }}
+              size='small'
+              sx={{ mr: '5px' }}
               name='product-rating'
-              value={RateValue}
+              value={getAverage(producto?.Puntuacion)}
               precision={0.5}
-              onChange={(event, newEvent) => {
-                setRateValue(newEvent)
-                addRate(producto._id, newEvent)
-              }}
+              readOnly
               emptyIcon={
                 <StarBorder
-                  sx={{ color: 'rgba(255,255,255,0.8)' }}
+                  sx={{ height: '18px', color: 'rgba(255, 255, 255, 0.8)' }}
                 ></StarBorder>
               }
             />

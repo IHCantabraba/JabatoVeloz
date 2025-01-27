@@ -60,7 +60,7 @@ const NavBar = () => {
               sx={{
                 flexGrow: 1,
                 display: { xs: 'none', md: 'flex' },
-                textShadow: 'var(--ihc-text-thin-shadow-white)',
+                textShadow: 'var(--ihc-text-shadow-dark)',
                 color: `var(--ihc-${
                   !currentUser ? 'white' : light ? 'light' : 'dark'
                 }-mode-text)`
