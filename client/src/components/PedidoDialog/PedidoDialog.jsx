@@ -169,32 +169,27 @@ const PedidoDialog = () => {
             direction='row'
             sx={{ justifyContent: 'space-between', flexWrap: 'wrap', mb: 2 }}
           >
-            {/* New button */}
-            <Button onClick={() => generateExcel(pedido)}>New Excel</Button>
-            <DownloadTableExcel
-              filename={'pedido_' + pedido?._id}
-              sheet='ropa'
-              currentTableRef={printRef.current}
-            >
-              {OpenPedido ? (
-                <Button
-                  variant='contained'
-                  sx={{ backgroundColor: 'var(--ihc-jV-green)', mt: 5 }}
-                  endIcon={<ListAltOutlinedIcon />}
-                >
-                  Excel
-                </Button>
-              ) : (
-                <Button
-                  variant='contained'
-                  sx={{ backgroundColor: 'var(--ihc-jV-green)', mt: 5 }}
-                  endIcon={<ListAltOutlinedIcon />}
-                  disabled
-                >
-                  PDF
-                </Button>
-              )}
-            </DownloadTableExcel>
+            {OpenPedido ? (
+              <Button
+                variant='contained'
+                sx={{ backgroundColor: 'var(--ihc-jV-green)', mt: 5 }}
+                endIcon={<ListAltOutlinedIcon />}
+                onClick={() => generateExcel(pedido)}
+              >
+                Excel
+              </Button>
+            ) : (
+              <Button
+                variant='contained'
+                sx={{ backgroundColor: 'var(--ihc-jV-green)', mt: 5 }}
+                endIcon={<ListAltOutlinedIcon />}
+                onClick={() => generateExcel(pedido)}
+                disabled
+              >
+                Excel
+              </Button>
+            )}
+
             {OpenPedido ? (
               <Button
                 variant='contained'

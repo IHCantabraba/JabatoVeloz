@@ -1,3 +1,10 @@
+const getCurrentDate = () => {
+  const date = new Date()
+  const month = date.getUTCMonth() + 1
+  const year = date.getUTCFullYear()
+  const today = `${month}_${year}`
+  return today
+}
 const customStyle = (
   color = 'FF000000',
   size = 14,
@@ -45,8 +52,10 @@ export const FormatedData = (orders) => {
     codigo: data._id,
     prenda: ` ${
       data.seriegrafia
-        ? data.productos.Nombre + '- CON NOMBRE - DISEÑO PATROCINADOR'
-        : data.productos.Nombre + '- DISEÑO PATROCINADOR'
+        ? data.productos.Nombre + '- CON NOMBRE'
+        : data.productos.Nombre
+    } ${
+      data.productos.Categoria === 'Camisetas' ? '- DISEÑO PATROCINADOR' : ''
     }`,
     color: data.productos.Nombre === 'Pantalon largo' ? 'NEGRO' : '',
     unica: data.talla === 'unica' ? Number(data.unidades) : '',
@@ -69,7 +78,7 @@ export const FormatedData = (orders) => {
   return formatedData
 }
 
-export const hedaerStyle = (headerRow) => {
+export const headerStyle = (headerRow) => {
   headerRow.height = 20
   headerRow.eachCell((cell) => {
     cell.font = { bold: true, size: 14, name: 'Arial' }
@@ -117,15 +126,19 @@ export const productNameColor = (ws) => {
   })
 }
 export const columnsWidth = (ws) => {
-  ws.getColumn(1).width = 20
+  ws.getColumn(1).width = 40
   ws.getColumn(2).width = 80
   ws.getColumn(`S`).width = 15
 }
 export const bodyStyle = (ws) => {
   ws.eachRow((fila, numeroFila) => {
     if (numeroFila > 1) {
-      fila.eachCell((cell) => {
-        cell.alignment = { horizontal: 'center', vertical: 'middle' }
+      let horizontal = 'center'
+      fila.eachCell((cell, colNumber) => {
+        if (colNumber === 2) {
+          horizontal = 'left'
+        }
+        cell.alignment = { horizontal: horizontal, vertical: 'middle' }
         cell.font = { bold: true, size: 11, name: 'Arial' }
       })
     }
@@ -145,7 +158,7 @@ export const createLink = (blob) => {
   const link = document.createElement('a')
   link.href = URL.createObjectURL(blob)
   /* name when download */
-  link.download = `Pedido_JABATO_VELOZ`
+  link.download = `Pedido_${getCurrentDate()}_JABATO_VELOZ`
   /* click de link */
   link.click()
   return link
@@ -157,14 +170,13 @@ export const fillSheet = (ws, formatedData) => {
   })
 }
 
-export const SummaryRow = (ws, date) => {
+export const SummaryRow = (ws) => {
   //añadir fila
   const summaryRow = ws.addRow([])
   const summaryRowNumber = summaryRow.number
 
   // primera celda Fecha
   const Cell1 = ws.getCell(`A${summaryRowNumber}`)
-  Cell1.value = date
   Cell1.style = customStyle('FFFF0000', '12', 'center', true)
 
   const range1 = `A${summaryRowNumber}:C${summaryRowNumber}`
@@ -325,7 +337,7 @@ export const customExcel = (ws, pedido) => {
   // insertar datos
   fillSheet(ws, formatedData)
   // style for header
-  hedaerStyle(ws.getRow(1))
+  headerStyle(ws.getRow(1))
   /* asignar color a la celda de la prenda */
   productNameColor(ws)
   /* asignar color a todos */
@@ -335,7 +347,7 @@ export const customExcel = (ws, pedido) => {
   //line style las row
   lastRowStyle(ws)
   // summary Row
-  SummaryRow(ws, pedido.ExpireDate)
+  SummaryRow(ws)
   // Iva row
   IvaRow(ws, pedido)
   // TOTAL rpice
