@@ -29,7 +29,6 @@ export const register = tryCatch(async (req, res, next) => {
     .json({ success: true, result: user, message: 'Registration successfuly' })
 })
 export const login = tryCatch(async (req, res, next) => {
-  //try {
   const { nombre, password } = req.body
   const user = await User.findOne({ nombre })
 
@@ -47,7 +46,6 @@ export const login = tryCatch(async (req, res, next) => {
       nombre: user.nombre,
       rol: user.rol
     }
-    console.log(simplifiedUser)
     return res.status(200).json({
       success: true,
       result: { token, user: simplifiedUser },

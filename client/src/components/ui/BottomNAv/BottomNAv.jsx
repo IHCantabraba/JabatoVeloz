@@ -122,11 +122,7 @@ const BottomNAv = () => {
             label='MiRopa'
             icon={<CheckroomIcon />}
             onClick={() => {
-              getUserOrders(
-                dispatch,
-                currentUser.result.user._id,
-                currentUser.result.token
-              )
+              getUserOrders(dispatch, currentUser.user._id, currentUser.token)
               dispatch({ type: 'HIDE_FILTERS' })
             }}
           />

@@ -13,7 +13,7 @@ const MiRopa = () => {
       <Stack>
         <Box>
           <Typography variant='h4' component='span'>
-            {`Ropa solicitada por ${currentUser.result.user.nombre}`}
+            {`Ropa solicitada por ${currentUser.user.nombre}`}
           </Typography>
         </Box>
       </Stack>

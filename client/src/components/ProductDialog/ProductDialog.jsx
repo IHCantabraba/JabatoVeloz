@@ -53,7 +53,7 @@ const ProductDialog = () => {
 
   const addRate = (id, mark) => {
     setRateValue(mark)
-    AddRate(dispatch, id, mark, currentUser.result.user._id)
+    AddRate(dispatch, id, mark, currentUser.user._id)
     setRateValue(0)
   }
 
@@ -77,7 +77,7 @@ const ProductDialog = () => {
     e.preventDefault()
 
     const body = {
-      users: currentUser.result.user._id,
+      users: currentUser.user._id,
       productos: product._id,
       talla: selectedTalla,
       pedidos: selectedPedido,

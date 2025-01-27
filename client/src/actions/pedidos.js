@@ -8,7 +8,7 @@ export const createPedido = async (pedido, currentUser, dispatch, setPage) => {
     {
       url: `https://jabato-veloz-backend.vercel.app/api/pedidos/pedido`,
       body: pedido,
-      token: currentUser.result.token
+      token: currentUser.token
     },
     dispatch
   )
@@ -54,7 +54,7 @@ export const closePedido = async (pedido, currentUser, dispatch) => {
     {
       url: `https://jabato-veloz-backend.vercel.app/api/pedidos/pedido/${pedido._id}`,
       method: 'POST',
-      token: currentUser?.result.token
+      token: currentUser.token
     },
     dispatch
   )

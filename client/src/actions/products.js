@@ -97,7 +97,7 @@ export const addProduct = async (dispatch, currentUser, data, setPage) => {
   const addedProduct = await fetch(
     `https://jabato-veloz-backend.vercel.app/api/productos/producto`,
     {
-      headers: { Authorization: `Bearer ${currentUser.result.token}` },
+      headers: { Authorization: `Bearer ${currentUser.token}` },
       method: 'POST',
       body: productInfo
     }

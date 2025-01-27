@@ -93,7 +93,7 @@ const AddPedido = ({ setPage }) => {
       ExpireDate: `${FechaPedido.$D}/${FechaPedido.$M + 1}/${FechaPedido.$y}`,
       title: details.title,
       description: details.description,
-      users: currentUser.result.user._id
+      users: currentUser.user._id
     }
     createPedido(pedido, currentUser, dispatch, setPage)
   }

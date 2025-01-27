@@ -15,7 +15,7 @@ const Products = () => {
   } = useValue()
   useEffect(() => {
     console.log('fetchingProducts')
-    getProducts(dispatch, currentUser.result.token, AvaliableSeriegrafia)
+    getProducts(dispatch, currentUser.token, AvaliableSeriegrafia)
   }, [productoEliminado])
   useEffect(() => {
     getCategoriasAndGeneros(filterProducts, dispatch)

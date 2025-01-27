@@ -75,7 +75,7 @@ const Profile = () => {
             inputRef={nameRef}
             inputProps={{ minLength: 2 }}
             required
-            defaultValue={currentUser?.result.user.nombre}
+            defaultValue={currentUser.user.nombre}
           />
           <label htmlFor='profilePhoto'>
             <input

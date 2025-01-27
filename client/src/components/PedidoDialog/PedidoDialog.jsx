@@ -20,7 +20,6 @@ import TablaPedidos from '../TablaPedidos/TablaPedidos'
 import DoneAllIcon from '@mui/icons-material/DoneAll'
 import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined'
 import { closePedido } from '../../actions/pedidos'
-import { DownloadTableExcel } from 'react-export-table-to-excel'
 import { createLink, customExcel } from './utils/customSheet'
 const PedidoDialog = () => {
   const {
