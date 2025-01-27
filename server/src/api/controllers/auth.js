@@ -44,7 +44,8 @@ export const login = tryCatch(async (req, res, next) => {
       _id: user._id,
       alias: user.alias,
       nombre: user.nombre,
-      rol: user.rol
+      rol: user.rol,
+      img: user.img
     }
     return res.status(200).json({
       success: true,
