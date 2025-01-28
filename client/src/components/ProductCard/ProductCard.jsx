@@ -10,29 +10,21 @@ import {
   Tooltip,
   Typography
 } from '@mui/material'
-import { StarBorder } from '@mui/icons-material'
+
 import { useValue } from '../../context/ContextProvider'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import ProductCardMenu from './ProductCardMenu'
 import { getPedidos } from '../../actions/pedidos'
-import { getAverage } from '../ProductDialog/utils/getRateAverage'
+
 import RatingInfo from '../RatingInfo/RatingInfo'
 
 const ProductCard = ({ producto }) => {
   const [anchorProductMenu, setAnchorProductMenu] = useState(false)
   const {
-    state: { isAdmin, currentUser, filterProducts },
+    state: { isAdmin },
     dispatch
   } = useValue()
 
-  // asegurarse que se recoge el producto más actualizado
-  const getUpdatedProduct = () => {
-    const product = filterProducts.filter(
-      (product) => product._id === producto._id
-    )
-    console.log(product)
-    return product
-  }
   return (
     <Card
       key={producto._id}
