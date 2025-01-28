@@ -121,8 +121,13 @@ const PedidoDialog = () => {
           }}
         >
           <Avatar
-            src='./assets/Jabato_Veloz9_tran.png'
-            sx={{ width: '150px', height: '75px', alignSelf: 'start' }}
+            src='./assets/JV_circle_Icon.png'
+            sx={{
+              width: '75px',
+              height: '75px',
+              alignSelf: 'start',
+              boxShadow: 5
+            }}
           ></Avatar>
           <Typography
             variant='h6'
