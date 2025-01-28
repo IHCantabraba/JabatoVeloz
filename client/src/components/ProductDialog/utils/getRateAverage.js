@@ -1,8 +1,7 @@
 export const getAverage = (puntuaciones) => {
-  const numeroPuntuaciones = puntuaciones.length
-  let puntuacionTotal = 0
-  puntuaciones.map((puntuacion) => (puntuacionTotal += puntuacion.score))
-  const average = puntuacionTotal / numeroPuntuaciones
+  const average =
+    puntuaciones.reduce((suma, puntuacion) => suma + puntuacion.score, 0) /
+    puntuaciones.length
 
   return average.toFixed(1)
 }

@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import {
   Avatar,
+  Box,
   Card,
   IconButton,
   ImageListItem,
   ImageListItemBar,
   Rating,
-  Tooltip
+  Tooltip,
+  Typography
 } from '@mui/material'
 import { StarBorder } from '@mui/icons-material'
 import { useValue } from '../../context/ContextProvider'
@@ -15,7 +17,6 @@ import ProductCardMenu from './ProductCardMenu'
 import { getPedidos } from '../../actions/pedidos'
 import { getAverage } from '../ProductDialog/utils/getRateAverage'
 
-let SCORE = 0
 const ProductCard = ({ producto }) => {
   const [anchorProductMenu, setAnchorProductMenu] = useState(false)
   const {
@@ -100,21 +101,52 @@ const ProductCard = ({ producto }) => {
         />
         {/* Rate area */}
         <ImageListItemBar
-          title={producto.Precio + '€' + ' ' + producto.Sexo}
-          actionIcon={
-            <Rating
-              size='small'
-              sx={{ mr: '5px' }}
-              name='product-rating'
-              value={getAverage(producto?.Puntuacion)}
-              precision={0.5}
-              readOnly
-              emptyIcon={
-                <StarBorder
-                  sx={{ height: '18px', color: 'rgba(255, 255, 255, 0.8)' }}
-                ></StarBorder>
-              }
-            />
+          title={
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-around'
+              }}
+            >
+              <Typography>
+                {producto.Precio + '€' + ' ' + producto.Sexo + ' '}
+              </Typography>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-around'
+                }}
+              >
+                <Typography variant='body2'>
+                  {getAverage(producto?.Puntuacion) === 'NaN'
+                    ? '-'
+                    : `${getAverage(producto?.Puntuacion)}/5 `}
+                </Typography>
+                <Rating
+                  size='small'
+                  sx={{ mr: '5px' }}
+                  name='product-rating'
+                  value={getAverage(producto?.Puntuacion)}
+                  precision={0.1}
+                  max={1}
+                  readOnly
+                  emptyIcon={
+                    <StarBorder
+                      sx={{ height: '18px', color: 'rgba(255, 255, 255, 0.8)' }}
+                    ></StarBorder>
+                  }
+                />
+                <Typography variant='body2'>
+                  {producto?.Puntuacion
+                    ? `(${producto.Puntuacion.length}) `
+                    : '(0) '}
+                </Typography>
+              </Box>
+            </Box>
           }
         />
       </ImageListItem>
