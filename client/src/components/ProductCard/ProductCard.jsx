@@ -67,22 +67,8 @@ const ProductCard = ({ producto }) => {
                 />
               </>
             ) : (
-              <IconButton
-                onClick={() => {
-                  dispatch({
-                    type: 'UPDATE_PRODUCT',
-                    payload: getUpdatedProduct
-                  })
-                  getPedidos(dispatch)
-                }}
-              >
-                <Tooltip
-                  id='Detalles-button'
-                  title='Ver Detalles'
-                  sx={{ mr: '5px' }}
-                >
-                  <Avatar src={producto.img}></Avatar>
-                </Tooltip>
+              <IconButton sx={{ pointerEvents: 'none' }}>
+                <Avatar src={producto.img}></Avatar>
               </IconButton>
             )
           }
