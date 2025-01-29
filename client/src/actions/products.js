@@ -5,7 +5,7 @@ export const getProducts = async (dispatch, token, seriegrafias) => {
   dispatch({ type: 'START_LOADING' })
   const productos = await fetchingData(
     {
-      url: `https://jabato-veloz-backend.vercel.app/api/productos`,
+      url: `https://jabatoveloz-backend.vercel.app/api/productos`,
       method: 'GET',
       token: token
     },
@@ -18,7 +18,7 @@ export const getProducts = async (dispatch, token, seriegrafias) => {
   if (!seriegrafias) {
     const seriegrafias = await fetchingData(
       {
-        url: `https://jabato-veloz-backend.vercel.app/api/seriegrafias`,
+        url: `https://jabatoveloz-backend.vercel.app/api/seriegrafias`,
         method: 'GET',
         token: token
       },
@@ -36,7 +36,7 @@ export const AddRate = async (dispatch, id, mark, userId) => {
   dispatch({ type: 'START_LOADING' })
   const updateProduct = await fetchingData(
     {
-      url: `https://jabato-veloz-backend.vercel.app/api/productos/producto/${id}`,
+      url: `https://jabatoveloz-backend.vercel.app/api/productos/producto/${id}`,
       method: 'POST',
       body: { puntuacion: { users: userId, score: mark } }
     },
@@ -53,7 +53,7 @@ export const deleteProduct = async (dispatch, id, productoEliminado, token) => {
 
   const deleteProducto = await fetchingData(
     {
-      url: `https://jabato-veloz-backend.vercel.app/api/productos/${id}`,
+      url: `https://jabatoveloz-backend.vercel.app/api/productos/${id}`,
       method: 'DELETE',
       token: token
     },
@@ -95,7 +95,7 @@ export const addProduct = async (dispatch, currentUser, data, setPage) => {
   productInfo.append('originalIMG', originalIMG)
 
   const addedProduct = await fetch(
-    `https://jabato-veloz-backend.vercel.app/api/productos/producto`,
+    `https://jabatoveloz-backend.vercel.app/api/productos/producto`,
     {
       headers: { Authorization: `Bearer ${currentUser.token}` },
       method: 'POST',

@@ -5,7 +5,7 @@ export const createOrder = async (dispatch, body) => {
 
   const result = await fetchingData(
     {
-      url: `https://jabato-veloz-backend.vercel.app/api/orders/order`,
+      url: `https://jabatoveloz-backend.vercel.app/api/orders/order`,
       body: body
     },
     dispatch
@@ -29,7 +29,7 @@ export const getUserOrders = async (dispatch, userId, token) => {
 
   const result = await fetchingData(
     {
-      url: `https://jabato-veloz-backend.vercel.app/api/users/${userId}`,
+      url: `https://jabatoveloz-backend.vercel.app/api/users/${userId}`,
       method: 'GET',
       token: token
     },
@@ -46,7 +46,7 @@ export const updateOrder = async (dispatch, order, userId, token) => {
   dispatch({ type: 'START_LOADING' })
   const result = await fetchingData(
     {
-      url: `https://jabato-veloz-backend.vercel.app/api/orders/${order._id}`,
+      url: `https://jabatoveloz-backend.vercel.app/api/orders/${order._id}`,
       method: 'POST',
       token: token
     },
@@ -56,7 +56,7 @@ export const updateOrder = async (dispatch, order, userId, token) => {
   if (result.success) {
     const userOrders = await fetchingData(
       {
-        url: `https://jabato-veloz-backend.vercel.app/api/users/${userId}`,
+        url: `https://jabatoveloz-backend.vercel.app/api/users/${userId}`,
         method: 'GET',
         token: token
       },
@@ -76,7 +76,7 @@ export const deleteOrder = async (dispatch, order, userId, token) => {
 
   const result = await fetchingData(
     {
-      url: `https://jabato-veloz-backend.vercel.app/api/orders/order/${order._id}`,
+      url: `https://jabatoveloz-backend.vercel.app/api/orders/order/${order._id}`,
       method: 'DELETE',
       token: token
     },
@@ -86,7 +86,7 @@ export const deleteOrder = async (dispatch, order, userId, token) => {
   if (result.success) {
     const userOrders = await fetchingData(
       {
-        url: `https://jabato-veloz-backend.vercel.app/api/users/${userId}`,
+        url: `https://jabatoveloz-backend.vercel.app/api/users/${userId}`,
         method: 'GET',
         token: token
       },

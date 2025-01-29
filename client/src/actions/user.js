@@ -6,7 +6,7 @@ export const handleRegister = async (user, dispatch) => {
 
   const result = await fetchingData(
     {
-      url: `https://jabato-veloz-backend.vercel.app/api/auth/register`,
+      url: `https://jabatoveloz-backend.vercel.app/api/auth/register`,
       body: user
     },
     dispatch
@@ -43,7 +43,7 @@ const handleLogin = async (user, dispatch) => {
   dispatch({ type: 'START_LOADING' })
   const result = await fetchingData(
     {
-      url: `https://jabato-veloz-backend.vercel.app/api/auth/login`,
+      url: `https://jabatoveloz-backend.vercel.app/api/auth/login`,
       body: user
     },
     dispatch
@@ -73,7 +73,7 @@ export const UpdateProfile = async (currentUser, updatedFields, dispatch) => {
   }
   try {
     const result = await fetch(
-      `https://jabato-veloz-backend.vercel.app/api/users/${currentUser.result.user._id}`,
+      `https://jabatoveloz-backend.vercel.app/api/users/${currentUser.result.user._id}`,
       {
         headers: { Authorization: `Bearer ${currentUser.result.token}` },
         method: 'POST',

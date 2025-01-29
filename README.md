@@ -90,7 +90,7 @@ https://jabatoveloz.onrender.com
 
 #### 1. server side deploy
 
-https://jabato-veloz-backend.vercel.app
+https://jabatoveloz-backend.vercel.app
 
 #### 2. client side deploy
 
