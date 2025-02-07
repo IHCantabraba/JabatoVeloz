@@ -90,10 +90,13 @@ const Profile = () => {
               sx={{
                 width: 75,
                 height: 75,
-                cursor: 'pointer'
-                // '& .MuiAvatar-img': { objectFit: 'contain' }
+                cursor: 'pointer',
+                '& .MuiAvatar-img': {
+                  objectFit: 'contain',
+                  height: '100%',
+                  width: 'auto'
+                }
               }}
-              style={{ objectFit: 'contain' }}
             />
           </label>
         </DialogContent>
