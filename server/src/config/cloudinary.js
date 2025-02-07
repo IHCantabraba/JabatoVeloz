@@ -11,5 +11,5 @@ export const cloudinaryConfig = () => {
     console.log(`unabled to connect to cloudinary ${error}`)
   }
 }
-// export default { cloudinaryConfig }
+
 export default cloudinaryConfig

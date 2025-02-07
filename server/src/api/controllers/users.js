@@ -37,11 +37,8 @@ export const updatedUser = tryCatch(async (req, res, next) => {
   const oldUser = await User.findById(id)
 
   if (req.file) {
-    console.log('changing avatar img')
     deleteFile(oldUser.img)
     newUser.img = req.file.path
-  } else {
-    console.log('no file send')
   }
   newUser._id = id
   newUser.rol = oldUser.rol
@@ -62,8 +59,6 @@ export const deleteUser = async (req, res, next) => {
     const deletedUser = await User.findByIdAndDelete(id)
     if (deleteUser.img !== 'Undefined') {
       deleteFile(deletedUser.img)
-    } else {
-      console.log('No img to delete. ')
     }
     return res.status(200).json(`Succesfully deleted User: ${deletedUser}`)
   } catch (error) {
@@ -80,10 +75,7 @@ export const registerEvent = async (req, res, next) => {
     }
     const newEvent = new Event(req.body)
     if (req.file) {
-      console.log(`Adding file`)
       newEvent.img = req.file.path
-    } else {
-      console.log(`No image passed for the event`)
     }
     const event = await newEvent.save()
     return res.status(200).json(event)

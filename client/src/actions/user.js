@@ -73,17 +73,17 @@ export const UpdateProfile = async (currentUser, updatedFields, dispatch) => {
   }
   try {
     const result = await fetch(
-      `https://jabatoveloz-backend.vercel.app/api/users/${currentUser.result.user._id}`,
+      `https://jabatoveloz-backend.vercel.app/api/users/${currentUser.user._id}`,
       {
-        headers: { Authorization: `Bearer ${currentUser.result.token}` },
+        headers: { Authorization: `Bearer ${currentUser.token}` },
         method: 'POST',
         body: data
       }
     )
     const response = await result.json()
 
-    currentUser.result.user.img = response.result.img
-    currentUser.result.user.nombre = response.result.nombre
+    currentUser.user.img = response.result.img
+    currentUser.user.nombre = response.result.nombre
     if (response.success) {
       dispatch({
         type: 'UPDATE_USER',

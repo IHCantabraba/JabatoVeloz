@@ -24,17 +24,3 @@ export default function validateDNI(dni) {
     return false
   }
 }
-// const sample = [
-//   '71657311Y',
-//   '71657311y',
-//   'X9847155G',
-//   'Y4554066B',
-//   'Y4554066b',
-//   'X1234567A'
-// ]
-
-// for (let i = 0; i <= sample.length - 1; i++) {
-//   console.log(`Validating ${sample[i]} `)
-//   validateDNI(sample[i])
-//   console.log('\n')
-// }
