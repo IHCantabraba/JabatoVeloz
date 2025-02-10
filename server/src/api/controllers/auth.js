@@ -18,10 +18,7 @@ export const register = tryCatch(async (req, res, next) => {
       .json({ success: false, message: 'Password must be 6 chras or more' })
   const newUser = new User(req.body)
   if (req.file) {
-    console.log('adding file')
     newUser.img = req.file.path
-  } else {
-    console.log('no image passed')
   }
   const user = await newUser.save()
   return res

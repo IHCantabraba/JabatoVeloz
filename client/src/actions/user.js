@@ -13,8 +13,7 @@ export const handleRegister = async (user, dispatch) => {
   )
   if (result.success) {
     dispatch({ type: 'CLOSE_LOGIN' })
-    console.log(result.result)
-    // login after register
+
     handleLogin(
       { nombre: result.result.nombre, password: user.password },
       dispatch

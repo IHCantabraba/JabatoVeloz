@@ -21,7 +21,6 @@ export default function LandingCards({ cardInfo, checked }) {
     dispatch({ type: 'OPEN_LOGIN' })
   }
   const handleContact = () => {
-    console.log('contact')
     dispatch({
       type: 'UPDATE_ALERT',
       payload: {

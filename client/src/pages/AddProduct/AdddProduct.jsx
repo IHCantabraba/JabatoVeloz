@@ -51,7 +51,7 @@ const AdddProduct = ({ setPage }) => {
   }
   const handleChangePic = (e) => {
     const file = e.target.files[0]
-    console.log(file)
+
     if (file) {
       const PhotoURL = URL.createObjectURL(file)
       dispatch({
@@ -79,7 +79,7 @@ const AdddProduct = ({ setPage }) => {
     } else {
       values.originalIMG = false
     }
-    console.log(values)
+
     addProduct(dispatch, currentUser, values, setPage)
   }
   return (

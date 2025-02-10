@@ -118,7 +118,6 @@ export const productNameColor = (ws) => {
       richText[richText.length - 1].text = richText[
         richText.length - 1
       ].text.slice(0, -3)
-      console.log(richText[richText.length - 1].text)
 
       fila.getCell(2).value = { richText }
       richText = []

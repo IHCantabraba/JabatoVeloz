@@ -14,13 +14,9 @@ export default function validateDNI(dni) {
     letra = letra.substring(number, number + 1)
 
     if (letra != letter) {
-      console.log('DNI or NIE erróneo')
       return false
-    } else {
-      console.log('DNI or NIE correcto')
     }
   } else {
-    console.log('Formato de DNI o NIE erróneo')
     return false
   }
 }

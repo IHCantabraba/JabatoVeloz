@@ -18,8 +18,6 @@ export const deleteProduct = tryCatch(async (req, res) => {
   const deleteProduct = await Productos.findByIdAndDelete(id)
   if (deleteProduct.img && deleteProduct.originalIMG) {
     deleteFile(deleteProduct.img)
-  } else {
-    console.log('Generic image. Nothing to delete')
   }
   return res.status(200).json({ success: true, message: 'Producto Eliminado' })
 })
@@ -34,10 +32,7 @@ export const createProduct = tryCatch(async (req, res) => {
   }
   const newProduct = new Productos(req.body)
   if (req.file) {
-    console.log('adding file')
     newProduct.img = req.file.path
-  } else {
-    console.log('no image passed')
   }
   const product = await newProduct.save()
   if (product)

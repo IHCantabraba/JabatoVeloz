@@ -26,7 +26,7 @@ const fetchingFiles = async (
       type: 'UPDATE_ALERT',
       payload: { open: true, severity: 'error', message: error.message }
     })
-    console.log(error.message)
+
     return null
   }
 }

@@ -8,7 +8,7 @@
     "start": "node index.js",
     "dev": "nodemon index.js",
     "build": "npm install",
-    "SeedingProducts": "node ./src/utils/Products/SeedingProducts.js",
+    "CreateSeed": "node ./src/utils/Products/CreateDataSeed.js",
     "SeedingData": "node ./src/utils/Products/SeedingAppData.js"
   },
   "keywords": [],

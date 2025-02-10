@@ -68,7 +68,6 @@ export const deleteUser = async (req, res, next) => {
 /* registrar una Carrera */
 export const registerEvent = async (req, res, next) => {
   try {
-    console.log(req.body)
     const eventDuplicated = await Event.findOne({ titulo: req.body.titulo })
     if (eventDuplicated) {
       return res.satus(400).json(`Event is already register`)

@@ -98,7 +98,6 @@ const ProductDialog = () => {
   const Tallas = product?.Tallas.split(' ')
   const handleChangeTalla = (e) => {
     setSelectedTalla(e.target.value)
-    console.log(selectedTalla)
   }
   const handleChangePedido = (e) => {
     setSelectedPedido(e.target.value)

@@ -14,7 +14,6 @@ export const isAuth = async (req, res, next) => {
       return res.status(400).json(`User Id not found`)
     }
   } catch (error) {
-    console.log(error)
     if (error === 'jwt expired') {
       return res.status(401).json('Sesión caducada')
     } else {

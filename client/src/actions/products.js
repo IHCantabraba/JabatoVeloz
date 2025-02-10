@@ -61,10 +61,8 @@ export const deleteProduct = async (dispatch, id, productoEliminado, token) => {
   )
   if (deleteProducto.success) {
     if (productoEliminado === 'yes') {
-      console.log('productoEliminado es true')
       dispatch({ type: 'PRODUCTO_ELIMINADO', payload: 'no' })
     } else {
-      console.log('productoEliminado es false')
       dispatch({ type: 'PRODUCTO_ELIMINADO', payload: 'yes' })
     }
     dispatch({ type: 'END_LOADING' })

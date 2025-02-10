@@ -38,7 +38,7 @@ const fetchingData = async (
       type: 'UPDATE_ALERT',
       payload: { open: true, severity: 'error', message: msg }
     })
-    console.log(error.message)
+
     dispatch({ type: 'END_LOADING' })
     return null
   }

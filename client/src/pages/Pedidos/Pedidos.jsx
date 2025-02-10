@@ -47,7 +47,6 @@ const Pedidos = React.memo(() => {
                   color: 'var(--ihc-jV-green)'
                 }}
                 onClick={() => {
-                  console.log(pedido)
                   dispatch({ type: 'UPDATE_PEDIDO', payload: pedido })
                   dispatch({
                     type: 'UPDATE_OPEN_PEDIDO_STATE',

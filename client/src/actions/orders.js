@@ -37,7 +37,6 @@ export const getUserOrders = async (dispatch, userId, token) => {
   )
   if (result.success) {
     dispatch({ type: 'UPDATE_MIROPA', payload: result.result })
-    console.log(result.result)
   }
   dispatch({ type: 'END_LOADING' })
 }
@@ -64,7 +63,6 @@ export const updateOrder = async (dispatch, order, userId, token) => {
     )
     if (userOrders.success) {
       dispatch({ type: 'UPDATE_MIROPA', payload: userOrders.result })
-      console.log(userOrders.result)
     }
   }
 
@@ -94,7 +92,6 @@ export const deleteOrder = async (dispatch, order, userId, token) => {
     )
     if (userOrders.success) {
       dispatch({ type: 'UPDATE_MIROPA', payload: userOrders.result })
-      console.log(userOrders.result)
     }
   }
   dispatch({ type: 'END_LOADING' })

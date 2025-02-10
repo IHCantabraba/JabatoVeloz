@@ -35,8 +35,6 @@ const PedidoDialog = () => {
   const printRef = useRef()
 
   const handleCerrarPedido = () => {
-    /* TODO implement update Pedido */
-    console.log(`Se va acerrar el pedido ${pedido._id}`)
     closePedido(pedido, currentUser, dispatch)
   }
   const generateExcel = async (pedido) => {

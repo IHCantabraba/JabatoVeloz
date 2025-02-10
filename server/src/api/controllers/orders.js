@@ -31,7 +31,6 @@ export const updateOrder = tryCatch(async (req, res) => {
   const order = await Orders.findById(id)
 
   if (order) {
-    console.log(`order ${order._id} actualizada`)
     order.pagado = true
   }
 
