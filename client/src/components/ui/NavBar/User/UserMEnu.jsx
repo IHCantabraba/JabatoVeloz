@@ -6,7 +6,9 @@ import { useValue } from '../../../../context/ContextProvider'
 
 const UserMEnu = ({ anchorUserMenu, setAnchorUserMenu }) => {
   const {
-    state: { currentUser, productPage },
+    state: {
+      userManager: { currentUser }
+    },
     dispatch
   } = useValue()
   /* no element related to this menu */

@@ -16,12 +16,21 @@ import { UpdateProfile } from '../../../../actions/user'
 
 const Profile = () => {
   const {
-    state: { profile, currentUser, light },
+    // state: { profile, currentUser, light },
+    state: {
+      userManager: { currentUser, profile },
+      appManager: {
+        theme: { light }
+      }
+    },
     dispatch
   } = useValue()
   const nameRef = useRef()
   const handleClose = () => {
-    dispatch({ type: 'UPDATE_PROFILE', payload: { ...profile, open: false } })
+    dispatch({
+      type: 'UPDATE_PROFILE',
+      payload: { ...profile, open: false }
+    })
   }
   /* cuando se selecciona una nueva imagen actualiza el perfil (profile) */
   const handleChange = (e) => {

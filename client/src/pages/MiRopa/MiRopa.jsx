@@ -5,7 +5,10 @@ import { TablaRopa } from '../../components/TablaRopa/TablaRopa'
 
 const MiRopa = () => {
   const {
-    state: { miRopa, currentUser }
+    state: {
+      pedidosManager: { miRopa },
+      userManager: { currentUser }
+    }
   } = useValue()
 
   return (

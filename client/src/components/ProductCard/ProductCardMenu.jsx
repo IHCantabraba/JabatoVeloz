@@ -11,7 +11,10 @@ const ProductCardMenu = ({
   producto
 }) => {
   const {
-    state: { productoEliminado, currentUser },
+    state: {
+      productsManager: { productoEliminado },
+      userManager: { currentUser }
+    },
     dispatch
   } = useValue()
   const handleCloseProductMenu = () => {

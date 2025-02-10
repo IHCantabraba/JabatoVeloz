@@ -1,33 +1,44 @@
 import { createContext, useContext, useEffect, useReducer, useRef } from 'react'
 import Reducer from './Reducer'
+import RootReducer from './RootReducer'
 
 const initialState = {
-  currentUser: null,
-  light: true,
-  openLogin: false,
-  loading: false,
-  alert: { open: false, severity: 'info', message: '' },
-  profile: { open: false, file: null, photoURL: '' },
-  details: { title: '', description: '' },
-  FechaPedido: '',
-  isAdmin: false,
-  pedidos: null,
-  productos: null,
-  priceFilter: 100,
-  filterProducts: [],
-  product: null,
-  productoEliminado: false,
-  productPage: false,
-  showThemes: false,
-  pedido: null,
-  miRopa: null,
-  newProductPhoto: './assets/Prof.png',
-  Categorias: null,
-  Generos: null,
-  Tallas: null,
-  seriegrafia: null,
-  AvaliableSeriegrafia: null,
-  OpenPedido: null
+  appManager: {
+    login: { openLogin: false },
+    theme: { light: true },
+    alert: { open: false, severity: 'info', message: '' },
+    page: { productPage: false },
+    loading: false,
+    isAdmin: false,
+    showThemes: false
+  },
+  userManager: {
+    profile: { open: false, file: null, photoURL: '' },
+    currentUser: null
+  },
+  productsManager: {
+    productos: null,
+    priceFilter: 100,
+    filterProducts: [],
+    productoEliminado: false,
+    product: null,
+    Categorias: null,
+    Generos: null,
+    Tallas: null,
+    newProductPhoto: './assets/Prof.png'
+  },
+  seriegrafiaManager: {
+    seriegrafia: null,
+    AvaliableSeriegrafia: null
+  },
+  pedidosManager: {
+    details: { title: '', description: '' },
+    pedidos: null,
+    FechaPedido: '',
+    pedido: null,
+    miRopa: null,
+    OpenPedido: null
+  }
 }
 /* crear un contexto */
 const Context = createContext(initialState)
@@ -37,7 +48,7 @@ export const useValue = () => {
 }
 /* crear un provider */
 const ContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(Reducer, initialState)
+  const [state, dispatch] = useReducer(RootReducer, initialState)
   useEffect(() => {
     const currentUser = JSON.parse(localStorage.getItem('currentUser'))
     const AdminState = localStorage.getItem('isAdmin')

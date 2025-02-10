@@ -3,7 +3,7 @@ import { Snackbar, Alert } from '@mui/material'
 import { useValue } from '../../context/ContextProvider'
 const Notis = () => {
   const {
-    state: { alert },
+    state: { appManager },
     dispatch
   } = useValue()
   /* controlar el cierre si es po clicki en la X o en cualquier lado de la pantalla */
@@ -11,23 +11,26 @@ const Notis = () => {
     /* si se hace click fuera no se cierra  */
     if (reason === 'clickaway') return
     /* resto de casos cierra cambiando el estado inicial */
-    dispatch({ type: 'UPDATE_ALERT', payload: { ...alert, open: false } })
+    dispatch({
+      type: 'UPDATE_ALERT',
+      payload: { ...appManager.alert, open: false }
+    })
   }
   return (
     <Snackbar
-      open={alert.open}
+      open={appManager?.alert.open}
       autoHideDuration={2000}
       onClose={handleClose}
       anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
     >
       <Alert
         onClose={handleClose}
-        severity={alert.severity}
+        severity={appManager?.alert.severity}
         sx={{ width: '100%' }}
         variant='filled'
         elevation={6}
       >
-        {alert.message}
+        {appManager?.alert.message}
       </Alert>
     </Snackbar>
   )

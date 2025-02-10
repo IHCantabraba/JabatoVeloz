@@ -23,7 +23,13 @@ import { closePedido } from '../../actions/pedidos'
 import { createLink, customExcel } from './utils/customSheet'
 const PedidoDialog = () => {
   const {
-    state: { pedido, light, currentUser, OpenPedido },
+    state: {
+      pedidosManager: { pedido, OpenPedido },
+      appManager: {
+        theme: { light }
+      },
+      userManager: { currentUser }
+    },
     dispatch
   } = useValue()
   const printRef = useRef()

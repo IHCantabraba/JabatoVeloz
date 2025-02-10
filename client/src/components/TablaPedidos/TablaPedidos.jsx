@@ -15,7 +15,12 @@ import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined'
 import { getSeriegrafiaPrice } from '../../actions/utils/PrecioSeriegrafia'
 const TablaPedidos = ({ pedido, printref }) => {
   const {
-    state: { AvaliableSeriegrafia, light }
+    state: {
+      seriegrafiaManager: { AvaliableSeriegrafia },
+      appManager: {
+        theme: { light }
+      }
+    }
   } = useValue()
 
   return (

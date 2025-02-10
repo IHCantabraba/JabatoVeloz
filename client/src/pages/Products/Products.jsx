@@ -6,13 +6,13 @@ import ProductCard from '../../components/ProductCard/ProductCard'
 const Products = () => {
   const {
     state: {
-      filterProducts,
-      productoEliminado,
-      currentUser,
-      AvaliableSeriegrafia
+      productsManager: { filterProducts, productoEliminado },
+      userManager: { currentUser },
+      seriegrafiaManager: { AvaliableSeriegrafia }
     },
     dispatch
   } = useValue()
+
   useEffect(() => {
     console.log('fetchingProducts')
     getProducts(dispatch, currentUser.token, AvaliableSeriegrafia)

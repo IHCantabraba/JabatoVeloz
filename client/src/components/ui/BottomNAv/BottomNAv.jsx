@@ -23,7 +23,10 @@ import { useValue } from '../../../context/ContextProvider'
 const BottomNAv = () => {
   /* estado que controla el click de cada icono de los existentes en lña barra de navegador. */
   const {
-    state: { isAdmin, light, productPage, currentUser },
+    state: {
+      appManager: { isAdmin, light },
+      userManager: { currentUser }
+    },
     dispatch
   } = useValue()
   const [value, setValue] = useState(2)
@@ -69,16 +72,6 @@ const BottomNAv = () => {
             bgcolor: `var(--ihc-${light ? 'light' : 'dark'}-mode-bg-nav)`
           }}
         >
-          {/* <BottomNavigationAction label='Map' icon={<LocationOn />} /> */}
-          {/* <BottomNavigationAction
-            label='Carreras'
-            icon={<DirectionsRunIcon />}
-            onClick={() => {
-              if (productPage) {
-                dispatch({ type: 'HIDE_FILTERS' })
-              }
-            }}
-          /> */}
           {isAdmin && (
             <BottomNavigationAction
               sx={{ display: { md: 'flex' } }}

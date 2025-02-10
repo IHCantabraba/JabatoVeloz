@@ -19,10 +19,8 @@ import CustomDate from '../../CustomDate/CustomDate'
 
 const BaseUrl = import.meta.env.VITE_BaseName
 const Login = () => {
-  /* obetner estado inicial de nuestro custom hook y el dispatcher para cambair estados */
-  /* el Login se va a habrir desde varios sitios por lo que se necesita controlar el estadp con una variable"openLogin" y el dispatch para cerrarlo  */
   const {
-    state: { openLogin, light },
+    state: { appManager },
     dispatch
   } = useValue()
 
@@ -91,7 +89,7 @@ const Login = () => {
     isRegister ? setTitle('Register') : setTitle('Login')
   }, [isRegister])
   return (
-    <Dialog open={openLogin} onClose={handleClose}>
+    <Dialog open={appManager.login.openLogin} onClose={handleClose}>
       <DialogTitle>
         {title}
         <IconButton
@@ -193,7 +191,7 @@ const Login = () => {
             variant='contained'
             endIcon={<Send />}
             sx={{
-              bgcolor: light
+              bgcolor: appManager.theme.light
                 ? `var(--ihc-toolbar-light-mode)`
                 : `var(--ihc-dark-mode-text)`
             }}

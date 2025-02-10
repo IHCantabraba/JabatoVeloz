@@ -27,7 +27,13 @@ const AdddProduct = ({ setPage }) => {
   const [selectedTallas, setTallasSelected] = useState([])
 
   const {
-    state: { newProductPhoto, currentUser, light, Categorias, Generos, Tallas },
+    state: {
+      userManager: { currentUser },
+      appManager: {
+        theme: { light }
+      },
+      productsManager: { newProductPhoto, Categorias, Generos, Tallas }
+    },
     dispatch
   } = useValue()
   const handleGeneroChange = (e) => {

@@ -19,7 +19,13 @@ const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   const {
-    state: { currentUser, light, productPage, showThemes },
+    state: {
+      appManager: {
+        theme: { light },
+        productPage
+      },
+      userManager: { currentUser }
+    },
     dispatch
   } = useValue()
 
@@ -30,7 +36,7 @@ const NavBar = () => {
           backgroundColor: `var(--ihc-toolbar-${
             !currentUser ? 'none' : light ? 'light' : 'dark'
           }-mode)`,
-          // justifyContent: 'space-between'
+
           flexGrow: '1'
         }}
       >
@@ -125,7 +131,9 @@ const NavBar = () => {
                   color: 'var(--ihc-JV-orange)',
                   cursor: 'pointer'
                 }}
-                onClick={() => dispatch({ type: 'DARK_THEME', payload: false })}
+                onClick={() =>
+                  dispatch({ type: 'TOGGLE_THEME', payload: false })
+                }
               />
             ) : (
               <ModeNightOutlinedIcon
@@ -136,7 +144,9 @@ const NavBar = () => {
                   }-mode-text)`,
                   cursor: 'pointer'
                 }}
-                onClick={() => dispatch({ type: 'LIGHT_THEME', payload: true })}
+                onClick={() =>
+                  dispatch({ type: 'TOGGLE_THEME', payload: true })
+                }
               />
             )}
           </Toolbar>

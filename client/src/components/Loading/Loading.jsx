@@ -4,10 +4,13 @@ import { useValue } from '../../context/ContextProvider'
 
 const Loading = () => {
   const {
-    state: { loading }
+    state: { appManager }
   } = useValue()
   return (
-    <Backdrop open={loading} sx={{ zIndex: (theme) => theme.zIndex.modal + 1 }}>
+    <Backdrop
+      open={appManager.loading}
+      sx={{ zIndex: (theme) => theme.zIndex.modal + 1 }}
+    >
       <CircularProgress sx={{ color: 'white' }} />
     </Backdrop>
   )

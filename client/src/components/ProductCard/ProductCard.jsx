@@ -21,7 +21,9 @@ import RatingInfo from '../RatingInfo/RatingInfo'
 const ProductCard = ({ producto }) => {
   const [anchorProductMenu, setAnchorProductMenu] = useState(false)
   const {
-    state: { isAdmin },
+    state: {
+      appManager: { isAdmin }
+    },
     dispatch
   } = useValue()
 

@@ -18,7 +18,13 @@ import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined
 import { getSeriegrafiaPrice } from '../../actions/utils/PrecioSeriegrafia'
 export const TablaRopa = ({ userOrders }) => {
   const {
-    state: { currentUser, light, AvaliableSeriegrafia },
+    state: {
+      userManager: { currentUser },
+      appManager: {
+        theme: { light }
+      },
+      seriegrafiaManager: { AvaliableSeriegrafia }
+    },
     dispatch
   } = useValue()
   const handleUpdatePagado = (order) => {

@@ -5,7 +5,10 @@ import { getPedidos } from '../../actions/pedidos'
 
 const Pedidos = React.memo(() => {
   const {
-    state: { pedidos, isAdmin },
+    state: {
+      pedidosManager: { pedidos },
+      appManager: { isAdmin }
+    },
     dispatch
   } = useValue()
   useEffect(() => {

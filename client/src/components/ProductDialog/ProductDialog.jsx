@@ -20,7 +20,6 @@ import {
   Typography
 } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-
 import { Close, Send, Star } from '@mui/icons-material'
 import { useValue } from '../../context/ContextProvider'
 import { createOrder } from '../../actions/orders'
@@ -29,17 +28,17 @@ import { obtenerCategoria } from './utils/obtenerCategoria'
 import { CustomProps } from '../utils/CustomProps'
 import { getAverage } from './utils/getRateAverage'
 import { AddRate } from '../../actions/products'
-// let RATES = 0
-// let SCORE = 0
+
 const ProductDialog = () => {
   const {
     state: {
-      product,
-      light,
-      pedidos,
-      currentUser,
-      seriegrafia,
-      AvaliableSeriegrafia
+      userManager: { currentUser },
+      appManager: {
+        theme: { light }
+      },
+      productsManager: { product },
+      seriegrafiaManager: { seriegrafia, AvaliableSeriegrafia },
+      pedidosManager: { pedidos }
     },
     dispatch
   } = useValue()

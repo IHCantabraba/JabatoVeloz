@@ -16,7 +16,10 @@ import { createPedido } from '../../actions/pedidos'
 
 const AddPedido = ({ setPage }) => {
   const {
-    state: { details, FechaPedido, currentUser },
+    state: {
+      pedidosManager: { details, FechaPedido },
+      userManager: { currentUser }
+    },
     dispatch
   } = useValue()
   const [activeStep, setActiveStep] = useState(0)
