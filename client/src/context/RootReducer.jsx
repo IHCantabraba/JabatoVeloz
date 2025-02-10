@@ -1,5 +1,5 @@
 import UserManagerReducer from './UserManagerReducer'
-import AppManagerReducer from './appManagerReducer'
+import AppManagerReducer from './AppManagerReducer'
 import ProductManagerReducer from './ProductsManagerReducer'
 import SeriegrafiaManagerReducer from './SeriegrafiasManagerReducer'
 import PedidosManagerReducer from './PedidosManagerReducer'
